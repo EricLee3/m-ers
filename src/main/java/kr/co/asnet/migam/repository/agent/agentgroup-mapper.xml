@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.asnet.migam.repository.agent.AgentGroupDaoMapper">
+	<resultMap id="rmapAgentGroup" type="agentGroup">
+        <result property="groupId" column="group_id" />
+        <result property="groupName" column="group_name" />
+        <result property="agentCount" column="agent_count" />
+        <result property="profile_name" column="profile_name" />
+        <result property="profile_meta_idx" column="profile_meta_idx" />
+        <result property="agent_profile_idx" column="agent_profile_idx" />
+        <result property="customer_profile_idx" column="customer_profile_idx" />
+	</resultMap>
+	
+	<sql id="sql_agentgroup">
+		<![CDATA[
+		select
+			b.group_id as group_id,
+			b.group_name as group_name,
+			b.agent_profile_id AS agent_profile_id,
+			b.customer_profile_id AS customer_profile_id,
+			(select count(*) from mecs5_agent a where a.group_id= b.group_id) as agent_count
+			from
+			mecs5_agent_group b
+		]]>
+	</sql>
+
+	<insert id="insertAgentGroup" parameterType="agentGroup">
+		<![CDATA[
+		insert into mecs5_agent_group (
+			group_id,
+			group_name,
+			agent_count,
+			agent_profile_id,
+			customer_profile_id
+		) values (
+			#{groupId},
+			#{groupName},
+			#{agentCount},
+			#{profile_name_agent},
+			#{profile_name_cus}
+		)
+		]]>
+	</insert>
+
+	<sql id="sql_paging">
+		<if test="pageDTO != null">
+			<![CDATA[
+			limit #{pageDTO.startRow}, #{pageDTO.itemPerPage}
+			]]>
+		</if>
+	</sql>
+
+	<sql id="sql_search">
+		<where>
+            <if test="searchDTO != null">
+            	<if test="searchDTO.searchGroup != null and searchDTO.searchGroup != ''">
+            	<![CDATA[
+                	and group_id = '${searchDTO.searchGroup}'
+            	]]>
+            	</if>
+			</if>
+		</where>
+	</sql>
+
+	<select id="selectAgentGroup" parameterType="String" resultMap="rmapAgentGroup">
+		<include refid="sql_agentgroup" />
+		<where>
+			<![CDATA[group_id = #{groupId}]]>
+		</where>
+	</select>
+
+	<update id="updateAgentGroup" parameterType="agentGroup">
+		update mecs5_agent_group
+		<set>
+			group_name = #{groupName},
+			agent_profile_id = #{profile_name_agent},
+			customer_profile_id = #{profile_name_cus}
+		</set>
+		<where>
+			group_id = #{groupId}
+		</where>
+	</update>
+	
+	<select id="selectAgentGroupList" parameterType="hashmap" resultMap="rmapAgentGroup">
+		<include refid="sql_agentgroup" />
+		<include refid="sql_search" />
+		<![CDATA[${orderby}]]>
+		<include refid="sql_paging" />
+	</select> 
+	
+	<select id="selectProfileList" parameterType="hashmap" resultMap="rmapAgentGroup">
+		SELECT NAME AS profile_name, profile_meta_idx AS profile_meta_idx FROM mecs5_profile_meta GROUP BY profile_name ORDER BY NAME ASC
+	</select> 
+
+	<select id="selectCount" parameterType="hashmap" resultType="int">
+		<![CDATA[select count(*) from (]]>
+		<include refid="sql_agentgroup" />
+		<include refid="sql_search" />
+		<![CDATA[) cnt]]>
+	</select>
+
+	<delete id="deleteAgentGroup" parameterType="String">
+		<![CDATA[
+			delete from mecs5_agent_group where group_id = #{groupId}
+		]]>
+	</delete>
+	
+	<select id="selectAgentProfileList" parameterType="hashmap" resultMap="rmapAgentGroup">
+		select agent_profile_id, customer_profile_id from mecs5_agent_group where 1=1
+        <if test="searchDTO.searchId != null and searchDTO.searchId != ''">
+          	<![CDATA[
+              	and group_id = '${searchDTO.searchId}'
+          	]]>
+        </if>
+	</select> 
+	
+	
+</mapper> 

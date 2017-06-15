@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.asnet.migam.repository.agent.ProConfDaoMapper">
+	               
+	<resultMap id="rmapProConf" type="proConf">
+		<result property="p_profile_idx" column="p_profile_idx" />
+		<result property="p_profile_meta_idx" column="p_profile_meta_idx" />
+		<result property="p_insert_date" column="p_insert_date" />
+		<result property="p_update_date" column="p_update_date" />
+		<result property="p_description" column="p_description" />
+		<result property="s_script_idx" column="s_script_idx" />
+		<result property="s_script" column="s_script" />
+		<result property="s_svc_meta_idx" column="s_svc_meta_idx" />
+		<result property="s_profile_idx" column="s_profile_idx" />
+		<result property="s_min" column="s_min" />
+		<result property="s_max" column="s_max" />
+		<result property="s_description" column="s_description" />
+		<result property="name" column="name" />
+		<result property="p_name" column="p_name" />
+		<result property="service_idx" column="service_idx" />
+		<result property="s_name" column="s_name" />
+		<result property="s_name" column="s_name" />
+		<result property="sv_min" column="sv_min" />
+		<result property="sv_max" column="sv_max" />
+		<result property="basic_name" column="basic_name" />
+		<result property="count" column="count" />
+	</resultMap>
+	
+	
+	<sql id="sql_proConf">
+		<![CDATA[
+		select a.profile_idx as p_profile_idx, a.profile_meta_idx as p_profile_meta_idx, a.insert_date as p_insert_date, 
+		a.update_date as p_update_date, a.description as p_description,
+		b.script_idx as s_script_idx, b.script as s_script, b.svc_meta_idx as s_svc_meta_idx, b.profile_idx as s_profile_idx, 
+		b.min as s_min, b.max as s_max, b.description as s_description,
+		(select c.name from mecs5_profile_meta c where a.profile_meta_idx = c.profile_meta_idx) as name
+		from MECS5_EMOTION_PROFILE a,  MECS5_EMOTION_SCRIPT b, mecs5_profile_meta c where a.profile_meta_idx = b.profile_idx
+		where 1=1
+		]]>
+	</sql>
+	
+	<sql id="sql_proConf_real_back">
+	<![CDATA[
+	SELECT d.script AS s_script, d.svc_meta_idx AS s_svc_meta_idx, d.profile_idx AS p_profile_idx,   
+	d.min AS s_min, d.max AS s_max, d.description AS p_description, a.name AS p_name,
+	(SELECT b.name FROM MECS5_PROFILE_META b, mecs5_emotion_profile c WHERE b.profile_meta_idx=b.profile_meta_idx GROUP BY b.name) AS basic_name  
+FROM MECS5_EMOTION_SCRIPT d  
+LEFT OUTER JOIN MECS5_PROFILE_META a ON a.profile_meta_idx = d.profile_idx    
+where 1=1
+	
+	]]>
+	</sql>
+
+<sql id="sql_proConf_real">
+	<![CDATA[	
+	SELECT 
+d.script AS s_script, d.svc_meta_idx AS s_svc_meta_idx, d.profile_idx AS p_profile_idx,   
+d.min AS s_min, d.max AS s_max, d.description AS p_description, f.name AS p_name,
+e.profile_meta_idx as e_profile_meta_idx, f.name as basic_name, d.count as count
+FROM 
+mecs5_emotion_script d, 
+mecs5_emotion_profile e,
+MECS5_PROFILE_META f
+WHERE d.profile_idx=e.profile_idx AND e.profile_meta_idx = f.profile_meta_idx AND d.svc_meta_idx=f.svc_meta_idx
+]]>
+	</sql>	
+	
+	
+	<sql id="sql_proConf3">
+		<![CDATA[
+		select service_idx, name, kr_name, emotion_level, group_concat(basic_idx SEPARATOR ',') as basic_idx, 
+		min, max, insert_date, update_date, description from MECS5_SERVICE_INDICATOR
+		]]>
+	</sql>
+	
+	<sql id="sql_proConf33">
+		<![CDATA[
+		select service_idx, name, kr_name, emotion_level, basic_idx, 
+		min, max, insert_date, update_date, description from MECS5_SERVICE_INDICATOR
+		]]>
+	</sql>
+	
+	<sql id="sql_proConf2">
+		<![CDATA[
+		select svc_meta_idx as service_idx, name from MECS5_PROFILE_META
+		]]>
+	</sql>
+	
+	<sql id="sql_proConfName">
+		<![CDATA[
+		select profile_meta_idx as p_profile_meta_idx, name from MECS5_PROFILE_META group by name
+		]]>
+	</sql>
+    
+	<sql id="sql_paging">
+		<if test="pageDTO != null">
+			<![CDATA[
+			limit #{pageDTO.startRow}, #{pageDTO.itemPerPage}
+			]]>
+		</if>
+	</sql>
+
+	<sql id="sql_search">
+            <if test="searchDTO != null">
+            	<if test="searchDTO.searchId != null and searchDTO.searchId != ''">
+	            	<![CDATA[
+	                	and f.name = SUBSTRING_INDEX('${searchDTO.searchId}', ',', 1)
+	            	]]>
+            	</if>
+			</if>
+	</sql>
+
+	
+	<select id="selectProConfList" parameterType="hashmap" resultMap="rmapProConf">
+		<include refid="sql_proConf_real" />
+		<include refid="sql_search" />
+		 GROUP BY d.script, d.profile_idx
+		<![CDATA[${orderby}]]>
+		<include refid="sql_paging" />
+	</select> 
+	
+	<select id="selectProNameList" parameterType="hashmap" resultMap="rmapProConf">
+		<include refid="sql_proConfName" />
+	</select> 
+	
+	<select id="selectIndiList" parameterType="hashmap" resultMap="rmapProConf">
+		select svc_meta_idx as service_idx, name from MECS5_PROFILE_META where name = '${name}'
+	</select> 
+	
+	<select id="selectProChkList2_back" parameterType="hashmap" resultMap="rmapProConf">
+		SELECT a.script_idx AS s_script_idx, a.script AS s_script, a.svc_meta_idx AS s_svc_meta_idx, a.profile_idx AS s_profile_idx, 
+		a.min AS s_min, a.max AS s_max, a.description AS p_description, b.name AS name,
+		(SELECT NAME FROM MECS5_PROFILE_META WHERE profile_meta_idx  = a.profile_idx) AS p_name 
+		FROM MECS5_EMOTION_SCRIPT a LEFT OUTER JOIN mecs5_service_ind_meta b ON a.svc_meta_idx = b.svc_meta_idx  WHERE 1=1
+		<if test="searchDTO.searchQuery != null and searchDTO.searchQuery != ''">
+          	<![CDATA[
+              	and a.profile_idx = '${searchDTO.searchQuery}'
+          	]]>
+        </if>
+        <if test="searchDTO.searchId != null and searchDTO.searchId != ''">
+          	<![CDATA[
+              	and a.script = '${searchDTO.searchId}'
+          	]]>
+        </if>
+	</select> 
+	
+	<select id="selectProChkList2" parameterType="hashmap" resultMap="rmapProConf">
+SELECT * FROM (
+SELECT a.script_idx AS s_script_idx, a.script AS s_script, a.svc_meta_idx AS s_svc_meta_idx,
+a.profile_idx AS s_profile_idx, a.min AS s_min, a.max AS s_max, a.description AS p_description, 
+b.name AS NAME,b.min AS sv_min, b.max AS sv_max, c.NAME AS p_name ,
+(SELECT profile_meta_idx FROM mecs5_emotion_profile  WHERE profile_idx = a.profile_idx GROUP BY profile_meta_idx) AS p_profile_idx,
+ a.count as count
+FROM MECS5_PROFILE_META c 
+RIGHT OUTER JOIN  MECS5_EMOTION_SCRIPT a ON c.profile_meta_idx = a.profile_idx
+LEFT OUTER JOIN mecs5_service_ind_meta b ON a.svc_meta_idx = b.svc_meta_idx
+WHERE 1=1
+<if test="searchDTO.searchId != null and searchDTO.searchId != ''">
+  <![CDATA[
+     and a.script = '${searchDTO.searchId}'
+  ]]>
+</if>
+<if test="searchDTO.searchQuery != null and searchDTO.searchQuery != ''">
+  <![CDATA[
+     and a.profile_idx = '${searchDTO.searchQuery}'
+  ]]>
+</if>
+UNION
+SELECT NULL AS s_script_idx, NULL AS s_script, b.svc_meta_idx AS s_svc_meta_idx, NULL AS s_profile_idx, NULL AS s_min, NULL AS s_max, NULL AS p_description, 
+b.name AS NAME,b.min AS sv_min, b.max AS sv_max,
+c.NAME AS p_name, null as p_profile_idx,
+NULL as count
+FROM MECS5_PROFILE_META c 
+LEFT OUTER JOIN mecs5_service_ind_meta b ON c.svc_meta_idx= b.svc_meta_idx
+WHERE 1=1
+<if test="searchDTO.searchCondition != null and searchDTO.searchCondition != ''">
+  <![CDATA[
+    and c.name = '${searchDTO.searchCondition}'
+  ]]>
+</if>
+) mj GROUP BY NAME
+</select> 
+	
+	
+	
+	
+	<select id="selectProChkList" parameterType="hashmap" resultMap="rmapProConf">
+		select a.svc_meta_idx as service_idx, 
+		(select b.name from MECS5_SERVICE_IND_META b where 1=1 and a.svc_meta_idx = b.svc_meta_idx) as name,
+		(SELECT b.min FROM MECS5_SERVICE_IND_META b WHERE 1=1 AND a.svc_meta_idx = b.svc_meta_idx) AS sv_MIN,
+		(SELECT b.max FROM MECS5_SERVICE_IND_META b WHERE 1=1 AND a.svc_meta_idx = b.svc_meta_idx) AS sv_MAX
+		 from MECS5_PROFILE_META a where 1=1
+        <if test="searchDTO.searchId != null and searchDTO.searchId != ''">
+          	<![CDATA[
+              	and a.name = SUBSTRING_INDEX('${searchDTO.searchId}', ',', 1)
+          	]]>
+        </if>
+	</select> 
+
+	<select id="selectCount" parameterType="hashmap" resultType="int">
+		<![CDATA[select count(*) from (]]>
+		<include refid="sql_proConf_real" />
+		<include refid="sql_search" />
+		 GROUP BY d.script, d.profile_idx
+		<![CDATA[) cnt]]>
+	</select>
+	
+	<select id="selectCount2" parameterType="hashmap" resultType="int">
+		<![CDATA[select count(*) from (]]>
+		<include refid="sql_proConf_real" />
+		<include refid="sql_search" />
+		<![CDATA[) cnt]]>
+	</select>
+	
+	
+	<select id="selectProConf" parameterType="hashmap" resultMap="rmapProConf">
+		<include refid="sql_proConf33" />
+		<where>
+			<![CDATA[name = '${searchDTO.searchQuery}']]>   
+		</where>
+		<![CDATA[
+	        and emotion_level =  '${searchDTO.searchId}'
+	    ]]>
+	</select>
+	
+	
+	<update id="updateProConf" parameterType="proConf">
+		update MECS5_EMOTION_SCRIPT
+		<set>
+			min = #{min},
+			max = #{max},
+			description = #{description}
+		</set>
+		<where>
+			service_idx = #{svc_meta_idx}
+		</where>
+	</update>
+	
+	<delete id="deleteProConf" parameterType="proConf">
+		<![CDATA[
+			delete from MECS5_EMOTION_SCRIPT where profile_idx = #{p_profile_idx} and script = #{s_script} 
+		]]>
+	</delete>
+	
+	<delete id="deleteProConf_script" parameterType="String">
+		<![CDATA[
+			delete from MECS5_EMOTION_PROFILE where profile_idx = #{p_profile_idx}
+		]]>
+	</delete>
+	
+	<insert id="insertProConf" parameterType="proConf">
+		<![CDATA[
+		insert into MECS5_EMOTION_PROFILE (
+			profile_meta_idx,
+			insert_date,
+			update_date,
+			description
+		) values (
+			(select max(profile_meta_idx) from mecs5_profile_meta where name = SUBSTRING_INDEX('${name}', ',', 1)),
+			now(),
+			now(),
+			#{p_description}
+		)
+		]]>
+	</insert>
+	
+	<insert id="insertProConf_S" parameterType="proConf">
+		<![CDATA[
+		insert into MECS5_EMOTION_SCRIPT (
+			script,
+			svc_meta_idx,
+			profile_idx,
+			min,
+			max,
+			insert_date,
+			update_date,
+			description,
+			count
+		) values (
+			#{s_script},
+			#{service_idx},
+			(SELECT max(profile_idx) FROM mecs5_emotion_profile where profile_meta_idx=SUBSTRING_INDEX('${name}', ',', -1)),
+			#{s_min},
+			#{s_max},
+			now(),
+			now(),
+			#{p_description},
+			#{count}
+			
+		)
+		]]>
+	</insert>
+	
+	<select id="selectProConfName" parameterType="hashmap" resultMap="rmapProConf">
+		SELECT profile_idx as p_profile_idx FROM mecs5_emotion_profile WHERE  profile_meta_idx=SUBSTRING_INDEX('${searchDTO.searchId}', ',', -1)
+	</select>
+	
+	<select id="selectDupMinMax" parameterType="hashmap" resultType="int">
+		SELECT count(*) FROM mecs5_emotion_script 
+		WHERE 1=1
+		AND (1=2
+		${s_min}
+		)
+	</select>
+	
+</mapper> 

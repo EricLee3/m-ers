@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.asnet.migam.repository.agent.ProMetaDaoMapper">
+	               
+	<resultMap id="rmapProMeta" type="proMeta">
+		<result property="profile_meta_idx" column="profile_meta_idx" />
+		<result property="name" column="name" />
+		<result property="service_idx" column="service_idx" />
+		<result property="insert_date" column="insert_date" />
+		<result property="description" column="description" />
+		<result property="basic_idx" column="basic_idx" />
+		<result property="svc_meta_idx" column="svc_meta_idx" />
+		<result property="service_name" column="service_name" />
+		<result property="min" column="min" />
+		<result property="max" column="max" />
+	</resultMap>
+	
+	
+	<sql id="sql_proMeta">
+		<![CDATA[
+		select profile_meta_idx, name, group_concat(svc_meta_idx SEPARATOR ',') as service_idx, insert_date, description from MECS5_PROFILE_META
+		]]>
+	</sql>
+	
+	<sql id="sql_proMeta_name">
+		<![CDATA[
+		SELECT profile_meta_idx, NAME FROM MECS5_PROFILE_META GROUP BY NAME
+		]]>
+	</sql>
+	
+	<sql id="sql_proMeta_pro">
+		<![CDATA[
+		select * from MECS5_EMOTION_PROFILE
+		]]>
+	</sql>
+	
+	<sql id="sql_proMeta_sc">
+		<![CDATA[
+		select * from MECS5_EMOTION_SCRIPT
+		]]>
+	</sql>
+	
+	<sql id="sql_proMeta5">
+		<![CDATA[
+		select profile_meta_idx, name, group_concat(svc_meta_idx SEPARATOR ',') as service_idx, insert_date, description as description from MECS5_PROFILE_META
+		]]>
+	</sql>
+	
+	<sql id="sql_proMeta3">
+		<![CDATA[
+		select a.svc_meta_idx as svc_meta_idx, a.name as name, a.min as min, a.max as max, 
+		a.description as description, 
+		(select group_concat(b.basic_idx SEPARATOR ',') 
+		from mecs5_service_ind_map b where 1=1 and a.svc_meta_idx = b.svc_meta_idx) as basic_idx 
+		from mecs5_service_ind_meta a
+		]]>
+	</sql>
+	
+	<sql id="sql_proMeta4">
+		<![CDATA[
+		select name, svc_meta_idx, min, max from mecs5_service_ind_meta
+		]]>
+	</sql>
+	
+	<sql id="sql_proMeta2">
+		<![CDATA[
+		select profile_meta_idx, name from MECS5_PROFILE_META
+		]]>
+	</sql>
+    
+	<sql id="sql_paging">
+		<if test="pageDTO != null">
+			<![CDATA[
+			limit #{pageDTO.startRow}, #{pageDTO.itemPerPage}
+			]]>
+		</if>
+	</sql>
+
+	<sql id="sql_search">
+		<where>
+            <if test="searchDTO != null">
+            	<if test="searchDTO.searchId != null and searchDTO.searchId != ''">
+	            	<![CDATA[
+	                	and name = '${searchDTO.searchId}'
+	            	]]>
+            	</if>
+			</if>
+		</where>
+	</sql>
+
+	<select id="selectProMetaList" parameterType="hashmap" resultMap="rmapProMeta">
+		<include refid="sql_proMeta" />
+		<include refid="sql_search" />
+		group by name
+		<![CDATA[${orderby}]]>
+		<include refid="sql_paging" />
+	</select> 
+	
+	<select id="selectSvIndiList" parameterType="hashmap" resultMap="rmapProMeta">
+		<include refid="sql_proMeta_name" />
+	</select> 
+	
+	<select id="selectIndiList" parameterType="hashmap" resultMap="rmapProMeta">
+		<include refid="sql_proMeta4" />
+	</select> 
+
+	<select id="selectCount" parameterType="hashmap" resultType="int">
+		<![CDATA[select count(*) from (]]>
+		<include refid="sql_proMeta" />
+		<include refid="sql_search" />
+		group by name
+		<![CDATA[) cnt]]>
+	</select>
+	
+	<select id="selectCount_pro" parameterType="hashmap" resultType="int">
+		<![CDATA[select count(*) from (]]>
+		<include refid="sql_proMeta_pro" />
+		where profile_meta_idx = '${searchDTO.searchId}'
+		<![CDATA[) cnt]]>
+	</select>
+	
+	
+	<select id="selectCount_sc" parameterType="hashmap" resultType="int">
+		<![CDATA[select count(*) from (]]>
+		<include refid="sql_proMeta_sc" />
+		where profile_idx = '${searchDTO.searchId}'
+		<![CDATA[) cnt]]>
+	</select>
+	
+	
+	<select id="selectSensMeta" parameterType="String" resultMap="rmapProMeta">
+		<include refid="sql_proMeta" />
+		<where>
+			<![CDATA[a.svc_meta_idx = #{groupId}]]>
+		</where>
+	</select>
+	
+	
+	<update id="updateSensMeta" parameterType="proMeta">
+		update MECS5_Service_IND_META
+		<set>
+			min = #{min},
+			max = #{max},
+			description = #{description}
+		</set>
+		<where>
+			svc_meta_idx = #{svc_meta_idx}
+		</where>
+	</update>
+	
+	<delete id="deleteSensMeta" parameterType="String">
+		<![CDATA[
+			delete from MECS5_SERVICE_IND_MAP where svc_meta_idx = #{index}
+		]]>
+	</delete>
+	
+	<delete id="deleteSensMeta2" parameterType="String">
+		<![CDATA[
+			delete from MECS5_SERVICE_IND_META where svc_meta_idx = #{index}
+		]]>
+	</delete>
+	
+	<select id="selectName" parameterType="String" resultMap="rmapProMeta">
+		<include refid="sql_proMeta" />
+			<where>
+				<![CDATA[name = #{groupId}]]>
+			</where>
+	</select>
+	
+	<insert id="insertProMeta" parameterType="proMeta">
+		<![CDATA[
+		insert into MECS5_PROFILE_META (
+			profile_meta_idx,
+			name,
+			svc_meta_idx,
+			insert_date,
+			description
+		) values (
+			#{profile_meta_idx},
+			#{name},
+			#{service_idx},
+			now(),
+			#{description}
+		)
+		]]>
+	</insert>
+	
+	<delete id="deleteProMeta" parameterType="String">
+		<![CDATA[
+			delete from MECS5_PROFILE_META where name = #{name}
+		]]>
+	</delete>
+	
+	<select id="selectProMeta" parameterType="String" resultMap="rmapProMeta">
+		<include refid="sql_proMeta5" />
+		<where>
+			<![CDATA[name = #{groupId}]]>
+		</where>
+	</select>
+	
+	<select id="selectProMeta2" parameterType="String" resultMap="rmapProMeta">
+		SELECT a.profile_meta_idx, a.name, 
+GROUP_CONCAT(a.svc_meta_idx SEPARATOR ',') AS service_idx, a.insert_date, a.description AS description,
+GROUP_CONCAT(b.name SEPARATOR ',') AS service_name 
+FROM MECS5_PROFILE_META a,
+mecs5_service_ind_meta b
+ WHERE a.svc_meta_idx = b.svc_meta_idx
+ AND a.name = #{groupId}
+ GROUP BY a.profile_meta_idx, a.name, a.insert_date, a.description
+	</select>
+	
+	<select id="selectProIdx" parameterType="String" resultMap="rmapProMeta">
+		SELECT IFNULL(MAX(profile_meta_idx)+1, 0) as profile_meta_idx FROM MECS5_PROFILE_META
+	</select>
+	
+</mapper> 

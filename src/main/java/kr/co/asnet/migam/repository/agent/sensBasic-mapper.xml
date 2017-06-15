@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.asnet.migam.repository.agent.SensBasicDaoMapper">
+	               
+	<resultMap id="rmapSensBasic" type="sensBasic">
+		<result property="basic_idx" column="basic_idx" />
+		<result property="name" column="name" />
+		<result property="type" column="type" />
+		<result property="min" column="min" />
+		<result property="max" column="max" />
+		<result property="insert_date" column="insert_date" />
+		<result property="description" column="description" />
+		<result property="kr_name" column="kr_name" />
+		<result property="b_min" column="b_min" />
+		<result property="b_max" column="b_max" />
+	</resultMap>
+	
+	
+	<sql id="sql_sensBasic">
+		<![CDATA[
+		select
+			basic_idx,
+			name,
+			type,
+			min,
+			max,
+			insert_date,
+			description
+		from 
+			MECS5_BASIC_IND_META
+		]]>
+	</sql>
+	
+	
+	
+	<sql id="sql_sensMeta">
+		<![CDATA[
+		select
+			name
+		from 
+			MECS5_SERVICE_IND_META
+		]]>
+	</sql>
+    
+	<sql id="sql_paging">
+		<if test="pageDTO != null">
+			<![CDATA[
+			limit #{pageDTO.startRow}, #{pageDTO.itemPerPage}
+			]]>
+		</if>
+	</sql>
+
+	<sql id="sql_search">
+		<where>
+            <if test="searchDTO != null">
+            	<if test="searchDTO.searchId != null and searchDTO.searchId != ''">
+	            	<![CDATA[
+	                	and name = '${searchDTO.searchId}'
+	            	]]>
+            	</if>
+			</if>
+		</where>
+	</sql>
+
+	<select id="selectSensBasicList" parameterType="hashmap" resultMap="rmapSensBasic">
+		<include refid="sql_sensBasic" />
+		<include refid="sql_search" />
+		<![CDATA[${orderby}]]>
+		<include refid="sql_paging" />
+	</select> 
+	
+	<select id="selectNameList" parameterType="hashmap" resultMap="rmapSensBasic">
+		<include refid="sql_sensBasic" />
+	</select> 
+
+	<select id="selectCount" parameterType="hashmap" resultType="int">
+		<![CDATA[select count(*) from (]]>
+		<include refid="sql_sensBasic" />
+		<include refid="sql_search" />
+		<![CDATA[) cnt]]>
+	</select>
+	
+	<insert id="insertSensBasic" parameterType="sensBasic">
+		<![CDATA[
+		insert into MECS5_BASIC_IND_META (
+			name,
+			type,
+			min,
+			max,
+			insert_date,
+			description
+		) values (
+			#{name},
+			#{type},
+			#{min},
+			#{max},
+			DATE_FORMAT(NOW(), "%y%m%d"),
+			#{description}
+		)
+		]]>
+	</insert>
+	
+	<insert id="insertSensMeta" parameterType="sensMeta">
+		<![CDATA[
+		insert into MECS5_SERVICE_IND_META (
+			name,
+			min,
+			max,
+			insert_date,
+			description,
+			kr_name
+		) values (
+			#{name},
+			#{min},
+			#{max},
+			NOW(),
+			#{description},
+			CONVERT(#{kr_name} USING utf8)
+		)
+		]]>
+	</insert>
+	
+	<insert id="insertSensMap" parameterType="sensMeta">
+		<![CDATA[
+		insert into MECS5_SERVICE_IND_MAP (
+			svc_meta_idx,
+			basic_idx,
+			insert_date,
+			description,
+			min,
+			max
+		) values (
+			(SELECT max(svc_meta_idx) FROM MECS5_SERVICE_IND_META),
+			#{basic_idx},
+			DATE_FORMAT(NOW(), "%y%m%d"),
+			#{description},
+			#{b_min},
+			#{b_max}
+		)
+		]]>
+	</insert>
+	
+	<insert id="insertSensMap_update" parameterType="sensMeta">
+		<![CDATA[
+		insert into MECS5_SERVICE_IND_MAP (
+			svc_meta_idx,
+			basic_idx,
+			insert_date,
+			description,
+			min,
+			max
+		) values (
+			#{svc_meta_idx},
+			#{basic_idx},
+			DATE_FORMAT(NOW(), "%y%m%d"),
+			#{description},
+			#{b_min},
+			#{b_max}
+		)
+		]]>
+	</insert>
+	
+	<select id="selectSensBasic" parameterType="String" resultMap="rmapSensBasic">
+		<include refid="sql_sensBasic" />
+		<where>
+			<![CDATA[basic_idx = #{groupId}]]>
+		</where>
+	</select>
+	
+	
+	<update id="updateSensBasic" parameterType="sensBasic">
+		update MECS5_BASIC_IND_META
+		<set>
+			min = #{min},
+			max = #{max},
+			description = #{description}
+		</set>
+		<where>
+			basic_idx = #{basic_idx}
+		</where>
+	</update>
+	
+	<delete id="deleteSensBasic" parameterType="String">
+		<![CDATA[
+			delete from MECS5_BASIC_IND_META where basic_idx = #{index}
+		]]>
+	</delete>
+	
+	
+	<select id="selectAgentGroup" parameterType="String" resultMap="rmapSensBasic">
+		<include refid="sql_sensBasic" />
+		<where>
+			<![CDATA[name = #{groupId}]]>
+		</where>
+	</select>
+	
+	<select id="selectName" parameterType="String" resultMap="rmapSensBasic">
+		<include refid="sql_sensMeta" />
+		<where>
+			<![CDATA[name = #{groupId}]]>
+		</where>
+	</select>
+	
+</mapper> 

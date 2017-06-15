@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.asnet.migam.repository.call.CallAnalysisDaoMapper">
+	<resultMap id="rmapCallAnalysis" type="callAnalysis">
+		<result property="index" column="idx" />
+		<result property="jobId" column="job_id" />
+		<result property="agentId" column="agent_id" />
+		<result property="groupId" column="group_id" />
+		<result property="agentNumber" column="agent_no" />
+		<result property="agentName" column="agent_name" />
+		<result property="customerNumber" column="customer_no" />
+		<result property="recogTime" column="recog_time" />
+		<result property="callParty" column="call_party" />
+		<result property="callType" column="call_type" />
+		<result property="startTime" column="start_time" />
+		<result property="endTime" column="end_time" />
+		<result property="callDuration" column="call_duration" />
+		<result property="bmAgent" column="bm_agent" />
+		<result property="bmCustomer" column="bm_customer" />
+		<result property="mixedWavePath" column="mixed_wavepath" />
+		<result property="agentCriticalValue" column="agent_critical_value" />
+		<result property="customerCriticalValue" column="customer_critical_value" />
+		
+		<result property="agentTransitionFlag" column="agent_transition_flag" />
+		<result property="agentResultFlag" column="agent_result_flag" />
+		<result property="agentFailCode" column="agent_fail_code" />
+		<result property="agentResult" column="agent_result" />
+		<result property="agentResultString" column="agent_result_string" />
+		<result property="agentWavePath" column="agent_wavepath" />
+		<result property="agentSegmentCount" column="agent_no_of_segments" />
+		<result property="agentStartPos" column="agent_start_pos" />
+		<result property="agentEndPos" column="agent_end_pos" />
+		<result property="agentSegmentData" column="agent_segment_data" />
+
+		<result property="customerTransitionFlag" column="customer_transition_flag" />
+		<result property="customerResultFlag" column="customer_result_flag" />
+		<result property="customerFailCode" column="customer_fail_code" />
+		<result property="customerResult" column="customer_result" />
+		<result property="customerResultString" column="customer_result_string" />
+		<result property="customerWavePath" column="customer_wavepath" />
+		<result property="customerSegmentCount" column="customer_no_of_segments" />
+		<result property="customerStartPos" column="customer_start_pos" />
+		<result property="customerEndPos" column="customer_end_pos" />
+		<result property="customerSegmentData" column="customer_segment_data" />
+
+		<result property="createDate" column="insert_date" />
+	</resultMap>
+
+	<sql id="sql_callAnalysis">
+		<![CDATA[
+		select
+			idx,
+			job_id,
+			agent_id,
+			group_id,
+			agent_no,
+			customer_no,
+			recog_time,
+			call_type,
+			start_time,
+			end_time,
+			call_duration,
+			bm_agent,
+			bm_customer,
+			mixed_wavepath,
+			agent_critical_value,
+			customer_critical_value,	
+			agent_transition_flag,
+			agent_result_flag,
+			agent_fail_code,
+			agent_result,
+			agent_result_string,
+			agent_wavepath,
+			agent_no_of_segments,
+			agent_start_pos,
+			agent_end_pos,
+			agent_segment_data,
+			customer_transition_flag,
+			customer_result_flag,
+			customer_fail_code,
+			customer_result,
+			customer_result_string,
+			customer_wavepath,
+			customer_no_of_segments,
+			customer_start_pos,
+			customer_end_pos,
+			customer_segment_data,
+            agent_name,
+            insert_date
+		from 
+			mecs5_analysis_result
+		]]>
+	</sql>
+
+	<sql id="sql_paging">
+		<if test="pageDTO != null">
+			<![CDATA[
+			limit #{pageDTO.startRow}, #{pageDTO.itemPerPage}
+			]]>
+		</if>
+	</sql>
+
+	<sql id="sql_search">
+		<where>
+            <if test="searchDTO != null">
+            	<if test="searchDTO.startDate != null and searchDTO.startDate != '' ">
+            		<![CDATA[
+            			and date_format(insert_date,'%Y-%m-%d') >= #{searchDTO.startDate} 
+            			and date_format(insert_date,'%Y-%m-%d') <= #{searchDTO.endDate}
+            		]]>
+            	</if>
+            	<if test="searchDTO.searchId != null and searchDTO.searchId != '' ">
+		            <![CDATA[
+		                and agent_id = #{searchDTO.searchId} 
+		            ]]>
+				</if>
+				<if test="searchDTO.searchType == 1">
+		            <![CDATA[
+		                and customer_result_flag = '1'
+		                and customer_fail_code = '0'
+		            ]]>
+				</if>
+				<if test="searchDTO.searchType == 2">
+		            <![CDATA[
+		                and agent_result_flag = '1'
+		                and agent_fail_code = '0'
+		            ]]>
+				</if>
+				<if test="searchDTO.searchType == 3">
+		            <![CDATA[
+		                and (( customer_result_flag = '1'
+		                and customer_fail_code = '0' )
+		                or ( agent_result_flag = '1'
+		                and agent_fail_code = '0' ))
+		            ]]>
+				</if>
+				<if test="searchDTO.searchQuery != null and searchDTO.searchQuery != '' ">
+		            <![CDATA[
+		                and customer_no like CONCAT('%',#{searchDTO.searchQuery},'%')
+		            ]]>
+				</if>
+			</if>
+		</where>
+	</sql>
+
+	<select id="selectCallAnalysisList" parameterType="hashmap" resultMap="rmapCallAnalysis">
+		<include refid="sql_callAnalysis" />
+		<include refid="sql_search" />
+		<![CDATA[${orderby}]]>
+		<include refid="sql_paging" />
+	</select> 
+
+	<select id="selectCallAnalysis" parameterType="int" resultMap="rmapCallAnalysis">
+		<include refid="sql_callAnalysis" />
+		<where>
+			<![CDATA[idx = #{index}]]>
+		</where>
+	</select>
+
+	<select id="selectCount" parameterType="hashmap" resultType="int">
+		<![CDATA[select count(*) from (]]>
+		<include refid="sql_callAnalysis" />
+		<include refid="sql_search" />
+		<![CDATA[) cnt]]>
+	</select>
+	
+	<select id="selectDailyAngryCallForDashBoard" parameterType="hashmap" resultMap="rmapCallAnalysis">
+		<![CDATA[
+			select 
+				count(agent_id) as customer_result,
+				agent_id,
+				agent_name 
+			from
+				mecs5_analysis_result
+		]]>
+		<where>
+			<![CDATA[
+				and date_format(insert_date,'%Y-%m-%d') = date_format(NOW(),'%Y-%m-%d') 
+				and agent_id in ( ${searchDTO.searchId} )
+			]]>
+            <if test="searchDTO != null">
+				<if test="searchDTO.searchType == 1">
+		            <![CDATA[
+		                and customer_result_flag = 1
+		                and customer_fail_code = 0
+		            ]]>
+				</if>
+				<if test="searchDTO.searchType == 2">
+		            <![CDATA[
+		                and agent_result_flag = 1
+		                and agent_fail_code = 0
+		            ]]>
+				</if>
+				<if test="searchDTO.searchType == 3">
+		            <![CDATA[
+		                and (( customer_result_flag = '1'
+		                and customer_fail_code = '0' )
+		                or ( agent_result_flag = '1'
+		                and agent_fail_code = '0' ))
+		            ]]>
+				</if>
+            </if>
+		</where>
+		<![CDATA[group by agent_id]]>
+		<![CDATA[${orderby}]]>
+	</select>
+</mapper> 

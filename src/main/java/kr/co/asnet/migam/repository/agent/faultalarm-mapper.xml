@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.asnet.migam.repository.agent.ProcessDaoMapper">
+	<resultMap id="rmapFaultAlarm" type="FaultAlarmStatGroup">
+		<result property="sys_id" column="sys_id" />
+        <result property="sys_name" column="sys_name" />
+        <result property="code" column="code" />
+        <result property="happened_time" column="happened_time" />
+        <result property="detail" column="detail" />
+	</resultMap>
+	
+	<resultMap id="rmapFaultAlarmHis" type="FaultAlarmHisGroup">
+		<result property="sys_id" column="sys_id" />
+        <result property="sys_name" column="sys_name" />
+        <result property="code" column="code" />
+        <result property="happened_time" column="happened_time" />
+        <result property="delete_time" column="delete_time" />
+        <result property="detail" column="detail" />
+	</resultMap>
+	
+
+	
+	<sql id="sql_faultalarm">
+		<![CDATA[
+		select
+			sys_id,
+			sys_name,
+			code,
+			happened_time,
+			detail
+		from 
+			mecs5_fault_state
+		]]>
+	</sql>
+	
+	
+	<select id="selectFaultAlarmStatList" parameterType="hashmap" resultMap="rmapFaultAlarm">
+		<include refid="sql_faultalarm" />
+		<![CDATA[${orderby}]]>
+	</select>
+	
+	<select id="selectFaultAlarmStatCount" parameterType="hashmap" resultType="int">
+		<![CDATA[select count(*) from (]]>
+		<include refid="sql_faultalarm" />
+		<![CDATA[) cnt]]>
+	</select>
+	
+	<delete id="deleteFaultAlarm" parameterType="String">
+		<![CDATA[
+			delete from mecs5_fault_state where code = #{code}
+		]]>
+	</delete>
+	
+	<insert id="insertFaultHis" parameterType="FaultAlarmStatGroup">
+		<![CDATA[
+		update mecs5_fault_history set s_username = #{s_username} , s_userid = #{s_userid} , delete_time = now() where code = #{code}
+		]]>
+	</insert>
+</mapper> 

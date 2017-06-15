@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.asnet.migam.repository.user.UserDaoMapper">
+	<resultMap id="rmapUser" type="user">
+        <result property="index" column="n_index" />
+        <result property="userId" column="s_userid" />
+        <result property="passwd" column="s_passwd" />
+        <result property="userName" column="s_username" />
+        <result property="status" column="n_status" />
+        <result property="role" column="s_role" />
+        <result property="createDate" column="d_createdate" />
+        <result property="visitDate" column="d_visitdate" />
+        <result property="phone" column="s_phone" />
+        <result property="alarmCount" column="n_alarmcount" />
+        <result property="org" column="s_org" />
+        <result property="position" column="s_position" />
+	</resultMap>
+	
+	<sql id="sql_user">
+		<![CDATA[
+		select
+			n_index,
+			s_userid,
+			s_passwd,
+			s_username,
+			n_status,
+			s_role,
+			d_createdate,
+			d_visitdate,
+			s_phone,
+			n_alarmcount,
+			s_org,
+			s_position
+		from 
+			mers_user
+		]]>
+	</sql>
+
+	<insert id="insertUser" parameterType="user">
+		<![CDATA[
+		insert into mers_user (
+            s_userid,
+            s_passwd,
+            s_username,
+            n_status,
+            s_role,
+            d_createdate,
+            d_visitdate,
+            s_phone,
+            n_alarmcount,
+            s_org,
+            s_position
+		) values (
+			#{userId},
+			#{passwd},
+			#{userName},
+			#{status},
+			#{role},
+			NOW(),
+			NOW(),
+			#{phone},
+			#{alarmCount},
+			#{org},
+			#{position}
+		)
+		]]>
+		<selectKey resultType="Integer" keyProperty="index" order="AFTER">
+		  SELECT LAST_INSERT_ID();
+		</selectKey>
+	</insert>
+
+	<sql id="sql_paging">
+		<if test="pageDTO != null">
+			<![CDATA[
+			limit #{pageDTO.startRow}, #{pageDTO.itemPerPage}
+			]]>
+		</if>
+	</sql>
+
+	<sql id="sql_search">
+		<where>
+            <if test="searchDTO != null">
+            	<if test="searchDTO.searchStatus != null">
+            	<![CDATA[
+                	and n_status = '${searchDTO.searchStatus}'
+            	]]>
+            	</if>
+				<if test="searchDTO.searchQuery != null">
+	            <![CDATA[
+	                and ( 
+	                    s_username like '%${searchDTO.searchQuery}%' or
+	                    s_userid like '%${searchDTO.searchQuery}%' )
+	            ]]>
+				</if>
+				<if test="searchDTO.searchType != null">
+	            <![CDATA[
+	                and ( s_role like '%${searchDTO.searchType}%' )
+	            ]]>
+				</if>
+			</if>
+		</where>
+	</sql>
+
+	<select id="selectUser" parameterType="int" resultMap="rmapUser">
+		<include refid="sql_user" />
+		<where>
+			<![CDATA[n_index = #{index}]]>
+		</where>
+	</select>
+
+	<select id="selectUserById" parameterType="string" resultMap="rmapUser">
+		<include refid="sql_user" />
+		<where>
+			<![CDATA[s_userid = #{userId}]]>
+		</where>
+	</select>
+	
+	<update id="updateUser" parameterType="user">
+		update mers_user
+		<set>
+			<if test="userId != null and userId != ''">
+				s_userid = #{userId},
+			</if>
+			<if test="passwd != null and passwd != ''">
+				s_passwd = #{passwd},
+			</if>
+			<if test="userName != null and userName != ''">
+				s_username = #{userName},
+			</if>
+			n_status = #{status},
+			s_role = #{role},
+			s_org = #{org},
+			s_position = #{position},
+			s_phone = #{phone},
+			d_createdate = #{createDate},
+			d_visitdate = #{visitDate},
+			n_alarmcount = #{alarmCount}
+		</set>
+		<where>
+			n_index = #{index}
+		</where>
+	</update>
+	
+	<update id="updateAlarmCount" parameterType="user">
+		update mers_user
+		<set>
+            n_alarmcount = #{alarmCount},
+		</set>
+		<where>
+			n_index = #{index}
+		</where>
+	</update>
+	
+
+	<select id="selectUserList" parameterType="hashmap" resultMap="rmapUser">
+		<include refid="sql_user" />
+		<include refid="sql_search" />
+		<![CDATA[${orderby}]]>
+		<include refid="sql_paging" />
+	</select> 
+
+	<select id="selectCount" parameterType="hashmap" resultType="int">
+		<![CDATA[select count(*) from (]]>
+		<include refid="sql_user" />
+		<include refid="sql_search" />
+		<![CDATA[) cnt]]>
+	</select>
+
+	<delete id="deleteUser" parameterType="String">
+		<![CDATA[
+			delete from mers_user where n_index = #{index}
+		]]>
+	</delete>
+	
+	
+	
+	
+	
+	<update id="updateUserTime" parameterType="user">
+		update mers_user
+		<set>
+				d_visitdate = now()
+		</set>
+		<where>
+			s_userid = #{userId}
+		</where>
+	</update>
+	
+	
+	
+	
+	
+	
+</mapper> 

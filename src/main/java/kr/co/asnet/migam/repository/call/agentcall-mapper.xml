@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.asnet.migam.repository.call.AgentCallDaoMapper">
+	<resultMap id="rmapAgentCall" type="agentCall">
+		<result property="statTime" column="stat_time" />
+		<result property="agentId" column="agent_id" />
+		<result property="agentName" column="agent_name" />
+		<result property="totalCount" column="total_cnt" />
+		<result property="successCount" column="succ_cnt" />
+		<result property="failCount" column="fail_cnt" />
+		<result property="angryCount" column="angry_cnt" />
+		<result property="stressCount" column="stress_cnt" />
+		<result property="incrementCount" column="incr_cnt" />
+		<result property="decrementCount" column="decr_cnt" />
+	</resultMap>
+
+	<select id="selectAgentCallListForChart" parameterType="hashmap" resultMap="rmapAgentCall">
+		<![CDATA[
+			select
+				sum(total_cnt) as total_cnt,
+				sum(succ_cnt) as succ_cnt,
+				sum(fail_cnt) as fail_cnt,
+				sum(angry_cnt) as angry_cnt,
+				sum(stress_cnt) as stress_cnt,
+				sum(incr_cnt) as incr_cnt,
+				sum(decr_cnt) as decr_cnt,
+	            mecs5_agent_stat_daily.agent_id,
+				mecs5_agent.agent_name as agent_name
+			from 
+				mecs5_agent_stat_daily
+				LEFT join mecs5_agent
+				ON mecs5_agent.agent_id = mecs5_agent_stat_daily.agent_id 
+		]]>
+		<where>
+            <if test="searchDTO != null">
+            	<if test="searchDTO.startDate != null and searchDTO.startDate != '' ">
+            		<![CDATA[
+            			and date_format(stat_time,'%Y-%m-%d') >= #{searchDTO.startDate} 
+            			and date_format(stat_time,'%Y-%m-%d') <= #{searchDTO.endDate}
+            		]]>
+            	</if>
+            	<if test="searchDTO.searchId != null">
+            		<![CDATA[
+            			and mecs5_agent_stat_daily.agent_id in (${searchDTO.searchId}) 
+            		]]>
+            	</if>
+            </if>
+		</where>
+		<![CDATA[
+			group by mecs5_agent_stat_daily.agent_id
+		]]>
+		<![CDATA[${orderby}]]>
+	</select>
+</mapper> 

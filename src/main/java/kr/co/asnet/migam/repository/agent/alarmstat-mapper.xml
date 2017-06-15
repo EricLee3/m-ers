@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.asnet.migam.repository.agent.ProcessDaoMapper">
+	<resultMap id="rmapAlarmStat" type="AlarmStatGroup">
+        <result property="sys_id" column="sys_id" />
+        <result property="sys_name" column="sys_name" />
+        <result property="alarm_code" column="alarm_code" />
+        <result property="alarmed_time" column="alarmed_time" />
+        <result property="alarm_flag" column="alarm_flag" />
+        <result property="alarm_lv" column="alarm_lv" />
+        <result property="alarm_detail" column="alarm_detail" />
+        <result property="audio_flag" column="audio_flag" />
+	</resultMap>
+	
+	<sql id="sql_alarm_stat">
+		<![CDATA[
+		select
+			sys_id,      
+			sys_name,   
+			alarm_code, 
+			alarmed_time,
+			alarm_flag,
+			alarm_lv,
+			alarm_detail,
+			audio_flag
+		from 
+			mecs5_alarm_state
+		]]>
+	</sql>
+	
+	<sql id="sql_paging">
+		<if test="pageDTO != null">
+			<![CDATA[
+			limit #{pageDTO.startRow}, #{pageDTO.itemPerPage}
+			]]>
+		</if>
+	</sql>
+	
+	<select id="selectAlarmStatList" parameterType="hashmap" resultMap="rmapAlarmStat">
+		<include refid="sql_alarm_stat" />
+		where ALARM_FLAG = '1'
+		<![CDATA[${orderby}]]>
+	</select>
+	
+	<select id="selectAlarmStatCount" parameterType="hashmap" resultType="int">
+		<![CDATA[select count(*) from (]]>
+		<include refid="sql_alarm_stat" />
+		where ALARM_FLAG = '1'
+		<![CDATA[) cnt]]>
+	</select>
+</mapper> 

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
+ "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<settings>
+		<setting name="cacheEnabled" value="true" />
+		<setting name="lazyLoadingEnabled" value="true" />
+		<setting name="multipleResultSetsEnabled" value="true" />
+		<setting name="useColumnLabel" value="true" />
+		<setting name="useGeneratedKeys" value="true" />
+		<setting name="autoMappingBehavior" value="PARTIAL" />
+		<setting name="defaultExecutorType" value="REUSE" />
+		<setting name="defaultStatementTimeout" value="25" />
+		<setting name="safeRowBoundsEnabled" value="false" />
+		<setting name="mapUnderscoreToCamelCase" value="false" />
+		<setting name="localCacheScope" value="SESSION" />
+		<setting name="jdbcTypeForNull" value="OTHER" />
+		<setting name="lazyLoadTriggerMethods" value="equals,clone,hashCode,toString" />
+		
+	</settings>
+
+	<typeAliases>
+		<typeAlias alias="user" type="kr.co.asnet.migam.domain.user.User" />
+		<typeAlias alias="agent" type="kr.co.asnet.migam.domain.agent.Agent" />
+		<typeAlias alias="agentGroup" type="kr.co.asnet.migam.domain.agent.AgentGroup" />
+		<typeAlias alias="agentHistory" type="kr.co.asnet.migam.domain.agent.AgentHistory" />
+		<typeAlias alias="callAudit" type="kr.co.asnet.migam.domain.call.CallAudit" />
+		<typeAlias alias="hourlyCall" type="kr.co.asnet.migam.domain.call.HourlyCall" />
+		<typeAlias alias="dailyCall" type="kr.co.asnet.migam.domain.call.DailyCall" />
+		<typeAlias alias="agentCall" type="kr.co.asnet.migam.domain.call.AgentCall" />
+		<typeAlias alias="monthlyCall" type="kr.co.asnet.migam.domain.call.MonthlyCall" />
+		<typeAlias alias="callAnalysis" type="kr.co.asnet.migam.domain.call.CallAnalysis" />
+		<typeAlias alias="pageDTO" type="kr.co.asnet.migam.domain.PageDTO" />
+		<typeAlias alias="searchDTO" type="kr.co.asnet.migam.domain.SearchDTO" />
+		<typeAlias alias="parameter" type="kr.co.asnet.migam.domain.config.Parameter" />
+		<typeAlias alias="license" type="kr.co.asnet.migam.domain.config.License" />
+		<typeAlias alias="batch" type="kr.co.asnet.migam.domain.config.Batch" />
+		<typeAlias alias="batchHistory" type="kr.co.asnet.migam.domain.config.BatchHistory" />
+		<typeAlias alias="processGroup" type="kr.co.asnet.migam.domain.agent.ProcessGroup" />
+		<typeAlias alias="alarmstatGroup" type="kr.co.asnet.migam.domain.agent.AlarmStatGroup" />
+		<typeAlias alias="faultalarmstatGroup" type="kr.co.asnet.migam.domain.agent.FaultAlarmStatGroup" />
+		<typeAlias alias="FaultAlarmHisGroup" type="kr.co.asnet.migam.domain.agent.FaultAlarmHisGroup" />
+		<typeAlias alias="SensMeta" type="kr.co.asnet.migam.domain.agent.SensMeta" />
+		<typeAlias alias="ProMeta" type="kr.co.asnet.migam.domain.agent.ProMeta" />
+		<typeAlias alias="AnalResult" type="kr.co.asnet.migam.domain.agent.AnalResult" />
+		<typeAlias type="kr.co.asnet.migam.domain.agent.ResourceLog" alias="resourceLog"/>
+		<typeAlias type="kr.co.asnet.migam.domain.agent.AlarmLog" alias="alarmLog"/>
+		<typeAlias type="kr.co.asnet.migam.domain.agent.FaultAlarmLog" alias="faultalarmLog"/>
+		<typeAlias type="kr.co.asnet.migam.domain.agent.HisLog" alias="hisLog"/>
+		<typeAlias type="kr.co.asnet.migam.domain.agent.AlarmCode" alias="alarmCode"/>
+		<typeAlias type="kr.co.asnet.migam.domain.agent.AlarmLimit" alias="alarmLimit"/>
+		<typeAlias type="kr.co.asnet.migam.domain.agent.SensBasic" alias="sensBasic"/>
+		<typeAlias type="kr.co.asnet.migam.domain.agent.SensConf" alias="sensConf"/>
+		<typeAlias type="kr.co.asnet.migam.domain.agent.ProConf" alias="proConf"/>
+		<typeAlias type="kr.co.asnet.migam.domain.agent.ImsiMent" alias="ImsiMent"/>
+		<typeAlias type="kr.co.asnet.migam.domain.agent.Voicefile" alias="Voicefile"/>
+		<typeAlias type="kr.co.asnet.migam.domain.agent.Recognition_job" alias="Recognition_job"/>
+		<typeAlias alias="realStat" type="kr.co.asnet.migam.domain.call.RealStat" />
+		<!-- 
+		<typeAlias alias="attach" type="kr.co.asnet.migam.domain.board.Attach" />
+		<typeAlias alias="board" type="kr.co.asnet.migam.domain.board.Board" />
+		<typeAlias alias="post" type="kr.co.asnet.migam.domain.board.Post" />
+		<typeAlias alias="comment" type="kr.co.asnet.migam.domain.board.Comment" />
+		<typeAlias alias="topic" type="kr.co.asnet.migam.domain.topic.Topic" />
+		<typeAlias alias="opinion" type="kr.co.asnet.migam.domain.opinion.Opinion" />
+		<typeAlias alias="contact" type="kr.co.asnet.migam.domain.contact.Contact" />
+		<typeAlias alias="section" type="kr.co.asnet.migam.domain.section.Section" />
+		<typeAlias alias="mail" type="kr.co.asnet.migam.domain.mail.Mail" />
+		 -->
+	</typeAliases>
+
+	<typeHandlers>
+		<typeHandler javaType="java.sql.Timestamp" handler="org.apache.ibatis.type.DateTypeHandler" />
+		<typeHandler javaType="java.sql.Time" handler="org.apache.ibatis.type.DateTypeHandler" />
+		<typeHandler javaType="java.sql.Date" handler="org.apache.ibatis.type.DateTypeHandler" />
+	</typeHandlers>
+	
+	<mappers>
+		<mapper resource="kr/co/asnet/migam/repository/user/user-mapper.xml" />
+		<mapper resource="kr/co/asnet/migam/repository/agent/agent-mapper.xml" />
+		<mapper resource="kr/co/asnet/migam/repository/agent/agentgroup-mapper.xml" />
+		<mapper resource="kr/co/asnet/migam/repository/agent/agenthistory-mapper.xml" />
+		<mapper resource="kr/co/asnet/migam/repository/call/callaudit-mapper.xml" />
+		<mapper resource="kr/co/asnet/migam/repository/call/hourlycall-mapper.xml" />
+		<mapper resource="kr/co/asnet/migam/repository/call/dailycall-mapper.xml" />
+		<mapper resource="kr/co/asnet/migam/repository/call/agentcall-mapper.xml" />
+		<mapper resource="kr/co/asnet/migam/repository/call/monthlycall-mapper.xml" />
+		<mapper resource="kr/co/asnet/migam/repository/call/callanalysis-mapper.xml" />
+		<mapper resource="kr/co/asnet/migam/repository/parameter/parameter-mapper.xml" />
+		<mapper resource="kr/co/asnet/migam/repository/config/license-mapper.xml" />
+		<mapper resource="kr/co/asnet/migam/repository/config/batch-mapper.xml" />
+		<mapper resource="kr/co/asnet/migam/repository/config/batchHistory-mapper.xml" />
+		<mapper resource="kr/co/asnet/migam/repository/agent/process-mapper.xml" />
+		<mapper resource="kr/co/asnet/migam/repository/agent/alarmstat-mapper.xml" />
+		<mapper resource="kr/co/asnet/migam/repository/agent/resource-mapper.xml"/>
+		<mapper resource="kr/co/asnet/migam/repository/agent/alarmLog-mapper.xml"/>
+		<mapper resource="kr/co/asnet/migam/repository/agent/alarmCode-mapper.xml"/>
+		<mapper resource="kr/co/asnet/migam/repository/agent/alarmLimit-mapper.xml"/>
+		<mapper resource="kr/co/asnet/migam/repository/agent/hisLog-mapper.xml"/>
+		<mapper resource="kr/co/asnet/migam/repository/agent/faultalarm-mapper.xml" />
+		<mapper resource="kr/co/asnet/migam/repository/agent/faultalarmLog-mapper.xml"/>
+	    <mapper resource="kr/co/asnet/migam/repository/agent/sensBasic-mapper.xml"/>
+	    <mapper resource="kr/co/asnet/migam/repository/agent/sensMeta-mapper.xml"/>
+	    <mapper resource="kr/co/asnet/migam/repository/agent/proMeta-mapper.xml"/>
+	    <mapper resource="kr/co/asnet/migam/repository/agent/sensConf-mapper.xml"/>
+	    <mapper resource="kr/co/asnet/migam/repository/agent/proConf-mapper.xml"/>
+	    <mapper resource="kr/co/asnet/migam/repository/agent/SensDemo-mapper.xml"/>
+	<!-- 
+		<mapper resource="kr/co/asnet/esc/repository/board/attach-mapper.xml" />
+		<mapper resource="kr/co/asnet/esc/repository/board/board-mapper.xml" />
+		<mapper resource="kr/co/asnet/esc/repository/board/post-mapper.xml" />
+        <mapper resource="kr/co/asnet/esc/repository/topic/topic-mapper.xml" />
+        <mapper resource="kr/co/asnet/esc/repository/opinion/opinion-mapper.xml" />
+        <mapper resource="kr/co/asnet/esc/repository/board/comment-mapper.xml" />
+		<mapper resource="kr/co/asnet/esc/repository/contact/contact-mapper.xml" />
+		<mapper resource="kr/co/asnet/esc/repository/section/section-mapper.xml" />
+		<mapper resource="kr/co/asnet/esc/repository/mail/mail-mapper.xml" />
+	 -->		
+	</mappers>
+
+</configuration>

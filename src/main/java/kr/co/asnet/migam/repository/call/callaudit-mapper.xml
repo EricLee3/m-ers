@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.asnet.migam.repository.call.CallAuditDaoMapper">
+	<resultMap id="rmapCallAudit" type="callAudit">
+		<result property="agentId" column="agent_id" />
+		<result property="groupId" column="group_id" />
+		<result property="callStatus" column="call_state" />
+		<result property="recognitionTime" column="recog_time" />
+		<result property="startTime" column="start_time" />
+		<result property="endTime" column="end_time" />
+		<result property="callDuration" column="call_duration" />
+		<result property="callType" column="call_type" />
+		<result property="agentNumber" column="agent_no" />
+		<result property="customerNumber" column="customer_no" />
+		<result property="agentWavePath" column="agent_wavepath" />
+		<result property="customerWavePath" column="customer_wavepath" />
+		<result property="agentCriticalValue" column="agent_critical_value" />
+		<result property="customerCriticalValue" column="customer_critical_value" />
+		<result property="agentStressCount" column="agent_stress_count" />
+		<result property="customerAngryCount" column="customer_angry_count" />
+		<result property="agentState" column="agent_state" />
+		<result property="customerState" column="customer_state" />
+		<result property="agentName" column="agent_name" />
+		<result property="groupName" column="group_name" />
+	</resultMap>
+	
+	<resultMap id="rmapRealStat" type="realStat">
+		<result property="agentId" column="agent_id" />
+		<result property="groupId" column="group_id" />
+		<result property="callStatus" column="call_state" />
+		<result property="recognitionTime" column="recog_time" />
+		<result property="startTime" column="start_time" />
+		<result property="endTime" column="end_time" />
+		<result property="callDuration" column="call_duration" />
+		<result property="callType" column="call_type" />
+		<result property="agentNumber" column="agent_no" />
+		<result property="agentName" column="agent_name" />
+		<result property="customerNumber" column="customer_no" />
+		<result property="agentWavePath" column="agent_wavepath" />
+		<result property="customerWavePath" column="customer_wavepath" />
+		<result property="agentScript" column="agent_script" />
+		<result property="customerScript" column="customer_script" />
+		<result property="groupName" column="group_name" />
+		<result property="agentProfileId" column="agent_profile_id" />
+		<result property="agentProfileName" column="agent_profile_name" />
+		<result property="customerProfileId" column="customer_profile_id" />
+		<result property="customerProfileName" column="customer_profile_name" />
+	</resultMap>
+	
+	<sql id="sql_callaudit_back">
+		<![CDATA[
+		select
+			RT.agent_id as agent_id,
+			RT.group_id as group_id,
+			RT.call_state as call_state,
+			RT.recog_time as recog_time,
+			RT.start_time as start_time,
+			RT.end_time as end_time,
+			RT.call_duration as call_duration,
+			RT.call_type as call_type,
+			RT.agent_no as agent_no,
+			RT.customer_no as customer_no,
+			RT.agent_wavepath as agent_wavepath,
+			RT.customer_wavepath as customer_wavepath,
+			RT.agent_critical_value as agent_critical_value,
+			RT.customer_critical_value as customer_critical_value,
+			RT.agent_stress_count as agent_stress_count,
+			RT.customer_angry_count as customer_angry_count,
+			RT.agent_state as agent_state,
+			RT.customer_state as customer_state,
+			AG.agent_name as agent_name,
+            GR.group_name as group_name
+		from 
+			mecs5_realtime_state RT 
+			LEFT JOIN (
+				select agent_name, agent_id from mecs5_agent group by agent_id
+			) as AG on RT.agent_id = AG.agent_id 
+			LEFT JOIN (
+				select group_name, group_id from mecs5_agent_group group by group_id
+			) as GR on RT.group_id = GR.group_id
+		]]>
+	</sql>
+	
+	<sql id="sql_callaudit">
+		<![CDATA[
+		select
+			RT.agent_id as agent_id,
+			RT.group_id as group_id,
+			RT.call_state as call_state,
+			RT.recog_time as recog_time,
+			RT.start_time as start_time,
+			RT.end_time as end_time,
+			RT.call_duration as call_duration,
+			RT.call_type as call_type,
+			RT.agent_no as agent_no,
+			RT.customer_no as customer_no,
+			RT.agent_wavepath as agent_wavepath,
+			RT.customer_wavepath as customer_wavepath,
+			AG.agent_name as agent_name,
+            GR.group_name as group_name
+		from 
+			mecs5_realtime_state RT 
+			LEFT JOIN (
+				select agent_name, agent_id from mecs5_agent group by agent_id
+			) as AG on RT.agent_id = AG.agent_id 
+			LEFT JOIN (
+				select group_name, group_id from mecs5_agent_group group by group_id
+			) as GR on RT.group_id = GR.group_id
+		]]>
+	</sql>
+	
+	<sql id="sql_realstat">
+		<![CDATA[
+		select
+			RT.agent_id as agent_id,
+			RT.group_id as group_id,
+			RT.call_state as call_state,
+			RT.recog_time as recog_time,
+			RT.start_time as start_time,
+			RT.end_time as end_time,
+			RT.call_duration as call_duration,
+			RT.call_type as call_type,
+			RT.agent_no as agent_no,
+			RT.customer_no as customer_no,
+			RT.agent_wavepath as agent_wavepath,
+			RT.customer_wavepath as customer_wavepath,
+			RT.agent_script as agent_script,
+			RT.customer_script as customer_script,
+			AG.agent_name as agent_name,
+            GR.group_name as group_name,
+            RT.agent_profile_id as agent_profile_id,
+            RT.agent_profile_name as agent_profile_name,
+            RT.customer_profile_id as customer_profile_id,
+            RT.customer_profile_name as customer_profile_name
+		from 
+			mecs5_realtime_state RT 
+			LEFT JOIN (
+				select agent_name, agent_id from mecs5_agent group by agent_id
+			) as AG on RT.agent_id = AG.agent_id 
+			LEFT JOIN (
+				select group_name, group_id from mecs5_agent_group group by group_id
+			) as GR on RT.group_id = GR.group_id
+		]]>
+	</sql>
+	
+	<insert id="insertCallAudit" parameterType="callAudit">
+		<![CDATA[
+		insert into mecs5_realtime_state (
+			agent_id,
+			group_id,
+			call_state
+		) values (
+			#{agentId},
+			#{groupId},
+			#{callStatus}
+		)
+		]]>
+	</insert>
+	
+	<sql id="sql_paging">
+		<if test="pageDTO != null">
+			<![CDATA[
+			limit #{pageDTO.startRow}, #{pageDTO.itemPerPage}
+			]]>
+		</if>
+	</sql>
+
+	<sql id="sql_search">
+		<where>
+            <if test="searchDTO != null">
+			</if>
+		</where>
+	</sql>
+	
+	
+	<sql id="sql_search_realstat">
+		<where>
+            <if test="searchDTO != null">
+            	<if test="searchDTO.searchId != null and searchDTO.searchId != ''">
+	            	<![CDATA[
+	                	and GR.group_name = '${searchDTO.searchId}'
+	            	]]>
+            	</if>
+            	<if test="searchDTO.searchQuery != null and searchDTO.searchQuery != ''">
+	            	<![CDATA[
+	                	and AG.agent_name = '${searchDTO.searchQuery}'
+	            	]]>
+            	</if>
+			</if>
+		</where>
+	</sql>
+	
+	
+
+	<select id="selectCallAudit" parameterType="String" resultMap="rmapCallAudit">
+		<include refid="sql_callaudit" />
+		<where>
+			<![CDATA[RT.agent_id = #{agentId}]]>
+		</where>
+	</select>
+
+	<select id="selectCallAuditList" parameterType="hashmap" resultMap="rmapCallAudit">
+		<include refid="sql_callaudit" />
+		<include refid="sql_search" />
+		<![CDATA[${orderby}]]>
+		<include refid="sql_paging" />
+	</select> 
+	
+	<select id="selectRealStatList" parameterType="hashmap" resultMap="rmapRealStat">
+		<include refid="sql_realstat" />
+		<include refid="sql_search_realstat" />
+		<![CDATA[${orderby}]]>
+		<include refid="sql_paging" />
+	</select> 
+	
+	<select id="selectGroupList" parameterType="hashmap" resultMap="rmapRealStat">
+		<include refid="sql_realstat" />
+		<![CDATA[${orderby}]]>
+	</select> 
+	
+	<select id="selectAgentList" parameterType="hashmap" resultMap="rmapRealStat">
+		<include refid="sql_realstat" />
+		<![CDATA[${orderby}]]>
+	</select> 
+
+	<select id="selectCount" parameterType="hashmap" resultType="int">
+		<![CDATA[select count(*) from (]]>
+		<include refid="sql_callaudit" />
+		<include refid="sql_search" />
+		<![CDATA[) cnt]]>
+	</select>
+	
+	<delete id="deleteCallAudit" parameterType="String">
+		<![CDATA[
+			delete from mecs5_realtime_state where agent_id = #{agentId}
+		]]>
+	</delete>
+</mapper> 

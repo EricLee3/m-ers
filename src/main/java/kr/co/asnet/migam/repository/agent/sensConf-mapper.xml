@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.asnet.migam.repository.agent.SensConfDaoMapper">
+	               
+	<resultMap id="rmapSensConf" type="sensConf">
+		<result property="service_idx" column="service_idx" />
+		<result property="name" column="name" />
+		<result property="kr_name" column="kr_name" />
+		<result property="emotion_level" column="emotion_level" />
+		<result property="basic_idx" column="basic_idx" />
+		<result property="min" column="min" />
+		<result property="max" column="max" />
+		<result property="insert_date" column="insert_date" />
+		<result property="update_date" column="update_date" />
+		<result property="description" column="description" />
+		<result property="indi_name" column="indi_name" />
+		<result property="indi_min" column="indi_min" />
+		<result property="indi_max" column="indi_max" />
+		<result property="s_name" column="s_name" />
+		<result property="b_name" column="b_name" />
+		<result property="b_min" column="b_min" />
+		<result property="b_max" column="b_max" />
+	</resultMap>
+	
+	
+	<sql id="sql_sensConf">
+		<![CDATA[
+		select service_idx, name, emotion_level, basic_idx, min, max, insert_date, update_date, description from MECS5_SERVICE_INDICATOR
+		]]>
+	</sql>
+	
+	<sql id="sql_sensConf3">
+		<![CDATA[
+		select service_idx, name, emotion_level, group_concat(basic_idx SEPARATOR ',') as basic_idx, 
+		min, max, insert_date, update_date, description from MECS5_SERVICE_INDICATOR
+		]]>
+	</sql>
+	
+	<sql id="sql_sensConf33">
+		<![CDATA[
+		select service_idx, name, emotion_level, basic_idx, 
+		min, max, insert_date, update_date, description from MECS5_SERVICE_INDICATOR
+		]]>
+	</sql>
+	
+	<sql id="sql_sensConf2">
+		<![CDATA[
+		select basic_idx, name, min, max from MECS5_basic_IND_META
+		]]>
+	</sql>
+	
+	<sql id="sql_sensConfSv">
+		<![CDATA[
+		select svc_meta_idx, name from MECS5_SERVICE_IND_META
+		
+		]]>
+	</sql>
+	
+	<sql id="sql_sensConfSv_mj">
+		<![CDATA[
+		
+		SELECT service_idx as svc_meta_idx,NAME FROM MECS5_SERVICE_INDICATOR GROUP BY NAME
+		]]>
+	</sql>
+    
+	<sql id="sql_paging">
+		<if test="pageDTO != null">
+			<![CDATA[
+			limit #{pageDTO.startRow}, #{pageDTO.itemPerPage}
+			]]>
+		</if>
+	</sql>
+
+	<sql id="sql_search">
+		<where>
+            <if test="searchDTO != null">
+            	<if test="searchDTO.searchId != null and searchDTO.searchId != ''">
+	            	<![CDATA[
+	                	and name = '${searchDTO.searchId}'
+	            	]]>
+            	</if>
+			</if>
+		</where>
+	</sql>
+
+	
+	<select id="selectSensConfList" parameterType="hashmap" resultMap="rmapSensConf">
+		<include refid="sql_sensConf" />
+		<include refid="sql_search" />
+		group by name, emotion_level
+		<![CDATA[${orderby}]]>
+		<include refid="sql_paging" />
+	</select> 
+	
+	<select id="selectSvIndiList" parameterType="hashmap" resultMap="rmapSensConf">
+		<include refid="sql_sensConfSv" />
+	</select> 
+	
+	<select id="selectIndiList" parameterType="hashmap" resultMap="rmapSensConf">
+		<include refid="sql_sensConf2" />
+	</select> 
+	
+	<select id="selectSensChkList" parameterType="hashmap" resultMap="rmapSensConf">
+	
+SELECT a.BASIC_IDX AS BASIC_IDX, b.NAME AS NAME, a.MIN AS MIN, a.MAX AS MAX, 
+(SELECT MIN FROM MECS5_BASIC_IND_META c WHERE c.basic_idx = a.basic_idx) AS indi_MIN, 
+(SELECT MAX FROM MECS5_BASIC_IND_META c WHERE c.basic_idx = a.basic_idx) AS indi_MAX , 
+a.DESCRIPTION AS DESCRIPTION ,
+(SELECT MIN FROM (SELECT sub.min , sub.max, sub.basic_idx FROM MECS5_SERVICE_IND_Map sub LEFT OUTER JOIN mecs5_service_ind_meta sub2 ON sub2.svc_meta_idx = sub.svc_meta_idx WHERE 1=1  AND sub2.name = 'a' )c WHERE c.basic_idx = a.basic_idx) AS b_min,
+(SELECT MAX FROM (SELECT sub.min , sub.max, sub.basic_idx FROM MECS5_SERVICE_IND_Map sub LEFT OUTER JOIN mecs5_service_ind_meta sub2 ON sub2.svc_meta_idx = sub.svc_meta_idx WHERE 1=1  AND sub2.name = 'a' )c WHERE c.basic_idx = a.basic_idx) AS b_max
+FROM mecs5_service_indicator a 
+LEFT OUTER JOIN MECS5_BASIC_IND_META b 
+ON a.basic_idx = b.basic_idx 
+WHERE 1=1 
+AND a.name = '${searchDTO.searchQuery}'
+AND emotion_level = '${searchDTO.searchId}'
+		
+	</select> 
+
+	<select id="selectCount" parameterType="hashmap" resultType="int">
+SELECT COUNT(*) FROM(
+SELECT service_idx, NAME, emotion_level, basic_idx, MIN, MAX, insert_date, update_date, description FROM MECS5_SERVICE_INDICATOR
+<include refid="sql_search" />
+GROUP BY NAME, emotion_level
+)a
+	</select>
+	
+	<select id="selectCount2" parameterType="hashmap" resultType="int">
+SELECT COUNT(*) FROM(
+SELECT service_idx, NAME, emotion_level, basic_idx, MIN, MAX, insert_date, update_date, description FROM MECS5_SERVICE_INDICATOR
+<include refid="sql_search" />
+)a
+	</select>
+	
+
+	
+	<select id="selectSensConf" parameterType="hashmap" resultMap="rmapSensConf">
+		<include refid="sql_sensConf33" />
+		<where>
+			<![CDATA[name = '${searchDTO.searchQuery}']]>   
+		</where>
+		<![CDATA[
+	        and emotion_level =  '${searchDTO.searchId}'
+	    ]]>
+	</select>
+	
+	
+	<update id="updateSensConf" parameterType="sensConf">
+		update MECS5_SERVICE_INDICATOR
+		<set>
+			min = #{min},
+			max = #{max},
+			description = #{description}
+		</set>
+		<where>
+			service_idx = #{svc_meta_idx}
+		</where>
+	</update>
+	
+	<delete id="deleteSensConf" parameterType="sensConf">
+		<![CDATA[
+			delete from MECS5_SERVICE_INDICATOR where name = #{name} and emotion_level = #{emotion_level}
+		]]>
+	</delete>
+	
+	<delete id="deleteSensConf2" parameterType="String">
+		<![CDATA[
+			delete from MECS5_SERVICE_IND_META where svc_meta_idx = #{index}
+		]]>
+	</delete>
+	
+	<insert id="insertSensConf" parameterType="sensConf">
+		<![CDATA[
+		insert into MECS5_SERVICE_INDICATOR (
+			name,
+			emotion_level,
+			basic_idx,
+			min,
+			max,
+			insert_date,
+			update_date,
+			description
+		) values (
+			#{name},
+			#{emotion_level},
+			#{basic_idx},
+			#{min},
+			#{max},
+			now(),
+			now(),
+			#{description}
+		)
+		]]>
+	</insert>
+	
+	<select id="selectProChkList" parameterType="hashmap" resultMap="rmapSensConf">
+	SELECT 
+a.svc_meta_idx,
+a.basic_idx,
+a.description ,
+b.name AS s_name,
+(SELECT NAME FROM MECS5_BASIC_IND_META c WHERE c.basic_idx = a.basic_idx ) AS b_name,
+(SELECT MIN FROM MECS5_BASIC_IND_META c WHERE c.basic_idx = a.basic_idx ) AS MIN,
+(SELECT MAX FROM MECS5_BASIC_IND_META c WHERE c.basic_idx = a.basic_idx ) AS MAX,
+a.min AS b_min,
+a.max AS b_max 
+FROM  MECS5_SERVICE_IND_Map a LEFT OUTER JOIN mecs5_service_ind_meta b ON b.svc_meta_idx = a.svc_meta_idx where 1=1
+        <if test="searchDTO.searchId != null and searchDTO.searchId != ''">
+          	<![CDATA[
+              	and b.name = '${searchDTO.searchId}'
+          	]]>
+        </if>
+	</select> 
+	
+	<select id="selectLevelList" parameterType="hashmap" resultMap="rmapSensConf">
+	SELECT IFNULL(MAX(emotion_level)+1,1) AS emotion_level FROM mecs5_service_indicator where 1=1
+        <if test="searchDTO.searchId != null and searchDTO.searchId != ''">
+          	<![CDATA[
+              	and name = '${searchDTO.searchId}'
+          	]]>
+        </if>
+	</select> 
+	
+	<select id="selectLevel" parameterType="hashmap" resultType="int">
+	SELECT count(*) FROM mecs5_service_indicator WHERE NAME = '${searchDTO.searchId}' AND emotion_level > '${searchDTO.searchQuery}'
+	</select>
+	
+	<select id="selectDupMinMax" parameterType="hashmap" resultType="int">
+		
+
+
+SELECT count(*) FROM mecs5_service_indicator WHERE 
+NAME = #{name}
+AND
+(
+ ( 1=2 
+ ${min}
+ )
+
+)
+		
+		
+	</select>
+	
+</mapper> 

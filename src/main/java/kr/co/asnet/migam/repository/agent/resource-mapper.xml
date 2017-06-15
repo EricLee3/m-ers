@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.asnet.migam.repository.agent.ResourceDaoMapper">
+	
+	<resultMap id="rmapResource" type="resourceLog">
+		<result property="sysId" column="sys_id" />
+		<result property="sysName" column="sys_name" />
+		<result property="updateTime" column="update_time" />
+		<result property="hostName" column="host_name" />
+		<result property="cateGory" column="category" />
+		<result property="vaLue" column="value" />
+		<result property="alarmLv" column="alarm_lv" />
+
+	</resultMap>
+	
+	<sql id="sql_resourceLog">
+		<![CDATA[
+		select
+			sys_id,
+			sys_name,
+			update_time,
+			host_name,
+			category,
+			value,
+			alarm_lv
+		from 
+			mecs5_monitor_history
+		]]>
+	</sql>
+    
+	<insert id="insertResourceLog" parameterType="resourceLog" >
+		<![CDATA[
+		insert into mecs5_monitor_history (
+			sys_id,
+			sys_name,
+			update_time,
+			host_name,
+			category,
+			value,
+			alarm_lv
+		) values (
+			#{sysId},
+			#{sysName},
+			#{updateTime},
+			#{hostName},
+			#{cateGory},
+			#{vaLue},
+			#{alarmLv}
+		)
+		]]>
+		<selectKey resultType="Date" keyProperty="updateTime" order="AFTER">
+		  SELECT LAST_INSERT_ID();
+		</selectKey>
+	</insert>
+
+	<sql id="sql_paging">
+		<if test="pageDTO != null">
+			<![CDATA[
+			limit #{pageDTO.startRow}, #{pageDTO.itemPerPage}
+			]]>
+		</if>
+	</sql>
+
+	<sql id="sql_search">
+		<where>
+            <if test="searchDTO != null">
+            	<if test="searchDTO.searchQuery != null and searchDTO.searchQuery != ''">
+	            	<![CDATA[
+	                	and host_name like '%${searchDTO.searchQuery}%'
+	            	]]>
+            	</if>
+            	<if test="searchDTO.startDate != null and searchDTO.startDate != '' ">
+            		<![CDATA[
+            			and update_time between #{searchDTO.startDate} 
+            			and #{searchDTO.endDate}
+            		]]>
+            	</if>
+            	<if test="searchDTO.searchId != null and searchDTO.searchId != ''">
+	            	<![CDATA[
+	                	and category = '${searchDTO.searchId}'
+	            	]]>
+            	</if>
+            	<if test="searchDTO.searchCondition != null and searchDTO.searchCondition != ''">
+	            	<![CDATA[
+	                	and alarm_lv = '${searchDTO.searchCondition}'
+	            	]]>
+            	</if>
+			</if>
+		</where>
+	</sql>
+
+	<select id="selectResourceLog" parameterType="String" resultMap="rmapResource">
+		<include refid="sql_resourceLog" />
+		<where>
+			<![CDATA[update_time = #{updateTime}]]>
+		</where>
+	</select>
+
+	<select id="selectResourceLogById" parameterType="String" resultMap="rmapResource">
+		<include refid="sql_resourceLog" />
+		<where>
+			<![CDATA[sys_name = #{sysName}]]>
+		</where>
+	</select>
+	
+	<select id="selectResourceLogList" parameterType="hashmap" resultMap="rmapResource">
+		<include refid="sql_resourceLog" />
+		<include refid="sql_search" />
+		<![CDATA[${orderby}]]>
+		<include refid="sql_paging" />
+	</select> 
+	
+	<select id="selectCategoryList" parameterType="hashmap" resultMap="rmapResource">
+		SELECT DISTINCT(category) as category FROM mecs5_monitor_history where 1=1 order by category asc
+	</select> 
+
+	<select id="selectLevelList" parameterType="hashmap" resultMap="rmapResource">
+		SELECT DISTINCT(alarm_lv) as alarm_lv FROM mecs5_monitor_history where 1=1 order by alarm_lv asc
+	</select> 
+
+
+	<select id="selectCount" parameterType="hashmap" resultType="int">
+		<![CDATA[select count(*) from (]]>
+		<include refid="sql_resourceLog" />
+		<include refid="sql_search" />
+		<![CDATA[) cnt]]>
+	</select>
+
+	<delete id="deleteResourceLog" parameterType="String">
+		<![CDATA[
+			delete from mecs5_monitor_history where update_time = #{updateTime}
+		]]>
+	</delete>
+	
+</mapper> 

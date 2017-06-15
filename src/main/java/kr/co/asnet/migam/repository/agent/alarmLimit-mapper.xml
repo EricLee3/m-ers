@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.asnet.migam.repository.agent.AlarmLimitDaoMapper">
+	<resultMap id="rmapAlarmLimit" type="alarmLimit">
+        <result property="alarmIdx" column="alarm_idx" />
+        <result property="criticalValue" column="critical_value" />
+        <result property="majorValue" column="major_value" />
+        <result property="minorValue" column="minor_value" />
+        <result property="cpuCri" column="cpu_cri" />
+        <result property="diskCri" column="disk_cri" />
+        <result property="memoryCri" column="memory_cri" />
+        <result property="cpuMajor" column="cpu_major" />
+        <result property="diskMajor" column="disk_major" />
+        <result property="memoryMajor" column="memory_major" />
+        <result property="cpuMinor" column="cpu_minor" />
+        <result property="diskMinor" column="disk_minor" />
+        <result property="memoryMinor" column="memory_minor" />
+	</resultMap>
+	
+		<resultMap id="rmapHisLog" type="hisLog">
+		<result property="change_date" column="change_date" />
+		<result property="user_id" column="user_id" />
+		<result property="user_name" column="user_name" />
+		<result property="user_ip" column="user_ip" />
+		<result property="menu" column="menu" />
+		<result property="detail" column="detail" />
+
+	</resultMap>
+	
+	
+	<insert id="insertHis" parameterType="hisLog">
+		<![CDATA[
+		insert into mecs5_change_history (
+			change_date,
+			user_id,
+			user_name,
+			user_ip,
+			menu,
+			detail
+		) values (
+			now(),
+			#{user_id},
+			#{user_name},
+			#{user_ip},
+			#{menu},
+			#{detail}
+		)
+		]]>
+	</insert>
+	
+	<sql id="sql_alarmLimit_history">
+		<![CDATA[
+		select
+			alarm_idx,
+			critical_value,
+			major_value,
+			minor_value
+		from 
+			mecs5_alarm_limit
+		]]>
+	</sql>
+	<sql id="sql_alarmLimit">
+		<![CDATA[
+		select
+			alarm_idx,
+			critical_value,
+			major_value,
+			minor_value
+		from 
+			mecs5_alarm_limit
+		]]>
+	</sql>
+
+	<sql id="sql_paging">
+		<if test="pageDTO != null">
+			<![CDATA[
+			limit 0, 1
+			]]>
+		</if>
+	</sql>
+
+	<sql id="sql_search">
+		<where>
+            <if test="searchDTO != null">
+            	<if test="searchDTO.searchQuery != null and searchDTO.searchQuery != ''">
+	            	<![CDATA[
+	                	and alarm_idx like '%${searchDTO.searchQuery}%'
+	            	]]>
+            	</if>
+			</if>
+		</where>
+	</sql>
+	
+	<select id="selectAalarmLimit" resultMap="rmapAlarmLimit">
+		<include refid="sql_alarmLimit" />
+	</select>
+	
+	<update id="updateAlarmLimit" parameterType="alarmLimit">
+		update mecs5_alarm_limit
+		<set>
+			critical_value = #{criticalValue},
+			major_value = #{majorValue},
+			minor_value = #{minorValue}
+		</set>
+		<where>
+			alarm_idx = #{alarmIdx} 
+		</where>
+	</update>
+
+	<insert id="insertAalarmLimit" parameterType="alarmLimit">
+		<![CDATA[
+		insert into mecs5_alarm_limit (
+			alarm_idx,
+			critical_value,
+			major_value,
+			minor_value
+		) values (
+			#{alarmIdx},
+			#{criticalValue},
+			#{majorValue},
+			#{minorValue}
+		)
+		]]>
+	</insert>
+
+	<select id="selectAlarmLimitList" parameterType="hashmap" resultMap="rmapAlarmLimit">
+		SELECT 
+		alarm_idx AS alarm_idx,
+(CASE WHEN alarm_idx='0' THEN critical_value WHEN alarm_idx='1' THEN critical_value WHEN alarm_idx='2' THEN critical_value  ELSE '' END) AS cpu_cri, 
+(CASE WHEN alarm_idx='0' THEN major_value WHEN alarm_idx='1' THEN major_value WHEN alarm_idx='2' THEN major_value ELSE '' END) AS cpu_major,
+(CASE WHEN alarm_idx='0' THEN minor_value WHEN alarm_idx='1' THEN minor_value WHEN alarm_idx='2' THEN minor_value ELSE '' END) AS cpu_minor
+FROM mecs5_alarm_limit
+		<include refid="sql_search" />
+	</select> 
+	
+	<select id="selectSearchAlarmLimitList" parameterType="hashmap" resultMap="rmapAlarmLimit">
+		<include refid="sql_alarmLimit_history" />
+	</select> 
+	
+	<select id="selectAlarmLimit" parameterType="int" resultMap="rmapAlarmLimit">
+		<include refid="sql_alarmLimit_history" />
+		<where>
+			<![CDATA[alarm_idx = #{alarmIdx}]]>
+		</where>
+	</select>
+</mapper> 

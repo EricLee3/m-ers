@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.asnet.migam.repository.agent.AlarmCodeDaoMapper">
+	<resultMap id="rmapAlarmCode" type="alarmCode">
+        <result property="index" column="idx" />
+        <result property="alarmCode" column="alarm_code" />
+        <result property="alarmLv" column="alarm_lv" />
+        <result property="alarmDesc" column="alarm_desc" />
+        <result property="useFlag" column="use_flag" />
+        <result property="visualFlag" column="visual_flag" />
+        <result property="audioFlag" column="audio_flag" />
+	</resultMap>
+	
+	<sql id="sql_alarmcode">
+		<![CDATA[
+		select
+			idx,
+			alarm_code,
+			alarm_lv,
+			alarm_desc,
+			use_flag,
+			visual_flag,
+			audio_flag
+		from 
+			mecs5_alarm_config
+		]]>
+	</sql>
+
+	<insert id="insertAlarmCode" parameterType="alarmCode">
+		<![CDATA[
+		insert into mecs5_alarm_config (
+			alarm_code,
+			alarm_lv,
+			alarm_desc,
+			use_flag,
+			visual_flag,
+			audio_flag
+		) values (
+			#{alarmCode},
+			#{alarmLv},
+			#{alarmDesc},
+			#{useFlag},
+			#{visualFlag},
+			#{audioFlag}
+		)
+		]]>
+	</insert>
+
+	<sql id="sql_paging">
+		<if test="pageDTO != null">
+			<![CDATA[
+			limit #{pageDTO.startRow}, #{pageDTO.itemPerPage}
+			]]>
+		</if>
+	</sql>
+
+	<sql id="sql_search">
+		<where>
+            <if test="searchDTO != null">
+            	<if test="searchDTO.searchQuery != null and searchDTO.searchQuery != ''">
+	            	<![CDATA[
+	                	and alarm_code like '%${searchDTO.searchQuery}%'
+	            	]]>
+            	</if>
+            	<if test="searchDTO.startDate != null and searchDTO.startDate != '' ">
+            		<![CDATA[
+            		]]>
+            	</if>
+            	<if test="searchDTO.searchCondition!= null and searchDTO.searchCondition != ''">
+	            	<![CDATA[
+	                	and alarm_desc like '%${searchDTO.searchCondition}%'
+	            	]]>
+            	</if>
+            	<if test="searchDTO.searchType!= null and searchDTO.searchType != ''">
+	            	<![CDATA[
+	                	and alarm_lv ='${searchDTO.searchType}'
+	            	]]>
+            	</if>
+			</if>
+		</where>
+	</sql>
+
+	<select id="selectAlarmCode" parameterType="String" resultMap="rmapAlarmCode">
+		<include refid="sql_alarmcode" />
+		<where>
+			<![CDATA[alarm_code = #{alrmCode}]]>
+		</where>
+	</select>
+
+	<update id="updateAlarmCode" parameterType="alarmCode">
+		update mecs5_alarm_config
+		<set>
+			alarm_desc = #{alarmDesc} , alarm_lv = #{alarmLv}, use_flag = #{useFlag}, visual_flag = #{visualFlag}, audio_flag = #{audioFlag}
+		</set>
+		<where>
+			alarm_code = #{alarmCode} 
+		</where>
+	</update>
+	
+	<select id="selectAlarmCodeList" parameterType="hashmap" resultMap="rmapAlarmCode">
+		<include refid="sql_alarmcode" />
+		<include refid="sql_search" />
+		<![CDATA[${orderby}]]>
+		<include refid="sql_paging" />
+	</select> 
+
+	<select id="selectCount" parameterType="hashmap" resultType="int">
+		<![CDATA[select count(*) from (]]>
+		<include refid="sql_alarmcode" />
+		<include refid="sql_search" />
+		<![CDATA[) cnt]]>
+	</select>
+
+	<delete id="deleteAlarmCode" parameterType="String">
+		<![CDATA[
+			delete from mecs5_alarm_config where alarm_code = #{alarmCode}
+		]]>
+	</delete>
+</mapper> 

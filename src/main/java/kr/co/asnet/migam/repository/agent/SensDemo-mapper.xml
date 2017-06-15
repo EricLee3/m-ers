@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.asnet.migam.repository.agent.SensDemoDaoMapper">
+	               
+	<resultMap id="rmapImsiMent" type="ImsiMent">
+		<result property="ment_flag" column="ment_flag" />
+		<result property="ment" column="ment" />
+	</resultMap>
+	
+	<resultMap id="rmapVoicefile" type="Voicefile">
+        <result property="idx" column="idx" />
+        <result property="call_id" column="call_id" />
+        <result property="agent_id" column="agent_id" />
+        <result property="group_id" column="group_id" />
+        <result property="call_type" column="call_type" />
+        <result property="realtimeness" column="realtimeness" />
+        <result property="bm_agent" column="bm_agent" />
+        <result property="bm_customer" column="bm_customer" />
+        <result property="agent_no" column="agent_no" />
+        <result property="customer_no" column="customer_no" />
+        <result property="agent_voice_filename" column="agent_voice_filename" />
+        <result property="customer_voice_filename" column="customer_voice_filename" />
+        <result property="agent_emo_profile" column="agent_emo_profile" />
+        <result property="emtion_analysis_state" column="emtion_analysis_state" />
+        <result property="start_date" column="start_date" />
+	</resultMap>
+
+	<resultMap id="rmapRecognition_job" type="Recognition_job">
+        <result property="idx" column="idx" />
+        <result property="job_id" column="job_id" />
+        <result property="start_time" column="start_time" />
+        <result property="end_time" column="end_time" />
+        <result property="record_start_time" column="record_start_time" />
+        <result property="record_end_time" column="record_end_time" />
+        <result property="group_id" column="group_id" />
+        <result property="bm_customer" column="bm_customer" />
+        <result property="agent_id" column="agent_id" />
+        <result property="job_trigger_time" column="job_trigger_time" />
+        <result property="day_repeat" column="day_repeat" />
+        <result property="status" column="status" />
+        <result property="insert_date" column="insert_date" />   
+	</resultMap>
+
+<resultMap id="rmapAnalresult" type="AnalResult">
+        <result property="job_id" column="job_id" />
+        <result property="call_party" column="call_party" />
+        <result property="indicator_name" column="indicator_name" />
+        <result property="indicator_kor_name" column="indicator_kor_name" />
+        <result property="indicator_start_pos" column="indicator_start_pos" />
+        <result property="indicator_end_pos" column="indicator_end_pos" />
+        <result property="indicator_result" column="indicator_result" />
+	</resultMap>
+
+
+<resultMap id="rmapdemoExcel" type="ImsiMent">
+		<result property="dname" column="dname" />
+		<result property="resultval" column="resultval" />
+	</resultMap>
+	
+	<sql id="sql_imsi_ment">
+		<![CDATA[
+		select
+			ment_flag,
+			ment
+		from 
+			mecs5_voice_ment
+		where ment_flag = '${searchDTO.searchQuery}'
+		]]>
+	</sql>
+	
+	<sql id="sql_anal">
+		<![CDATA[
+		select
+			job_id,
+		call_party,
+		indicator_name,
+		indicator_kor_name,
+		indicator_start_pos,
+		indicator_end_pos,
+		indicator_result
+		from 
+			mecs5_analysis_result_ind
+		where job_id = '${searchDTO.searchQuery}'
+		]]>
+	</sql>
+    
+	<sql id="sql_paging">
+		<if test="pageDTO != null">
+			<![CDATA[
+			limit #{pageDTO.startRow}, #{pageDTO.itemPerPage}
+			]]>
+		</if>
+	</sql>
+	
+	<insert id="insertVoicefile" parameterType="Voicefile">
+		<![CDATA[
+		insert into mecs5_voicefile (
+			call_id,
+			agent_id,
+			group_id,
+			call_type,
+			realtimeness,
+			bm_agent,
+			bm_customer,
+			agent_no,
+			customer_no,
+			agent_voice_filename,
+			customer_voice_filename,
+			agent_emo_profile,
+			emotion_analysis_state,
+			start_date
+		) values (
+			#{call_id},
+			#{agent_id},
+			#{group_id},
+			#{call_type},
+			#{realtimeness},
+			#{bm_agent},
+			#{bm_customer},
+			#{agent_no},
+			#{customer_no},
+			#{agent_voice_filename},
+			#{customer_voice_filename},
+			#{agent_emo_profile},
+			#{emtion_analysis_state},
+			now()
+		)
+		]]>
+	</insert>
+	
+
+	
+	<insert id="insertRecognition_job" parameterType="Recognition_job">
+		<![CDATA[
+		insert into mecs5_recognition_job (
+			job_id,
+			start_time,
+			end_time,
+			record_start_time,
+			record_end_time,
+			group_id,
+			agent_id,
+			job_trigger_time,
+			day_repeat,
+			status,
+			insert_date,
+			job_name
+		) values (
+			#{job_id},
+			now(6),
+			#{end_time},
+			#{record_start_time},
+			#{record_end_time},
+			#{group_id},
+			#{agent_id},
+			#{job_trigger_time},
+			#{day_repeat},
+			#{status},
+			now(),
+			#{job_name}
+		)
+		]]>
+	</insert>
+	
+	<select id="selectImsiMentList" parameterType="hashmap" resultMap="rmapImsiMent">
+		<include refid="sql_imsi_ment" />
+	</select> 
+	
+	<select id="selectAnalResultList" parameterType="hashmap" resultMap="rmapAnalresult">
+		<include refid="sql_anal" />
+	</select> 
+	
+	<select id="selectCount" parameterType="hashmap" resultType="int">
+		<![CDATA[select count(*) from (]]>
+		select * from mecs5_analysis_result  
+		WHERE job_id= '${searchDTO.searchQuery}'
+		<![CDATA[) cnt]]>
+	</select>
+	
+	<select id="selectCountFailCode" parameterType="hashmap" resultType="int">
+		select agent_fail_code from mecs5_analysis_result WHERE job_id= '${searchDTO.searchQuery}'
+	</select>
+	
+	<select id="selectdemo_excel" parameterType="hashmap" resultMap="rmapdemoExcel">
+		 SELECT seq AS dname, resultval AS resultval FROM (
+         SELECT 'Seq' AS Seq, indicator_start_pos as resultval
+          FROM mecs5_analysis_result_ind
+          WHERE job_id = '${searchDTO.searchQuery}' GROUP BY indicator_start_pos
+         UNION
+          SELECT 'start_pos' AS start_pos, indicator_start_pos as resultval
+          FROM mecs5_analysis_result_ind
+          WHERE job_id = '${searchDTO.searchQuery}' GROUP BY indicator_start_pos
+         UNION
+          SELECT 'end_pos' AS end_pos, indicator_end_pos as resultval
+          FROM mecs5_analysis_result_ind
+          WHERE job_id = '${searchDTO.searchQuery}' GROUP BY indicator_end_pos
+         UNION
+          SELECT indicator_name, indicator_result as resultval
+          FROM mecs5_analysis_result_ind
+          WHERE job_id = '${searchDTO.searchQuery}'
+       	) a
+	</select> 
+
+</mapper> 

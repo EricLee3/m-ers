@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib version="2.1" xmlns="http://java.sun.com/xml/ns/javaee" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd">
+	<tlib-version>1.0</tlib-version>
+	<short-name>asnetFn</short-name>
+	<uri>Functions</uri>
+
+	<function>
+		<description>문자열의 nl, cr 을 br 태그로 변경한다.</description>
+		<name>nlToBr</name>
+		<function-class>kr.co.asnet.esc.tags.Functions</function-class>
+		<function-signature>java.lang.String newLineToBr(java.lang.String)</function-signature>
+		<example>${asnetFn:nlToBr("hello world")}</example>
+	</function>
+
+	<function>
+		<description>문자열의 HTML, SCRIPT 를 제거한다.</description>
+		<name>escapeHTML</name>
+		<function-class>kr.co.asnet.esc.tags.Functions</function-class>
+		<function-signature>java.lang.String escapeHTML(java.lang.String)</function-signature>
+		<example>${asnetFn:escapeHTML("hello world")}</example>
+	</function>
+
+	<function>
+		<description>주어진 HTML에서 모든 TAG를 제거하고, 순수한 Text만을 반환합니다. </description>
+		<name>stripHtml</name>
+		<function-class>kr.co.asnet.esc.tags.Functions</function-class>
+		<function-signature>java.lang.String stripHtml(java.lang.String)</function-signature>
+		<example>${asnetFn:stripHtml("hello world")}</example>
+	</function>
+
+	<function>
+		<description>문자열을 생략표시한다.</description>
+		<name>ellipsis</name>
+		<function-class>kr.co.asnet.esc.tags.Functions</function-class>
+		<function-signature>java.lang.String ellipsis(java.lang.String, int, java.lang.String)</function-signature>
+		<example>${asnetFn:ellipsis("hello world", 3, "..")}</example>
+	</function>
+
+	<function>
+		<description>이미지 URL을 가져온다.</description>
+		<name>imagePath</name>
+		<function-class>kr.co.asnet.esc.tags.Functions</function-class>
+		<function-signature>java.lang.String getImagePath(java.lang.String, int, java.lang.String)</function-signature>
+		<example>${asnetFn:imagePath("/attach", 3, "jpg")}</example>
+	</function>
+
+	<function>
+		<description>이미지 썸네일 URL을 가져온다.</description>
+		<name>thumbnailPath</name>
+		<function-class>kr.co.asnet.esc.tags.Functions</function-class>
+		<function-signature>java.lang.String getThumbnailPath(java.lang.String, int)</function-signature>
+		<example>${asnetFn:thumbnailPath("/attach", 3)}</example>
+	</function>
+
+	<function>
+		<description>암호화</description>
+		<name>cipherEncode</name>
+		<function-class>kr.co.asnet.esc.tags.Functions</function-class>
+		<function-signature>java.lang.String cipherEncode(java.lang.String)</function-signature>
+		<example>${asnetFn:cipherEncode("이름")}</example>
+	</function>
+
+	<function>
+		<description>복호화</description>
+		<name>cipherDecode</name>
+		<function-class>kr.co.asnet.esc.tags.Functions</function-class>
+		<function-signature>java.lang.String cipherDecode(java.lang.String)</function-signature>
+		<example>${asnetFn:cipherDecode("이름")}</example>
+	</function>
+
+	<function>
+		<description>새글</description>
+		<name>isNew</name>
+		<function-class>kr.co.asnet.esc.tags.Functions</function-class>
+		<function-signature>boolean isNew(java.util.Date, int)</function-signature>
+		<example>${asnetFn:isNew(Date, 7)}</example>
+	</function>
+	
+	<function>
+		<description>날짜 비교</description>
+		<name>dateCompare</name>
+		<function-class>kr.co.asnet.esc.tags.Functions</function-class>
+		<function-signature>kr.co.asnet.esc.tags.Functions dateCompare(java.util.Date, java.util.Date)</function-signature>
+		<example>${asnetFn:dateCompare(java.util.Date, java.util.Date)}</example>
+	</function>
+	
+    <function>
+        <description>게시판의 쓰기 권한 확인</description>
+        <name>hasBoardPermission</name>
+        <function-class>kr.co.asnet.esc.tags.Functions</function-class>
+        <function-signature>boolean hasBoardPermission(java.lang.String, java.lang.String)</function-signature>
+        <example>${asnetFn:hasBoardPermission("ADMIN, POLICY", "MEMBER")}</example>
+    </function>
+    
+    <function>
+        <description>게시판의 URL 반환</description>
+        <name>getBoardUrl</name>
+        <function-class>kr.co.asnet.esc.tags.Functions</function-class>
+        <function-signature>String getBoardUrl(int)</function-signature>
+        <example>${asnetFn:getBoardUrl(1)}</example>
+    </function>
+    
+    <function>
+        <description>메일 템플릿 종류 반환</description>
+        <name>getEventTitle</name>
+        <function-class>kr.co.asnet.esc.tags.Functions</function-class>
+        <function-signature>String getEventTitle(int)</function-signature>
+        <example>${asnetFn:getEventTitle(1)}</example>
+    </function>	
+    	
+</taglib>

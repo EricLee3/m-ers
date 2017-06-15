@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.asnet.migam.repository.call.DailyCallDaoMapper">
+	<resultMap id="rmapDailyCall" type="dailyCall">
+		<result property="statTime" column="stat_time" />
+		<result property="agentId" column="agent_id" />
+		<result property="totalCount" column="total_cnt" />
+		<result property="successCount" column="succ_cnt" />
+		<result property="failCount" column="fail_cnt" />
+		<result property="angryCount" column="angry_cnt" />
+		<result property="stressCount" column="stress_cnt" />
+		<result property="incrementCount" column="incr_cnt" />
+		<result property="decrementCount" column="decr_cnt" />
+	</resultMap>
+	
+	<sql id="sql_dailycall">
+		<![CDATA[
+		select
+			stat_time,
+			total_cnt,
+			succ_cnt,
+			fail_cnt,
+			angry_cnt,
+			stress_cnt,
+			incr_cnt,
+			decr_cnt
+		from 
+			mecs5_service_stat_daily
+		]]>
+	</sql>
+
+	<sql id="sql_dailycall_agent">
+		<![CDATA[
+		select
+			stat_time,
+			agent_id,
+			total_cnt,
+			succ_cnt,
+			fail_cnt,
+			angry_cnt,
+			stress_cnt,
+			incr_cnt,
+			decr_cnt
+		from 
+			mecs5_agent_stat_daily
+		]]>
+	</sql>
+	
+	<sql id="sql_paging">
+		<if test="pageDTO != null">
+			<![CDATA[
+			limit #{pageDTO.startRow}, #{pageDTO.itemPerPage}
+			]]>
+		</if>
+	</sql>
+
+	<sql id="sql_search">
+		<where>
+            <if test="searchDTO != null">
+            	<if test="searchDTO.startDate != null and searchDTO.startDate != '' ">
+            		<![CDATA[
+            			and date_format(stat_time,'%Y-%m-%d') >= #{searchDTO.startDate} 
+            			and date_format(stat_time,'%Y-%m-%d') <= #{searchDTO.endDate}
+            		]]>
+            	</if>
+            	<if test="searchDTO.searchQuery != null and searchDTO.searchQuery != '' ">
+            		<![CDATA[
+            			and agent_id = '${searchDTO.searchQuery}' 
+            		]]>
+            	</if>
+			</if>
+		</where>
+	</sql>
+
+	<select id="selectDailyCallList" parameterType="hashmap" resultMap="rmapDailyCall">
+		<include refid="sql_dailycall" />
+		<include refid="sql_search" />
+		<![CDATA[${orderby}]]>
+		<include refid="sql_paging" />
+	</select>
+	
+	<select id="selectDailyCallListWithAgent" parameterType="hashmap" resultMap="rmapDailyCall">
+		<include refid="sql_dailycall_agent" />
+		<include refid="sql_search" />
+		<![CDATA[${orderby}]]>
+		<include refid="sql_paging" />
+	</select>  
+
+	<select id="selectCount" parameterType="hashmap" resultType="int">
+		<![CDATA[select count(*) from (]]>
+		<include refid="sql_dailycall" />
+		<include refid="sql_search" />
+		<![CDATA[) cnt]]>
+	</select>
+
+	<select id="selectDailyCallListForChart" parameterType="hashmap" resultMap="rmapDailyCall">
+		<![CDATA[
+			select 
+				stat_time, 
+				sum(total_cnt) as total_cnt,
+				sum(succ_cnt) as succ_cnt,
+				sum(fail_cnt) as fail_cnt,
+				sum(angry_cnt) as angry_cnt, 
+				sum(stress_cnt) as stress_cnt,
+				 sum(incr_cnt) as incr_cnt,
+				 sum(decr_cnt) as decr_cnt
+			from 
+				mecs5_agent_stat_daily
+		]]>
+		<where>
+            <if test="searchDTO != null">
+            	<if test="searchDTO.startDate != null and searchDTO.startDate != '' ">
+            		<![CDATA[
+            			and date_format(stat_time,'%Y-%m-%d') >= #{searchDTO.startDate} 
+            			and date_format(stat_time,'%Y-%m-%d') <= #{searchDTO.endDate}
+            		]]>
+            	</if>
+            	<if test="searchDTO.searchId != null and searchDTO.searchId != '' ">
+            		<![CDATA[
+            			and agent_id = #{searchDTO.searchId} 
+            		]]>
+            	</if>
+            	<if test="(searchDTO.searchId == null or searchDTO.searchId == '') and searchDTO.searchGroup != null">
+            		<![CDATA[
+            			and agent_id in ( select agent_id from mecs5_agent where group_id=#{searchDTO.searchGroup} )
+            		]]>
+            	</if>
+            </if>
+		</where>
+		<![CDATA[group by date_format(stat_time, '%Y-%m-%d')]]>
+		<![CDATA[${orderby}]]>
+	</select>
+</mapper> 

@@ -1,0 +1,369 @@
+/*!
+ *   AdminLTE v2.3.3
+ *   Author: Almsaeed Studio
+ *	 Website: Almsaeed Studio <http://almsaeedstudio.com>
+ *   License: Open source - MIT
+ *           Please visit http://opensource.org/licenses/MIT for more information
+!*/
+/*
+ * Core: General Layout Style
+ * -------------------------
+ */
+
+.critical {
+   border: 1px solid #ff0000;
+   background: #ff0000;
+   background: -webkit-gradient(linear, left top, left bottom, from(#ff0000), to(#ff0000));
+   background: -webkit-linear-gradient(top, #ff0000, #ff0000);
+   background: -moz-linear-gradient(top, #ff0000, #ff0000);
+   background: -ms-linear-gradient(top, #ff0000, #ff0000);
+   background: -o-linear-gradient(top, #ff0000, #ff0000);
+   background-image: -ms-linear-gradient(top, #ff0000 0%, #ff0000 100%);
+   padding: 4.5px 9px;
+   -webkit-border-radius: 6px;
+   -moz-border-radius: 6px;
+   border-radius: 6px;
+   -webkit-box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0;
+   -moz-box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0;
+   box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0;
+   text-shadow: #ffffff 0 1px 0;
+   color: #ffffff;
+   font-size: 10px;
+   font-family: helvetica, serif;
+   text-decoration: none;
+   vertical-align: middle;
+   }
+.critical:hover {
+   border: 1px solid #ff0000;
+   text-shadow: #ffffff 0 1px 0;
+   background: #ff0000;
+   background: -webkit-gradient(linear, left top, left bottom, from(#ff0000), to(#ff0000));
+   background: -webkit-linear-gradient(top, #ff0000, #ff0000);
+   background: -moz-linear-gradient(top, #ff0000, #ff0000);
+   background: -ms-linear-gradient(top, #ff0000, #ff0000);
+   background: -o-linear-gradient(top, #ff0000, #ff0000);
+   background-image: -ms-linear-gradient(top, #ff0000 0%, #ff0000 100%);
+   color: #fff;
+   }
+.critical:active {
+   text-shadow: #ffffff 0 1px 0;
+   border: 1px solid #ff0000;
+   background: #ff0000;
+   background: -webkit-gradient(linear, left top, left bottom, from(#ff0000), to(#ff0000));
+   background: -webkit-linear-gradient(top, #ff0000, #ff0000);
+   background: -moz-linear-gradient(top, #ff0000, #ff0000);
+   background: -ms-linear-gradient(top, #ff0000, #ff0000);
+   background: -o-linear-gradient(top, #ff0000, #ff0000);
+   background-image: -ms-linear-gradient(top, #ff0000 0%, #ff0000 100%);
+   color: #fff;
+   }
+   
+   .normal {
+   border: 1px solid #007004;
+   background: #007004;
+   background: -webkit-gradient(linear, left top, left bottom, from(#007004), to(#007004));
+   background: -webkit-linear-gradient(top, #007004, #007004);
+   background: -moz-linear-gradient(top, #007004, #007004);
+   background: -ms-linear-gradient(top, #007004, #007004);
+   background: -o-linear-gradient(top, #007004, #007004);
+   background-image: -ms-linear-gradient(top, #007004 0%, #007004 100%);
+   padding: 4.5px 10px;
+   -webkit-border-radius: 6px;
+   -moz-border-radius: 6px;
+   border-radius: 6px;
+   -webkit-box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0;
+   -moz-box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0;
+   box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0;
+   text-shadow: #ffffff 0 1px 0;
+   color: #ffffff;
+   font-size: 10px;
+   font-family: helvetica, serif;
+   text-decoration: none;
+   vertical-align: middle;
+   }
+.normal:hover {
+   border: 1px solid #007004;
+   text-shadow: #ffffff 0 1px 0;
+   background: #007004;
+   background: -webkit-gradient(linear, left top, left bottom, from(#007004), to(#007004));
+   background: -webkit-linear-gradient(top, #007004, #007004);
+   background: -moz-linear-gradient(top, #007004, #007004);
+   background: -ms-linear-gradient(top, #007004, #007004);
+   background: -o-linear-gradient(top, #007004, #007004);
+   background-image: -ms-linear-gradient(top, #007004 0%, #007004 100%);
+   color: #fff;
+   }
+.normal:active {
+   text-shadow: #ffffff 0 1px 0;
+   border: 1px solid #007004;
+   background: #007004;
+   background: -webkit-gradient(linear, left top, left bottom, from(#007004), to(#007004));
+   background: -webkit-linear-gradient(top, #007004, #007004);
+   background: -moz-linear-gradient(top, #007004, #007004);
+   background: -ms-linear-gradient(top, #007004, #007004);
+   background: -o-linear-gradient(top, #007004, #007004);
+   background-image: -ms-linear-gradient(top, #007004 0%, #007004 100%);
+   color: #fff;
+   }
+   
+   .minor {
+   border: 1px solid #ffd900;
+   background: #ffd900;
+   background: -webkit-gradient(linear, left top, left bottom, from(#ffd900), to(#ffd900));
+   background: -webkit-linear-gradient(top, #ffd900, #ffd900);
+   background: -moz-linear-gradient(top, #ffd900, #ffd900);
+   background: -ms-linear-gradient(top, #ffd900, #ffd900);
+   background: -o-linear-gradient(top, #ffd900, #ffd900);
+   background-image: -ms-linear-gradient(top, #ffd900 0%, #ffd900 100%);
+   padding: 4.5px 12.5px;
+   -webkit-border-radius: 6px;
+   -moz-border-radius: 6px;
+   border-radius: 6px;
+   -webkit-box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0;
+   -moz-box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0;
+   box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0;
+   text-shadow: #000000 0 1px 0;
+   color: #000000;
+   font-size: 11px;
+   font-family: helvetica, serif;
+   text-decoration: none;
+   vertical-align: middle;
+   }
+.minor:hover {
+   border: 1px solid #ffd900;
+   text-shadow: #000000 0 1px 0;
+   background: #ffd900;
+   background: -webkit-gradient(linear, left top, left bottom, from(#ffd900), to(#ffd900));
+   background: -webkit-linear-gradient(top, #ffd900, #ffd900);
+   background: -moz-linear-gradient(top, #ffd900, #ffd900);
+   background: -ms-linear-gradient(top, #ffd900, #ffd900);
+   background: -o-linear-gradient(top, #ffd900, #ffd900);
+   background-image: -ms-linear-gradient(top, #ffd900 0%, #ffd900 100%);
+   color: #000000;
+   }
+.minor:active {
+   text-shadow: #000000 0 1px 0;
+   border: 1px solid #ffd900;
+   background: #ffd900;
+   background: -webkit-gradient(linear, left top, left bottom, from(#ffd900), to(#ffd900));
+   background: -webkit-linear-gradient(top, #ffd900, #ffd900);
+   background: -moz-linear-gradient(top, #ffd900, #ffd900);
+   background: -ms-linear-gradient(top, #ffd900, #ffd900);
+   background: -o-linear-gradient(top, #ffd900, #ffd900);
+   background-image: -ms-linear-gradient(top, #ffd900 0%, #ffd900 100%);
+   color: #000000;
+   }
+   
+   .major {
+   border: 1px solid #ff8c00;
+   background: #ff8c00;
+   background: -webkit-gradient(linear, left top, left bottom, from(#ff8c00), to(#ff8c00));
+   background: -webkit-linear-gradient(top, #ff8c00, #ff8c00);
+   background: -moz-linear-gradient(top, #ff8c00, #ff8c00);
+   background: -ms-linear-gradient(top, #ff8c00, #ff8c00);
+   background: -o-linear-gradient(top, #ff8c00, #ff8c00);
+   background-image: -ms-linear-gradient(top, #ff8c00 0%, #ff8c00 100%);
+   padding: 4.5px 12.5px;
+   -webkit-border-radius: 6px;
+   -moz-border-radius: 6px;
+   border-radius: 6px;
+   -webkit-box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0;
+   -moz-box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0;
+   box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0;
+   text-shadow: #ffffff 0 1px 0;
+   color: #ffffff;
+   font-size: 11px;
+   font-family: helvetica, serif;
+   text-decoration: none;
+   vertical-align: middle;
+   }
+.major:hover {
+   border: 1px solid #ff8c00;
+   text-shadow: #ffffff 0 1px 0;
+   background: #ff8c00;
+   background: -webkit-gradient(linear, left top, left bottom, from(#ff8c00), to(#ff8c00));
+   background: -webkit-linear-gradient(top, #ff8c00, #ff8c00);
+   background: -moz-linear-gradient(top, #ff8c00, #ff8c00);
+   background: -ms-linear-gradient(top, #ff8c00, #ff8c00);
+   background: -o-linear-gradient(top, #ff8c00, #ff8c00);
+   background-image: -ms-linear-gradient(top, #ff8c00 0%, #ff8c00 100%);
+   color: #ffffff;
+   }
+.major:active {
+   text-shadow: #ffffff 0 1px 0;
+   border: 1px solid #ff8c00;
+   background: #ff8c00;
+   background: -webkit-gradient(linear, left top, left bottom, from(#ff8c00), to(#ff8c00));
+   background: -webkit-linear-gradient(top, #ff8c00, #ff8c00);
+   background: -moz-linear-gradient(top, #ff8c00, #ff8c00);
+   background: -ms-linear-gradient(top, #ff8c00, #ff8c00);
+   background: -o-linear-gradient(top, #ff8c00, #ff8c00);
+   background-image: -ms-linear-gradient(top, #ff8c00 0%, #ff8c00 100%);
+   color: #ffffff;
+   }
+   
+   
+   .fault {
+   border: 1px solid #1E90FF;
+   background: #1E90FF;
+   background: -webkit-gradient(linear, left top, left bottom, from(#1E90FF), to(#1E90FF));
+   background: -webkit-linear-gradient(top, #1E90FF, #1E90FF);
+   background: -moz-linear-gradient(top, #1E90FF, #1E90FF);
+   background: -ms-linear-gradient(top, #1E90FF, #1E90FF);
+   background: -o-linear-gradient(top, #1E90FF, #1E90FF);
+   background-image: -ms-linear-gradient(top, #1E90FF 0%, #1E90FF 100%);
+   padding: 4.5px 14px;
+   -webkit-border-radius: 6px;
+   -moz-border-radius: 6px;
+   border-radius: 6px;
+   -webkit-box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0;
+   -moz-box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0;
+   box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0;
+   text-shadow: #ffffff 0 1px 0;
+   color: #ffffff;
+   font-size: 11px;
+   font-family: helvetica, serif;
+   text-decoration: none;
+   vertical-align: middle;
+   }
+.fault:hover {
+   border: 1px solid #1E900FF;
+   text-shadow: #ffffff 0 1px 0;
+   background: #1E900FF;
+   background: -webkit-gradient(linear, left top, left bottom, from(#1E900FF), to(#1E900FF));
+   background: -webkit-linear-gradient(top, #1E900FF, #1E900FF);
+   background: -moz-linear-gradient(top, #1E900FF, #1E900FF);
+   background: -ms-linear-gradient(top, #1E900FF, #1E900FF);
+   background: -o-linear-gradient(top, #1E900FF, #1E900FF);
+   background-image: -ms-linear-gradient(top, #1E900FF 0%, #1E900FF 100%);
+   color: #ffffff;
+   }
+.fault:active {
+   text-shadow: #ffffff 0 1px 0;
+   border: 1px solid #1E900FF;
+   background: #1E900FF;
+   background: -webkit-gradient(linear, left top, left bottom, from(#1E900FF), to(#1E900FF));
+   background: -webkit-linear-gradient(top, #1E900FF, #1E900FF);
+   background: -moz-linear-gradient(top, #1E900FF, #1E900FF);
+   background: -ms-linear-gradient(top, #1E900FF, #1E900FF);
+   background: -o-linear-gradient(top, #1E900FF, #1E900FF);
+   background-image: -ms-linear-gradient(top, #1E900FF 0%, #1E900FF 100%);
+   color: #ffffff;
+   }
+   
+
+/* H1 - H6 font */
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+	font-family: 'Source Sans Pro', sans-serif, 돋움체;
+}
+
+/* 각 페이지 상단 제목 */
+.content-header>h2 {
+	margin: 0;
+	font-size: 18px;
+}
+
+/* box 제목  */
+.box-header>h3 {
+	margin: 0;
+	font-size: 16px;
+}
+
+.box-title>h3 {
+	margin: 0;
+	font-size: 16px;
+}
+
+/* 테이블 제목 스타일 변경 */
+th {
+	font-weight: normal;
+}
+
+/* 모니터링 > 상담원 목록 : 파이 차트 항목 위치 */
+ul.chart-legend.clearfix {
+	margin-left: -5px;
+	margin-top: 20px;
+}
+
+/* 시스템 > 서비스 설정 > 자동수행 작업목록 : 모달에서 datepicker, timepicker 표시되도록 z-index 지정 */
+body.modal-open .datepicker {
+	z-index: 1050 !important;
+}
+
+body.modal-open .bootstrap-timepicker-widget {
+	z-index: 1050 !important;
+}
+
+/* 모니터 > 상담원 목록 : agent.callStatus 값에 따라 통화 상태의 색상을 지정한다. */
+.auditStatus0 {
+	color: #d2d6de !important;
+}
+
+.auditStatus1 {
+	color: #00a65a !important;
+}
+
+.auditStatus2 {
+	color: #dd4b39 !important;
+}
+
+audio {
+	width: 520px;
+}
+
+.jsRemoveSearchAgent {
+	background-color: #3c8dbc;
+	border: 1px solid #367fa9;
+	border-radius: 4px;
+	cursor: default;
+	float: left;
+	margin-right: 5px;
+	margin-top: 5px;
+	padding: 0 5px;
+	color: #fff;
+	font-size: 14px;
+	line-height: 1.42857143;
+	height: 24px;
+	margin: 10px 5px;
+	margin-top: -5px
+}
+
+/* #line-chart > svg {width: 100% !important;} */
+svg {width: 100% !important;}
+@page {
+	size: auto;
+}
+
+@media print {
+	body {
+		width: 100%;
+		background: white;
+		color: black;
+		padding-left: 0;
+	}
+
+	.main-header, .main-sidebar, .main-footer, .modal {
+		display: none;
+	}
+	
+	a[href]:after {
+		content: none !important;
+	}
+
+	.col-md-12 {
+		width: 100% !important;
+	}
+
+	form .col-md-2 {
+		float: left;
+		width: 20%;
+	}
+
+	@page {
+		size: portrait;
+		margin-left: 0;
+		padding-left: 0;
+	}
+}
+
+

@@ -1,0 +1,54 @@
+@CHARSET "UTF-8";
+
+.margin-top10{
+	margin-top: 10px;
+}
+
+.non-padding{
+	padding: 0px;
+}
+
+.search-label{
+	min-width: 75px;
+}
+.search-input{
+	width: 150px!important;	
+}
+
+/* 테이블 */
+table th{
+	background-color:#f5f5f5;
+	font-size: 14px;
+	text-align: center;
+}
+
+table td{
+	text-align: center;
+}
+
+.datalist{
+	cursor: pointer;
+}
+
+#input_table th{
+	vertical-align: middle!important;	
+}
+#input_table td{
+	text-align: left;	
+}
+
+td > input[type="text"]{
+	width: 100%!important;
+}
+
+/* button */
+.btn-gray {
+    color: #ffffff;
+    background-color: #6d6b6b;
+    border-color: #464545;
+}
+.btn-gray:hover {
+    color: #ffffff;
+    background-color: #2c2c2c;
+    border-color: #272727;
+}

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.asnet.migam.repository.agent.SensMetaDaoMapper">
+	               
+	<resultMap id="rmapSensMeta" type="sensMeta">
+		<result property="svc_meta_idx" column="svc_meta_idx" />
+		<result property="name" column="name" />
+		<result property="min" column="min" />
+		<result property="max" column="max" />
+		<result property="insert_date" column="insert_date" />
+		<result property="description" column="description" />
+		<result property="basic_idx" column="basic_idx" />
+		<result property="b_name" column="b_name" />
+		<result property="kr_name" column="kr_name" />
+		<result property="b_min" column="b_min" />
+		<result property="b_max" column="b_max" />
+	</resultMap>
+	
+	
+	<sql id="sql_sensMeta">
+		<![CDATA[
+		select svc_meta_idx, name, min, max, insert_date, description,kr_name from MECS5_SERVICE_IND_META
+		]]>
+	</sql>
+	
+	<sql id="sql_sensMeta3">
+		<![CDATA[
+		select a.svc_meta_idx as svc_meta_idx, a.name as name, a.min as min, a.max as max, 
+		a.description as description, a.kr_name,
+		(select GROUP_CONCAT(b.basic_idx ORDER BY b.basic_idx ASC)
+		from mecs5_service_ind_map b where 1=1 and a.svc_meta_idx = b.svc_meta_idx) as basic_idx,
+		(select GROUP_CONCAT(b.min ORDER BY b.basic_idx ASC) 
+		from mecs5_service_ind_map b where 1=1 and a.svc_meta_idx = b.svc_meta_idx) as b_min,
+		(select GROUP_CONCAT(b.max ORDER BY b.basic_idx ASC) 
+		from mecs5_service_ind_map b where 1=1 and a.svc_meta_idx = b.svc_meta_idx) as b_max  
+		from mecs5_service_ind_meta a
+		]]>
+	</sql>
+	
+	<sql id="sql_sensMeta2">
+		<![CDATA[
+		select basic_idx, name from MECS5_basic_IND_META order by basic_idx asc
+		]]>
+	</sql>
+    
+	<sql id="sql_paging">
+		<if test="pageDTO != null">
+			<![CDATA[
+			limit #{pageDTO.startRow}, #{pageDTO.itemPerPage}
+			]]>
+		</if>
+	</sql>
+
+	<sql id="sql_search">
+		<where>
+            <if test="searchDTO != null">
+            	<if test="searchDTO.searchId != null and searchDTO.searchId != ''">
+	            	<![CDATA[
+	                	and name = '${searchDTO.searchId}'
+	            	]]>
+            	</if>
+			</if>
+		</where>
+	</sql>
+
+	
+	<select id="selectSensMetaList" parameterType="hashmap" resultMap="rmapSensMeta">
+		<include refid="sql_sensMeta" />
+		<include refid="sql_search" />
+		<![CDATA[${orderby}]]>
+		<include refid="sql_paging" />
+	</select> 
+	
+	<select id="selectSvIndiList" parameterType="hashmap" resultMap="rmapSensMeta">
+		<include refid="sql_sensMeta" />
+	</select> 
+	
+	<select id="selectSvIndiList_chk" parameterType="hashmap" resultMap="rmapSensMeta">
+		<include refid="sql_sensMeta" />
+	</select> 
+	
+	<select id="selectIndiList" parameterType="hashmap" resultMap="rmapSensMeta">
+		<include refid="sql_sensMeta2" />
+	</select> 
+
+	<select id="selectCount" parameterType="hashmap" resultType="int">
+		<![CDATA[select count(*) from (]]>
+		<include refid="sql_sensMeta" />
+		<include refid="sql_search" />
+		<![CDATA[) cnt]]>
+	</select>
+	
+	<select id="selectSensMeta" parameterType="String" resultMap="rmapSensMeta">
+		<include refid="sql_sensMeta3" />
+		<where>
+			<![CDATA[a.svc_meta_idx = #{groupId}]]>
+		</where>
+	</select>
+	
+	<select id="selectSensMeta2" parameterType="String" resultMap="rmapSensMeta">
+		SELECT c.svc_meta_idx AS svc_meta_idx, c.name AS NAME, c.min AS MIN, c.max AS MAX, 
+c.description AS description, GROUP_CONCAT(a.basic_idx SEPARATOR ',') AS basic_idx, GROUP_CONCAT(a.name SEPARATOR ',') AS b_name,
+c.kr_name as kr_name, GROUP_CONCAT(b.min SEPARATOR ',') AS b_min, GROUP_CONCAT(b.max SEPARATOR ',') AS b_max 
+FROM 
+mecs5_basic_ind_meta a, 
+mecs5_service_ind_map b,
+mecs5_service_ind_meta c 
+WHERE a.basic_idx = b.basic_idx 
+AND b.svc_meta_idx = c.svc_meta_idx 
+AND c.svc_meta_idx = #{groupId}
+GROUP BY  c.svc_meta_idx, c.name, c.min, c.max, c.description
+	</select>
+	
+	
+	<update id="updateSensMeta" parameterType="sensMeta">
+		update MECS5_Service_IND_META
+		<set>
+			min = #{min},
+			max = #{max},
+			description = #{description},
+			kr_name = CONVERT(#{kr_name} USING utf8)
+		</set>
+		<where>
+			svc_meta_idx = #{svc_meta_idx}
+		</where>
+	</update>
+	
+	<delete id="deleteSensMeta" parameterType="String">
+		<![CDATA[
+			delete from MECS5_SERVICE_IND_MAP where svc_meta_idx = #{index}
+		]]>
+	</delete>
+	
+	<delete id="deleteSensMeta2" parameterType="String">
+		<![CDATA[
+			delete from MECS5_SERVICE_IND_META where svc_meta_idx = #{index}
+		]]>
+	</delete>
+	
+	<select id="selectCount_sc" parameterType="hashmap" resultType="int">
+		select count(*) from mecs5_profile_meta where svc_meta_idx = '${searchDTO.searchId}'
+	</select>
+	
+	<select id="selectCount_sv" parameterType="hashmap" resultType="int">
+		select count(*) from MECS5_SERVICE_INDICATOR where name = '${searchDTO.searchQuery}'
+	</select>
+	
+</mapper> 

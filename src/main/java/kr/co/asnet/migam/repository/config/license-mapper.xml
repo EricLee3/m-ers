@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.asnet.migam.repository.config.LicenseDaoMapper">
+	<resultMap id="rmapLicense" type="license">
+        <result property="realtimeService" column="realtime_service" />
+        <result property="nonrealtimeService" column="nonrealtime_service" />
+        <result property="customerStress" column="customer_stress" />
+        <result property="agentStress" column="agent_stress" />
+        <result property="realtimeChannel" column="realtime_channel" />
+        <result property="nonrealtimeChannel" column="nonrealtime_channel" />
+	</resultMap>
+	
+	<sql id="sql_license">
+		<![CDATA[
+		select
+			realtime_service,
+			nonrealtime_service,
+			customer_stress,
+			agent_stress,
+			realtime_channel,
+			nonrealtime_channel
+		from 
+			mecs5_service_option
+		]]>
+	</sql>
+
+	<select id="selectLicense" resultMap="rmapLicense">
+		<include refid="sql_license" />
+	</select>
+	
+	<update id="updateLicense" parameterType="license">
+		update mecs5_service_option
+		<set>
+			realtime_service = #{realtimeService},
+			nonrealtime_service = #{nonrealtimeService},
+			customer_stress = #{customerStress},
+			agent_stress = #{agentStress},
+			realtime_channel = #{realtimeChannel},
+			nonrealtime_channel = #{nonrealtimeChannel}
+		</set>
+	</update>
+
+</mapper> 

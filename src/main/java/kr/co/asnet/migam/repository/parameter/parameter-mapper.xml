@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.asnet.migam.repository.parameter.ParameterDaoMapper">
+	<resultMap id="rmapParameter" type="parameter">
+        <result property="agentStress" column="agent_stress" />
+        <result property="customerAngry" column="customer_angry" />
+        <result property="stressCount" column="agent_stress_critical_count" />
+        <result property="angryCount" column="customer_angry_critical_count" />
+        <result property="userId" column="login_id" />
+        <result property="title" column="title" />
+        <result property="createDate" column="INSERT_DATE" />
+	</resultMap>
+	
+	<sql id="sql_parameter_history">
+		<![CDATA[
+		select
+			agent_stress,
+			customer_angry,
+			agent_stress_critical_count,
+			customer_angry_critical_count,
+			login_id,
+			title,
+			INSERT_DATE
+		from 
+			mecs5_recognition_parameter_history
+		]]>
+	</sql>
+	<sql id="sql_parameter">
+		<![CDATA[
+		select
+			agent_stress,
+			customer_angry,
+			agent_stress_critical_count,
+			customer_angry_critical_count
+		from 
+			mecs5_recognition_parameter
+		]]>
+	</sql>
+
+	<sql id="sql_paging">
+		<if test="pageDTO != null">
+			<![CDATA[
+			limit #{pageDTO.startRow}, #{pageDTO.itemPerPage}
+			]]>
+		</if>
+	</sql>
+
+	<select id="selectParameter" resultMap="rmapParameter">
+		<include refid="sql_parameter" />
+	</select>
+	
+	<update id="updateParameter" parameterType="parameter">
+		update mecs5_recognition_parameter
+		<set>
+			agent_stress = #{agentStress},
+			customer_angry = #{customerAngry},
+			agent_stress_critical_count = #{stressCount},
+			customer_angry_critical_count = #{angryCount}
+		</set>
+	</update>
+
+	<insert id="insertParameterHistory" parameterType="parameter">
+		<![CDATA[
+		insert into mecs5_recognition_parameter_history (
+			agent_stress,
+			customer_angry,
+			agent_stress_critical_count,
+			customer_angry_critical_count,
+			login_id,
+			title,
+			INSERT_DATE
+		) values (
+			#{agentStress},
+			#{customerAngry},
+			#{stressCount},
+			#{angryCount},
+			#{userId},
+			#{title},
+			NOW()
+		)
+		]]>
+	</insert>
+
+	<select id="selectParameterHistoryList" parameterType="hashmap" resultMap="rmapParameter">
+		<include refid="sql_parameter_history" />
+		<![CDATA[${orderby}]]>
+		<include refid="sql_paging" />
+	</select> 
+</mapper> 

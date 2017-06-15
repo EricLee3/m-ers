@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.asnet.migam.repository.agent.ProcessDaoMapper">
+	<resultMap id="rmapProcess" type="processGroup">
+        <result property="sys_id" column="sys_id" />
+        <result property="sys_name" column="sys_name" />
+        <result property="update_time" column="update_time" />
+        <result property="host_name" column="host_name" />
+        <result property="category" column="category" />
+        <result property="value" column="value" />
+        <result property="alarm_lv" column="alarm_lv" />
+	</resultMap>
+
+	
+	<sql id="sql_process">
+		<![CDATA[
+		select
+			sys_id,
+			sys_name,
+			update_time,
+			host_name,
+			category,
+			value,
+			alarm_lv
+		from 
+			mecs5_monitor
+		]]>
+	</sql>
+	
+	
+	<select id="selectProcessGroupList" parameterType="hashmap" resultMap="rmapProcess">
+		<include refid="sql_process" />
+		where host_name = 'CPU'
+		<![CDATA[${orderby}]]>
+	</select>
+	
+	<select id="selectMemoryGroupList" parameterType="hashmap" resultMap="rmapProcess">
+		<include refid="sql_process" />
+		where host_name = 'MEMORY'
+		<![CDATA[${orderby}]]>
+	</select>
+	
+	<select id="selectDiskGroupList" parameterType="hashmap" resultMap="rmapProcess">
+		<include refid="sql_process" />
+		where host_name = 'DISK'
+		<![CDATA[${orderby}]]>
+	</select>
+	
+	<select id="selectProcessList" parameterType="hashmap" resultMap="rmapProcess">
+		<include refid="sql_process" />
+		where host_name = 'PROCESS'
+		<![CDATA[${orderby}]]>
+	</select>
+	
+	<select id="selectProcessCount" parameterType="hashmap" resultType="int">
+		<![CDATA[select count(*) from (]]>
+		<include refid="sql_process" />
+		where host_name = 'PROCESS'
+		<![CDATA[) cnt]]>
+	</select>
+	
+	<delete id="deleteProcess" parameterType="String">
+		<![CDATA[
+			update mecs5_monitor set value='1' where category = #{category}
+		]]>
+	</delete>
+	
+	<delete id="startProcess" parameterType="String">
+		<![CDATA[
+			update mecs5_monitor set value='0' where category = #{category}
+		]]>
+	</delete>
+
+</mapper> 

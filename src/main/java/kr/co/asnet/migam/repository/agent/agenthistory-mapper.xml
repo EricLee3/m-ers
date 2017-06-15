@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.asnet.migam.repository.agent.AgentHistoryDaoMapper">
+	<resultMap id="rmapAgentHistory" type="agentHistory">
+		<result property="index" column="idx" />
+		<result property="agentId" column="agent_id" />
+		<result property="description" column="description" />
+		<result property="createDate" column="insert_date" />	
+	</resultMap>
+	
+	<sql id="sql_agenthisotry">
+		<![CDATA[
+		select
+			idx,
+			agent_id,
+			description,
+			insert_date
+		from 
+			mecs5_agent_history
+		]]>
+	</sql>
+
+	<insert id="insertAgentHistory" parameterType="agentHistory" useGeneratedKeys="true" keyProperty="index">
+		<![CDATA[
+		insert into mecs5_agent_history (
+			agent_id,
+			description,
+			insert_date
+		) values (
+			#{agentId},
+			#{description},
+			NOW()
+		)
+		]]>
+		<selectKey resultType="Integer" keyProperty="index" order="AFTER">
+        	SELECT LAST_INSERT_ID();
+        </selectKey>
+	</insert>
+
+	<sql id="sql_paging">
+		<if test="pageDTO != null">
+			<![CDATA[
+			limit #{pageDTO.startRow}, #{pageDTO.itemPerPage}
+			]]>
+		</if>
+	</sql>
+
+	<sql id="sql_search">
+		<where>
+            <if test="searchDTO != null">
+            	<if test="searchDTO.searchId != null and searchDTO.searchId != ''">
+            	<![CDATA[
+                	and agent_id = '${searchDTO.searchId}'
+            	]]>
+            	</if>
+			</if>
+		</where>
+	</sql>
+
+	<select id="selectAgentHistory" parameterType="int" resultMap="rmapAgentHistory">
+		<include refid="sql_agenthisotry" />
+		<where>
+			<![CDATA[idx = #{index}]]>
+		</where>
+	</select>
+
+	<select id="selectAgentHistoryList" parameterType="hashmap" resultMap="rmapAgentHistory">
+		<include refid="sql_agenthisotry" />
+		<include refid="sql_search" />
+		<![CDATA[${orderby}]]>
+		<include refid="sql_paging" />
+	</select> 
+
+	<select id="selectCount" parameterType="hashmap" resultType="int">
+		<![CDATA[select count(*) from (]]>
+		<include refid="sql_agenthisotry" />
+		<include refid="sql_search" />
+		<![CDATA[) cnt]]>
+	</select>
+
+	<delete id="deleteAgentHistory" parameterType="int">
+		<![CDATA[
+			delete from mecs5_agent_history where idx = #{index}
+		]]>
+	</delete>
+</mapper> 

@@ -1,0 +1,62 @@
+#mainTable{
+	min-width:1140px;
+	width:100%;
+}
+
+#searchBoardTable{
+	border-collapse:collapse;
+	width:1140px;
+	font-family: 나눔고딕,굴림,돋움,arial;
+	word-break:break-all;
+	text-align:center;
+}
+
+#mainTable th{
+	background-color:lightgray;
+	font-family: 나눔고딕,굴림,돋움,arial;
+	font-size: 10pt;
+	word-break:break-all;
+	text-align:center;
+	padding:10px;
+}
+#mainTable tr th{
+	border:1px solid white;	
+}
+#mainTable tr td{
+	border-bottom:1px solid lightgray;	
+}
+
+#mainTable td{
+	font-family: 나눔고딕,굴림,돋움,arial;
+	font-size: 10pt;
+	word-break:break-all;
+	text-align:center;
+	padding:7px;
+	border-collapse:collapse;
+}
+
+
+#smallTable th{
+	background-color:lightgray;
+	font-family: 나눔고딕,굴림,돋움,arial;
+	font-size: 10pt;
+	word-break:break-all;
+	text-align:center;
+	padding:10px;
+}
+
+#smallTable tr th{
+	border:1px solid white;	
+}
+#smallTable tr td{
+	border-bottom:1px solid lightgray;	
+}
+
+#smallTable td{
+	font-family: 나눔고딕,굴림,돋움,arial;
+	font-size: 10pt;
+	word-break:break-all;
+	text-align:center;
+	padding:7px;
+	border-collapse:collapse;
+}

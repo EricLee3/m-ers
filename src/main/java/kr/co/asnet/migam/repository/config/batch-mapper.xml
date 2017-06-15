@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.asnet.migam.repository.config.BatchDaoMapper">
+
+	<resultMap id="rmapBatch" type="batch">
+		<result property="index" column="idx" />
+		<result property="jobId" column="job_id" />
+		<result property="startTime" column="start_time" />
+		<result property="endTime" column="end_time" />
+		<result property="recordStart" column="record_start_time" />
+		<result property="recordEnd" column="record_end_time" />
+		<result property="groupId" column="group_id" />
+		<result property="agentId" column="agent_id" />
+		<result property="triggerTime" column="job_trigger_time" />
+		<result property="repeat" column="day_repeat" />
+		<result property="status" column="status" />
+		<result property="createDate" column="insert_date" />
+		<result property="jobName" column="job_name" />
+	</resultMap>
+       
+	
+	<sql id="sql_batch">
+		<![CDATA[
+		select
+			idx,
+			job_id,
+			start_time,
+			end_time,
+			record_start_time,
+			record_end_time,
+			group_id,
+			agent_id,
+			job_trigger_time,
+			day_repeat,
+			status,
+			insert_date,
+			job_name
+		from 
+			mecs5_recognition_job
+		]]>
+	</sql>
+
+	<insert id="insertBatch" parameterType="batch" >
+		insert into mecs5_recognition_job (
+			job_id,
+			start_time,
+			end_time,
+			record_start_time,
+			record_end_time,
+			group_id,
+			agent_id,
+			job_trigger_time,
+			day_repeat,
+			status,
+			insert_date,
+			job_name
+		) values (
+			#{jobId},
+			#{startTime},
+			#{endTime},
+			#{recordStart},
+			#{recordEnd},
+			#{groupId},
+			#{agentId},
+			${triggerTime},
+			#{repeat},
+			#{status},
+			NOW(),
+			#{jobName}
+		)
+		<selectKey resultType="Integer" keyProperty="index" order="AFTER">
+		  SELECT LAST_INSERT_ID();
+		</selectKey>
+	</insert>
+
+	<sql id="sql_paging">
+		<if test="pageDTO != null">
+			<![CDATA[
+			limit #{pageDTO.startRow}, #{pageDTO.itemPerPage}
+			]]>
+		</if>
+	</sql>
+
+	<sql id="sql_search">
+		<where>
+            <if test="searchDTO != null">
+            	<if test="searchDTO.searchQuery != null and searchDTO.searchQuery != ''">
+            	<![CDATA[
+                	and job_id = '${searchDTO.searchQuery}'
+            	]]>
+            	</if>
+			</if>
+		</where>
+	</sql>
+
+	<select id="selectBatch" parameterType="int" resultMap="rmapBatch">
+		<include refid="sql_batch" />
+		<where>
+			<![CDATA[idx = #{index}]]>
+		</where>
+	</select>
+
+	<select id="selectBatchById" parameterType="String" resultMap="rmapBatch">
+		<include refid="sql_batch" />
+		<where>
+			<![CDATA[job_id = #{jobId}]]>
+		</where>
+	</select>
+	
+	<update id="updateBatch" parameterType="batch">
+		update mecs5_recognition_job
+		<set>
+			job_id = #{jobId},
+			start_time = #{startTime},
+			end_time = #{endTime},
+			record_start_time = #{recordStart},
+			record_end_time = #{recordEnd},
+			group_id = #{groupId},
+			agent_id = #{agentId},
+			job_trigger_time = ${triggerTime},
+			day_repeat = #{repeat},
+			status = #{status}, 
+			job_name = #{jobName}
+		</set>
+		<where>
+			idx = #{index}
+		</where>
+	</update>
+	
+	<select id="selectBatchList" parameterType="hashmap" resultMap="rmapBatch">
+		<include refid="sql_batch" />
+		<include refid="sql_search" />
+		<![CDATA[${orderby}]]>
+		<include refid="sql_paging" />
+	</select> 
+
+	<select id="selectCount" parameterType="hashmap" resultType="int">
+		<![CDATA[select count(*) from (]]>
+		<include refid="sql_batch" />
+		<include refid="sql_search" />
+		<![CDATA[) cnt]]>
+	</select>
+
+	<delete id="deleteBatch" parameterType="String">
+		<![CDATA[
+			delete from mecs5_recognition_job where idx = #{index}
+		]]>
+	</delete>
+	
+</mapper> 
