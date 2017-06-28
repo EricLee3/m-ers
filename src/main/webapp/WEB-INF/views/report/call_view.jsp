@@ -68,9 +68,9 @@ System.out.println("path:::::::::::::::" + path);
 									<canvas id="lineChart" style="height: 250px"></canvas>
  								</div>
  								<span class="col-md-12">
-<!--
+<!--  
 									<audio id="audioPlayer" src="/resources/wav/${callAnalysis.mixedWavePath}" controls preload="auto"></audio>
--->
+-->									
 									<audio id="audioPlayer" src="/resources/wav/${fn:replace(callAnalysis.mixedWavePath, 'C:/home/mecs/PSNR/', '')}" controls preload="auto"></audio>
 								</span>
 							</div>

@@ -495,7 +495,7 @@ function checkDatepicker() {
 	      lineColors: ['#54aaff', '#de8162'],
 	      xkey: 'date',
 	      ykeys: ['AngryCall', 'StressCall'],
-	      labels: ['Angry Call', 'Stress Call'],
+	      labels: ['Angry Call', 'Stress Call'],      
 	      parseTime: false,
 	      hideHover: 'auto'
 	    });

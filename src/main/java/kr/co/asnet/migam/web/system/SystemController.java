@@ -1865,9 +1865,10 @@ public class SystemController {
 	                     Runtime rt = Runtime.getRuntime();
 	                     /*경로바꾸기*/
 	                     //로컬
-	                     //String exeFile = "C:/workspace/src_20161102_mers/src/main/sox-14.2.0/sox "+file+" -b 16 -r 8000 -c 1 "+"C:/home/mecs/PSNR/record/"+year+"/"+mm+"/"+dd+"/"+hh+"/"+soxfilename;
+	                     //로컬 - C:\Users\in.lee\workspace\projects\M-ERS\src\main\webapp\sox-14.2.0
+	                     String exeFile = "C:/Users/in.lee/workspace/projects/M-ERS/src/main/sox-14.2.0/sox "+file+" -b 16 -r 8000 -c 1 "+"C:/home/mecs/PSNR/record/"+year+"/"+mm+"/"+dd+"/"+hh+"/"+soxfilename;
 	                     //TB
-	                     String exeFile = "C:/tomcat/webapps/src_20161102_mers/sox-14.2.0/sox "+file+" -b 16 -r 8000 -c 1 "+"C:/home/mecs/PSNR/record/"+year+"/"+mm+"/"+dd+"/"+hh+"/"+soxfilename;
+	                     //String exeFile = "C:/tomcat/webapps/src_20161102_mers/sox-14.2.0/sox "+file+" -b 16 -r 8000 -c 1 "+"C:/home/mecs/PSNR/record/"+year+"/"+mm+"/"+dd+"/"+hh+"/"+soxfilename;
 	                     
 	             
 	                     Process p;
@@ -1987,12 +1988,12 @@ public class SystemController {
 	                     soxfilename = "sox_"+fileName;
 	                     Runtime rt = Runtime.getRuntime();
 	                     /*경로바꾸기*/
-	                     //로컬
-	                     //String exeFile = "C:/workspace/src_20161102_mers/src/main/sox-14.2.0/sox "+file+" -b 16 -r 8000 -c 1 "+"C:/home/mecs/PSNR/record/"+year+"/"+mm+"/"+dd+"/"+hh+"/"+soxfilename;
+	                     //로컬 - C:\Users\in.lee\workspace\projects\M-ERS\src\main\webapp\sox-14.2.0
+	                     String exeFile = "C:/Users/in.lee/workspace/projects/M-ERS/src/main/sox-14.2.0/sox "+file+" -b 16 -r 8000 -c 1 "+"C:/home/mecs/PSNR/record/"+year+"/"+mm+"/"+dd+"/"+hh+"/"+soxfilename;
 	                     //TB
-	                     String exeFile = "C:/tomcat/webapps/src_20161102_mers/sox-14.2.0/sox "+file+" -b 16 -r 8000 -c 1 "+"C:/home/mecs/PSNR/record/"+year+"/"+mm+"/"+dd+"/"+hh+"/"+soxfilename;
+	                     //String exeFile = "C:/tomcat/webapps/src_20161102_mers/sox-14.2.0/sox "+file+" -b 16 -r 8000 -c 1 "+"C:/home/mecs/PSNR/record/"+year+"/"+mm+"/"+dd+"/"+hh+"/"+soxfilename;
 	                     
-	             
+	                     
 	                     Process p;
 	                                  
 	                     try {
