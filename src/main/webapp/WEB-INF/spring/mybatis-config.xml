@@ -31,6 +31,7 @@
 		<typeAlias alias="agentCall" type="kr.co.asnet.migam.domain.call.AgentCall" />
 		<typeAlias alias="monthlyCall" type="kr.co.asnet.migam.domain.call.MonthlyCall" />
 		<typeAlias alias="callAnalysis" type="kr.co.asnet.migam.domain.call.CallAnalysis" />
+		<typeAlias alias="completionCallAnalysis" type="kr.co.asnet.migam.domain.call.CompletionCallAnalysis" />
 		<typeAlias alias="pageDTO" type="kr.co.asnet.migam.domain.PageDTO" />
 		<typeAlias alias="searchDTO" type="kr.co.asnet.migam.domain.SearchDTO" />
 		<typeAlias alias="parameter" type="kr.co.asnet.migam.domain.config.Parameter" />
@@ -57,6 +58,7 @@
 		<typeAlias type="kr.co.asnet.migam.domain.agent.Voicefile" alias="Voicefile"/>
 		<typeAlias type="kr.co.asnet.migam.domain.agent.Recognition_job" alias="Recognition_job"/>
 		<typeAlias alias="realStat" type="kr.co.asnet.migam.domain.call.RealStat" />
+		
 		<!-- 
 		<typeAlias alias="attach" type="kr.co.asnet.migam.domain.board.Attach" />
 		<typeAlias alias="board" type="kr.co.asnet.migam.domain.board.Board" />
@@ -106,6 +108,7 @@
 	    <mapper resource="kr/co/asnet/migam/repository/agent/sensConf-mapper.xml"/>
 	    <mapper resource="kr/co/asnet/migam/repository/agent/proConf-mapper.xml"/>
 	    <mapper resource="kr/co/asnet/migam/repository/agent/SensDemo-mapper.xml"/>
+	    <mapper resource="kr/co/asnet/migam/repository/call/completionCallAnalysis-mapper.xml" />
 	<!-- 
 		<mapper resource="kr/co/asnet/esc/repository/board/attach-mapper.xml" />
 		<mapper resource="kr/co/asnet/esc/repository/board/board-mapper.xml" />

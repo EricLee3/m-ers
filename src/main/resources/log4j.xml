@@ -26,32 +26,32 @@
 
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">
-		<level value="info" />
+		<level value="debug" />
 	</logger>
 	<logger name="org.springframework.beans">
-		<level value="info" />
+		<level value="debug" />
 	</logger>
 	<logger name="org.springframework.context">
-		<level value="info" />
+		<level value="debug" />
 	</logger>
 	<logger name="org.springframework.web">
-		<level value="info" />
+		<level value="debug" />
 	</logger>
 	<logger name="org.springframework.jdbc">
-		<level value="info" />
+		<level value="debug" />
 	</logger>
 	<logger name="org.springframework.jndi">
-		<level value="info" />
+		<level value="debug" />
 	</logger>
 	<logger name="org.springframework.ui">
-		<level value="info" />
+		<level value="debug" />
 	</logger>
 	
 	<logger name="org.mybatis">
-		<level value="info" />
+		<level value="debug" />
 	</logger>
 	<logger name="org.apache.ibatis">
-		<level value="info" />
+		<level value="debug" />
 	</logger>
 	
 	<!-- Root Logger -->

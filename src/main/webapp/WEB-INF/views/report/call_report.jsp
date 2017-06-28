@@ -220,6 +220,7 @@
 		<!-- Modal 콜 상세 조회 -->
 		<div class="modal fade" id="modalCallDetail" tabindex="-1" role="dialog" aria-labelledby=""></div>
 <script>
+/*
 var lineChart;
 var lineChartCanvas;
 
@@ -275,6 +276,7 @@ var lineChartData = {
 		}
 	]
 };
+*/
 $(document).ready(function(){
 	
 	$(document).on("click", ".jsExcelDownload", function(e){
@@ -340,7 +342,7 @@ $(document).ready(function(){
         window.location.href = pathname + "?" + $("#form_callreport_search").serialize();
     });
      
-    lineDraw();
+   // lineDraw();
 
 	$(function () {
   		var beforePrint = function() {
@@ -401,7 +403,7 @@ $(document).ready(function(){
 	$("#modalCallDetail").on("hidden.bs.modal", function(){
 	    	$("audio").trigger("pause");
 	});
-	
+	/*
 	$("#modalCallDetail").on("shown.bs.modal", function(){
 		lineChartCanvas = $("#lineChart");
 		lineChartData.labels = $.parseJSON ( $("#callAnalysis_labelString").val().replace(/\'/g, '"') );
@@ -424,7 +426,7 @@ $(document).ready(function(){
 		lineChart.update();
 	    lineChart.render(0, false);
 	 });
-	
+	*/
 	 $('.player_audio').click(function() {
 		    if ($('.player_audio').paused == false) {
 		        $('.player_audio').pause();
@@ -470,7 +472,7 @@ function checkDatepicker() {
   return dataUrl;
  }
  
- 
+ /*
  function lineDraw(){
 	//LINE CHART
 	    var line = new Morris.Line({
@@ -500,6 +502,7 @@ function checkDatepicker() {
 	      hideHover: 'auto'
 	    });
  }
+ */
 </script>
 </body>
 </html>
