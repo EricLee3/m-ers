@@ -1,9 +1,83 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="../include/taglib.jsp"%>
-<%
-String path = application.getRealPath("/");
-System.out.println("path:::::::::::::::" + path);
-%>
+	<script type="text/javascript" src="/resources/highcharts/highcharts.js"></script>
+	<script type="text/javascript" src="/resources/highcharts/exporting.js"></script>
+	
+<script>
+
+function linegraph(mdata){
+	Highcharts.setOptions({
+	    colors: ['#b6728e', '#6dc066', '#ff6666', '#66cdaa', '#f08080', 
+	             '#ffc82e', '#ffb6c1','#11a51b', '#738b9a', '#7ac5cd',
+	             '#4f90c1', '#222d4a','#9c3b30', '#db8e4e', '#dbbc5d',
+	             '#ff8fcf', '#d11141','#6663bf', '#16f14b', '#d0a92b']
+	});
+    Highcharts.chart('linegraph_display', {
+    	chart: {
+            type: 'spline',
+    	},
+	    title: {
+	        //text: 'Solar Employment Growth by Sector, 2010-2016'
+	        text: ' '
+	    },
+	    subtitle: {
+	        //text: 'Source: thesolarfoundation.com'
+	    },
+	    yAxis: {
+	        title: {
+	           // text: 'Number of Employees'
+	        	  text: ' ',
+	        	  allowDecimals: false // 정수로만 표기
+	        } 
+	       // ,tickInterval: 10
+	    },
+	    xAxis: {
+	      //  type: 'datetime'
+	        //categories: ['0','2','4','6','8']
+	         tickInterval: 2,
+	        minPadding: 0.05,
+	        maxPadding: 0.05
+	    },
+	    legend: {
+	        layout: 'horizontal',
+	        align: 'center',
+	        verticalAlign: 'bottom'
+	    },
+	    plotOptions: {
+	        series: {
+	            pointStart: 0
+	
+	        },
+	        line: {
+                dataLabels: {
+                    enabled: true
+                }
+            } 
+	    },    
+	    /*
+	    series: [{
+	        data: [
+	               ["0", 29.9],
+	               ["1", 71.5],
+	               ["7", 106.4]
+	           ]
+	       }]
+	    */
+	   series:mdata   
+	}); 
+	
+}
+
+	$(document).ready(function(){
+
+		$.getJSON("http://"+location.host+"/report/linegraph?idx="+"${index}",
+				  function(data) {
+				      linegraph(data);
+		});
+
+	});
+</script>
+
 			<div class="modal-dialog modal-lg" role="document">
 				<div class="modal-content modal-lg">
 					<div class="modal-header">
@@ -11,7 +85,7 @@ System.out.println("path:::::::::::::::" + path);
 							<span aria-hidden="true">&times;</span>
 						</button>
 						<h4 class="modal-title" id="myModalLabel">
-							콜 상세조회
+							콜 상세조회11
 						</h4>
 					</div>
 					<div class="modal-body">
@@ -65,7 +139,10 @@ System.out.println("path:::::::::::::::" + path);
 							<div class="col-md-8">
 								<!-- LINE CHART -->
 								<div class="row margin">
+								<!-- 
 									<canvas id="lineChart" style="height: 250px"></canvas>
+									 -->
+									  <div id="linegraph_display"  style="margin-top:20px; margin-left:5px; width:560px; height:300px;"></div>
  								</div>
  								<span class="col-md-12">
 <!--  

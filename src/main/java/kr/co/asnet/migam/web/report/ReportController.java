@@ -1,13 +1,16 @@
 package kr.co.asnet.migam.web.report;
 
 import java.io.File;
-
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -19,14 +22,19 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.google.gson.Gson;
 
 import kr.co.asnet.migam.domain.PageDTO;
 import kr.co.asnet.migam.domain.SearchDTO;
 import kr.co.asnet.migam.domain.agent.Agent;
 import kr.co.asnet.migam.domain.agent.AgentGroup;
+import kr.co.asnet.migam.domain.agent.AnalResult;
 import kr.co.asnet.migam.domain.call.AgentCall;
 import kr.co.asnet.migam.domain.call.CallAnalysis;
 import kr.co.asnet.migam.domain.call.CallAnalysisComp;
+import kr.co.asnet.migam.domain.call.CompletionCallAnalysis;
 import kr.co.asnet.migam.domain.call.DailyCall;
 import kr.co.asnet.migam.domain.call.HourlyCall;
 import kr.co.asnet.migam.domain.call.MonthlyCall;
@@ -34,6 +42,7 @@ import kr.co.asnet.migam.service.agent.AgentGroupService;
 import kr.co.asnet.migam.service.agent.AgentService;
 import kr.co.asnet.migam.service.call.AgentCallService;
 import kr.co.asnet.migam.service.call.CallAnalysisService;
+import kr.co.asnet.migam.service.call.CompletionCallAnalysisService;
 import kr.co.asnet.migam.service.call.DailyCallService;
 import kr.co.asnet.migam.service.call.HourlyCallService;
 import kr.co.asnet.migam.service.call.MonthlyCallService;
@@ -64,7 +73,10 @@ public class ReportController {
 	@Inject 
 	private AgentCallService agentCallService;
 	
-	 
+	@Inject 
+	private CompletionCallAnalysisService completionCallAnalysisService;
+	
+	
 	 
 	/**
 	 * 리포트 URL 입력시 기본 페이지입니다.
@@ -137,10 +149,10 @@ public class ReportController {
 	 */
 	@RequestMapping(value = "/call_view/{index}", method = RequestMethod.GET)
 	public String callViewModal(@PathVariable("index") int index, Model model) {
+		/*
 		CallAnalysis callAnalysis = callAnalysisService.getCallAnalysis(index);
 		//model.addAttribute("callAnalysis", callAnalysis);
 		callAnalysis.setMixedWavePath(callAnalysis.getMixedWavePath().replaceAll("\\\\","/"));
-		System.out.println("aaaaaaa::::::::::::::::::::::::" + callAnalysis.getMixedWavePath());
 	
 		// 데이터 숫자를 구하여 차트 label 개수를 동일하게 맞춰야, 차트 데이터를 모두 표시할 수 있습니다.
 		int count = 0;
@@ -209,9 +221,66 @@ public class ReportController {
 		//. Bar 차트 표시를 위해 추가된 부분
 		
 		model.addAttribute("labelString", labelString);
-		
+		*/
 		return "/report/call_view";
 	}
+	
+	
+	@RequestMapping(value = "linegraph", method = RequestMethod.GET, produces="text/plain;charset=UTF-8")
+    public @ResponseBody String linegraph( @RequestParam(value = "page", required = false, defaultValue = "1") int page,SearchDTO searchDTO, Locale locale, Model model,String idx) {
+        Gson gson = new Gson();
+        
+        PageDTO pageDTO = new PageDTO(page);
+        searchDTO.setSearchQuery(idx);
+		   List<CompletionCallAnalysis> CompletionCallAnalysisList = completionCallAnalysisService.getCompletionCallAnalysisList(pageDTO, searchDTO, "order by indicator_kor_name");
+         List<Map> hashlist = new ArrayList<Map>();
+		   String indicator_name = "";
+		   String indicator_end_pos = "";
+		   String indicator_result ="";
+		   DecimalFormat format = new DecimalFormat("#");
+	          
+		   for(int i=0;i< CompletionCallAnalysisList.size();i++){
+
+				indicator_name = CompletionCallAnalysisList.get(i).getIndicator_kor_name();
+				indicator_end_pos = CompletionCallAnalysisList.get(i).getIndicator_end_pos();
+				indicator_result = CompletionCallAnalysisList.get(i).getIndicator_result();
+		
+		        String indicator_result_sub[] = indicator_result.split(",");
+		        String end_posbtime[] = indicator_end_pos.split(",");
+		        int[] indicator_result_sub2 = new int[indicator_result_sub.length];
+				
+
+		        double[] indicator_result_sub3 = new double[indicator_result_sub.length];
+	            int[] end_postime_sub2 = new int[end_posbtime.length];
+	            
+	            Object[] postime = new Object[end_posbtime.length];
+	            
+	            for(int j = 0; j<indicator_result_sub.length; j++){
+	                  String str = format.format(Double.parseDouble(end_posbtime[j]));
+	                  end_postime_sub2[j] =  Integer.parseInt(str) ;
+	                  
+	                  indicator_result_sub2[j] = Integer.parseInt(indicator_result_sub[j]);
+
+	                  Object[] postime2 ={end_postime_sub2[j],indicator_result_sub2[j]}; 
+	                  postime[j] = postime2;
+	         
+	                
+	            }
+	            
+
+	        	
+	        	HashMap hashmap = new HashMap();
+             hashmap = new HashMap();
+             hashmap.put("name", indicator_name);
+             hashmap.put("data", postime);
+             hashlist.add(hashmap);
+	       
+	         
+			}
+
+        return gson.toJson(hashlist);
+    }
+	
 	
 	/**
 	 * 통계::상담원별 통계
