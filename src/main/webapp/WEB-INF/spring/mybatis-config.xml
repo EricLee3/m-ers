@@ -58,6 +58,7 @@
 		<typeAlias type="kr.co.asnet.migam.domain.agent.Voicefile" alias="Voicefile"/>
 		<typeAlias type="kr.co.asnet.migam.domain.agent.Recognition_job" alias="Recognition_job"/>
 		<typeAlias alias="realStat" type="kr.co.asnet.migam.domain.call.RealStat" />
+		<typeAlias alias="RealindState" type="kr.co.asnet.migam.domain.call.RealindState" />
 		
 		<!-- 
 		<typeAlias alias="attach" type="kr.co.asnet.migam.domain.board.Attach" />
@@ -109,6 +110,7 @@
 	    <mapper resource="kr/co/asnet/migam/repository/agent/proConf-mapper.xml"/>
 	    <mapper resource="kr/co/asnet/migam/repository/agent/SensDemo-mapper.xml"/>
 	    <mapper resource="kr/co/asnet/migam/repository/call/completionCallAnalysis-mapper.xml" />
+	    <mapper resource="kr/co/asnet/migam/repository/call/realindState-mapper.xml" />   
 	<!-- 
 		<mapper resource="kr/co/asnet/esc/repository/board/attach-mapper.xml" />
 		<mapper resource="kr/co/asnet/esc/repository/board/board-mapper.xml" />
