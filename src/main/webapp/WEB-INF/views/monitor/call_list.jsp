@@ -98,6 +98,7 @@
 										<th class="col-sm-1">구분</th>
 										<th class="col-sm-1">프로파일</th>
 										<th class="col-sm-1">스크립트</th>
+										<th class="col-sm-1">상세조회</th>
 									</tr>
 									</thead>
 									<tbody>
