@@ -42,9 +42,6 @@ public class CompletionCallAnalysisDaoMapper implements CompletionCallAnalysisDa
 	public List<CompletionCallAnalysis> selectCompletionCallAnalysisList(PageDTO pageDTO, SearchDTO searchDTO, String orderby) {
 		Map<String, Object> parameters = new HashMap<String, Object>();
 		{
-			System.out.println("pageDTO:"+pageDTO);
-			System.out.println("searchDTO:"+searchDTO);
-			System.out.println("orderby:"+orderby);
 			parameters.put("pageDTO", pageDTO);
 			parameters.put("searchDTO", searchDTO);
 			parameters.put("orderby", orderby);

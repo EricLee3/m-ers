@@ -21,6 +21,8 @@ public interface RealindStateDao {
 
 	public RealindState selectRealindState(SearchDTO searchDTO);
 
+	public List<RealindState> selectRealindStateList(SearchDTO searchDTO, String orderby);
+
 	
 	
 }
