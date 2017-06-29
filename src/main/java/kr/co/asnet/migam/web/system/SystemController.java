@@ -25,6 +25,8 @@ import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -1866,9 +1868,10 @@ public class SystemController {
 	                     /*경로바꾸기*/
 	                     //로컬
 	                     //로컬 - C:\Users\in.lee\workspace\projects\M-ERS\src\main\webapp\sox-14.2.0
-	                     String exeFile = "C:/Users/in.lee/workspace/projects/M-ERS/src/main/sox-14.2.0/sox "+file+" -b 16 -r 8000 -c 1 "+"C:/home/mecs/PSNR/record/"+year+"/"+mm+"/"+dd+"/"+hh+"/"+soxfilename;
+	                     //String exeFile = "C:/Users/in.lee/workspace/projects/M-ERS/src/main/sox-14.2.0/sox "+file+" -b 16 -r 8000 -c 1 "+"C:/home/mecs/PSNR/record/"+year+"/"+mm+"/"+dd+"/"+hh+"/"+soxfilename;
 	                     //TB
 	                     //String exeFile = "C:/tomcat/webapps/src_20161102_mers/sox-14.2.0/sox "+file+" -b 16 -r 8000 -c 1 "+"C:/home/mecs/PSNR/record/"+year+"/"+mm+"/"+dd+"/"+hh+"/"+soxfilename;
+	                     String exeFile = "C:/tomcat/apache-tomcat-8.5.16-windows-x64/apache-tomcat-8.5.16/webapps/mers/sox-14.2.0/sox "+file+" -b 16 -r 8000 -c 1 "+"C:/home/mecs/PSNR/record/"+year+"/"+mm+"/"+dd+"/"+hh+"/"+soxfilename;
 	                     
 	             
 	                     Process p;
@@ -1987,13 +1990,14 @@ public class SystemController {
 	                    
 	                     soxfilename = "sox_"+fileName;
 	                     Runtime rt = Runtime.getRuntime();
+	                     
 	                     /*경로바꾸기*/
 	                     //로컬 - C:\Users\in.lee\workspace\projects\M-ERS\src\main\webapp\sox-14.2.0
-	                     String exeFile = "C:/Users/in.lee/workspace/projects/M-ERS/src/main/sox-14.2.0/sox "+file+" -b 16 -r 8000 -c 1 "+"C:/home/mecs/PSNR/record/"+year+"/"+mm+"/"+dd+"/"+hh+"/"+soxfilename;
+	                     //String exeFile = "C:/Users/in.lee/workspace/projects/M-ERS/src/main/sox-14.2.0/sox "+file+" -b 16 -r 8000 -c 1 "+"C:/home/mecs/PSNR/record/"+year+"/"+mm+"/"+dd+"/"+hh+"/"+soxfilename;
 	                     //TB
 	                     //String exeFile = "C:/tomcat/webapps/src_20161102_mers/sox-14.2.0/sox "+file+" -b 16 -r 8000 -c 1 "+"C:/home/mecs/PSNR/record/"+year+"/"+mm+"/"+dd+"/"+hh+"/"+soxfilename;
 	                     
-	                     
+	                     String exeFile = "C:/tomcat/apache-tomcat-8.5.16-windows-x64/apache-tomcat-8.5.16/webapps/mers/sox-14.2.0/sox "+file+" -b 16 -r 8000 -c 1 "+"C:/home/mecs/PSNR/record/"+year+"/"+mm+"/"+dd+"/"+hh+"/"+soxfilename;
 	                     Process p;
 	                                  
 	                     try {
