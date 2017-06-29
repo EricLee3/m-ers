@@ -123,6 +123,7 @@ function linegraph(mdata){
 									</div>
 									<!-- /.info-box-content -->
 								</div>
+								<!--  
 								<div class="col-md-12" style="height: 30px"></div>
 								<div class="col-md-6">
 									<span class="pull-left"> 
@@ -135,7 +136,7 @@ function linegraph(mdata){
 										<i class="fa fa-minus" style="color:#de8162;"></i> 상담원
 									</span>
 								</div>
-
+								-->
 							</div>
 							<!-- /.col -->
 
@@ -150,12 +151,16 @@ function linegraph(mdata){
 									  -->
 									  <div id="linegraph_display"  style="margin-top:20px; margin-left:5px; width:560px; height:300px;"></div>
  								</div>
+ 								
  								<span class="col-md-12">
 <!--  
 									<audio id="audioPlayer" src="/resources/wav/${callAnalysis.mixedWavePath}" controls preload="auto"></audio>
 -->									
+								<!-- 
 									<audio id="audioPlayer" src="/resources/wav/${fn:replace(callAnalysis.mixedWavePath, 'C:/home/mecs/PSNR/', '')}" controls preload="auto"></audio>
+								-->
 								</span>
+								 
 							</div>
 						</div>
 					</div>

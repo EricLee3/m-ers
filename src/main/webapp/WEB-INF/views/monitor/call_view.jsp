@@ -230,17 +230,17 @@
 								-->
 							</div>
 							<!-- /.col -->
-
 							<div class="col-md-8">
 								<!-- LINE CHART -->
 								<div class="row margin">
 									<!--  <canvas id="lineChart" style="height: 250px"></canvas>-->
 									<div id="linegraph_display"  style="margin-top:20px; margin-left:5px; width:560px; height:300px;"></div>
-									
+									<!--  
 									<span class="col-md-12">
 										<audio id="audioPlayer1" src="/resources/wav/${fn:replace(callAudit.customerWavePath, '/home/mecs/PSNR/', '')}" controls preload="auto" ></audio>
 										<audio id="audioPlayer2" src="/resources/wav/${fn:replace(callAudit.agentWavePath, '/home/mecs/PSNR/', '')}" controls preload="auto" ></audio>
 									</span>
+									
 								</div>
 							</div>
 						</div>
