@@ -88,7 +88,7 @@ function linegraph(mdata){
 							<span aria-hidden="true">&times;</span>
 						</button>
 						<h4 class="modal-title" id="myModalLabel">
-							콜 상세조회11
+							콜 상세조회
 						</h4>
 					</div>
 					<div class="modal-body">

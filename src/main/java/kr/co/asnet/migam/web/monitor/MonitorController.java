@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 
 import kr.co.asnet.migam.domain.PageDTO;
 import kr.co.asnet.migam.domain.SearchDTO;
@@ -36,6 +38,7 @@ import kr.co.asnet.migam.service.call.CallAnalysisService;
 import kr.co.asnet.migam.service.call.CallAuditService;
 import kr.co.asnet.migam.service.call.DailyCallService;
 import kr.co.asnet.migam.service.call.HourlyCallService;
+import kr.co.asnet.migam.service.call.RealindStateService;
 import kr.co.asnet.migam.service.config.LicenseService;
 import kr.co.asnet.migam.service.config.ParameterService;
 
@@ -66,6 +69,8 @@ public class MonitorController {
 	@Inject
 	private CallAnalysisService callAnalysisService;
 	
+	@Inject
+	private RealindStateService realindStateService;
 	
 	
 	/**
@@ -413,4 +418,24 @@ public class MonitorController {
 		
 		return "/monitor/call_view_refresh";
 	}
+	
+	
+	
+	// 주기적으로 체크
+	@RequestMapping(value = "/call_linegraph", method = {RequestMethod.POST, RequestMethod.GET})	
+	@ResponseBody
+	public int[] call_linegraph(Model model, String agentId, SearchDTO searchDTO,kr.co.asnet.migam.domain.call.RealindState RealindState){
+		searchDTO.setSearchQuery(agentId);
+		RealindState =  realindStateService.getRealindState(searchDTO);
+		String indicator_result[] = RealindState.getIndicator_result().split(",");
+		
+		int indicator_result_int[] = new int[2];
+		
+		for(int i=0; i < indicator_result.length;i++){
+			indicator_result_int[i] = Integer.parseInt(indicator_result[i]) ;
+		}
+
+		return indicator_result_int;
+	}
+	
 }

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.asnet.migam.repository.call.RealindStateDaoMapper">
+	<resultMap id="rmapRealindState" type="realindState">
+		<result property="agent_id" column="agent_id" />
+		<result property="call_party" column="call_party" />
+		<result property="indicator_name" column="indicator_name" />
+		<result property="indicator_kor_name" column="indicator_kor_name" />
+		<result property="indicator_level" column="indicator_level" />
+		<result property="indicator_result" column="indicator_result" />
+	</resultMap>
+
+	<sql id="sql_paging">
+		<if test="pageDTO != null">
+			<![CDATA[
+			limit #{pageDTO.startRow}, #{pageDTO.itemPerPage}
+			]]>
+		</if>
+	</sql>
+
+	<select id="selectRealindState" parameterType="hashmap" resultMap="rmapRealindState">
+		SELECT  GROUP_CONCAT(indicator_result) as indicator_result FROM mecs5_realtime_ind_state WHERE agent_id=#{agent_id} AND call_party=1 ORDER BY indicator_name
+	</select>
+
+	<select id="selectRealindStateList" parameterType="hashmap" resultMap="rmapRealindState">
+		SELECT  indicator_name, indicator_result FROM mecs5_realtime_ind_state WHERE agent_id=#{agent_id} AND call_party=1  
+		and ( indicator_name='Desire' or indicator_name='Attention')
+		ORDER BY indicator_name
+	</select> 
+	
+
+
+
+
+</mapper> 

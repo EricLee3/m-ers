@@ -110,6 +110,11 @@
 										<td>고객</td>
 										<td>${real.customerProfileName }</td>
 										<td>${real.customerScript }</td>
+										<td class="hidden-print" rowspan="2">
+											<button type="button" class="jsShowModal btn btn-default btn-xs" data-index="${real.agentId }">
+												<i class="fa fa-headphones"></i> 
+											</button>
+										</td>
 									</tr>
 									<tr>
 										<td>상담사</td>
@@ -159,6 +164,8 @@
 			</section>
 			<!-- /.content -->
 	
+			<!-- Modal 콜 상세 조회 -->
+		<div class="modal fade" id="modalCallDetail" tabindex="-1" role="dialog" aria-labelledby=""></div>
 		
 <script>
 var mainTimer;
@@ -301,7 +308,6 @@ $(document).ready(function(){
     $(document).on("click", ".jsShowModal", function(e){
     	e.preventDefault();
     	var agentId = $(this).attr("data-index");
-    	thisAgentId = agentId;
     	$("#modalCallDetail").load(
     		"/monitor/call_view/"+agentId, 
     		function( response, status, xhr ) {
@@ -315,19 +321,12 @@ $(document).ready(function(){
     	);
     });
     
+ 
     $("#modalCallDetail").on("hidden.bs.modal", function(){
-    	isModalShow = false;
-    	isAudio1Play = false;
-    	isAudio2Play = false;
-    	isFirstTimePlayAudio1 = true;
-    	isFirstTimePlayAudio2 = true;
-    	isInitializeAudio1 = false;
-    	isInitializeAudio2 = false;
-    	window.clearInterval(reloadAudioTimer1);
-    	window.clearInterval(reloadAudioTimer2);
+    	clearInterval(refreshInterval) ;
     	$("audio").trigger("pause");
     });
-    
+    /*
     $("#modalCallDetail").on("shown.bs.modal", function(){
     	$("#audioPlayer1").on("play", function(e) {
     		isAudio1Play = true; // 음성 파일 리프레시. false 로 처리하면 리프레시 하지 않음.
@@ -368,7 +367,7 @@ $(document).ready(function(){
     	parseTime: false,
     	hideHover: 'auto'
     });
-    
+    */
     function audioPlayer1Callback() {
     	$("#audioPlayer1").on("pause", function(e) {
         	isAudio1Play = false; 
