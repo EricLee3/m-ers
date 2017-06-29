@@ -92,9 +92,9 @@
 										<td>${pro.count}</td>
 										<td>
 											<div class="btn-group">
-												<button type="button" class="jsShowDetail btn btn-default btn-xs" data-groupid="${pro.p_profile_idx },${pro.s_script},${pro.p_name}">상세</button>
-												<button type="button" class="jsShowModal btn btn-default btn-xs" data-groupid="${pro.p_profile_idx },${pro.s_script},${pro.p_name}">수정</button>
-												<button type="button" class="jsDeleteGroup btn btn-default btn-xs" data-groupid="${pro.p_profile_idx },${pro.p_name },${pro.s_script}">삭제</button>
+												<button type="button" class="jsShowDetail btn btn-default btn-xs" data-groupid="${pro.p_profile_idx },${pro.s_script.replaceAll(',',' ')},${pro.p_name}">상세</button>
+												<button type="button" class="jsShowModal btn btn-default btn-xs" data-groupid="${pro.p_profile_idx },${pro.s_script.replaceAll(',',' ')},${pro.p_name}">수정</button>
+												<button type="button" class="jsDeleteGroup btn btn-default btn-xs" data-groupid="${pro.p_profile_idx },${pro.p_name },${pro.s_script.replaceAll(',',' ')}">삭제</button>
 											</div>
 										</td>
 									</tr>
@@ -756,11 +756,14 @@ $(document).ready(function(){
     	var username = "${sessionScope.sessionUser.currentUser.userName }";
     	var userid = "${sessionScope.sessionUser.currentUser.userId}";
     	var groupId = $(this).attr("data-groupid") + "," + username + "," + userid;
+    	alert("1::::"+encodeURI(groupId));
+    	
     	if(confirm("삭제 하시겠습니까?")) {
 	    	$.ajax({
-	    		url:"/REST/sens/deleteProConf/" + groupId,
+	    		url:"/REST/sens/deleteProConf",
 	    		dataType : "JSON",
-	    		method : "GET",
+	    		data : groupId,
+	    		method : "POST",
 	    		success : function(result) {
 	    	    	if( result) {
 	    	    		// alert("정상적으로 삭제되어, 화면을 갱신합니다.");
