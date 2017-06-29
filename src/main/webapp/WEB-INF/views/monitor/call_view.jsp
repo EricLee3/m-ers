@@ -210,6 +210,7 @@
 									<!-- /.info-box-content -->
 								</div>
 								<!-- /.info-box -->
+								<!--  
 								<div class="col-md-6">
 									<span class="pull-left"> 
 										<i class="fa fa-minus text-primary"></i> 고객
@@ -218,7 +219,7 @@
 								<div class="col-md-6">
 									<!-- <button type="button" class="btn-default btn-xs pull-right">
 										<i class="fa fa-play"></i>
-									</button> -->
+									</button> 
 								</div>
 								<div class="col-md-12" style="height: 30px"></div>
 								<div class="col-md-6">
@@ -226,6 +227,7 @@
 										<i class="fa fa-minus" style="color:#de8162;"></i> 상담원
 									</span>
 								</div>
+								-->
 							</div>
 							<!-- /.col -->
 
