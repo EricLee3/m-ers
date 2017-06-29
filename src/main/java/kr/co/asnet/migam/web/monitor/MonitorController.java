@@ -427,15 +427,22 @@ public class MonitorController {
 	public int[] call_linegraph(Model model, String agentId, SearchDTO searchDTO,kr.co.asnet.migam.domain.call.RealindState RealindState){
 		searchDTO.setSearchQuery(agentId);
 		RealindState =  realindStateService.getRealindState(searchDTO);
-		String indicator_result[] = RealindState.getIndicator_result().split(",");
-		
-		int indicator_result_int[] = new int[2];
-		
-		for(int i=0; i < indicator_result.length;i++){
-			indicator_result_int[i] = Integer.parseInt(indicator_result[i]) ;
+		String indicator_level[] = null;
+		if(RealindState != null){
+			indicator_level = RealindState.getIndicator_level().split(",");
 		}
-
-		return indicator_result_int;
+		 
+		
+		int indicator_level_int[] = new int[2];
+		if(indicator_level != null){	
+			for(int i=0; i < indicator_level.length;i++){
+				indicator_level_int[i] = Integer.parseInt(indicator_level[i]) ;
+			}
+		}else{
+			indicator_level_int[0] = 0;
+			indicator_level_int[1] = 0;
+		}
+		return indicator_level_int;
 	}
 	
 }
