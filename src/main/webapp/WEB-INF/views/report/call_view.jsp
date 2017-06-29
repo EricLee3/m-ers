@@ -73,7 +73,7 @@ function linegraph(mdata){
 
 	$(document).ready(function(){
 
-		$.getJSON("http://"+location.host+"/report/linegraph?idx="+"${index}",
+		$.getJSON("https://"+location.host+"/report/linegraph?idx="+"${index}",
 				  function(data) {
 				      linegraph(data);
 		});

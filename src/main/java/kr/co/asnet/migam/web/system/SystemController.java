@@ -14,7 +14,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Properties;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -138,6 +140,10 @@ public class SystemController {
 	private ProConfService proConfService;
 	@Inject
 	private SensDemoService sensDemoService;	
+	
+    // 프로퍼티 객체 주입
+    @Resource(name = "appProp")
+    private Properties appProp;
 	/**
 	 * 시스템::시스템 설정::라이선스 설정
 	 * 
@@ -711,9 +717,6 @@ public class SystemController {
 		     
 		      
 		      for(int i = 0; i < array_idx.length; i++) {
-		    	  System.out.println("aa:::::" + cri[i]);
-		    	  System.out.println("bb:::::" + mj[i]);
-		    	  System.out.println("c:::::" + mi[i]);
 		    	  
 		    	  alarmLimit.setAlarmIdx(array_idx[i]);
 		    	  alarmLimit.setCriticalValue(cri[i]);
@@ -1866,17 +1869,9 @@ public class SystemController {
 	                     soxfilename = "sox_"+fileName;
 	                     Runtime rt = Runtime.getRuntime();
 	                     
-	                     
-	                     // IOS
-	                     /*경로바꾸기*/
-	                     //로컬
-	                     String exeFile = "C:/Users/in.lee/workspace/projects/M-ERS/src/main/sox-14.2.0/sox "+file+" -b 16 -r 8000 -c 1 "+"C:/home/mecs/PSNR/record/"+year+"/"+mm+"/"+dd+"/"+hh+"/"+soxfilename;
-	                     //TB
-	                     //String exeFile = "C:/tomcat/webapps/src_20161102_mers/sox-14.2.0/sox "+file+" -b 16 -r 8000 -c 1 "+"C:/home/mecs/PSNR/record/"+year+"/"+mm+"/"+dd+"/"+hh+"/"+soxfilename;
-	                     
-	                     // TM presentation
-	                     //String exeFile = "C:/tomcat/apache-tomcat-8.5.16-windows-x64/apache-tomcat-8.5.16/webapps/mers/sox-14.2.0/sox "+file+" -b 16 -r 8000 -c 1 "+"C:/home/mecs/PSNR/record/"+year+"/"+mm+"/"+dd+"/"+hh+"/"+soxfilename;
-	                     
+	                     String soxdir = appProp.getProperty("sox.dir");
+	                     String exeFile = soxdir+" "+file+" -b 16 -r 8000 -c 1 "+"C:/home/mecs/PSNR/record/"+year+"/"+mm+"/"+dd+"/"+hh+"/"+soxfilename;
+	                  
 	             
 	                     Process p;
 	                                  
