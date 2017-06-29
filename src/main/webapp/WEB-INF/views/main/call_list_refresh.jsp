@@ -5,8 +5,8 @@
 		<tr>
 			<th>상담원</th>
 			<th>그룹</th>
-			<th>Angry</th>
-			<th>Stress</th>
+			<th>주의 단계</th>
+			<th>흥미 단계</th> 
 			<th>상세조회</th>
 		</tr>
 	</thead>
