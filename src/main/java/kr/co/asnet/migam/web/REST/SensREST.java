@@ -898,12 +898,10 @@ public class SensREST {
 	}
 	
 	@RequestMapping(value = "/deleteProConf", method = RequestMethod.POST)
-	public ResponseEntity<Boolean> deleteProConf(String groupId, Model model, HisLog hislog,ProConf proConf) throws UnknownHostException {
-		
+	public ResponseEntity<Boolean> deleteProConf(String groupId, Model model, HisLog hislog,ProConf proConf, HttpServletRequest httpreq) throws UnknownHostException {
 		InetAddress ip = InetAddress.getLocalHost(); 
 		String[] array;
 		array = groupId.split(",");
-		System.out.println("groupId::::"+groupId);
 		
 		/*
 		hislog.setDetail("[삭제] 프로파일 명 : ["+array[1]+"]");

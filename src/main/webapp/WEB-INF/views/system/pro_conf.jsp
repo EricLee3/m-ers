@@ -756,13 +756,11 @@ $(document).ready(function(){
     	var username = "${sessionScope.sessionUser.currentUser.userName }";
     	var userid = "${sessionScope.sessionUser.currentUser.userId}";
     	var groupId = $(this).attr("data-groupid") + "," + username + "," + userid;
-    	alert("1::::"+encodeURI(groupId));
-    	
     	if(confirm("삭제 하시겠습니까?")) {
 	    	$.ajax({
 	    		url:"/REST/sens/deleteProConf",
 	    		dataType : "JSON",
-	    		data : groupId,
+	    		data : { "groupId" : groupId },
 	    		method : "POST",
 	    		success : function(result) {
 	    	    	if( result) {
