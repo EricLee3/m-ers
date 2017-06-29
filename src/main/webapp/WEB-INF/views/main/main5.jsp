@@ -80,7 +80,7 @@
                                       <c:if test="${callAudit.callStatus eq '1' }">
                                     <c:choose>
                                        <c:when test="${callAudit.customerAngryCount gt angryCountParameter }">
-                                          <span class="label label-danger" title="Angry">${callAudit.customerAngryCount }</span>
+                                          <span class="label label-danger" title="주의 단계">${callAudit.customerAngryCount }</span>
                                        </c:when>
                                        <c:otherwise>
                                           <span class="label label-success" title="Normal">${callAudit.customerAngryCount }</span>
@@ -88,14 +88,14 @@
                                     </c:choose>
                                  </c:if>
                                  <c:if test="${callAudit.callStatus eq '0' }">
-                                    <span class="label label-default" title="Angry">${callAudit.customerAngryCount }</span>
+                                    <span class="label label-default" title="주의 단계">${callAudit.customerAngryCount }</span>
                                  </c:if>
                                  </td>
                                  <td>
                                       <c:if test="${callAudit.callStatus eq '1' }">
                                     <c:choose>
                                        <c:when test="${callAudit.agentStressCount gt stressCountParameter }">
-                                          <span class="label label-danger" title="Stress">${callAudit.agentStressCount }</span>
+                                          <span class="label label-danger" title="흥미 단계">${callAudit.agentStressCount }</span>
                                        </c:when>
                                        <c:otherwise>
                                           <span class="label label-success" title="Normal">${callAudit.agentStressCount }</span>
@@ -227,7 +227,7 @@ var lineChartData = {
       labels: ['00:00','','','','','','','','',''],
    datasets: [
       {
-         label: "Stress",
+         label: "흥미 단계",
          borderColor: "rgba(222, 129, 98, 1)",
          backgroundColor: "rgba(222, 129, 98, 1)",
          pointBorderColor: "rgba(222, 129, 98, 1)",
@@ -240,7 +240,7 @@ var lineChartData = {
          data: [0]
       },
       {
-         label: "Angry",
+         label: "주의 단계",
          borderColor: "rgba(60,141,188,0.9)",
          backgroundColor: "rgba(60,141,188,0.9)",
          pointBorderColor: "#3b8bba",
