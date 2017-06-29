@@ -280,7 +280,9 @@ public class SensREST {
 		array = proConf.getService_idx().split(",");
 		
 		String[] array_max = req.getParameterValues("s_max");
-		
+		proConf.setS_script(proConf.getS_script().replaceAll(",", " "));
+		proConf.setP_description(proConf.getP_description().replaceAll(",", " "));
+		proConf.setS_description(proConf.getS_description().replaceAll(",", " "));
 		String groupId = "";
 		
 		groupId = proConfService.insertProConf(proConf); 
@@ -625,9 +627,6 @@ public class SensREST {
 		
 		String[] service_idx = req.getParameterValues("service_idx");
 		
-		System.out.println("service_idx::" + service_idx.length);
-
-		System.out.println("p_profile_idx:::"+proConf.getP_profile_idx());
 		String mjprofile_idx = proConf.getP_profile_idx();
 		
 		String[] array_min = req.getParameterValues("s_min");
@@ -640,8 +639,9 @@ public class SensREST {
 		proConf.setP_profile_idx(proConf.getS_profile_idx());
 		//int updateCount = proMetaService.updateProMeta(proMeta);
 		String updateCount = "";
-		
-		
+		//proConf.setS_script(proConf.getS_script().replaceAll(",", " "));
+		proConf.setP_description(proConf.getP_description().replaceAll(",", " "));
+		proConf.setS_description(proConf.getS_description().replaceAll(",", " "));
 		
 		Boolean isDeleted = proConfService.deleteProConf(proConf);
 		proConfService.deleteProConf_script(proConf);
@@ -897,14 +897,14 @@ public class SensREST {
 		}
 	}
 	
-	@RequestMapping(value = "/deleteProConf/{groupId}", method = RequestMethod.GET)
-	public ResponseEntity<Boolean> deleteProConf(@PathVariable("groupId") String groupId, Model model, HisLog hislog,ProConf proConf) throws UnknownHostException {
-		System.out.println("aaaaaaaaaaaaaa:::::::::::::::::::::::");
+	@RequestMapping(value = "/deleteProConf", method = RequestMethod.POST)
+	public ResponseEntity<Boolean> deleteProConf(String groupId, Model model, HisLog hislog,ProConf proConf) throws UnknownHostException {
+		
 		InetAddress ip = InetAddress.getLocalHost(); 
 		String[] array;
 		array = groupId.split(",");
+		System.out.println("groupId::::"+groupId);
 		
-		System.out.println("agentIndex::::" + groupId);
 		/*
 		hislog.setDetail("[삭제] 프로파일 명 : ["+array[1]+"]");
 		hislog.setMenu("시스템 설정 > 프로파일 설정 [삭제]");
