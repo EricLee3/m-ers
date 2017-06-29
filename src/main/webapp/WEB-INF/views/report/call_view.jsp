@@ -35,8 +35,8 @@ function linegraph(mdata){
 	      //  type: 'datetime'
 	        //categories: ['0','2','4','6','8']
 	         tickInterval: 2,
-	        minPadding: 0.05,
-	        maxPadding: 0.05
+	         minPadding: 0.05,
+	         maxPadding: 0.05
 	    },
 	    legend: {
 	        layout: 'horizontal',
@@ -54,6 +54,9 @@ function linegraph(mdata){
                 }
             } 
 	    },    
+	    scrollbar: {
+	    	enabled: true
+	    },
 	    /*
 	    series: [{
 	        data: [
@@ -142,12 +145,15 @@ function linegraph(mdata){
 								<!-- 
 									<canvas id="lineChart" style="height: 250px"></canvas>
 									 -->
+									 <!--  
+									  <div id="linegraph_display"  style="margin-top:20px; margin-left:5px; width:560px; height:300px;"></div>
+									  -->
 									  <div id="linegraph_display"  style="margin-top:20px; margin-left:5px; width:560px; height:300px;"></div>
  								</div>
  								<span class="col-md-12">
-<!--
+<!--  
 									<audio id="audioPlayer" src="/resources/wav/${callAnalysis.mixedWavePath}" controls preload="auto"></audio>
--->
+-->									
 									<audio id="audioPlayer" src="/resources/wav/${fn:replace(callAnalysis.mixedWavePath, 'C:/home/mecs/PSNR/', '')}" controls preload="auto"></audio>
 								</span>
 							</div>

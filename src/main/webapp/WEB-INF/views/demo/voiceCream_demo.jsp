@@ -238,8 +238,8 @@ function fun_result(){
 	    	       			$("[id=excel]").removeAttr("disabled");
 	    	       		 }else{
 	    	       			 cnt ++;
-	    	       			 if(cnt == 60){
-	    	       				 alert("응답이 없습니다.(결과 출력 재시도 횟수 60회 초과)");
+	    	       			 if(cnt == 100){
+	    	       				 alert("응답이 없습니다.(결과 출력 재시도 횟수 100회 초과)");
 	    	       				 $('#loading').hide(); 
 	    	       				 clearInterval(refreshInterval);
 	    	       			 }

@@ -101,9 +101,9 @@
 										<div class="form-group">
 											<select class="form-control" id="selectCallType" name="searchType">
 												<option value="0">전체 Call</option>
-												<option value="1">Angry Call</option>
-												<option value="2">Stress Call</option>
-												<option value="3">Angry or Stress Call</option>
+												<option value="1">주의 단계</option>
+												<option value="2">흥미 단곈</option>
+												<option value="3">주의 or 흥미 단계</option>
 											</select>
 										</div>
 									</div>
@@ -125,8 +125,8 @@
 										</div>
 										<div class="box-footer clearfix">
 											<span class="pull-right"> 
-												<i class="fa fa-minus" style="color: #54aaff;"></i> Angry Call 
-												<i class="fa fa-minus" style="color: #de8162;"></i> Stress Call
+												<i class="fa fa-minus" style="color: #54aaff;"></i> 주의 단계
+												<i class="fa fa-minus" style="color: #de8162;"></i> 흥미 단계
 											</span>
 										</div>
 									</div>
@@ -497,7 +497,7 @@ function checkDatepicker() {
 	      lineColors: ['#54aaff', '#de8162'],
 	      xkey: 'date',
 	      ykeys: ['AngryCall', 'StressCall'],
-	      labels: ['Angry Call', 'Stress Call'],
+	      labels: ['Angry Call', 'Stress Call'],      
 	      parseTime: false,
 	      hideHover: 'auto'
 	    });

@@ -98,8 +98,8 @@ public class CallReportExcelView extends AbstractXlsxView {
 		
 		row.createCell(colNum++).setCellValue("종료시간");
 		row.createCell(colNum++).setCellValue("통화시간(초)");
-		row.createCell(colNum++).setCellValue("Angry");
-		row.createCell(colNum++).setCellValue("Stress");
+		row.createCell(colNum++).setCellValue("주의 단계");
+		row.createCell(colNum++).setCellValue("흥미 단계");
 
 		int i = 0;
 		SimpleDateFormat simpleDateFormatDate = new SimpleDateFormat("yyyy-MM-dd");
@@ -154,8 +154,8 @@ public class CallReportExcelView extends AbstractXlsxView {
 		row.createCell(colNum++).setCellValue("시작시간");
 		
 		row.createCell(colNum++).setCellValue("통화시간(초)");
-		row.createCell(colNum++).setCellValue("Angry");
-		row.createCell(colNum++).setCellValue("Stress");
+		row.createCell(colNum++).setCellValue("주의 단계");
+		row.createCell(colNum++).setCellValue("흥미 단계");
 		int i = 0;
 		SimpleDateFormat simpleDateFormatDate = new SimpleDateFormat("yyyy-MM-dd");
 		SimpleDateFormat simpleDateFormatTime = new SimpleDateFormat("HH:mm:ss");
@@ -206,8 +206,8 @@ public class CallReportExcelView extends AbstractXlsxView {
 		row.createCell(colNum++).setCellValue("전체 호");
 		row.createCell(colNum++).setCellValue("성공 호");
 		row.createCell(colNum++).setCellValue("실패 호");
-		row.createCell(colNum++).setCellValue("Angry");
-		row.createCell(colNum++).setCellValue("Stress");
+		row.createCell(colNum++).setCellValue("주의 단계");
+		row.createCell(colNum++).setCellValue("흥미 단계");
 		row.createCell(colNum++).setCellValue("고객불만 증가");
 		row.createCell(colNum++).setCellValue("고객불만 감소");
 
@@ -282,8 +282,8 @@ public class CallReportExcelView extends AbstractXlsxView {
 		row.createCell(colNum++).setCellValue("전체 호");
 		row.createCell(colNum++).setCellValue("성공 호");
 		row.createCell(colNum++).setCellValue("실패 호");
-		row.createCell(colNum++).setCellValue("Angry");
-		row.createCell(colNum++).setCellValue("Stress");
+		row.createCell(colNum++).setCellValue("주의 단계");
+		row.createCell(colNum++).setCellValue("흥미 단계");
 		row.createCell(colNum++).setCellValue("고객불만 증가");
 		row.createCell(colNum++).setCellValue("고객불만 감소");
 
@@ -358,8 +358,8 @@ public class CallReportExcelView extends AbstractXlsxView {
 		row.createCell(colNum++).setCellValue("전체 호");
 		row.createCell(colNum++).setCellValue("성공 호");
 		row.createCell(colNum++).setCellValue("실패 호");
-		row.createCell(colNum++).setCellValue("Angry");
-		row.createCell(colNum++).setCellValue("Stress");
+		row.createCell(colNum++).setCellValue("주의 단계");
+		row.createCell(colNum++).setCellValue("흥미 단계");
 		row.createCell(colNum++).setCellValue("고객불만 증가");
 		row.createCell(colNum++).setCellValue("고객불만 감소");
 
@@ -434,8 +434,8 @@ public class CallReportExcelView extends AbstractXlsxView {
 		row.createCell(colNum++).setCellValue("전체 호");
 		row.createCell(colNum++).setCellValue("성공 호");
 		row.createCell(colNum++).setCellValue("실패 호");
-		row.createCell(colNum++).setCellValue("Angry");
-		row.createCell(colNum++).setCellValue("Stress");
+		row.createCell(colNum++).setCellValue("주의 단계");
+		row.createCell(colNum++).setCellValue("흥미 단계");
 		row.createCell(colNum++).setCellValue("고객불만 증가");
 		row.createCell(colNum++).setCellValue("고객불만 감소");
 
@@ -508,8 +508,8 @@ public class CallReportExcelView extends AbstractXlsxView {
 		row.createCell(colNum++).setCellValue("전체 호");
 		row.createCell(colNum++).setCellValue("성공 호");
 		row.createCell(colNum++).setCellValue("실패 호");
-		row.createCell(colNum++).setCellValue("Angry");
-		row.createCell(colNum++).setCellValue("Stress");
+		row.createCell(colNum++).setCellValue("주의 단계");
+		row.createCell(colNum++).setCellValue("흥미 단계");
 		row.createCell(colNum++).setCellValue("고객불만 증가");
 		row.createCell(colNum++).setCellValue("고객불만 감소");
 
