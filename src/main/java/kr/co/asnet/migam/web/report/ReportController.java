@@ -149,11 +149,11 @@ public class ReportController {
 	 */
 	@RequestMapping(value = "/call_view/{index}", method = RequestMethod.GET)
 	public String callViewModal(@PathVariable("index") int index, Model model) {
-		/*
+		
 		CallAnalysis callAnalysis = callAnalysisService.getCallAnalysis(index);
 		//model.addAttribute("callAnalysis", callAnalysis);
 		callAnalysis.setMixedWavePath(callAnalysis.getMixedWavePath().replaceAll("\\\\","/"));
-	
+		/*
 		// 데이터 숫자를 구하여 차트 label 개수를 동일하게 맞춰야, 차트 데이터를 모두 표시할 수 있습니다.
 		int count = 0;
 		if (callAnalysis.getCustomerSegmentCount() > callAnalysis.getAgentSegmentCount()) {
@@ -217,11 +217,13 @@ public class ReportController {
 		//logger.debug( "labelString=" + labelString );
 		callAnalysis.setCustomerSegmentData(customerSegmentData);
 		callAnalysis.setAgentSegmentData(agentSegmentData);
+				model.addAttribute("labelString", labelString);
+		*/
 		model.addAttribute("callAnalysis", callAnalysis);
 		//. Bar 차트 표시를 위해 추가된 부분
 		
-		model.addAttribute("labelString", labelString);
-		*/
+
+		
 		return "/report/call_view";
 	}
 	
