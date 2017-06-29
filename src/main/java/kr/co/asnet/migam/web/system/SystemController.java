@@ -1870,12 +1870,12 @@ public class SystemController {
 	                     // IOS
 	                     /*경로바꾸기*/
 	                     //로컬
-	                     String exeFile = "C:/Users/in.lee/workspace/projects/M-ERS/src/main/sox-14.2.0/sox "+file+" -b 16 -r 8000 -c 1 "+"C:/home/mecs/PSNR/record/"+year+"/"+mm+"/"+dd+"/"+hh+"/"+soxfilename;
+	                     //String exeFile = "C:/Users/in.lee/workspace/projects/M-ERS/src/main/sox-14.2.0/sox "+file+" -b 16 -r 8000 -c 1 "+"C:/home/mecs/PSNR/record/"+year+"/"+mm+"/"+dd+"/"+hh+"/"+soxfilename;
 	                     //TB
 	                     //String exeFile = "C:/tomcat/webapps/src_20161102_mers/sox-14.2.0/sox "+file+" -b 16 -r 8000 -c 1 "+"C:/home/mecs/PSNR/record/"+year+"/"+mm+"/"+dd+"/"+hh+"/"+soxfilename;
 	                     
 	                     // TM presentation
-	                     //String exeFile = "C:/tomcat/apache-tomcat-8.5.16-windows-x64/apache-tomcat-8.5.16/webapps/mers/sox-14.2.0/sox "+file+" -b 16 -r 8000 -c 1 "+"C:/home/mecs/PSNR/record/"+year+"/"+mm+"/"+dd+"/"+hh+"/"+soxfilename;
+	                     String exeFile = "C:/tomcat/apache-tomcat-8.5.16-windows-x64/apache-tomcat-8.5.16/webapps/mers/sox-14.2.0/sox "+file+" -b 16 -r 8000 -c 1 "+"C:/home/mecs/PSNR/record/"+year+"/"+mm+"/"+dd+"/"+hh+"/"+soxfilename;
 	                     
 	             
 	                     Process p;
@@ -1997,12 +1997,12 @@ public class SystemController {
 	                     
 	                     // IOS
 	                     /*경로바꾸기*/
-	                     String exeFile = "C:/Users/in.lee/workspace/projects/M-ERS/src/main/sox-14.2.0/sox "+file+" -b 16 -r 8000 -c 1 "+"C:/home/mecs/PSNR/record/"+year+"/"+mm+"/"+dd+"/"+hh+"/"+soxfilename;
+	                     //String exeFile = "C:/Users/in.lee/workspace/projects/M-ERS/src/main/sox-14.2.0/sox "+file+" -b 16 -r 8000 -c 1 "+"C:/home/mecs/PSNR/record/"+year+"/"+mm+"/"+dd+"/"+hh+"/"+soxfilename;
 	                     //TB
 	                     //String exeFile = "C:/tomcat/webapps/src_20161102_mers/sox-14.2.0/sox "+file+" -b 16 -r 8000 -c 1 "+"C:/home/mecs/PSNR/record/"+year+"/"+mm+"/"+dd+"/"+hh+"/"+soxfilename;
 	                     
 	                     // TM presentation
-	                     //String exeFile = "C:/tomcat/apache-tomcat-8.5.16-windows-x64/apache-tomcat-8.5.16/webapps/mers/sox-14.2.0/sox "+file+" -b 16 -r 8000 -c 1 "+"C:/home/mecs/PSNR/record/"+year+"/"+mm+"/"+dd+"/"+hh+"/"+soxfilename;
+	                     String exeFile = "C:/tomcat/apache-tomcat-8.5.16-windows-x64/apache-tomcat-8.5.16/webapps/mers/sox-14.2.0/sox "+file+" -b 16 -r 8000 -c 1 "+"C:/home/mecs/PSNR/record/"+year+"/"+mm+"/"+dd+"/"+hh+"/"+soxfilename;
 	                     
 	                     Process p;
 	                                  
