@@ -50,5 +50,14 @@ public class RealindStateDaoMapper implements RealindStateDao {
 		return sqlSession.selectOne("kr.co.asnet.migam.repository.call.RealindStateDaoMapper.selectRealindState", parameters);
 	}
 
+	@Override
+	public List<RealindState> selectRealindStateList(SearchDTO searchDTO, String orderby) {
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		{
+			parameters.put("agent_id", searchDTO.getSearchQuery());
+			parameters.put("orderby", orderby);
+		}
+		return sqlSession.selectList("kr.co.asnet.migam.repository.call.RealindStateDaoMapper.selectRealindStateList", parameters);
+	}
 
 }

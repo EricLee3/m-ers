@@ -23,6 +23,8 @@ public interface RealindStateService {
 	
 	public RealindState getRealindState(SearchDTO searchDTO);
 
+	public List<RealindState> getRealindStateList(SearchDTO searchDTO, String orderby);
+
 }
 
 

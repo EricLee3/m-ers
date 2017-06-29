@@ -24,11 +24,13 @@ import kr.co.asnet.migam.domain.SearchDTO;
 import kr.co.asnet.migam.domain.agent.Agent;
 import kr.co.asnet.migam.domain.agent.AgentGroup;
 import kr.co.asnet.migam.domain.agent.AgentHistory;
+import kr.co.asnet.migam.domain.agent.ImsiMent;
 import kr.co.asnet.migam.domain.call.CallAnalysis;
 import kr.co.asnet.migam.domain.call.CallAudit;
 import kr.co.asnet.migam.domain.call.DailyCall;
 import kr.co.asnet.migam.domain.call.HourlyCall;
 import kr.co.asnet.migam.domain.call.RealStat;
+import kr.co.asnet.migam.domain.call.RealindState;
 import kr.co.asnet.migam.domain.config.License;
 import kr.co.asnet.migam.domain.config.Parameter;
 import kr.co.asnet.migam.service.agent.AgentGroupService;
@@ -424,18 +426,23 @@ public class MonitorController {
 	// 주기적으로 체크
 	@RequestMapping(value = "/call_linegraph", method = {RequestMethod.POST, RequestMethod.GET})	
 	@ResponseBody
-	public int[] call_linegraph(Model model, String agentId, SearchDTO searchDTO,kr.co.asnet.migam.domain.call.RealindState RealindState){
+	public String[] call_linegraph(Model model, String agentId, SearchDTO searchDTO,kr.co.asnet.migam.domain.call.RealindState RealindState){
 		searchDTO.setSearchQuery(agentId);
-		RealindState =  realindStateService.getRealindState(searchDTO);
-		String indicator_result[] = RealindState.getIndicator_result().split(",");
+		//RealindState =  realindStateService.getRealindState(searchDTO);
 		
-		int indicator_result_int[] = new int[2];
+		List<RealindState>StateList =  realindStateService.getRealindStateList(searchDTO, "order by indicator_name asc");
 		
-		for(int i=0; i < indicator_result.length;i++){
-			indicator_result_int[i] = Integer.parseInt(indicator_result[i]) ;
-		}
+		String[] indicator_data = new String[StateList.size()];
+		 for(int i=0;i< StateList.size();i++){
+             String indicator_name = StateList.get(i).getIndicator_name();
+             String indicator_level = StateList.get(i).getIndicator_level();
 
-		return indicator_result_int;
+             indicator_data[i] = indicator_name+","+indicator_level;
+		
+		 }
+		
+		
+		return indicator_data;
 	}
 	
 }

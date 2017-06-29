@@ -16,6 +16,7 @@ import kr.co.asnet.migam.domain.PageDTO25;
 import kr.co.asnet.migam.domain.PageDTO5;
 import kr.co.asnet.migam.domain.PageDTO50;
 import kr.co.asnet.migam.domain.SearchDTO;
+import kr.co.asnet.migam.domain.call.CompletionCallAnalysis;
 import kr.co.asnet.migam.domain.call.RealindState;
 import kr.co.asnet.migam.repository.call.RealindStateDao;
 
@@ -39,4 +40,8 @@ public class RealindStateServiceImpl implements RealindStateService {
 		return RealindStateDao.selectRealindState(searchDTO);
 	}
 	
+	@Override
+	public List<RealindState> getRealindStateList(SearchDTO searchDTO, String orderby) {
+		return RealindStateDao.selectRealindStateList(searchDTO, orderby);
+	}
 }

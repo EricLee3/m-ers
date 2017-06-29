@@ -19,13 +19,12 @@
 	</sql>
 
 	<select id="selectRealindState" parameterType="hashmap" resultMap="rmapRealindState">
-		SELECT  GROUP_CONCAT(indicator_result) as indicator_result FROM mecs5_realtime_ind_state WHERE agent_id=#{agent_id} AND call_party=1 ORDER BY indicator_name
+		SELECT  GROUP_CONCAT(indicator_level) as indicator_level FROM mecs5_realtime_ind_state WHERE agent_id=#{agent_id} AND call_party=1 ORDER BY indicator_name
 	</select>
 
 	<select id="selectRealindStateList" parameterType="hashmap" resultMap="rmapRealindState">
-		SELECT  indicator_name, indicator_result FROM mecs5_realtime_ind_state WHERE agent_id=#{agent_id} AND call_party=1  
-		and ( indicator_name='Desire' or indicator_name='Attention')
-		ORDER BY indicator_name
+		SELECT  indicator_name, indicator_result,indicator_level FROM mecs5_realtime_ind_state WHERE agent_id=#{agent_id} AND call_party=1  
+		<![CDATA[${orderby}]]>
 	</select> 
 	
 
