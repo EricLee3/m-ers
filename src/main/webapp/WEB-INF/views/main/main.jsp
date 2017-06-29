@@ -375,6 +375,7 @@ function side(gubun){
 				<li class="" id="batch_log"><a href="/service/batch_log" target="iframe" onclick="side(10);"><i class="fa fa-circle-o"></i> 자동 수행 작업 이력</a></li>
 	</c:otherwise>
 </c:choose>
+<!-- 
 <c:choose>
 	<c:when test="${menuCategory eq 'service' && menu eq 'config'}">
 				<li class="active"><a href="/service/config_limit" target="iframe" style="color: #1E90FF;"><i class="fa fa-circle-o"></i><font style="color: #1E90FF;"> 임계치 설정</font></a></li>
@@ -383,7 +384,7 @@ function side(gubun){
 				<li class="" id="config_limit"><a href="/service/config_limit" target="iframe" onclick="side(11);"><i class="fa fa-circle-o"></i> 임계치 설정</a></li>
 	</c:otherwise>
 </c:choose>
-
+ -->
 
 <c:choose>
 	<c:when test="${menuCategory eq 'system' && menu eq 'sens_conf'}">
