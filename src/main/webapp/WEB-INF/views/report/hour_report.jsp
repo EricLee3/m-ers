@@ -144,8 +144,8 @@
 										</div>
 										<div class="box-footer clearfix">
 											<span class="pull-right"> 
-												<i class="fa fa-minus" style="color: #de8162;"></i> Anger Call 
-												<i class="fa fa-minus" style="color: #e7cd64;"></i> Stress Call
+												<i class="fa fa-minus" style="color: #de8162;"></i> 주의 단계
+												<i class="fa fa-minus" style="color: #e7cd64;"></i> 흥미 단계
 											</span>
 										</div>
 									</div>
@@ -161,10 +161,10 @@
 														<th class="no-sort">전체 호</th>
 														<th class="no-sort">성공 호</th>
 														<th class="no-sort">실패 호</th>
-														<th class="no-sort">Angry</th>
-														<th class="no-sort">Stress</th>
-														<th class="no-sort">고객불만 증가</th>
-														<th class="no-sort">고객불만 감소</th>
+														<th class="no-sort">주의단계</th>
+														<th class="no-sort">흥미단계</th>
+														<th class="no-sort">욕구단계</th>
+														<!-- th class="no-sort">고객불만 감소</th -->
 													</tr>
 												</thead>
 												<tbody>
@@ -176,7 +176,7 @@
 														<td >${angerCall }</td>
 														<td >${stressCall }</td>
 														<td >${incrementCount }</td>
-														<td >${decrementCount }</td>
+														<!-- td >${decrementCount }</td -->
 													</tr>
 													<c:forEach items="${hourlyCallListByOrder }"  var="hourlyCall" >
 													<tr>
@@ -187,7 +187,7 @@
 														<td><span class="text-danger">${hourlyCall.angryCount}</span></td>
 														<td><span class="text-info">${hourlyCall.stressCount}</span></td>
 														<td>${hourlyCall.incrementCount}</td>
-														<td>${hourlyCall.decrementCount}</td>
+														<!-- td>${hourlyCall.decrementCount}</td -->
 													</tr>
 													</c:forEach>
 													<c:if test="${empty hourlyCallListByOrder }">
@@ -359,8 +359,8 @@ $(document).ready(function(){
 	      ],
 	      lineColors: ['#de8162', '#e7cd64'],
 	      xkey: 'date',
-	      ykeys: ['AngryCall', 'StressCall'],
-	      labels: ['Angry Call', 'Stress Call'],
+	      ykeys: ['주의 단계', '흥미 단계'],
+	      labels: ['주의 단계', '흥미 단계'],
 	      parseTime: false,
 	      hideHover: 'auto'
 	    });
@@ -428,8 +428,8 @@ function lineDraw(){
       ],
       lineColors: ['#de8162', '#e7cd64'],
       xkey: 'date',
-      ykeys: ['AngryCall', 'StressCall'],
-      labels: ['Angry Call', 'Stress Call'],
+      ykeys: ['주의 단계', '흥미 단계'],
+      labels: ['주의 단계', '흥미 단계'],
       parseTime: false,
       hideHover: 'auto'
     });

@@ -66,8 +66,8 @@
                               <tr>
                                  <th>상담원</th>
                                  <th>그룹</th>
-                                 <th>Angry</th>
-                                 <th>Stress</th>
+                                 <th>주의 단계</th>
+                                 <th>흥미 단계</th>
                                  <th>상세조회</th>
                               </tr>
                            </thead>
@@ -137,7 +137,7 @@
                   <div class="box-footer clearfix">
                      <span class="pull-right">
                            <i class="fa fa-minus" style="color: #54aaff;"></i> 이번 달
-                        <i class="fa fa-minus" style="color: #e7cd64;"></i> 지난 달 (Angry Call) 
+                        <i class="fa fa-minus" style="color: #e7cd64;"></i> 지난 달 (주의 단계) 
                          </span>
                   </div>
                </div>
@@ -152,7 +152,7 @@
                   <div class="box-footer clearfix">
                      <span class="pull-right">
                            <i class="fa fa-minus" style="color: #de8162;"></i> 이번 달 
-                         <i class="fa fa-minus" style="color: #e7cd64;"></i> 지난 달 (Angry Call)
+                         <i class="fa fa-minus" style="color: #e7cd64;"></i> 지난 달 (주의 단계)
                        </span>
                   </div>
                </div>

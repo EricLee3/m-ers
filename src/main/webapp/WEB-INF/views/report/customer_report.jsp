@@ -50,7 +50,7 @@
 					<div class="col-xs-12">
 						<div class="box box-success">
 							<div class="box-header">
-								<h3 class="box-title">${searchDTO.startDate} ~ ${searchDTO.endDate} 기간의 고객 Angry/Stress Call 현황 (총 : ${callAnalysisCount }개)</h3>
+								<h3 class="box-title">${searchDTO.startDate} ~ ${searchDTO.endDate} 기간의 고객 주의/흥미 단계 현황 (총 : ${callAnalysisCount }개)</h3>
 							</div>
 							<!-- /.box-header -->
 							<div class="box-body">
@@ -82,9 +82,9 @@
 										<div class="form-group">
 											<select class="form-control" id="selectCallType" name="searchType">
 												<option value="0">전체 Call</option>
-												<option value="1">Angry Call</option>
-												<option value="2">Stress Call</option>
-												<option value="3">Angry or Stress Call</option>
+												<option value="1">주의 단계</option>
+												<option value="2">흥미 단계</option>
+												<option value="3">주의 or 흥미 단계</option>
 											</select>
 										</div>
 									</div>
@@ -111,8 +111,8 @@
 										</div>
 										<div class="box-footer clearfix">
 											<span class="pull-right"> 
-												<i class="fa fa-minus" style="color: #54aaff;"></i> Angry Call 
-												<i class="fa fa-minus" style="color: #de8162;"></i> Stress Call
+												<i class="fa fa-minus" style="color: #54aaff;"></i> 주의 단계
+												<i class="fa fa-minus" style="color: #de8162;"></i> 흥미 단계
 											</span>
 										</div>
 									</div>
@@ -130,11 +130,15 @@
 													<th class="no-sort">상담일</th>
 													<th class="no-sort">시작시간</th>
 													<th class="no-sort">통화시간(초)</th>
-													<th class="no-sort">Angry
-														<span data-toggle="tooltip" title="Angry Call (Angry Count) : Angry Call 일 경우 Y (Angry Count) 와 같이 표시됩니다. Angry Call 이 아닐 경우 아무 것도 표시하지 않습니다." class="fa fa-question-circle"></span>
+													<th class="no-sort">주의 단계
+													<!-- 	
+													<span data-toggle="tooltip" title="Angry Call (Angry Count) : Angry Call 일 경우 Y (Angry Count) 와 같이 표시됩니다. Angry Call 이 아닐 경우 아무 것도 표시하지 않습니다." class="fa fa-question-circle"></span>
+													 -->
 													</th>
-													<th class="no-sort">Stress
+													<th class="no-sort">흥미 단계
+														<!--
 														<span data-toggle="tooltip" title="Stress Call (Stress Count) : (Stress Call 일 경우 Y (Stress Count) 와 같이 표시됩니다. (Stress Call 이 아닐 경우 아무 것도 표시하지 않습니다." class="fa fa-question-circle"></span>
+														-->
 													</th>
 													<th class="no-sort hidden-print">상세조회</th>
 												</tr>
@@ -231,7 +235,7 @@ var lineChartData = {
    	labels: ['00:00','','','','','','','','',''],
 	datasets: [
 		{
-			label: "Stress",
+			label: "흥미 단계",
 			borderColor: "rgba(222, 129, 98, 1)",
 			backgroundColor: "rgba(222, 129, 98, 1)",
 			pointBorderColor: "rgba(222, 129, 98, 1)",
@@ -244,7 +248,7 @@ var lineChartData = {
 			data: [0]
 		},
 		{
-			label: "Angry",
+			label: "주의 단계",
 			borderColor: "rgba(60,141,188,0.9)",
 			backgroundColor: "rgba(60,141,188,0.9)",
 			pointBorderColor: "#3b8bba",
@@ -448,8 +452,8 @@ function lineRedraw(){
       ],
       lineColors: ['#54aaff', '#de8162'],
       xkey: 'date',
-      ykeys: ['AngryCall', 'StressCall'],
-      labels: ['Angry Call', 'Stress Call'],
+      ykeys: ['주의 단계', '흥미 단계'],
+      labels: ['주의 단계', '흥미 단계'],
       parseTime: false,
       hideHover: 'auto'
     });
