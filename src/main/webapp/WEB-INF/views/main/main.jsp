@@ -14,9 +14,9 @@
    <link rel="stylesheet" href="/resources/css/AdminLTE.min.css">
    <link rel="stylesheet" href="/resources/css/skins/_all-skins.min.css">
    <link rel="stylesheet" href="/resources/plugins/ionslider/ion.rangeSlider.css">
-     <link rel="stylesheet" href="/resources/plugins/ionslider/ion.rangeSlider.skinHTML5.css">
-     <link rel="stylesheet" href="/resources/plugins/morris/morris.css">
-     <link rel="stylesheet" href="/resources/css/migam.css">
+   <link rel="stylesheet" href="/resources/plugins/ionslider/ion.rangeSlider.skinHTML5.css">
+   <link rel="stylesheet" href="/resources/plugins/morris/morris.css">
+   <link rel="stylesheet" href="/resources/css/migam.css">
    <!--[if lt IE 9]>
    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>

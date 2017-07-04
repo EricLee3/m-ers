@@ -1857,18 +1857,15 @@ public class SystemController {
 	            	//System.out.println("70초 후 : " + tri_time);
 	
 	            	File file = new File("C:/home/mecs/PSNR/record/"+year+"/"+mm+"/"+dd+"/"+hh+"/" + fileName);
-	                   if(!file.exists()){
-	                       //디렉토리 생성 메서드
-	                       file.mkdirs();
-	                       System.out.println("created directory successfully!");
-	                   }
-	                    uploadfile.transferTo(file);
+                    if(!file.exists()){
+                        //디렉토리 생성 메서드
+                        file.mkdirs();
+                        System.out.println("created directory successfully!");
+                    }
+                    uploadfile.transferTo(file);
 	                    
-	                    
-	                    
-	                     soxfilename = "sox_"+fileName;
-	                     Runtime rt = Runtime.getRuntime();
-	                     
+                    soxfilename = "sox_"+fileName;
+                    Runtime rt = Runtime.getRuntime();
 	                     
 	                     // IOS
 	                     /*경로바꾸기*/
@@ -1878,24 +1875,20 @@ public class SystemController {
 	                     //String exeFile = "C:/tomcat/webapps/src_20161102_mers/sox-14.2.0/sox "+file+" -b 16 -r 8000 -c 1 "+"C:/home/mecs/PSNR/record/"+year+"/"+mm+"/"+dd+"/"+hh+"/"+soxfilename;
 	                     
 	                     // TM presentation
-	  //                   String exeFile = "C:/tomcat/apache-tomcat-8.5.16-windows-x64/apache-tomcat-8.5.16/webapps/mers/sox-14.2.0/sox "+file+" -b 16 -r 8000 -c 1 "+"C:/home/mecs/PSNR/record/"+year+"/"+mm+"/"+dd+"/"+hh+"/"+soxfilename;
-	                     
+	                     // String exeFile = "C:/tomcat/apache-tomcat-8.5.16-windows-x64/apache-tomcat-8.5.16/webapps/mers/sox-14.2.0/sox "+file+" -b 16 -r 8000 -c 1 "+"C:/home/mecs/PSNR/record/"+year+"/"+mm+"/"+dd+"/"+hh+"/"+soxfilename;
 
-	                     String soxdir = appProp.getProperty("sox.dir");
-	                     String exeFile = soxdir+" "+file+" -b 16 -r 8000 -c 1 "+"C:/home/mecs/PSNR/record/"+year+"/"+mm+"/"+dd+"/"+hh+"/"+soxfilename;
-	                  
-
-	             
-	                     Process p;
-	                                  
-	                     try {
-	                         p = rt.exec(exeFile);
-	                         p.waitFor();
-	                         file.delete();
-	                     } catch (Exception e) {
-	                         e.printStackTrace();
-	                     }
-	                     
+                     String soxdir = appProp.getProperty("sox.dir");
+                     String exeFile = soxdir+" "+file+" -b 16 -r 8000 -c 1 "+"C:/home/mecs/PSNR/record/"+year+"/"+mm+"/"+dd+"/"+hh+"/"+soxfilename;
+             
+                     Process p;
+                                  
+                     try {
+                         p = rt.exec(exeFile);
+                         p.waitFor();
+                         file.delete();
+                     } catch (Exception e) {
+                         e.printStackTrace();
+                     }
 	       
 	                 voicefile.setCall_id("WEB_"+sdformat.format(calendarNow.getTime()));
 	                 voicefile.setCall_type("1");
