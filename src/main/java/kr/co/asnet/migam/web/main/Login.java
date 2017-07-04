@@ -19,20 +19,15 @@ public class Login implements HttpSessionBindingListener{
 
     public void valueBound(HttpSessionBindingEvent event) {
         loginUsers.put(event.getSession(), event.getName());
-        System.out.println(event.getName() + "login.");
-        System.out.println("count : " +  getUserCount());
      }
 
 
      public void valueUnbound(HttpSessionBindingEvent event) {
          loginUsers.remove(event.getSession());
-         System.out.println("  " + event.getName() + "logout.");
-         System.out.println("count : " +  getUserCount());
      }
 
 
      public void removeSession(String userId){
-    	 System.out.println(":::::::removeSession::::::::");
           Enumeration e = loginUsers.keys();
           HttpSession session = null;
           while(e.hasMoreElements()){
@@ -57,15 +52,11 @@ public class Login implements HttpSessionBindingListener{
                                                                                                                                                                                                                            
                                                                                                                                                                                                                            
     public void setSession(HttpSession session, String userId){  
-    	System.out.println("userId::::::::::::::::::" + userId);
-    	System.out.println("this:::::::::" + this);
     	//session.invalidate();
         session.setAttribute(userId, this);                                                                                                                                                                                
     }
     
     public void setSession2(HttpSession session, String userId){  
-    	System.out.println("userId222::::::::::::::::::" + userId);
-    	System.out.println("this222:::::::::" + this);
     	session.invalidate();
         session.setAttribute(userId, this);                                                                                                                                                                                
     }   

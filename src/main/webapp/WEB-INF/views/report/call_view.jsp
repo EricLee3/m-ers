@@ -18,24 +18,27 @@ function linegraph(mdata){
             type: 'spline'
     	},
 	    title: {
-	        //text: 'Solar Employment Growth by Sector, 2010-2016'
 	        text: ' '
 	    },
 	    subtitle: {
-	        //text: 'Source: thesolarfoundation.com'
+	    },
+	    tooltip: {
+	    	shared: true,
+	        useHTML: true,
+	        headerFormat: '<small>{point.x}</small><table>',
+	        pointFormat: '<tr><td style="color: {series.color}">{series.name}: </td>' +
+	            '<td style="text-align: right"><b>{point.y}</b></td></tr>',
+	        footerFormat: '</table>',
+	        valueDecimals:0
 	    },
 	    yAxis: {
 	        title: {
-	           // text: 'Number of Employees'
 	        	  text: ' ',
 	        	  allowDecimals: false // 정수로만 표기
 	        } 
-	       // ,tickInterval: 10
 	    },
 	    xAxis: {
-	      // type: 'number',
-	        //categories: ['0','2','4','6','8']
-	    	labels: {   formatter: function () {return this.value;}},
+	    	labels: {  formatter: function () {return this.value;} },
 	        // tickInterval: 2,
 	         minPadding: 0.05,
 	         maxPadding: 0.05
@@ -48,7 +51,6 @@ function linegraph(mdata){
 	    plotOptions: {
 	        series: {
 	            pointStart: 0
-	
 	        },
 	        line: {
                 dataLabels: {
