@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="../include/taglib.jsp"%>
-	<script type="text/javascript" src="/resources/highcharts/highcharts.js"></script>
-	<script type="text/javascript" src="/resources/highcharts/exporting.js"></script>
+	<script type="text/javascript" src="/resources/highcharts/stock/highstock.js"></script>
+	<script type="text/javascript" src="/resources/highcharts/stock/exporting.js"></script>
 	
 <script>
 
@@ -12,9 +12,10 @@ function linegraph(mdata){
 	             '#4f90c1', '#222d4a','#9c3b30', '#db8e4e', '#dbbc5d',
 	             '#ff8fcf', '#d11141','#6663bf', '#16f14b', '#d0a92b']
 	});
-    Highcharts.chart('linegraph_display', {
+   // Highcharts.chart('linegraph_display', {
+    	Highcharts.stockChart('linegraph_display', {
     	chart: {
-            type: 'spline',
+            type: 'spline'
     	},
 	    title: {
 	        //text: 'Solar Employment Growth by Sector, 2010-2016'
@@ -32,9 +33,10 @@ function linegraph(mdata){
 	       // ,tickInterval: 10
 	    },
 	    xAxis: {
-	      //  type: 'datetime'
+	      // type: 'number',
 	        //categories: ['0','2','4','6','8']
-	         tickInterval: 2,
+	    	labels: {   formatter: function () {return this.value;}},
+	        // tickInterval: 2,
 	         minPadding: 0.05,
 	         maxPadding: 0.05
 	    },
@@ -55,7 +57,17 @@ function linegraph(mdata){
             } 
 	    },    
 	    scrollbar: {
-	    	enabled: true
+            enabled:true
+	    },
+	    rangeSelector: {
+	    	selected: 4,
+	        inputEnabled: false,
+	        buttonTheme: {
+	            visibility: 'hidden'
+	        },
+	        labelStyle: {
+	            visibility: 'hidden'
+	        }
 	    },
 	    /*
 	    series: [{

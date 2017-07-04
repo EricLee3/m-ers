@@ -95,6 +95,9 @@
 	            exporting: {
 	                enabled: false
 	            },
+	            navigator: {
+	                enabled: false
+	            },
 	            series: [   
 	             {
 	                name: '관심', data: (function() {
