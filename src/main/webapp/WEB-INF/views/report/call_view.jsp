@@ -27,7 +27,7 @@ function linegraph(mdata){
 	        useHTML: true,
 	        headerFormat: '<small>{point.x}</small><table>',
 	        pointFormat: '<tr><td style="color: {series.color}">{series.name}: </td>' +
-	            '<td style="text-align: right"><b>{point.y}</b></td></tr>',
+	            		  '<td style="text-align: right"><b>{point.y}</b></td></tr>',
 	        footerFormat: '</table>',
 	        valueDecimals:0
 	    },
@@ -62,7 +62,6 @@ function linegraph(mdata){
             enabled:true
 	    },
 	    rangeSelector: {
-	    	selected: 4,
 	        inputEnabled: false,
 	        buttonTheme: {
 	            visibility: 'hidden'

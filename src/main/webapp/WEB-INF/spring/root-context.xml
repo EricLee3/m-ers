@@ -21,12 +21,23 @@
 	<util:properties id="appProp" location="classpath:/application.properties" />
 
 	<!-- DataSource -->
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+    <bean id="dataSourceSpied" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="#{dbProp['jdbc.driverClassName']}" />
 		<property name="url" value="#{dbProp['jdbc.url']}" />
 		<property name="username" value="#{dbProp['jdbc.username']}" />
-		<property name="password" value="#{dbProp['jdbc.password']}" />
-	</bean>
+		<property name="password" value="#{dbProp['jdbc.password']}" />   
+    </bean>
+
+
+    <bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
+        <constructor-arg ref="dataSourceSpied" /> 
+        <property name="logFormatter">
+            <bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter">
+                <property name="loggingType" value="MULTI_LINE" />
+                <property name="sqlPrefix" value="SQL    :: &#10;  "/>
+            </bean>
+        </property>
+    </bean>
 
 	<!-- Transaction -->
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">

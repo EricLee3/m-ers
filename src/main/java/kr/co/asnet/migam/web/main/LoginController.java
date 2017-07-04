@@ -72,7 +72,6 @@ public class LoginController {
 		login.printloginUsers();
 		status = userService.login(user);
 		 if(login.isUsing(user.getUserId())){
-			 System.out.println("using:::::::::::::::::::::");
 			 /*
 	        	session.setAttribute("login", "1");
 	        	model.addAttribute("login", (String)session.getAttribute("login"));
@@ -86,7 +85,6 @@ public class LoginController {
 	        	session.setAttribute("login_id", user.getUserId());
 	        	model.addAttribute("login", (String)session.getAttribute("login"));
 	        
-				 System.out.println("222222222222222222:::::::::::::::::::::");
 				Calendar calendar = Calendar.getInstance();
 		        java.util.Date date = calendar.getTime();
 		        String today = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date));
@@ -98,8 +96,6 @@ public class LoginController {
 			    		return ("redirect:/main");
 	        }else {
 				if ( status == 1 ) {
-					System.out.println("11111111111111:::::::::::::::::::::");
-				        	System.out.println("no:::::::::::::::::::::");
 				        	login.setSession(session, user.getUserId());
 				        	
 				        	userService.updateUserTime(user);
@@ -108,7 +104,6 @@ public class LoginController {
 				        	session.setAttribute("login_id", user.getUserId());
 				        	model.addAttribute("login", (String)session.getAttribute("login"));
 				        
-					 System.out.println("222222222222222222:::::::::::::::::::::");
 					Calendar calendar = Calendar.getInstance();
 		            java.util.Date date = calendar.getTime();
 		            String today = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date));
@@ -119,7 +114,6 @@ public class LoginController {
 					model.addAttribute("a_date", (String)session.getAttribute("a_date"));
 					return ("redirect:/main");
 		}
-		System.out.println("나가리~~~~~~~~~~~~~~~~~~~");
 		return ("redirect:/login");
 	        }
 	}
