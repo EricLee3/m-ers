@@ -18,7 +18,10 @@
 
 	<!-- Properties -->
 	<util:properties id="dbProp" location="classpath:/database.properties" />
-	<util:properties id="appProp" location="classpath:/application.properties" />
+
+<!--<util:properties id="appProp" location="classpath:/application.properties" /> -->
+	<util:properties id="appProp" location="classpath:/testserver.properties" />
+	
 
 	<!-- DataSource -->
     <bean id="dataSourceSpied" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
