@@ -41,7 +41,10 @@ function linegraph(mdata){
 	    	labels: {  formatter: function () {return this.value;} },
 	        // tickInterval: 2,
 	         minPadding: 0.05,
-	         maxPadding: 0.05
+	         maxPadding: 0.05,
+	         scrollbar: {
+	           	enabled: true
+	           }
 	    },
 	    legend: {
 	        layout: 'horizontal',
@@ -58,20 +61,32 @@ function linegraph(mdata){
                 }
             } 
 	    },    
-	    scrollbar: {
-            enabled:true
-	    },
+	    navigator: {
+		            enabled: false
+        },
+        scrollbar: {
+        	enabled: false
+        },
 	    rangeSelector: {
-	        inputEnabled: false,
-	        buttonTheme: {
-	            visibility: 'hidden'
-	        },
-	        labelStyle: {
-	            visibility: 'hidden'
-	        }
+	    	selected: 0,
+	    	buttons: [{
+                type: 'millisecond',
+                count: 10,
+                text: '2s'
+              },{
+                type: 'all',
+                text: 'All'
+	          }],
+	      //  buttonTheme: {visibility: 'hidden' },
+	        labelStyle: {visibility: 'hidden' },
+	        inputStyle:{visibility: 'hidden' },
+	        inputDateFormat: '%L',
+	        inputEditDateFormat: '%L',
+	        allButtonsEnabled: false
 	    },
-	    /*
-	    series: [{
+		       
+			    /*
+			    series: [{
 	        data: [
 	               ["0", 29.9],
 	               ["1", 71.5],
@@ -166,12 +181,13 @@ function linegraph(mdata){
  								</div>
  								
  								<span class="col-md-12">
-<!--  
 									<audio id="audioPlayer" src="/resources/wav/${callAnalysis.mixedWavePath}" controls preload="auto"></audio>
--->									
-								<!-- 
+<!--  
 									<audio id="audioPlayer" src="/resources/wav/${fn:replace(callAnalysis.mixedWavePath, 'C:/home/mecs/PSNR/', '')}" controls preload="auto"></audio>
-								-->
+-->									
+								 
+									
+								
 								</span>
 								 
 							</div>
