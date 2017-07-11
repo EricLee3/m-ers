@@ -19,19 +19,19 @@
 	                events: {
 	                    load: function() {
 	                        // set up the updating of the chart each second
-	                        var series = this.series[0]; var series2 = this.series[1]; var series3 = this.series[2]; var series4 = this.series[3]; var series5 = this.series[4]; var series6 = this.series[5]; var series7 = this.series[6];
+	                        var series = this.series[0]; var series2 = this.series[1]; 
+	                        var series3 = this.series[2]; var series4 = this.series[3]; var series5 = this.series[4]; var series6 = this.series[5]; var series7 = this.series[6];
 	                        var name=""; var attention = 0; var interest = 0; var desire = 0; var angry = 0; var boredom = 0; var uncomfortable = 0; var stress = 0;
                         	
 	                       refreshInterval= setInterval(function() {
-	                        	
 	                        	 $.ajax({
 	                                 url:'/monitor/call_linegraph?agentId='+'${agentId}',
 	                                 success:function(data){
-	                                    
 										for(var i=0; i < data.length;i++){
 											dataArr = data[i].split(",");
 											name = dataArr[0];
 											val = dataArr[1];
+											
 											if(name == "Attention") attention = val;
 											if(name == "Interest") interest = val;
 											if(name == "Desire") desire = val;
@@ -39,18 +39,21 @@
 											if(name == "Boredom") boredom = val;
 											if(name == "Uncomfortable") uncomfortable = val;
 											if(name == "Stress") stress = val;
-											
 										}
 	                                 }
 	                             })
 	                            var x = (new Date()).getTime(); // current time
-	                            series.addPoint([x, parseInt(attention)], false, true);
-	                            series2.addPoint([x,parseInt(interest)], false, true);
-	                            series3.addPoint([x,parseInt(desire)], false, true);
-	                            series4.addPoint([x,parseInt(angry)], false, true);
-	                            series5.addPoint([x,parseInt(boredom)], false, true);
-	                            series6.addPoint([x,parseInt(uncomfortable)], false, true);
-	                            series7.addPoint([x,parseInt(stress)], true, true);
+ 	                            series.addPoint([x, parseInt(angry)], false, true);
+ 	                            series2.addPoint([x, parseInt(stress)], true, true);
+	                            
+ 	                        	// static code for STM version only, requested by Cho E IOS[170711] 
+// 	                            series.addPoint ([x, parseInt(attention)], false, true);
+// 	                            series2.addPoint([x, parseInt(interest)], false, true);
+// 	                            series3.addPoint([x, parseInt(desire)], false, true);
+// 	                            series4.addPoint([x, parseInt(angry)], false, true);
+// 	                            series5.addPoint([x, parseInt(boredom)], false, true);
+// 	                            series6.addPoint([x, parseInt(uncomfortable)], false, true);
+// 	                            series7.addPoint([x, parseInt(stress)], true, true);
 	                            
 	                            attention = 0, interest = 0, desire = 0, angry = 0, boredom = 0, uncomfortable = 0, stress = 0;
 	                        }, 1000);
@@ -99,33 +102,33 @@
 	                enabled: false
 	            },
 	            series: [   
-	             {
-	                name: '관심', data: (function() {
-	                    var data = [], time = (new Date()).getTime(), i;
-	                     for (i = -15; i <= 0; i++) {
-	                        data.push({ x: time + i * 1000, y: 0 });
-	                    }
-	                    return data;
-	                })()
-	            },
-	            {
-	                name: '흥미', data: (function() {
-	                    var data = [], time = (new Date()).getTime(), i;
-	                     for (i = -15; i <= 0; i++) {
-	                        data.push({ x: time + i * 1000, y: 0 });
-	                    }
-	                    return data;
-	                })()
-	            },
-	            {
-	                name: '욕구', data: (function() {
-	                    var data = [], time = (new Date()).getTime(), i;
-	                     for (i = -15; i <= 0; i++) {
-	                        data.push({ x: time + i * 1000, y: 0 });
-	                    }
-	                    return data;
-	                })()
-	            },
+// 	            {
+// 	                name: '관심', data: (function() {
+// 	                    var data = [], time = (new Date()).getTime(), i;
+// 	                     for (i = -15; i <= 0; i++) {
+// 	                        data.push({ x: time + i * 1000, y: 0 });
+// 	                    }
+// 	                    return data;
+// 	                })()
+// 	            },
+// 	            {
+// 	                name: '흥미', data: (function() {
+// 	                    var data = [], time = (new Date()).getTime(), i;
+// 	                     for (i = -15; i <= 0; i++) {
+// 	                        data.push({ x: time + i * 1000, y: 0 });
+// 	                    }
+// 	                    return data;
+// 	                })()
+// 	            },
+// 	            {
+// 	                name: '욕구', data: (function() {
+// 	                    var data = [], time = (new Date()).getTime(), i;
+// 	                     for (i = -15; i <= 0; i++) {
+// 	                        data.push({ x: time + i * 1000, y: 0 });
+// 	                    }
+// 	                    return data;
+// 	                })()
+// 	            },
 	            {
 	                name: '화남', data: (function() {
 	                    var data = [], time = (new Date()).getTime(), i;
@@ -135,24 +138,24 @@
 	                    return data;
 	                })()
 	            },
-	            {
-	                name: '지루함', data: (function() {
-	                    var data = [], time = (new Date()).getTime(), i;
-	                     for (i = -15; i <= 0; i++) {
-	                        data.push({ x: time + i * 1000, y: 0 });
-	                    }
-	                    return data;
-	                })()
-	            },
-	            {
-	                name: '불편함', data: (function() {
-	                    var data = [], time = (new Date()).getTime(), i;
-	                     for (i = -15; i <= 0; i++) {
-	                        data.push({ x: time + i * 1000, y: 0 });
-	                    }
-	                    return data;
-	                })()
-	            },
+// 	            {
+// 	                name: '지루함', data: (function() {
+// 	                    var data = [], time = (new Date()).getTime(), i;
+// 	                     for (i = -15; i <= 0; i++) {
+// 	                        data.push({ x: time + i * 1000, y: 0 });
+// 	                    }
+// 	                    return data;
+// 	                })()
+// 	            },
+// 	            {
+// 	                name: '불편함', data: (function() {
+// 	                    var data = [], time = (new Date()).getTime(), i;
+// 	                     for (i = -15; i <= 0; i++) {
+// 	                        data.push({ x: time + i * 1000, y: 0 });
+// 	                    }
+// 	                    return data;
+// 	                })()
+// 	            },
 	            {
 	                name: '긴장감', data: (function() {
 	                    var data = [], time = (new Date()).getTime(), i;
