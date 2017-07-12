@@ -20,8 +20,6 @@ function linegraph(mdata){
 	    title: {
 	        text: ' '
 	    },
-	    subtitle: {
-	    },
 	    tooltip: {
 	    	shared: true,
 	        useHTML: true,
@@ -42,58 +40,38 @@ function linegraph(mdata){
 	        // tickInterval: 2,
 	         minPadding: 0.05,
 	         maxPadding: 0.05,
-	         scrollbar: {
-	           	enabled: true
-	           }
+	         scrollbar: {	enabled: true}
 	    },
 	    legend: {
+	    	enabled: true,
 	        layout: 'horizontal',
 	        align: 'center',
 	        verticalAlign: 'bottom'
 	    },
 	    plotOptions: {
-	        series: {
-	            pointStart: 0
-	        },
-	        line: {
-                dataLabels: {
-                    enabled: true
-                }
-            } 
+	        series: {pointStart: 0},
+	        line: { dataLabels: { enabled: true } } 
 	    },    
 	    navigator: {
-		            enabled: false
+		    enabled: false
         },
         scrollbar: {
         	enabled: false
         },
 	    rangeSelector: {
 	    	selected: 0,
-	    	buttons: [{
-                type: 'millisecond',
-                count: 10,
-                text: '2s'
-              },{
-                type: 'all',
-                text: 'All'
-	          }],
+	    	buttons: [
+	    	          {type: 'millisecond',  count: 10, text: '2초' },
+	    	          {type: 'all',text: 'All'}
+	    	          ],
 	      //  buttonTheme: {visibility: 'hidden' },
 	        labelStyle: {visibility: 'hidden' },
 	        inputStyle:{visibility: 'hidden' },
 	        inputDateFormat: '%L',
 	        inputEditDateFormat: '%L',
 	        allButtonsEnabled: false
-	    },
-		       
-			    /*
-			    series: [{
-	        data: [
-	               ["0", 29.9],
-	               ["1", 71.5],
-	               ["7", 106.4]
-	           ]
-	       }]
-	    */
+	    },	       
+/* series: [{ data: [["0", 29.9],["1", 71.5],  ["7", 106.4]]}] */
 	   series:mdata   
 	}); 
 	
