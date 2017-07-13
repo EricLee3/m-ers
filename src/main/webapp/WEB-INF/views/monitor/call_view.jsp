@@ -19,14 +19,12 @@
 	                events: {
 	                    load: function() {
 	                        // set up the updating of the chart each second
-	                        var series = this.series[0]; var series2 = this.series[1]; 
-	                        var series3 = this.series[2]; var series4 = this.series[3]; var series5 = this.series[4]; var series6 = this.series[5]; var series7 = this.series[6];
-	                        var name=""; var attention = 0; var interest = 0; var desire = 0; var angry = 0; var boredom = 0; var uncomfortable = 0; var stress = 0;
-                        	
+	                        var series = this.series, name="",val=0, attention = 0, interest = 0, desire = 0, angry = 0, boredom = 0, uncomfortable = 0, stress = 0;
 	                       refreshInterval= setInterval(function() {
 	                        	 $.ajax({
 	                                 url:'/monitor/call_linegraph?agentId='+'${agentId}',
 	                                 success:function(data){
+	     	                            var x = (new Date()).getTime(); // current time
 										for(var i=0; i < data.length;i++){
 											dataArr = data[i].split(",");
 											name = dataArr[0];
@@ -42,9 +40,9 @@
 										}
 	                                 }
 	                             })
-	                            var x = (new Date()).getTime(); // current time
- 	                            series.addPoint([x, parseInt(angry)], false, true);
- 	                            series2.addPoint([x, parseInt(stress)], true, true);
+
+ 	                            series[0].addPoint([x, parseInt(angry)], false, true);
+ 	                            series[1].addPoint([x, parseInt(stress)], true, true);
 	                            
  	                        	// static code for STM version only, requested by Cho E IOS[170711] 
 // 	                            series.addPoint ([x, parseInt(attention)], false, true);
@@ -63,20 +61,11 @@
 	            title: {
 	                text: ' ' 
 	            },
-	             subtitle: {
-	                text: ' '
-	            },
 	            xAxis: {
-	                title:{
-	                    text:' '  /*X 축 라벨*/
-	                    },
 	                type: 'datetime',
 	                tickPixelInterval: 150
 	            },
 	            yAxis: {
-	                title: {
-	                    text: ' '  /*y축 라벨*/
-	                },
 	                plotLines: [{
 	                    value: 0,
 	                    width: 1,
@@ -101,7 +90,7 @@
 	            navigator: {
 	                enabled: false
 	            },
-	            series: [   
+	            series: [
 // 	            {
 // 	                name: '관심', data: (function() {
 // 	                    var data = [], time = (new Date()).getTime(), i;

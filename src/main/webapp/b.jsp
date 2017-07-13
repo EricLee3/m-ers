@@ -20,25 +20,18 @@
 	                marginRight: 10,
 	                events: {
 	                    load: function() {
-	    
 	                        // set up the updating of the chart each second
-	                        var series = this.series[0];
-	                        var series2 = this.series[1];
-	                        var series3 = this.series[2];
-	                        var series4 = this.series[3];
+	                       	var series = this.series, chk=true; 
 	                        
 	                        setInterval(function() {
-	                            var x = (new Date()).getTime(); // current time
-	                                y = Math.random();
-	                                z = Math.random();
-	                                a = Math.random();
-	                                b = Math.random();
-	                            series.addPoint([x, y], false, true);
-	                            series2.addPoint([x,z], false, true);
-	                            series3.addPoint([x,a], false, true);
-	                            series4.addPoint([x,b], true, true);
+	                            var x = (new Date()).getTime(),
+	                                data = [Math.random(),Math.random(),Math.random(),Math.random()];
 	                            
-	                            
+	                                 for(var i=0; i < data.length; i ++){
+	                                	 if(i == data.length-1)chk=true;
+	                                	 else chk=false;
+	                                	 series[i].addPoint([x, data[i]], chk,true);
+	                                 }
 	                        }, 1000);
 	                    }
 	                }
@@ -80,74 +73,33 @@
 	                enabled: false
 	            },
 	            series: [
-	             {
-	                name: '툴팁라벨1!!!',
-	                data: (function() {
-	                    // generate an array of random data
-	                    var data = [],
-	                        time = (new Date()).getTime(),
-	                        i;
-	                    
-	                    for (a = -19; a <= 0; a++) {
-	                        data.push({
-	                            x: time + i * 1000,
-	                            y: Math.random()
-	                        });
-	                    }
-	                    console.log("Log 정보::"+data); 
-	                    return data;
-	                })()
-	            },
-	            {
-	                name: '툴팁라벨2',
-	                data: (function() {
-	                    // generate an array of random data
-	                    var data = [],
-	                        time = (new Date()).getTime(),
-	                        a;
-	    
-	                    for (a = -19; a <= 0; a++) {
-	                        data.push({
-	                            x: time + a * 1000,
-	                            y: Math.random()
-	                        });
-	                    }
-	                    return data;
-	                })()
-	            },
-	            {
-	                name: '툴팁라벨3',
-	                data: (function() {
-	                    // generate an array of random data
-	                    var data = [],
-	                        time = (new Date()).getTime(),
-	                        a;
-	    
-	                    for (a = -19; a <= 0; a++) {
-	                        data.push({
-	                            x: time + a * 1000,
-	                            y: Math.random()
-	                        });
-	                    }
-	                    return data;
-	                })()
-	            },
-	            {
-	                name: '툴팁라벨4',
-	                data: (function() {
-	                    // generate an array of random data
-	                    var data = [],
-	                        time = (new Date()).getTime(),
-	                        a;
-	    
-	                    for (a = -19; a <= 0; a++) {
-	                        data.push({
-	                            x: time + a * 1000,
-	                            y: Math.random()
-	                        });
-	                    }
-	                    return data;
-	                })()
+	            { name: 'Random data1',data: (function() {  var data = [], time = (new Date()).getTime(), i; for (i = -15; i <= 0; i++) {   data.push({ x: time + i * 1000, y: 0 });  }
+				        return data;
+				    })()
+	            },{
+	                name: 'Random data2',data: (function() {
+				        var data = [], time = (new Date()).getTime(), i;
+				         for (i = -15; i <= 0; i++) {
+				            data.push({ x: time + i * 1000, y: 0 });
+				        }
+				        return data;
+				    })()
+	            },{
+	                name: 'Random data3',data: (function() {
+				        var data = [], time = (new Date()).getTime(), i;
+				         for (i = -15; i <= 0; i++) {
+				            data.push({ x: time + i * 1000, y: 0 });
+				        }
+				        return data;
+				    })()
+	            },{
+	                name: 'Random data4',data: (function() {
+				        var data = [], time = (new Date()).getTime(), i;
+				         for (i = -15; i <= 0; i++) {
+				            data.push({ x: time + i * 1000, y: 0 });
+				        }
+				        return data;
+				    })()
 	            }
 	            ]
 	        });
