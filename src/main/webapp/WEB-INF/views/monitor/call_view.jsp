@@ -10,7 +10,7 @@
 	                useUTC: false
 	            }
 	        });
-	    
+
 	        $('#linegraph_display').highcharts({
 	            chart: {
 	                type: 'spline',
@@ -41,10 +41,18 @@
 	                                 }
 	                             })
 
+	                            // x should be here because of the case returned fail  IOS[170717] 
+	                            var x = (new Date()).getTime(); // current time
+	                            
  	                            series[0].addPoint([x, parseInt(angry)], false, true);
  	                            series[1].addPoint([x, parseInt(stress)], true, true);
-	                            
- 	                        	// static code for STM version only, requested by Cho E IOS[170711] 
+ 	                            
+ 	                            console.log("name : "+series[0].name + "-----" + "name : " + series[1].name);
+ 	                            console.log("data[0].x : "+series[0].data[0].x);
+ 	                            console.log("data[0].y : "+series[0].data[0].y);
+ 	                            
+
+ 	                            // static code for STM version only, requested by Cho E IOS[170711] 
 // 	                            series.addPoint ([x, parseInt(attention)], false, true);
 // 	                            series2.addPoint([x, parseInt(interest)], false, true);
 // 	                            series3.addPoint([x, parseInt(desire)], false, true);
