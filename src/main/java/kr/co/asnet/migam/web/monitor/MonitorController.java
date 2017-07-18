@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
 
 import kr.co.asnet.migam.domain.PageDTO;
 import kr.co.asnet.migam.domain.SearchDTO;
@@ -433,14 +434,14 @@ public class MonitorController {
 		List<RealindState>StateList =  realindStateService.getRealindStateList(searchDTO, "order by indicator_name asc");
 		
 		String[] indicator_data = new String[StateList.size()];
-		 for(int i=0;i< StateList.size();i++){
-             String indicator_name = StateList.get(i).getIndicator_name();
-             String indicator_level = StateList.get(i).getIndicator_level();
+		for(int i=0;i< StateList.size();i++){
+			String indicator_name = StateList.get(i).getIndicator_name();
+            String indicator_level = StateList.get(i).getIndicator_level();
+            indicator_data[i] = indicator_name+","+indicator_level;
+		}
 
-             indicator_data[i] = indicator_name+","+indicator_level;
-		
-		 }
-		
+		Gson gson = new Gson();
+		String test = gson.toJson(indicator_data);
 		
 		return indicator_data;
 	}
