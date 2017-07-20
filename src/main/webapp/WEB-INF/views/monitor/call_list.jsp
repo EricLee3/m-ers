@@ -263,11 +263,13 @@ $(document).ready(function(){
 	
 	
 	mainTimer = window.setInterval(updateCallList, 5000);
+	console.log("timer setting");
 	modalTimer = window.setInterval(updateChartData, 3000);
 	refreshAudioTimer1 = window.setInterval(audioPlayer1Callback, 3000);
 	refreshAudioTimer2 = window.setInterval(audioPlayer2Callback, 3000);
 	
 	function updateCallList(){
+		console.log("updateCallList called");
 		if( isModalShow == true ) return;
 		$("#div_call_list").load("/monitor/call_list_refresh", function( response, status, xhr ) {
 			if ( status == "error" ) {

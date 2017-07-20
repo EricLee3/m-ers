@@ -335,7 +335,7 @@ public class MonitorController {
 		Parameter systemParameter = parameterService.getParameter();
 		model.addAttribute("angryCountParameter", systemParameter.getAngryCount());
 		model.addAttribute("stressCountParameter", systemParameter.getStressCount());
-		
+		logger.debug("ListRefresh called");
 		return "/monitor/call_list_refresh";
 	}
 	
@@ -391,7 +391,7 @@ public class MonitorController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/call_view_refresh/{agentId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/call_view_refresh/{agentId}", method = {RequestMethod.GET, RequestMethod.POST})
 	public String callViewRefresh(@PathVariable("agentId") String agentId, Model model) {
 		CallAudit callAudit = callAuditService.getCallAudit(agentId);
 		model.addAttribute("callAudit", callAudit);
