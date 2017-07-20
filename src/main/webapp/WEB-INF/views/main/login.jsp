@@ -39,7 +39,7 @@
 			<div class="row">
 				<div class="col-xs-8"></div>
 				<div class="col-xs-4">
-					<button type="submit" class="jsLogin btn btn-primary btn-block btn-flat">로그인</button>
+					<button type="button" class="jsLogin btn btn-primary btn-block btn-flat">로그인</button>
 				</div>
 			</div>
 		</form>
@@ -49,14 +49,13 @@
 	</div>
 </div>
 <script>
-$(document).on("click", ".jsLogin", function(e){
-    $(window).keydown(function(event){
-        if(event.keyCode == 13) {
-          event.preventDefault();
-          $("#form_login").submit();
-        }
-    });
-	
+$(window).keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      $("#form_login").submit();
+    }
+});
+$(document).on("click", ".jsLogin", function(e){	
 	if ($.trim($("#userId").val()).length < 1 ){
 		alert("아이디를 입력해주세요.");
 		$("#userId").focus();
