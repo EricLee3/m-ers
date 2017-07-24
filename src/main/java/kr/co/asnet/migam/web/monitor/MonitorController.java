@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,8 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import kr.co.asnet.migam.domain.PageDTO;
 import kr.co.asnet.migam.domain.SearchDTO;
@@ -335,8 +338,31 @@ public class MonitorController {
 		Parameter systemParameter = parameterService.getParameter();
 		model.addAttribute("angryCountParameter", systemParameter.getAngryCount());
 		model.addAttribute("stressCountParameter", systemParameter.getStressCount());
-		logger.debug("ListRefresh called");
-		return "/monitor/call_list_refresh";
+
+		// test for 콜목록 
+		//		return "/monitor/call_list_refresh";
+		return "/monitor/call_list";
+	}
+	
+	@RequestMapping(value = "/call_list_refresh_IOS", method = RequestMethod.GET)
+	public @ResponseBody String callListRefreshIOS(HttpServletResponse response) {
+		List<CallAudit> callAuditList = callAuditService.getCallAuditList(null, null, "order by agent_id asc");
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("callAuditList", callAuditList);
+		logger.debug("IOS called");
+		
+		// example - json return 
+		Gson gson = new GsonBuilder().create();
+		return gson.toJson("Hello");
+		
+		
+		//return mav;
+		//		model.addAttribute("callAuditList", callAuditList);
+		
+		// 한계치 설정을 위한 값을 모델에 담습니다.
+		//Parameter systemParameter = parameterService.getParameter();
+//		model.addAttribute("angryCountParameter", systemParameter.getAngryCount());
+//		model.addAttribute("stressCountParameter", systemParameter.getStressCount());
 	}
 	
 	/**

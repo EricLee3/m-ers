@@ -27,7 +27,9 @@
 		, b.indicator_name  as indicator_name, b.indicator_kor_name as indicator_kor_name, b.call_party as call_party
 		FROM  mecs5_analysis_result a LEFT OUTER JOIN mecs5_analysis_result_ind b ON a.job_id = b.job_id
 		where
-			a.idx = '${searchDTO.searchQuery}' and b.call_party = 1
+			a.idx = '${searchDTO.searchQuery}' 
+<!-- commented the request from Cho E [24-JUL-2017]-->
+<!-- 			and b.call_party = 1 -->
 	</select> 
 	
 	
