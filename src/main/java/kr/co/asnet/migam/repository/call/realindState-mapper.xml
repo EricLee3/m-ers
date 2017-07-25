@@ -23,7 +23,7 @@
 	</select>
 
 	<select id="selectRealindStateList" parameterType="hashmap" resultMap="rmapRealindState">
-		SELECT  indicator_name, indicator_result,indicator_level FROM mecs5_realtime_ind_state WHERE agent_id=#{agent_id}
+		SELECT  call_party, indicator_name, indicator_result,indicator_level FROM mecs5_realtime_ind_state WHERE agent_id=#{agent_id}
 <!-- 		commented by the request from Cho E [24-Jul-2017] IOS  -->
 <!-- 		AND call_party=1   -->
 		<![CDATA[${orderby}]]>

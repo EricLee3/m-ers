@@ -340,8 +340,7 @@ public class MonitorController {
 		model.addAttribute("stressCountParameter", systemParameter.getStressCount());
 
 		// test for 콜목록 
-		//		return "/monitor/call_list_refresh";
-		return "/monitor/call_list";
+		return "/monitor/call_list_refresh";
 	}
 	
 	@RequestMapping(value = "/call_list_refresh_IOS", method = RequestMethod.GET)
@@ -462,14 +461,19 @@ public class MonitorController {
 		String[] indicator_data = new String[StateList.size()];
 		for(int i=0;i< StateList.size();i++){
 			String indicator_name = StateList.get(i).getIndicator_name();
+
+			// interim code for Service indicator
+			// actually it is recommended that the operator should create unique service indicator name for profiling IOS[25-Jul-2017]
+			if (indicator_name == "Energetic")  {
+				if (StateList.get(i).getCall_party() == "0")
+					indicator_name = "EnergeticCallee";
+			} else if (indicator_name == "Stress")  {
+				if (StateList.get(i).getCall_party() == "0")
+					indicator_name = "StressCallee";
+			}
             String indicator_level = StateList.get(i).getIndicator_level();
             indicator_data[i] = indicator_name+","+indicator_level;
 		}
-
-		Gson gson = new Gson();
-		String test = gson.toJson(indicator_data);
-		
 		return indicator_data;
 	}
-	
 }
