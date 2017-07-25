@@ -234,52 +234,58 @@ public class ReportController {
         
         PageDTO pageDTO = new PageDTO(page);
         searchDTO.setSearchQuery(idx);
-		   List<CompletionCallAnalysis> CompletionCallAnalysisList = completionCallAnalysisService.getCompletionCallAnalysisList(pageDTO, searchDTO, "order by indicator_kor_name");
-         List<Map> hashlist = new ArrayList<Map>();
-		   String indicator_name = "";
-		   String indicator_end_pos = "";
-		   String indicator_result ="";
-		   DecimalFormat format = new DecimalFormat("#");
+		List<CompletionCallAnalysis> CompletionCallAnalysisList = completionCallAnalysisService.getCompletionCallAnalysisList(pageDTO, searchDTO, "order by indicator_kor_name");
+        List<Map> hashlist = new ArrayList<Map>();
+		String indicator_name = "";
+		String indicator_end_pos = "";
+		String indicator_result ="";
+		DecimalFormat format = new DecimalFormat("#");
 	          
-		   for(int i=0;i< CompletionCallAnalysisList.size();i++){
-
-				indicator_name = CompletionCallAnalysisList.get(i).getIndicator_kor_name();
-				indicator_end_pos = CompletionCallAnalysisList.get(i).getIndicator_end_pos();
-				indicator_result = CompletionCallAnalysisList.get(i).getIndicator_result();
-		
-		        String indicator_result_sub[] = indicator_result.split(",");
-		        String end_posbtime[] = indicator_end_pos.split(",");
-		        int[] indicator_result_sub2 = new int[indicator_result_sub.length];
-				
-
-		        double[] indicator_result_sub3 = new double[indicator_result_sub.length];
-	            int[] end_postime_sub2 = new int[end_posbtime.length];
+		for(int i=0;i< CompletionCallAnalysisList.size();i++){
+			indicator_name = CompletionCallAnalysisList.get(i).getIndicator_kor_name();
+			// interim code for Service indicator
+			// actually it is recommended that the operator should create unique service indicator name for profiling IOS[25-Jul-2017]
+			if (indicator_name == "Energetic")  {
+				if (CompletionCallAnalysisList.get(i).getCall_party() == "0")  {
+					indicator_name = "Energetic(상담원)";
+				} else  {
+					indicator_name = "Energetic(고객)";
+				}
+			} else if (indicator_name == "Stress")  {
+				if (CompletionCallAnalysisList.get(i).getCall_party() == "0")  {
+					indicator_name = "Stress(상담원)";
+				} else  {
+					indicator_name = "Stress(고객)";
+				}
+			}			
+			
+			indicator_end_pos = CompletionCallAnalysisList.get(i).getIndicator_end_pos();
+			indicator_result = CompletionCallAnalysisList.get(i).getIndicator_result();
+	
+	        String indicator_result_sub[] = indicator_result.split(",");
+	        String end_posbtime[] = indicator_end_pos.split(",");
+	        int[] indicator_result_sub2 = new int[indicator_result_sub.length];
+	        double[] indicator_result_sub3 = new double[indicator_result_sub.length];
+	        int[] end_postime_sub2 = new int[end_posbtime.length];
+	        
+	        Object[] postime = new Object[end_posbtime.length];
 	            
-	            Object[] postime = new Object[end_posbtime.length];
-	            
-	            for(int j = 0; j<indicator_result_sub.length; j++){
-	                  String str = format.format(Double.parseDouble(end_posbtime[j]));
-	                  end_postime_sub2[j] =  Integer.parseInt(str) ;
-	                  
-	                  indicator_result_sub2[j] = Integer.parseInt(indicator_result_sub[j]);
+            for(int j = 0; j<indicator_result_sub.length; j++){
+                String str = format.format(Double.parseDouble(end_posbtime[j]));
+                end_postime_sub2[j] =  Integer.parseInt(str) ;
+              
+                indicator_result_sub2[j] = Integer.parseInt(indicator_result_sub[j]);
 
-	                  Object[] postime2 ={end_postime_sub2[j],indicator_result_sub2[j]}; 
-	                  postime[j] = postime2;
-	         
-	                
-	            }
-	            
-
+                Object[] postime2 ={end_postime_sub2[j],indicator_result_sub2[j]}; 
+                postime[j] = postime2;
+            }
 	        	
-	        	HashMap hashmap = new HashMap();
-             hashmap = new HashMap();
-             hashmap.put("name", indicator_name);
-             hashmap.put("data", postime);
-             hashlist.add(hashmap);
-	       
-	         
-			}
-
+	        HashMap hashmap = new HashMap();
+//            hashmap = new HashMap();
+            hashmap.put("name", indicator_name);
+            hashmap.put("data", postime);
+            hashlist.add(hashmap);
+		}
         return gson.toJson(hashlist);
     }
 	
