@@ -159,7 +159,7 @@ function linegraph(mdata){
  								</div>
  								
  								<span class="col-md-12">
-<%--								<audio id="audioPlayer" src="/resources/wav/${callAnalysis.mixedWavePath}" controls preload="auto"></audio> --%>
+<%-- 								<audio id="audioPlayer" src="/resources/wav/${callAnalysis.mixedWavePath}" controls preload="auto"></audio> --%>
 									<!-- this feature might be used in the server environment IOS -->
 									<audio id="audioPlayer" src="/resources/wav/${fn:replace(callAnalysis.mixedWavePath, 'C:/home/mecs/PSNR/', '')}" controls preload="auto"></audio>
 								</span>

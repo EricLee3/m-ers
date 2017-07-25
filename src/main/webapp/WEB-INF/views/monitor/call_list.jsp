@@ -260,8 +260,8 @@
                     // timer settings	
                     //mainTimer = window.setInterval(updateCallList, 15000); //5000);
                     modalTimer = window.setInterval(updateChartData, 3000);
-                    //refreshAudioTimer1 = window.setInterval(audioPlayer1Callback, 3000);
-                    //refreshAudioTimer2 = window.setInterval(audioPlayer2Callback, 3000);
+                    refreshAudioTimer1 = window.setInterval(audioPlayer1Callback, 3000);
+                    refreshAudioTimer2 = window.setInterval(audioPlayer2Callback, 3000);
 
                     function updateCallList() {
                         if (isModalShow == true) return;
