@@ -258,19 +258,32 @@
                     });
 
                     // timer settings	
-                    //mainTimer = window.setInterval(updateCallList, 15000); //5000);
+                    mainTimer = window.setInterval(updateCallListTest, 5000);
                     modalTimer = window.setInterval(updateChartData, 3000);
-                    //refreshAudioTimer1 = window.setInterval(audioPlayer1Callback, 3000);
-                    //refreshAudioTimer2 = window.setInterval(audioPlayer2Callback, 3000);
+                    refreshAudioTimer1 = window.setInterval(audioPlayer1Callback, 3000);
+                    refreshAudioTimer2 = window.setInterval(audioPlayer2Callback, 3000);
+
+                    function updateCallListTest() {
+                        if (isModalShow == true) return;
+                        console.log("updateCallListTest entered");
+                        $.ajax({
+                            url: '/monitor/call_list_refresh_IOS',
+                            type: JSON,
+                            success: function(data) {
+                                // check data exist or not first
+
+                                // if it is, find the location in the table
+                                //$(.table).
+
+                            }
+                        })
+                    }
+
+
 
                     function updateCallList() {
                         if (isModalShow == true) return;
-                        //		$("#div_call_list").load("/monitor/call_list_refresh", function( response, status, xhr ) {
-                        $("#test_tr").load("/monitor/call_list", function(response, status, xhr) {
-                            // 			console.log("updateCallList called -- 1");
-                            // 			console.log("response is "+response);
-                            // 			console.log("status is "+status);
-                            // 			console.log("xhr is "+xhr);
+                        $("#div_call_list").load("/monitor/call_list_refresh", function(response, status, xhr) {
                             if (status == "error") {
                                 var msg = "서버의 문제로 화면 갱신에 실패했습니다.";
                                 $("#div_call_list").html(msg + xhr.status + " " + xhr.statusText);

@@ -357,11 +357,6 @@ public class MonitorController {
 		
 		//return mav;
 		//		model.addAttribute("callAuditList", callAuditList);
-		
-		// 한계치 설정을 위한 값을 모델에 담습니다.
-		//Parameter systemParameter = parameterService.getParameter();
-//		model.addAttribute("angryCountParameter", systemParameter.getAngryCount());
-//		model.addAttribute("stressCountParameter", systemParameter.getStressCount());
 	}
 	
 	/**
