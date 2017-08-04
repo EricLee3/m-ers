@@ -295,8 +295,7 @@
 
                             		var rows = $("table#callListTbl tbody tr");
                             		console.log("rows is "+rows.length);
-                            		$(rows)
-                            		
+                            		                            		
                             		$("[id=agentName]").each(function(index)  {
 										if ($(this).text() == agentName)  {
 											//var row = $(this).parent.get(0);

@@ -355,7 +355,6 @@ public class MonitorController {
 		JSONArray jArray = new JSONArray();
 		
 		List<RealStat> realStatList = callAuditService.getRealStat(null, null, "where agent_profile_name is not null");
-		logger.debug("IOS called");
 		
 		for (int i=0; i < realStatList.size(); i++)  {
 			JSONObject jTmp = new JSONObject();
