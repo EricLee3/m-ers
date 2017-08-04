@@ -93,7 +93,7 @@
 
                                 <!-- table hovering disabled IOS -->
                                 <!-- <table class="table table-hover"> -->
-                                <table class="table ">
+                                <table class="table" id="callListTbl">
                                     <thead>
                                         <tr>
                                             <th class="col-sm-1">상담원 그룹</th>
@@ -109,11 +109,11 @@
                                         <c:forEach items="${realStatList}" var="real">
                                             <tr>
                                                 <td rowspan="2">${real.groupName }</td>
-                                                <td rowspan="2">${real.agentName }</td>
+                                                <td rowspan="2"  id="agentName">${real.agentName }</td>
                                                 <td rowspan="2">${real.agentNumber }</td>
-                                                <td>고객</td>
-                                                <td>${real.customerProfileName }</td>
-                                                <td>${real.customerScript }</td>
+                                                <td id="customer">고객</td>
+                                                <td id="custProName">${real.customerProfileName }</td>
+                                                <td id="custScrp">${real.customerScript }</td>
                                                 <td class="hidden-print" rowspan="2">
                                                     <button type="button" class="jsShowModal btn btn-default btn-xs" data-index="${real.agentId }">
 												<i class="fa fa-headphones"></i> 
@@ -121,9 +121,9 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>상담사</td>
-                                                <td>${real.agentProfileName }</td>
-                                                <td>${real.agentScript }</td>
+                                                <td id="repr">상담사</td>
+                                                <td id="reprProName"> ${real.agentProfileName }</td>
+                                                <td id="reprScrp">${real.agentScript }</td>
                                             </tr>
                                         </c:forEach>
                                     </tbody>
@@ -265,20 +265,58 @@
 
                     function updateCallListTest() {
                         if (isModalShow == true) return;
-                        console.log("updateCallListTest entered");
                         $.ajax({
                             url: '/monitor/call_list_refresh_IOS',
-                            type: JSON,
+                            dataType: "json",
+                            method: "GET", 
                             success: function(data) {
-                                // check data exist or not first
+                            	// Erase whole <td> text profiles in the table
+                            	$("[id=custProName]").each(function(index)  {
+                            		//console.log("custProName is : "+$(this).text());
+                            		$(this).text("");
+                            	});
+                            	$("[id=custScrp]").each(function(index)  {
+                            		//console.log("custScrp is : "+$(this).text());
+                            		$(this).text("");
+                            	});
+                            	$("[id=reprProName]").each(function(index)  {
+                            		//console.log("reprProName is : "+$(this).text());
+                            		$(this).text("");
+                            	});
+                            	$("[id=reprScrp]").each(function(index)  {
+                            		//console.log("reprScrp is : "+$(this).text());
+                            		$(this).text("");
+                            	});
+                            	for (i=0; i < data.Names.length; i++)  {
+                            		var agentName = data.Names[i].agentName;
+                            		var agentProfileName = data.Names[i].agentProfileName;
+                            		var customerProfileName = data.Names[i].customerProfileName;
+                            		console.log("data list is : " + agentName + ", " + agentProfileName + ", " + customerProfileName);
 
+                            		var rows = $("table#callListTbl tbody tr");
+                            		console.log("rows is "+rows.length);
+                            		$(rows)
+                            		
+                            		$("[id=agentName]").each(function(index)  {
+										if ($(this).text() == agentName)  {
+											//var row = $(this).parent.get(0);
+											//console.log("row index is "+row.rowIndex);
+											$(this).next().next().next().text(customerProfileName);
+											$(this).parent().next().next().text(agentProfileName);
+											//$(this).closest("#reprProName").text(agentProfileName);
+                            				//$(this).closest("[id=custProName]").text(customerProfileName);
+										}
+									});                            		
+                            	}
+                            	
+                                // check data exist or not first
+								//alert(data);
                                 // if it is, find the location in the table
                                 //$(.table).
 
                             }
                         })
                     }
-
 
 
                     function updateCallList() {
