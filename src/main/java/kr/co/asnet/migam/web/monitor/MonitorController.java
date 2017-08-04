@@ -9,6 +9,8 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -345,18 +347,31 @@ public class MonitorController {
 	
 	@RequestMapping(value = "/call_list_refresh_IOS", method = RequestMethod.GET)
 	public @ResponseBody String callListRefreshIOS(HttpServletResponse response) {
-		List<CallAudit> callAuditList = callAuditService.getCallAuditList(null, null, "order by agent_id asc");
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("callAuditList", callAuditList);
+		String agentName = null;
+		String customerProfileName = null;
+		String agentProfileName = null;
+		
+		JSONObject jObj = new JSONObject();
+		JSONArray jArray = new JSONArray();
+		
+		List<RealStat> realStatList = callAuditService.getRealStat(null, null, "where agent_profile_name is not null");
 		logger.debug("IOS called");
 		
-		// example - json return 
-		Gson gson = new GsonBuilder().create();
-		return gson.toJson("Hello");
+		for (int i=0; i < realStatList.size(); i++)  {
+			JSONObject jTmp = new JSONObject();
+			agentName = realStatList.get(i).getAgentName();
+			customerProfileName = realStatList.get(i).getCustomerProfileName();
+			agentProfileName = realStatList.get(i).getAgentProfileName();
+			
+			jTmp.put("agentName", agentName);
+			jTmp.put("customerProfileName", customerProfileName);
+			jTmp.put("agentProfileName", agentProfileName);
+			
+			jArray.add(jTmp);
+		}
+		jObj.put("Names", jArray);
 		
-		
-		//return mav;
-		//		model.addAttribute("callAuditList", callAuditList);
+		return jObj.toString();
 	}
 	
 	/**
