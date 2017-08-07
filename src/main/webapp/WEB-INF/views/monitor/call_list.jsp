@@ -293,26 +293,20 @@
                             		var customerProfileName = data.Names[i].customerProfileName;
                             		console.log("data list is : " + agentName + ", " + agentProfileName + ", " + customerProfileName);
 
-                            		var rows = $("table#callListTbl tbody tr");
-                            		console.log("rows is "+rows.length);
+                            		//var rows = $("table#callListTbl tbody tr");
+                            		//console.log("rows is "+rows.length);
                             		                            		
                             		$("[id=agentName]").each(function(index)  {
 										if ($(this).text() == agentName)  {
-											//var row = $(this).parent.get(0);
+											var row = $(this).parent().get(0);
+											var tbl = document.getElementById('callListTbl');
 											//console.log("row index is "+row.rowIndex);
 											$(this).next().next().next().text(customerProfileName);
-											$(this).parent().next().next().text(agentProfileName);
-											//$(this).closest("#reprProName").text(agentProfileName);
-                            				//$(this).closest("[id=custProName]").text(customerProfileName);
+											//$(this).parent().next().next().text(agentProfileName);
+											tbl.rows[row.rowIndex+1].cells[1].innerHTML = agentProfileName;
 										}
 									});                            		
                             	}
-                            	
-                                // check data exist or not first
-								//alert(data);
-                                // if it is, find the location in the table
-                                //$(.table).
-
                             }
                         })
                     }
