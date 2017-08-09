@@ -47,7 +47,7 @@
         <body class="hold-transition skin-blue sidebar-mini" id="test_tr">
             <!-- Content Header (Page header) -->
             <section class="content-header">
-                <h2><small>모니터 ></small> 모니터링</h2>
+                <h2><small>모니터 ></small> 콜 목록</h2>
             </section>
 
             <!-- Main content -->
@@ -62,16 +62,16 @@
                                 <form role="form" id="form_conf_search" action="" method="get">
                                     <input type="hidden" name="page" value="" />
                                     <input type="hidden" name="searchBoardIndex" id="searchBoardIndex" value="" />
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <select class="form-control" id="searchId" name="searchId">
-												<option value="">그룹선택</option>
-												<c:forEach items="${groupList}" var="group">
-													<option value="${group.groupName}">${group.groupName}</option>
-												</c:forEach>
-											</select>
-                                        </div>
-                                    </div>
+<!--                                     <div class="col-md-2"> -->
+<!--                                         <div class="form-group"> -->
+<!--                                             <select class="form-control" id="searchId" name="searchId"> -->
+<!-- 												<option value="">그룹선택</option>   -->
+<%-- 												<c:forEach items="${groupList}" var="group"> --%>
+<%-- 													<option value="${group.groupName}">${group.groupName}</option> --%>
+<%-- 												</c:forEach> --%>
+<!-- 											</select> -->
+<!--                                         </div> -->
+<!--                                     </div> -->
                                     <div class="col-md-2">
                                         <div class="form-group">
                                             <select class="form-control" id="searchQuery" name="searchQuery">
@@ -96,7 +96,7 @@
                                 <table class="table" id="callListTbl">
                                     <thead>
                                         <tr>
-                                            <th class="col-sm-1">상담원 그룹</th>
+<!--                                             <th class="col-sm-1">상담원 그룹</th> -->
                                             <th class="col-sm-1">상담원</th>
                                             <th class="col-sm-1">내선번호</th>
                                             <th class="col-sm-1">구분</th>
@@ -108,7 +108,7 @@
                                     <tbody>
                                         <c:forEach items="${realStatList}" var="real">
                                             <tr>
-                                                <td rowspan="2">${real.groupName }</td>
+<%--                                                 <td rowspan="2">${real.groupName }</td> --%>
                                                 <td rowspan="2"  id="agentName">${real.agentName }</td>
                                                 <td rowspan="2">${real.agentNumber }</td>
                                                 <td id="customer">고객</td>

@@ -70,16 +70,16 @@
 								<!-- 검색 조건 -->
 								<form role="form" id="form_agentCall_search" action="/report/agent_report" method="get">
 									<input type="hidden" name="searchType" value="${searchDTO.searchType}">
-									<div class="col-md-2">
-										<div class="form-group">
-											<select class="form-control" id="selectAgentGroup" name="searchGroup">
-												<option value="allGroup">--그룹 선택--</option>
-												<c:forEach items="${agentGroupList}" var="agentGroup">	
-												<option value="${agentGroup.groupId }">${agentGroup.groupName }</option>
-												</c:forEach>
-											</select>
-										</div>
-									</div>
+<!-- 									<div class="col-md-2"> -->
+<!-- 										<div class="form-group"> -->
+<!-- 											<select class="form-control" id="selectAgentGroup" name="searchGroup"> -->
+<!-- 												<option value="allGroup">--그룹 선택--</option> -->
+<%-- 												<c:forEach items="${agentGroupList}" var="agentGroup">	 --%>
+<%-- 												<option value="${agentGroup.groupId }">${agentGroup.groupName }</option> --%>
+<%-- 												</c:forEach> --%>
+<!-- 											</select> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
 									<div class="col-md-2">
 										<div class="form-group">
 											<input type="hidden" id="searchId" name="searchId" value="">

@@ -63,16 +63,16 @@
 								<form role="form" id="form_hourlyCall_search" action="/report/hour_report" mehtod="post">
 									<input type="hidden" name="page" value="">
 									<input type="hidden" name="searchType" value="${searchDTO.searchType}">
-									<div class="col-md-2 col-sm-2">
-										<div class="form-group">
-											<select class="form-control" id="selectAgentGroup" name="searchGroup">
-												<option value="allGroup">전체 그룹</option>
-												<c:forEach items="${agentGroupList}" var="agentGroup">	
-												<option value="${agentGroup.groupId }">${agentGroup.groupName }</option>
-												</c:forEach>
-											</select>
-										</div>
-									</div>
+<!-- 									<div class="col-md-2 col-sm-2"> -->
+<!-- 										<div class="form-group"> -->
+<!-- 											<select class="form-control" id="selectAgentGroup" name="searchGroup"> -->
+<!--												<option value="allGroup">전체 그룹</option>-->
+<%-- 												<c:forEach items="${agentGroupList}" var="agentGroup">	 --%>
+<%-- 												<option value="${agentGroup.groupId }">${agentGroup.groupName }</option> --%>
+<%-- 												</c:forEach> --%>
+<!-- 											</select> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
 									<div class="col-md-2 col-sm-2">
 										<div class="form-group">
 											<!-- 상담원 이름을 표시하기 위해 agentName 대신 searchIsNotice 를 사용했다. -->

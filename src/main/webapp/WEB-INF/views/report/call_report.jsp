@@ -56,16 +56,16 @@
 								<!-- 검색 조건 -->
 								<form role="form" id="form_callreport_search" action="" mehtod="get">
 									<input type="hidden" name="page" value="">
-									<div class="col-md-2">
-										<div class="form-group">
-											<select class="form-control" id="selectAgentGroup" name="searchGroup">
-												<option value="allGroup">전체 그룹</option>
-												<c:forEach items="${agentGroupList}" var="agentGroup">	
-												<option value="${agentGroup.groupId }">${agentGroup.groupName }</option>
-												</c:forEach>
-											</select>
-										</div>
-									</div>
+<!-- 									<div class="col-md-2"> -->
+<!-- 										<div class="form-group"> -->
+<!-- 											<select class="form-control" id="selectAgentGroup" name="searchGroup"> -->
+<!-- 												<option value="allGroup">전체 그룹</option> -->
+<%-- 												<c:forEach items="${agentGroupList}" var="agentGroup">	 --%>
+<%-- 												<option value="${agentGroup.groupId }">${agentGroup.groupName }</option> --%>
+<%-- 												</c:forEach> --%>
+<!-- 											</select> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
 									<div class="col-md-2">
 										<div class="form-group">
 											<select class="form-control" id="selectAgent" name="searchId">
