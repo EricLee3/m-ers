@@ -385,7 +385,7 @@ function side(gubun){
 	</c:otherwise>
 </c:choose>
  -->
-
+<!--  this is test context IOS -->
 <c:choose>
 	<c:when test="${menuCategory eq 'system' && menu eq 'sens_conf'}">
 				<li class="active"><a href="/system/sens_conf" target="iframe" style="color: #1E90FF;"><i class="fa fa-circle-o"></i><font style="color: #1E90FF;"> 감성지표 설정</font></a></li>
