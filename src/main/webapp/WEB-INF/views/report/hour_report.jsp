@@ -144,8 +144,8 @@
 										</div>
 										<div class="box-footer clearfix">
 											<span class="pull-right"> 
-												<i class="fa fa-minus" style="color: #de8162;"></i> 주의 단계
-												<i class="fa fa-minus" style="color: #e7cd64;"></i> 흥미 단계
+												<i class="fa fa-minus" style="color: #de8162;"></i> 분노 단계
+												<i class="fa fa-minus" style="color: #e7cd64;"></i> 스트레스 단계
 											</span>
 										</div>
 									</div>
@@ -161,9 +161,9 @@
 														<th class="no-sort">전체 호</th>
 														<th class="no-sort">성공 호</th>
 														<th class="no-sort">실패 호</th>
-														<th class="no-sort">주의단계</th>
-														<th class="no-sort">흥미단계</th>
-														<th class="no-sort">욕구단계</th>
+														<th class="no-sort">분노 단계</th>
+														<th class="no-sort">스트레스 단계</th>
+<!-- 														<th class="no-sort">욕구단계</th> -->
 														<!-- th class="no-sort">고객불만 감소</th -->
 													</tr>
 												</thead>
@@ -175,7 +175,7 @@
 														<td >${failCount }</td>
 														<td >${angerCall }</td>
 														<td >${stressCall }</td>
-														<td >${incrementCount }</td>
+<%-- 														<td >${incrementCount }</td> --%>
 														<!-- td >${decrementCount }</td -->
 													</tr>
 													<c:forEach items="${hourlyCallListByOrder }"  var="hourlyCall" >
@@ -186,7 +186,7 @@
 														<td>${hourlyCall.failCount}</td>
 														<td><span class="text-danger">${hourlyCall.angryCount}</span></td>
 														<td><span class="text-info">${hourlyCall.stressCount}</span></td>
-														<td>${hourlyCall.incrementCount}</td>
+<%-- 														<td>${hourlyCall.incrementCount}</td> --%>
 														<!-- td>${hourlyCall.decrementCount}</td -->
 													</tr>
 													</c:forEach>

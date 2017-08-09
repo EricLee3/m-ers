@@ -64,7 +64,7 @@
 										<c:if test="${agent.callStatus eq '1' }">
 											<c:choose>
 												<c:when test="${agent.angryCount gt angryCountParameter }">
-													<span class="pull-left auditStatus2" title="주의 단계" data-angrycount="${agent.angryCount }"><i class="fa fa-square"></i></span>
+													<span class="pull-left auditStatus2" title="11111주의 단계" data-angrycount="${agent.angryCount }"><i class="fa fa-square"></i></span>
 												</c:when>
 												<c:otherwise>
 													<span class="pull-left auditStatus1" title="Normal" data-angrycount="${agent.angryCount }"><i class="fa fa-square"></i></span>
@@ -104,7 +104,7 @@
 						<!-- TABLE: 오늘 콜 정보 -->
 						<div class="box box-primary">
 							<div class="box-header with-border">
-								<h3 class="box-title">오늘 콜 정보 (주의단계, 흥미단계)</h3>
+								<h3 class="box-title">오늘 콜 정보 (분노단계, 스트레스 단계)</h3>
 							</div>
 							<div class="box-body">
 								<div class="table-responsive">
@@ -113,8 +113,8 @@
 											<tr>
 												<th></th>
 												<th>전체 <span data-toggle="tooltip" title="전체 분석 콜 수" class="fa fa-question-circle"></span></th>
-												<th>주의 단계</th>
-												<th>흥미 단계</th>
+												<th>분노 단계</th>
+												<th>스트레스 단계</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -133,7 +133,7 @@
 
 						<div class="box box-danger">
 							<div class="box-header with-border">
-								<h3 class="box-title">오늘 콜 정보 (주의 단계, 흥미 단계) 차트</h3>
+								<h3 class="box-title">오늘 콜 정보 (분노 단계, 스트레스 단계) 차트</h3>
 							</div>
 							<div class="box-body">
 								<div class="row">
@@ -146,8 +146,8 @@
 									</div>
 									<div class="col-md-4 ">
 										<ul class="chart-legend clearfix">
-											<li><i class="fa fa-square text-red"></i> 주의 단계</li>
-											<li><i class="fa fa-square text-yellow"></i> 흥미 단계</li>
+											<li><i class="fa fa-square text-red"></i> 분노 단계</li>
+											<li><i class="fa fa-square text-yellow"></i> 스트레스 단계</li>
 											<li><i class="fa fa-square text-green"></i> Normal Call</li>
 										</ul>
 									</div>
@@ -185,22 +185,22 @@
 										<thead>
 											<tr>
 												<th>상담원</th>
-												<th>그룹 ID</th>
-												<th>주의단계</th>
-												<th>흥미단계</th>
+<!-- 												<th>그룹 ID</th> -->
+												<th>분노 단계</th>
+												<th>스트레스 단계</th>
 											</tr>
 										</thead>
 										<tbody>
 											<c:forEach items="${todayAgentList }" var="agent">
 											<tr>
 												<td><a href="/monitor/agent_view/${agent.agentId }">${agent.agentName }</a></td>
-												<td>
-												<c:forEach items="${groupList }" var="group" >
-													<c:if test="${group.groupId eq agent.groupId }">
-														${group.groupName }
-													</c:if>
-												</c:forEach>
-												</td>
+<!-- 												<td> -->
+<%-- 												<c:forEach items="${groupList }" var="group" > --%>
+<%-- 													<c:if test="${group.groupId eq agent.groupId }"> --%>
+<%-- 														${group.groupName } --%>
+<%-- 													</c:if> --%>
+<%-- 												</c:forEach> --%>
+<!-- 												</td> -->
 												<td>${agent.angryCount }</td>
 												<td>${agent.stressCount }</td>
 											</tr>
@@ -228,22 +228,22 @@
 										<thead>
 											<tr>
 												<th>상담원</th>
-												<th>그룹 ID</th>
-												<th>주의단계</th>
-												<th>흥미단계</th>
+<!-- 												<th>그룹 ID</th> -->
+												<th>분노 단계</th>
+												<th>스트레스 단계</th>
 											</tr>
 										</thead>
 										<tbody>
 											<c:forEach items="${lastWeekAgentList }" var="agent">
 											<tr>
 												<td><a href="/monitor/agent_view/${agent.agentId }">${agent.agentName }</a></td>
-												<td>
-												<c:forEach items="${groupList }" var="group" >
-													<c:if test="${group.groupId eq agent.groupId }">
-														${group.groupName }
-													</c:if>
-												</c:forEach>
-												</td>
+<!-- 												<td> -->
+<%-- 												<c:forEach items="${groupList }" var="group" > --%>
+<%-- 													<c:if test="${group.groupId eq agent.groupId }"> --%>
+<%-- 														${group.groupName } --%>
+<%-- 													</c:if> --%>
+<%-- 												</c:forEach> --%>
+<!-- 												</td> -->
 												<td>${agent.angryCount }</td>
 												<td>${agent.stressCount }</td>
 											</tr>
@@ -286,7 +286,7 @@ $(function () {
 	// ChartJS - Pie chart
 	var pieChartCanvas = $("#pieChart");//.get(0).getContext("2d");
 	var PieData = {
-		labels: ["주의단계","흥미단계","Normal"],
+		labels: ["분노 단계","스트레스 단계","Normal"],
 		datasets: [
 			{
 				data: [ ${angerCall }, ${stressCall }, ${totalCall }-${angerCall }-${stressCall } ],
