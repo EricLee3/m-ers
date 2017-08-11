@@ -3,16 +3,16 @@
 	<c:set var="j" value="0" />
 	<c:forEach items="${groupList }" var="group" >
 	<div class="col-md-4">
-		<div class="small-box bg-light-blue">
-			<div class="inner">
-				<h5>${group.groupName } ( ${group.agentCount }명 )</h5>
-			</div>
-			<div class="icon">
-				<h1>
-					<i class="ion ion-person"></i>
-				</h1>
-			</div>
-		</div>
+<!-- 		<div class="small-box bg-light-blue"> -->
+<!-- 			<div class="inner"> -->
+<%-- 				<h5>${group.groupName } ( ${group.agentCount }명 )</h5> --%>
+<!-- 			</div> -->
+<!-- 			<div class="icon"> -->
+<!-- 				<h1> -->
+<!-- 					<i class="ion ion-person"></i> -->
+<!-- 				</h1> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
 		<div class="row">
 			<c:set var="i" value="0" />
 			<c:forEach items="${group.agentList}" var="agent" >

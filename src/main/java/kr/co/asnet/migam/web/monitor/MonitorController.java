@@ -125,6 +125,8 @@ public class MonitorController {
 		model.addAttribute("totalCall", totalCount);
 		model.addAttribute("angerCall", angerCount);
 		model.addAttribute("stressCall", stressCount);
+//		model.addAttribute("angerCall", 20);
+//		model.addAttribute("stressCall", 10);
 		
 		// 오늘의 상담원별 콜 정보
 		List<Agent> todayAgentList = agentService.getAgentListWithCount(null, hourlySearchDTO, null);

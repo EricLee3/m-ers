@@ -80,7 +80,7 @@
 		document.getElementById('day_report').setAttribute("class", "");
 		document.getElementById('month_report').setAttribute("class", "");
 		document.getElementById('agent_report').setAttribute("class", "");
-		document.getElementById('performance_report').setAttribute("class", "");
+//		document.getElementById('performance_report').setAttribute("class", "");
 //		document.getElementById('batch_list').setAttribute("class", "");
 //		document.getElementById('batch_log').setAttribute("class", "");
 //		document.getElementById('config_limit').setAttribute("class", "");
@@ -97,9 +97,9 @@
 //		document.getElementById('sens_meta').setAttribute("class", "");
 //		document.getElementById('sens_conf').setAttribute("class", "");
 //		document.getElementById('pro_meta').setAttribute("class", "");
-		document.getElementById('pro_conf').setAttribute("class", "");
-		document.getElementById('sens_basic').setAttribute("class", "");
-		document.getElementById('sens_demo').setAttribute("class", "");
+//		document.getElementById('pro_conf').setAttribute("class", "");
+//		document.getElementById('sens_basic').setAttribute("class", "");
+//		document.getElementById('sens_demo').setAttribute("class", "");
 
 		if (gubun == 0) {
 			document.getElementById('agent_list').setAttribute("class",
@@ -393,20 +393,20 @@
 											class="fa fa-circle-o"></i> 상담원별 통계</a></li>
 								</c:otherwise>
 							</c:choose>
-							<c:choose>
-								<c:when
-									test="${menuCategory eq 'report' && menu eq 'performance_report'}">
-									<li class="active"><a href="/report/performance_report"
-										target="iframe" style="color: #1E90FF;"><i
-											class="fa fa-circle-o"></i><font style="color: #1E90FF;">
-												근무성과별 통계</font></a></li>
-								</c:when>
-								<c:otherwise>
-									<li class="" id="performance_report"><a
-										href="/report/performance_report" target="iframe"
-										onclick="side(8);"><i class="fa fa-circle-o"></i> 근무성과별 통계</a></li>
-								</c:otherwise>
-							</c:choose>
+<%-- 							<c:choose> --%>
+<%-- 								<c:when --%>
+<%-- 									test="${menuCategory eq 'report' && menu eq 'performance_report'}"> --%>
+<!-- 									<li class="active"><a href="/report/performance_report" -->
+<!-- 										target="iframe" style="color: #1E90FF;"><i -->
+<!-- 											class="fa fa-circle-o"></i><font style="color: #1E90FF;"> -->
+<!-- 												근무성과별 통계</font></a></li> -->
+<%-- 								</c:when> --%>
+<%-- 								<c:otherwise> --%>
+<!-- 									<li class="" id="performance_report"><a -->
+<!-- 										href="/report/performance_report" target="iframe" -->
+<!-- 										onclick="side(8);"><i class="fa fa-circle-o"></i> 근무성과별 통계</a></li> -->
+<%-- 								</c:otherwise> --%>
+<%-- 							</c:choose> --%>
 						</ul></li>
 
 					<li class="treeview active"><a href="#"> <i

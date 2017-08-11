@@ -93,7 +93,8 @@ $(document).ready(function(){
 								</div>
 								
 								<div class="form-group">
-									<label for="alarmIdx" class="col-sm-2 control-label" style="padding-left:160px;">시스템 자원  </label>
+									<label for="alarmIdx" class="col-sm-2 control-label" style="padding-left:60px;">시스템 자원  </label>
+<!-- 									<label for="alarmIdx" class="col-sm-2 control-label" style="padding-left:160px;">시스템 자원  </label> -->
 									<div class="col-sm-9" style="padding-left:110px;">
 										<c:choose>
 										    <c:when test="${recognitionAlarmLimit.alarmIdx eq '0'}"><b>CPU</b></c:when>

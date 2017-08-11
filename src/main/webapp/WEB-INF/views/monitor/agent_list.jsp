@@ -43,17 +43,17 @@
 						<c:set var="j" value="0" />
 						<c:forEach items="${groupList }" var="group" >
 						<div class="col-md-4">
-							<div class="small-box bg-light-blue">
-								<div class="inner">
-									<h5>${group.groupName } ( ${group.agentCount }명 )</h5>
-								</div>
-								<div class="icon">
-									<h1>
-										<i class="ion ion-person"></i>
-									</h1>
-								</div>
-								<!-- <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>  -->
-							</div>
+<!-- 							<div class="small-box bg-light-blue"> -->
+<!-- 								<div class="inner"> -->
+<%-- 									<h5>${group.groupName } ( ${group.agentCount }명 )</h5> --%>
+<!-- 								</div> -->
+<!-- 								<div class="icon"> -->
+<!-- 									<h1> -->
+<!-- 										<i class="ion ion-person"></i> -->
+<!-- 									</h1> -->
+<!-- 								</div> -->
+<!-- 								<a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>  -->
+<!-- 							</div> -->
 							<div class="row">
 								
 								<c:set var="i" value="0" />
@@ -104,7 +104,7 @@
 						<!-- TABLE: 오늘 콜 정보 -->
 						<div class="box box-primary">
 							<div class="box-header with-border">
-								<h3 class="box-title">오늘 콜 정보 (분노단계, 스트레스 단계)</h3>
+								<h3 class="box-title">오늘 콜 정보 </h3>
 							</div>
 							<div class="box-body">
 								<div class="table-responsive">
