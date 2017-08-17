@@ -2372,5 +2372,19 @@ public class SystemController {
               return gson.toJson(mj);
           }
          
+	         
+			   @RequestMapping(value = "/progress_link", method = {RequestMethod.GET, RequestMethod.POST})
+				public String progress_link( @RequestParam(value = "page", required = false, defaultValue = "1") int page, Model model, SearchDTO searchDTO, PageDTO2 pageDTO, String call_id) {
+					//List<ProMeta> IndiList = proMetaService.getIndiList(pageDTO, searchDTO, "order by name desc");
+					model.addAttribute("call_id", call_id);
+					return "/link/progress_link"; //메인페이지가 완성되지 않아 임시 주석처리합니다.
+				}
+			   
+			   @RequestMapping(value = "/pop_linegraph", method = {RequestMethod.GET, RequestMethod.POST})
+				public String pop_linegraph( @RequestParam(value = "page", required = false, defaultValue = "1") int page, Model model, SearchDTO searchDTO, PageDTO2 pageDTO, String call_id) {
+					//List<ProMeta> IndiList = proMetaService.getIndiList(pageDTO, searchDTO, "order by name desc");
+					model.addAttribute("call_id", call_id);
+					return "/link/pop_linegraph"; //메인페이지가 완성되지 않아 임시 주석처리합니다.
+				}
 		
 }

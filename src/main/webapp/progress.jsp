@@ -14,8 +14,8 @@
   <div class="progress" style="color: #ff22dd">
     <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:30%">
       40% Complete (success)
-    </div>
-  </div>
+    </div> 
+  </div> 
   <div class="progress">
     <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:50%">
       50% Complete (info)

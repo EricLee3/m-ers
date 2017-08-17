@@ -19,8 +19,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion.User;
-
 import kr.co.asnet.migam.domain.SearchDTO;
 import kr.co.asnet.migam.domain.agent.AlarmCode;
 import kr.co.asnet.migam.domain.agent.HisLog;
