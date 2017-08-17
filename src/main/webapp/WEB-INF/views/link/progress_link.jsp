@@ -40,11 +40,11 @@
             });
         </script>
 
- 
+
            <div class="row margin">
 			<div style="width: 236px; height: 72px">											
 				<div class="progress">	  											               			                  
-				  	<div id="pop_progress" class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100" style="width:55%; cursor:pointer;">55%</div>
+				  	<div id="pop_progress" class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%; cursor:pointer;">100%</div>
 				</div>
 			</div>
            </div>
