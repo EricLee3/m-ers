@@ -41,6 +41,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.google.gson.Gson;
+import com.miraeson.oam.vo.InfoVo;
 
 import kr.co.asnet.migam.domain.PageDTO;
 import kr.co.asnet.migam.domain.PageDTO100;
@@ -2387,4 +2388,9 @@ public class SystemController {
 					return "/link/pop_linegraph"; //메인페이지가 완성되지 않아 임시 주석처리합니다.
 				}
 		
+				@RequestMapping(value = "/req_progress", method = {RequestMethod.POST, RequestMethod.GET})	
+				@ResponseBody
+				public List<InfoVo> reqInfo(Model model){		
+					return statusDao.InfoStatus();
+				}
 }
