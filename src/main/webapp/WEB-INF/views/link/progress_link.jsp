@@ -40,7 +40,7 @@
             });
         </script>
 
-
+ 
            <div class="row margin">
 			<div style="width: 236px; height: 72px">											
 				<div class="progress">	  											               			                  
