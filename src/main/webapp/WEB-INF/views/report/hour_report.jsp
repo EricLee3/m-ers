@@ -353,7 +353,7 @@ $(document).ready(function(){
 			<c:forEach items="${hourlyCallListByOrderForChart}" var="hourlyCallItem"> {
 	        	date: '<fmt:formatDate pattern="MM/dd HH:00" value="${hourlyCallItem.statTime}" />', 
 	        	AngryCall: ${hourlyCallItem.angryCount}, 
-	        	StressCall:${hourlyCallItem.stressCount}
+	        	StressCall:${hourlyCallItem.stressCount},
 	        },
 			</c:forEach>
 	      ],
