@@ -20,13 +20,14 @@
         
         $(function() {
             $(document).ready(function() {
-            	
             	setInterval(req_progress,1000);
-                $("#pop_progress").click(function(){
-					window.open('pop_linegraph','pop_linegraph','location=no, directories=no,resizable=no,status=no,toolbar=no,menubar=no,channelmode=no,status=no, height=500px, width=600px, left=0,top=0');  
-            	});
            	});
         });
+        
+        function pop_progress(){
+        	window.open('pop_linegraph?agent_id=${agent_id}','pop_linegraph','location=no, directories=no,resizable=no,status=no,toolbar=no,menubar=no,channelmode=no,status=no, height=500px, width=600px, left=0,top=0');  
+        	
+        }
         
     	function req_progress(){		
     		var formURL = "req_progress";
@@ -43,8 +44,8 @@
     	    	       				var indicator_level_per =parseInt(data[i].indicator_level / 31 * 100);
     	    	       				var content = '<div class="progress_row">';
     	    	       				content += '<div class="container" style="width: 236px; height:72px; background-color: #174799; ">';
-    	    	       				content += '<div class="progress" style="margin: 0px; margin-top: 20px">';
-    	    	       				content += '<div id="pop_progress" class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="'+indicator_level_per+'" aria-valuemin="0" aria-valuemax="100" style="width:'+indicator_level_per+'%; cursor:pointer;">';
+    	    	       				content += '<div class="progress" style="margin: 0px; margin-top: 20px; cursor: pointer;" onclick="pop_progress()">';
+    	    	       				content += '<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="'+indicator_level_per+'" aria-valuemin="0" aria-valuemax="100" style="width:'+indicator_level_per+'%; ">';
     	    	       				content += indicator_level_per+'% ('+data[i].indicator_kor_name+')';
     	    	      			    content += '</div>';
     	    	      			    content += '</div>'; 
@@ -67,8 +68,8 @@
 	<fmt:parseNumber var="indicator_level" integerOnly="true" value="${progress.indicator_level / 31 * 100}"/>
 		<div class="progress_row">
           <div class="container" style="width: 236px; height:72px; background-color: #174799; ">
-			  <div class="progress" style="margin: 0px; margin-top: 20px">
-			    <div id="pop_progress" class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="${indicator_level}" aria-valuemin="0" aria-valuemax="100" style="width:${indicator_level}%; cursor:pointer;">
+			  <div  class="progress" style="margin: 0px; margin-top: 20px; cursor: pointer;" onclick="pop_progress()">
+			    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="${indicator_level}" aria-valuemin="0" aria-valuemax="100" style="width:${indicator_level}%;">
 			      ${indicator_level}% (Angry)
 			    </div>
 			  </div> 

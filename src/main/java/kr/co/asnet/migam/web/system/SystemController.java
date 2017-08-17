@@ -2371,7 +2371,6 @@ public class SystemController {
 	         
 			   @RequestMapping(value = "/progress_link", method = {RequestMethod.GET, RequestMethod.POST})
 				public String progress_link( @RequestParam(value = "page", required = false, defaultValue = "1") int page, Model model, ProgressLink progressLink) {
-					//List<ProMeta> IndiList = proMetaService.getIndiList(pageDTO, searchDTO, "order by name desc");
 				   List<ProgressLink> progresslinkList = progressLinkService.getprogressbar(progressLink);
 				    
 				   model.addAttribute("agent_id", progressLink.getAgent_id());
@@ -2382,9 +2381,8 @@ public class SystemController {
 				}
 			   
 			   @RequestMapping(value = "/pop_linegraph", method = {RequestMethod.GET, RequestMethod.POST})
-				public String pop_linegraph( @RequestParam(value = "page", required = false, defaultValue = "1") int page, Model model, SearchDTO searchDTO, PageDTO2 pageDTO, String call_id) {
-					//List<ProMeta> IndiList = proMetaService.getIndiList(pageDTO, searchDTO, "order by name desc");
-					model.addAttribute("call_id", call_id);
+				public String pop_linegraph( @RequestParam(value = "page", required = false, defaultValue = "1") int page, Model model,ProgressLink progressLink) {
+					model.addAttribute("agent_id", progressLink.getAgent_id());
 					return "/link/pop_linegraph"; //메인페이지가 완성되지 않아 임시 주석처리합니다.
 				}
 		
