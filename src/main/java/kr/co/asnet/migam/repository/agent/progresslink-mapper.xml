@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.asnet.migam.repository.agent.ProgressLinkDaoMapper">
+	<resultMap id="rmapProgressLink" type="ProgressLink">
+        <result property="agent_id" column="agent_id" />
+        <result property="indicator_name" column="indicator_name" />
+        <result property="indicator_kor_name" column="indicator_kor_name" />
+        <result property="indicator_level" column="indicator_level" />
+        <result property="agent_script" column="agent_script" />
+        <result property="customer_script" column="customer_script" />
+	</resultMap>
+
+	
+	<select id="selectProgressLingList" parameterType="hashmap" resultMap="rmapProgressLink">
+		SELECT 
+			a.agent_id AS agent_id, a.indicator_name AS indicator_name, a.indicator_kor_name AS indicator_kor_name, a.indicator_level AS indicator_level, 
+			b.agent_script AS agent_script, b.customer_script AS customer_script
+			FROM mecs5_realtime_ind_state a LEFT JOIN mecs5_realtime_state b ON a.agent_id = b.agent_id
+			WHERE 
+		   a.agent_id=#{progressLink.agent_id}
+		   AND indicator_name = #{progressLink.indicator_name}
+	</select>
+	
+
+</mapper> 

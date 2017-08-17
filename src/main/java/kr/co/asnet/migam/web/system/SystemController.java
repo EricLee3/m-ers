@@ -3,6 +3,9 @@ package kr.co.asnet.migam.web.system;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.InetAddress;
+import java.net.URLDecoder;
+import java.net.UnknownHostException;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -22,13 +25,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.fileupload.FileUploadException;
-import org.codehaus.jackson.JsonGenerationException;
-import org.codehaus.jackson.map.JsonMappingException;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -55,15 +53,16 @@ import kr.co.asnet.migam.domain.agent.AgentGroup;
 import kr.co.asnet.migam.domain.agent.AlarmCode;
 import kr.co.asnet.migam.domain.agent.AlarmLimit;
 import kr.co.asnet.migam.domain.agent.AlarmLog;
+import kr.co.asnet.migam.domain.agent.AlarmStatGroup;
 import kr.co.asnet.migam.domain.agent.AnalResult;
 import kr.co.asnet.migam.domain.agent.FaultAlarmLog;
 import kr.co.asnet.migam.domain.agent.FaultAlarmStatGroup;
 import kr.co.asnet.migam.domain.agent.HisLog;
-import kr.co.asnet.migam.domain.agent.AlarmStatGroup;
 import kr.co.asnet.migam.domain.agent.ImsiMent;
 import kr.co.asnet.migam.domain.agent.ProConf;
 import kr.co.asnet.migam.domain.agent.ProMeta;
 import kr.co.asnet.migam.domain.agent.ProcessGroup;
+import kr.co.asnet.migam.domain.agent.ProgressLink;
 import kr.co.asnet.migam.domain.agent.Recognition_job;
 import kr.co.asnet.migam.domain.agent.ResourceLog;
 import kr.co.asnet.migam.domain.agent.SensBasic;
@@ -75,13 +74,14 @@ import kr.co.asnet.migam.domain.user.User;
 import kr.co.asnet.migam.service.agent.AgentGroupService;
 import kr.co.asnet.migam.service.agent.AgentService;
 import kr.co.asnet.migam.service.agent.AlarmCodeService;
-import kr.co.asnet.migam.service.agent.AlarmLimitService; 
+import kr.co.asnet.migam.service.agent.AlarmLimitService;
 import kr.co.asnet.migam.service.agent.AlarmLogService;
 import kr.co.asnet.migam.service.agent.FaultAlarmLogService;
 import kr.co.asnet.migam.service.agent.HisLogService;
 import kr.co.asnet.migam.service.agent.ProConfService;
 import kr.co.asnet.migam.service.agent.ProMetaService;
 import kr.co.asnet.migam.service.agent.ProcessGroupService;
+import kr.co.asnet.migam.service.agent.ProgressLinkService;
 import kr.co.asnet.migam.service.agent.ResourceLogService;
 import kr.co.asnet.migam.service.agent.SensBasicService;
 import kr.co.asnet.migam.service.agent.SensConfService;
@@ -89,11 +89,6 @@ import kr.co.asnet.migam.service.agent.SensDemoService;
 import kr.co.asnet.migam.service.agent.SensMetaService;
 import kr.co.asnet.migam.service.config.LicenseService;
 import kr.co.asnet.migam.service.user.UserService;
-
-import java.net.InetAddress;  
-import java.net.URLDecoder;
-import java.net.URLEncoder;
-import java.net.UnknownHostException;
 
 
 /**
@@ -140,7 +135,8 @@ public class SystemController {
 	private ProConfService proConfService;
 	@Inject
 	private SensDemoService sensDemoService;	
-	
+	@Inject
+	private ProgressLinkService progressLinkService;
     // 프로퍼티 객체 주입
     @Resource(name = "appProp")
     private Properties appProp;
@@ -2374,10 +2370,15 @@ public class SystemController {
          
 	         
 			   @RequestMapping(value = "/progress_link", method = {RequestMethod.GET, RequestMethod.POST})
-				public String progress_link( @RequestParam(value = "page", required = false, defaultValue = "1") int page, Model model, SearchDTO searchDTO, PageDTO2 pageDTO, String call_id) {
+				public String progress_link( @RequestParam(value = "page", required = false, defaultValue = "1") int page, Model model, ProgressLink progressLink) {
 					//List<ProMeta> IndiList = proMetaService.getIndiList(pageDTO, searchDTO, "order by name desc");
-					model.addAttribute("call_id", call_id);
-					return "/link/progress_link"; //메인페이지가 완성되지 않아 임시 주석처리합니다.
+				   List<ProgressLink> progresslinkList = progressLinkService.getprogressbar(progressLink);
+				    
+				   model.addAttribute("agent_id", progressLink.getAgent_id());
+				   model.addAttribute("indicator_name", progressLink.getIndicator_name());
+				   model.addAttribute("ProgressList", progresslinkList);
+					
+				   return "/link/progress_link"; //메인페이지가 완성되지 않아 임시 주석처리합니다.
 				}
 			   
 			   @RequestMapping(value = "/pop_linegraph", method = {RequestMethod.GET, RequestMethod.POST})
@@ -2386,11 +2387,11 @@ public class SystemController {
 					model.addAttribute("call_id", call_id);
 					return "/link/pop_linegraph"; //메인페이지가 완성되지 않아 임시 주석처리합니다.
 				}
-		/*
+		
 				@RequestMapping(value = "/req_progress", method = {RequestMethod.POST, RequestMethod.GET})	
 				@ResponseBody
-				public List<InfoVo> reqInfo(Model model){		
-					return statusDao.InfoStatus();
+				public List<ProgressLink> reqInfo(Model model, ProgressLink progressLink){	
+					return  progressLinkService.getprogressbar(progressLink);
 				}
-				*/
+				
 }
