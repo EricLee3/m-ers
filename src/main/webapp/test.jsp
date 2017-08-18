@@ -16,7 +16,7 @@ http://bestjquery.com/tutorial/progress-bar/demo47/
     background: #e1e1e1;
     margin-bottom: 20px;
     position: relative;
-}
+} 
 .progress .progress-bar{
     animation: animate-positive 2s;
 }
