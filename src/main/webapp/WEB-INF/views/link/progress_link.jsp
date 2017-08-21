@@ -46,10 +46,10 @@
     	    	       				content += '<div class="container" style="width: 236px; height:72px; background-color: #174799; ">';
     	    	       				content += '<div class="progress" style="margin: 0px; margin-top: 20px; cursor: pointer;" onclick="pop_progress()">';
     	    	       				content += '<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="'+indicator_level_per+'" aria-valuemin="0" aria-valuemax="100" style="width:'+indicator_level_per+'%; ">';
-    	    	       				content += indicator_level_per+'% ('+data[i].indicator_kor_name+')';
+    	    	       				content += indicator_level_per+'%';
     	    	      			    content += '</div>';
     	    	      			    content += '</div>'; 
-    	    	      			    content += '<b style="color:white; ">'+data[i].customer_script+'</b>';
+    	    	      			    content += '<p style="color:white; font-size: 10px;">'+data[i].customer_script+'</p>';
     	    	      			    content += '</div></div>';
     	    	       			$(".progress_body").append(content);
     	    	       		}
@@ -70,10 +70,10 @@
           <div class="container" style="width: 236px; height:72px; background-color: #174799; ">
 			  <div  class="progress" style="margin: 0px; margin-top: 20px; cursor: pointer;" onclick="pop_progress()">
 			    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="${indicator_level}" aria-valuemin="0" aria-valuemax="100" style="width:${indicator_level}%;">
-			      ${indicator_level}% (Angry)
+			      ${indicator_level}%
 			    </div>
 			  </div> 
-			   <b style="color:white; ">${progress.customer_script}</b>
+			   <p style="color:white; font-size: 10px;">${progress.customer_script}</p>
 			</div>
         </div>
        </c:forEach>

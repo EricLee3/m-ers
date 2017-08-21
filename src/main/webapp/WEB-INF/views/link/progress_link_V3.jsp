@@ -15,10 +15,10 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <style type="text/css">
-.progress-title{
-    font-size: 14px;
+.progressbar-title{
+    font-size: 10px;
     font-weight: bold;
-    color: #97a5b6;
+    color: white;
     margin-bottom: 5px;
 }
 .progress{
@@ -30,6 +30,8 @@
     padding: 5px 8px;
     overflow: visible;
     margin-bottom: 30px;
+    margin-left: 18px;
+    margin-right: 18px;
 }
 .progress .progress-bar{
     position: relative;
@@ -45,7 +47,7 @@
 .progress .progress-value{
     font-size: 13px;
     font-weight: bold;
-    color: #97a5b6;
+    color: white;
     position: absolute;
     bottom: -25px;
     right: 5px;
@@ -97,7 +99,7 @@
     	    	       		$(".progress_row").remove();
     	    	       			for(var i=0;i < data.length; i ++){
     	    	       				var indicator_level_per =parseInt(data[i].indicator_level / 31 * 100);
-    	    	       				var content = '<div class="progress_row" style="width: 236px; height:72px;">';
+    	    	       				var content = '<div class="progress_row" style="width: 236px; height:72px; background-color: #174799;">';
     	    	       				content += '<b class="progressbar-title">';
     	    	       				if(data[i].customer_script == "" )content += '&nbsp;';
         	    	       			content += data[i].customer_script;
@@ -126,7 +128,7 @@
 	<div class=" progress_body" align="center">
 	<c:forEach items="${ProgressList}" var="progress">
 	<fmt:parseNumber var="indicator_level" integerOnly="true" value="${progress.indicator_level / 31 * 100}"/>
-		<div class="progress_row" style="width: 236px; height:72px;">
+		<div class="progress_row" style="width: 236px; height:72px; background-color: #174799;">
 			<b class="progressbar-title">
 			<c:if test="${progress.customer_script == ''}">&nbsp;</c:if>
 				${progress.customer_script}

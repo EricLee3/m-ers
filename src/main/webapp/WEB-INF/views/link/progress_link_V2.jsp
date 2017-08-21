@@ -16,8 +16,8 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <style type="text/css">
 .progressbar-title{
-    font-size: 14px;
-    color: #848484;
+    font-size: 10px;
+    color: white;
     text-transform: capitalize;
 }
 .progress{
@@ -25,6 +25,8 @@
     overflow: visible;
     background: #f0f0f0;
     margin-bottom: 40px;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 .progress .progress-bar{
     position: relative;
@@ -44,7 +46,7 @@
 }
 .progress-value{
     font-size: 13px;
-    color: #848484;
+    color: white;
     position: absolute;
     top: 16px;
     right: 0;
@@ -84,7 +86,7 @@
     	    	       		$(".progress_row").remove();
     	    	       			for(var i=0;i < data.length; i ++){
     	    	       				var indicator_level_per =parseInt(data[i].indicator_level / 31 * 100);
-    	    	       				var content = '<div class="progress_row" style="width: 236px; height:72px;">';
+    	    	       				var content = '<div class="progress_row" style="width: 236px; height:72px; background-color: #174799;">';
     	    	       				content += '<b class="progressbar-title">';
     	    	       				if(data[i].customer_script == "" )content += '&nbsp;';
         	    	       			content += data[i].customer_script;
@@ -113,7 +115,7 @@
 	<div class=" progress_body" align="center">
 	<c:forEach items="${ProgressList}" var="progress">
 	<fmt:parseNumber var="indicator_level" integerOnly="true" value="${progress.indicator_level / 31 * 100}"/>
-		<div class="progress_row" style="width: 236px; height:72px;">
+		<div class="progress_row" style="width: 236px; height:72px; background-color: #174799;">
 			<b class="progressbar-title">
 			<c:if test="${progress.customer_script == ''}">&nbsp;</c:if>
 				${progress.customer_script}
