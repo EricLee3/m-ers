@@ -12,10 +12,12 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -53,6 +55,52 @@ public class AgentREST {
 	private AlarmLimitService alarmLimitService;
 	@Inject
 	private LicenseService licenseService;
+
+	/*
+	 * Representative creation
+	 */
+    @RequestMapping(value="/repr", method = RequestMethod.POST)
+    public ResponseEntity<Void> repr(@RequestBody Agent agent, HisLog hislog/*String agentInfo*/) throws UnknownHostException {
+        /*
+         * SQL 확인
+         * DB table colomn name과 아래와 같이 다르게 등록되어 있음
+         * agent-mapper.xml 'insertAgent'
+         */
+//        agent.setProfile_name_agent("2k_상담원스트레스");
+//        agent.setProfile_name_cus("2k_고객감정");
+        agent.setGroupName("2k");
+        agent.setGroupId("2k");
+        agent.setProfile_name_agent("7");
+        agent.setProfile_name_cus("6");
+        agent.setIsAudit(1);
+        
+        logger.debug(agent.toString());
+        InetAddress ip = InetAddress.getLocalHost();
+        
+        int agentIndex = agentService.insertAgent(agent);
+        int agentchanged = agentService.insertAgentChanged(agent);
+        
+        hislog.setDetail("[등록] 상담원ID(이름) : ["+agent.getAgentId()+"("+agent.getAgentName()+")]");
+        hislog.setMenu("시스템 설정 > 상담원 목록[등록]");
+        hislog.setUser_id("in.lee");
+        hislog.setUser_ip(ip.getHostAddress());
+        hislog.setUser_name("이인");
+        alarmLimitService.insertHis(hislog);
+        
+        //모니터링 대상여부 확인
+        //int    intcallAudit = 1;
+        //if(agent.getIsAudit() == 1){
+        int    intcallAudit = callAuditService.insertCallAudit(agent.getAgentId(),agent.getGroupId(),0);
+        //}
+        
+        if(agentIndex > 0 && intcallAudit != 0) {
+            final HttpHeaders headers = new HttpHeaders();
+            //return new ResponseEntity<Void>(headers, HttpStatus.OK);
+            return new ResponseEntity<Void>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+        }
+    }
 
 	/**
 	 * 사용자 아이디가 유용한지 확인하여 결과를 JSON을 반환합니다.  
