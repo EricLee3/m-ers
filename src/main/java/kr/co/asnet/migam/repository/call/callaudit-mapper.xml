@@ -213,6 +213,14 @@
 		<include refid="sql_paging" />
 	</select> 
 	
+	<select id="countgetRealStat" parameterType="hashmap" resultType="int">
+		<![CDATA[select count(*) from (]]>
+		<include refid="sql_realstat" />
+		<include refid="sql_search_realstat" />
+		<![CDATA[) cnt]]>
+	</select>
+	
+	
 	<select id="selectGroupList" parameterType="hashmap" resultMap="rmapRealStat">
 		<include refid="sql_realstat" />
 		<![CDATA[${orderby}]]>

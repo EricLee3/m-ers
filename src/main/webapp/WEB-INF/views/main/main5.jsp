@@ -403,10 +403,10 @@ $(document).ready(function(){
          <c:forEach items="${agentDailyAngryCallForDashBoard}" var="agentDailyItem">         
             <c:choose>
                <c:when test="${agentDailyItem.agentId eq agentCallItem.agentId}">
-               ThisMonth: ${agentDailyItem.customerResult}
+               ThisMonth: ${agentDailyItem.customerResult},
                    </c:when>
                <c:otherwise>
-               ThisMonth: 0
+               ThisMonth: 0,
                </c:otherwise>
                 </c:choose>
          </c:forEach>

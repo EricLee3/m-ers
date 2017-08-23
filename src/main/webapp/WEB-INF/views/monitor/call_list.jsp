@@ -131,14 +131,14 @@
                             </div>
                             <div class="box-footer clearfix text-center">
 
-                                <%-- <ul class="pagination pagination-sm no-margin">
+                                <ul class="pagination pagination-sm no-margin">
 									<asnetPage:Pagination 
 										page="${pageDTO.page }" 
 										itemPerPage="${pageDTO.itemPerPage }" 
 										pagePerGroup="${pageDTO.pagePerGroup }" 
-										itemCount="${SensConfCount }" 
+										itemCount="${call_list_Count }" 
 									/>
-								</ul> --%>
+								</ul> 
                                     <!-- <button type="button" class="btn btn-default pull-right hidden-print" onclick="print()"><i class="fa fa-print"></i><small> 인쇄</small></button> -->
                                     <!-- <button type="button" class="btn btn-info pull-right margin-r-5 hidden-print"><i class="fa fa-file-excel-o"></i></button> -->
                             </div>
@@ -149,7 +149,6 @@
                                     <select class="form-control" id="searchBoardIndex1" name="searchBoardIndex1">
 										<option value="">선택</option>
 										<option value="5">5개</option>
-										<option value="10">10개</option>
 										<option value="15" selected="selected">15개</option>
 										<option value="25">25개</option>
 										<option value="50">50개</option>
@@ -172,6 +171,20 @@
             <div class="modal fade" id="modalCallDetail" tabindex="-1" role="dialog" aria-labelledby=""></div>
 
             <script>
+            /*
+            * 페이징을 위해 필요한 스크립트입니다.
+            * 단, 검색 상자등이 있을 경우에는 해당 항목의 이름 ( 아래에서는 form_search ) 등에 주의하셔야 합니다. 
+            * 또한,Page가 정상적으로 동작하기 위해서는 해당 페이지에 <form id="form_search "...><input type="hidden" name="page"> 와 같은 코드가 반드시 필요합니다.
+            */
+           $(document).on("click", ".pagination li a", function(e) {
+               e.preventDefault();
+               var page = $(this).attr("data-page");
+               $("#form_conf_search input[name='page']").val(page);
+               document.getElementById("searchBoardIndex").value = $("#searchBoardIndex1").val();
+               var pathname = window.location.pathname;
+               window.location.href = pathname + "?" + $("#form_conf_search").serialize();
+           });
+            
                 var mainTimer;
                 var modalTimer;
                 var refreshAudioTimer1;
@@ -250,10 +263,10 @@
                     //검색
                     $(document).on("click", ".jsSearch", function(e) {
                         e.preventDefault();
+                    
                         document.getElementById("searchBoardIndex").value = $("#searchBoardIndex1").val();
-                        document.getElementById("searchId").value = $("#searchId").val();
-                        document.getElementById("searchQuery").value = $("#searchQuery").val();
-
+                       // document.getElementById("searchId").value = $("#searchId").val();
+                       // document.getElementById("searchQuery").value = $("#searchQuery").val();
                         $("#form_conf_search").submit();
                     });
 

@@ -58,7 +58,7 @@
 
 			<!-- Main content -->
 			<section class="content">
-				<div class="row">
+				<div class="row" >
 					<div class="col-xs-12">
 						<div class="box box-success">
 							<div class="box-header">
@@ -68,7 +68,7 @@
 							
 							<div class="box-body">
 								<!-- 검색 조건 -->
-								<form role="form" id="form_agentCall_search" action="/report/agent_report" method="get">
+								<form role="form" id="form_agentCall_search" action="/report/agent_report" method="post">
 									<input type="hidden" name="searchType" value="${searchDTO.searchType}">
 <!-- 									<div class="col-md-2"> -->
 <!-- 										<div class="form-group"> -->
@@ -117,7 +117,7 @@
 										<button type="button" class="jsSearch btn btn-info">조회</button>
 									</div>
 							
-									<div class="col-md-8 box-header" id="agentList">
+									<div class="col-md-8 box-header agentList" id="agentList">
 										
 									</div>
 								
@@ -259,15 +259,17 @@ $(document).ready(function(){
 				if (agentId == "selectAllAgent") {
 					$("#selectAgent option").each(function() {
 						if ( $(this).val() != "allAgent" && $(this).val() != "selectAllAgent") {
+							/*
 							$("#agentList").append(" <span data-agentId='"
 									+$(this).val()+"' data-agentName ='"
 									+$(this).text()+"' class='btn btn-xs btn-info pull-left jsRemoveSearchAgent'>"
 									+"<i class='fa fa-times hidden-print'></i> "
 									+$(this).text()+"</span>");	
+							*/
+							$(".jsRemoveSearchAgent").remove();
 						}
 						
 					});
-					
 				} else {
 					$("#agentList").append(" <span data-agentId='"
 						+agentId+"' data-agentName ='"

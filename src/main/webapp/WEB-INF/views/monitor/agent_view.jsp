@@ -66,6 +66,8 @@
 						</div>
 
 						<!-- 상담원 상세 정보 -->
+						<!-- 2017.08.23 kyw del -->
+						<!--  
 						<div class="box box-success">
 							<div class="box-header with-border">
 								<h3 class="box-title">모니터링 대상 여부</h3>
@@ -100,7 +102,7 @@
 							</form>
 
 						</div>
-
+-->
 						<!-- 대상자 메모 box -->
 						<div class="box box-info">
 							<div class="box-header with-border">

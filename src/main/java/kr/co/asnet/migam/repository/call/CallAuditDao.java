@@ -3,6 +3,10 @@ package kr.co.asnet.migam.repository.call;
 import java.util.List;
 
 import kr.co.asnet.migam.domain.PageDTO;
+import kr.co.asnet.migam.domain.PageDTO100;
+import kr.co.asnet.migam.domain.PageDTO25;
+import kr.co.asnet.migam.domain.PageDTO5;
+import kr.co.asnet.migam.domain.PageDTO50;
 import kr.co.asnet.migam.domain.SearchDTO;
 import kr.co.asnet.migam.domain.agent.Agent;
 import kr.co.asnet.migam.domain.call.CallAudit;
@@ -43,11 +47,28 @@ public interface CallAuditDao {
 	public List<CallAudit> selectCallAuditList(PageDTO pageDTO, SearchDTO searchDTO, String orderby);
 	
 	public List<RealStat> selectRealStatList(PageDTO pageDTO, SearchDTO searchDTO, String orderby);
-	
 	public List<RealStat> selectGroupList(PageDTO pageDTO, SearchDTO searchDTO, String orderby);
-	
 	public List<RealStat> selectAgentList(PageDTO pageDTO, SearchDTO searchDTO, String orderby);
+	
+	public List<RealStat> selectRealStatList5(PageDTO5 pageDTO5, SearchDTO searchDTO, String orderby);
+	public List<RealStat> selectGroupList5(PageDTO5 pageDTO5, SearchDTO searchDTO, String orderby);
+	public List<RealStat> selectAgentList5(PageDTO5 pageDTO5, SearchDTO searchDTO, String orderby);
+	
+	public List<RealStat> selectRealStatList25(PageDTO25 pageDTO25, SearchDTO searchDTO, String orderby);
+	public List<RealStat> selectGroupList25(PageDTO25 pageDTO25, SearchDTO searchDTO, String orderby);
+	public List<RealStat> selectAgentList25(PageDTO25 pageDTO25, SearchDTO searchDTO, String orderby);
+	
+	public List<RealStat> selectRealStatList50(PageDTO50 pageDTO50, SearchDTO searchDTO, String orderby);
+	public List<RealStat> selectGroupList50(PageDTO50 pageDTO50, SearchDTO searchDTO, String orderby);
+	public List<RealStat> selectAgentList50(PageDTO50 pageDTO50, SearchDTO searchDTO, String orderby);
+	
+	public List<RealStat> selectRealStatList100(PageDTO100 pageDTO100, SearchDTO searchDTO, String orderby);
+	public List<RealStat> selectGroupList100(PageDTO100 pageDTO100, SearchDTO searchDTO, String orderby);
+	public List<RealStat> selectAgentList100(PageDTO100 pageDTO100, SearchDTO searchDTO, String orderby);
 
+	public int countgetRealStat(SearchDTO searchDTO);
+	
+	
 	/**
 	 * 실시간 통화(CallAudit)수 카운트
 	 * 
