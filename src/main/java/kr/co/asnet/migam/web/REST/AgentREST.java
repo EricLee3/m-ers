@@ -297,20 +297,17 @@ public class AgentREST {
 	 * @throws UnknownHostException 
 	 */
 	@RequestMapping(value = "/deleteAgent/{index}", method = RequestMethod.GET)
-	public ResponseEntity<Boolean> deleteAgent(@PathVariable("index") String agentIndex, Model model, HisLog hislog, Agent agent) throws UnknownHostException {
-		
+	public ResponseEntity<Boolean> deleteAgent(@PathVariable("index") String index, Model model, HisLog hislog, Agent agent, String username, String userid) throws UnknownHostException {
 		InetAddress ip = InetAddress.getLocalHost(); 
-		String[] array;
-		array = agentIndex.split(",");
 		
-		hislog.setDetail("[삭제] 상담원ID(이름) : ["+array[1]+"("+array[2]+")]");
+		hislog.setDetail("[삭제] 상담원ID(이름) : ["+agent.getAgentName()+"("+agent.getAgentId()+")]");
 		hislog.setMenu("시스템 설정 > 상담원 목록[삭제]");
-		hislog.setUser_id(array[4]);
+		hislog.setUser_id(userid);
 		hislog.setUser_ip(ip.getHostAddress());
-		hislog.setUser_name(array[3]);
+		hislog.setUser_name(username);
 		alarmLimitService.insertHis(hislog); 
-		agent.setAgentId(array[1]);
-		Boolean isDeleted = agentService.deleteAgent(array[0]);
+		
+		Boolean isDeleted = agentService.deleteAgent(index);
 		int agentchanged = agentService.insertAgentChanged(agent);
 		if(isDeleted) {
 			return new ResponseEntity<Boolean>(isDeleted, HttpStatus.OK);

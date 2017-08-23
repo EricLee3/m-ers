@@ -133,7 +133,7 @@ $(document).ready(function(){
 											<td class="hidden-print">
 												<div class="btn-group">
 													<button type="button" class="jsShowModal btn btn-default btn-xs" data-index="${agent.index }">수정</button>
-													<button type="button" class="jsDeleteAgent btn btn-default btn-xs" data-index="${agent.index },${agent.agentName }, ${agent.agentId }">삭제</button>
+													<button type="button" class="jsDeleteAgent btn btn-default btn-xs" data-index="${agent.index}?&agentName=${agent.agentName}&amp;agentId=${agent.agentId}">삭제</button>
 												</div>
 											</td>
 										</tr>
@@ -730,7 +730,8 @@ $(document).ready(function(){
     	e.preventDefault();
     	var username = "${sessionScope.sessionUser.currentUser.userName }";
     	var userid = "${sessionScope.sessionUser.currentUser.userId}";
-    	var userIndex = $(this).attr("data-index") + "," + username + "," + userid;
+    	var userIndex = $(this).attr("data-index") + "&username=" + username + "&userid=" + userid;
+    	console.log("userIndex is : "+userIndex);
     	if(confirm("한번 삭제하면 복구할 수 없습니다. 계속 하시겠습니까?")) {
 	    	$.ajax({
 	    		url:"/REST/agent/deleteAgent/" + userIndex,
