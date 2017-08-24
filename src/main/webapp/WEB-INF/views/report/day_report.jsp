@@ -111,19 +111,19 @@
 								</form>
 								<!-- /. 검색 조건 -->
 
-								<div class="col-md-12">
-									<div class="box box-default">
-										<div class="box-body chart-responsive">
-											<div class="chart" id="line-chart" style="height: 300px;"></div>
-										</div>
-										<div class="box-footer clearfix">
-											<span class="pull-right"> 
-												<i class="fa fa-minus" style="color: #de8162;"></i> 주의 단계
-												<i class="fa fa-minus" style="color: #e7cd64;"></i> 흥미 단계
-											</span>
-										</div>
-									</div>
-								</div>
+<!-- 								<div class="col-md-12"> -->
+<!-- 									<div class="box box-default"> -->
+<!-- 										<div class="box-body chart-responsive"> -->
+<!-- 											<div class="chart" id="line-chart" style="height: 300px;"></div> -->
+<!-- 										</div> -->
+<!-- 										<div class="box-footer clearfix"> -->
+<!-- 											<span class="pull-right">  -->
+<!-- 												<i class="fa fa-minus" style="color: #de8162;"></i> 주의 단계 -->
+<!-- 												<i class="fa fa-minus" style="color: #e7cd64;"></i> 흥미 단계 -->
+<!-- 											</span> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
 
 								<div class="col-md-12">
 									<div class="box">
@@ -194,6 +194,7 @@
 $(document).ready(function(){
 	$(document).on("click", ".jsExcelDownload", function(e){
 		e.preventDefault();
+		console.log("click the control");
 		window.open("/report/day_report_download?page=${pageDTO.page }&searchGroup=${searchDTO.searchGroup}&searchId=${searchDTO.searchId}&startDate=${searchDTO.startDate}&endDate=${searchDTO.endDate}&searchType=${searchDTO.searchType}&searchIsNotice=${searchDTO.searchIsNotice}", target="_blank");
 	});
 
@@ -261,7 +262,9 @@ $(document).ready(function(){
     });
 
 	$(function () {
-
+		/*
+		 * 그래프를 삭제하기 위한 주석, 이 부분에서 에러가 발생해서 밑의 Date Picker가 수행되지 않는 듯... IOS
+		/*
 	    //LINE CHART
 	    var line = new Morris.Line({
 	      element: 'line-chart',
@@ -281,7 +284,7 @@ $(document).ready(function(){
 	      parseTime: false,
 	      hideHover: 'auto'
 	    });
-		
+*/
 	    //Date picker
 	    $('#startDate').datepicker({
 	      autoclose: true
