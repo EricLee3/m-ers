@@ -73,7 +73,7 @@
 <!-- 											</select> -->
 <!-- 										</div> -->
 <!-- 									</div> -->
-									<div class="col-md-2 col-sm-2">
+									<div class="col-md-2">
 										<div class="form-group">
 											<!-- 상담원 이름을 표시하기 위해 agentName 대신 searchIsNotice 를 사용했다. -->
 											<input type="hidden" id="agentName" name="searchIsNotice" value="">

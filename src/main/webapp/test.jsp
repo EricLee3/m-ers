@@ -1,48 +1,82 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!--
+http://bestjquery.com/tutorial/progress-bar/demo47/
+http://bestjquery.com/tutorial/progress-bar/demo33/
+http://bestjquery.com/tutorial/progress-bar/demo32/
+-->
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <title>VoiceCream / 미래손 감정분석 솔루션</title>
-   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-   <script src="/resources/plugins/jQuery/jQuery-2.2.0.min.js"></script>
-   
-   <script type="text/javascript" src="/resources/jqplot/jquery.jqplot.js"></script>
-   <script type="text/javascript" src="/resources/jqplot/plugins/jqplot.pieRenderer.js"></script>
-   <script type="text/javascript" src="/resources/jqplot/plugins/jqplot.enhancedPieLegendRenderer.js"></script>
-   <link rel="stylesheet" type="text/css" href="/resources/jqplot/jquery.jqplot.css" />
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style type="text/css">
+.progressbar-title{
+    font-size: 14px;
+    color: #848484;
+    text-transform: capitalize;
+}
+.progress{
+    height: 5px;
+    overflow: visible;
+    background: #f0f0f0;
+    margin-bottom: 40px;
+}
+.progress .progress-bar{
+    position: relative;
+    animation: animate-positive 2s;
+}
+.progress .progress-icon{
+    width: 20px;
+    height: 20px;
+    line-height: 25px;
+    border-radius: 50%;
+    font-size: 13px;
+    position: absolute;
+    top: -7px;
+    right: 0;
+    background: #fff;
+    border-width: 3px;
+    border-style: solid;
+}
+.progress-value{
+    font-size: 13px;
+    color: #848484;
+    position: absolute;
+    top: 16px;
+    right: 0;
+}
+@-webkit-keyframes animate-positive {
+    0% { width: 0%; }
+}
+@keyframes animate-positive {
+    0% { width: 0%; }
+}
+</style>
 </head>
-<body >
-    <div id=kmj1  style="margin-top:20px; margin-left:20px; width:460px; height:300px;"></div>
-<script>
-$(document).ready(function(){
-    
-    data1 = [[['Apples', 210],['Oranges', 111], ['Bananas', 74], ['Grapes', 72],['Pears', 49]]];
-    toolTip1 = ['Red Delicious Apples', 'Parson Brown Oranges', 'Cavendish Bananas', 'Albaranzeuli Nero Grapes', 'Green Anjou Pears'];
- 
-    var plot1 = jQuery.jqplot('kmj1', 
-        data1,
-        {
-            title: ' ', 
-            seriesDefaults: {
-                shadow: false, 
-                renderer: jQuery.jqplot.PieRenderer, 
-                rendererOptions: { padding: 2, sliceMargin: 2, showDataLabels: true }
-            },
-            legend: {
-                show: true,
-                location: 'e',
-                renderer: $.jqplot.EnhancedPieLegendRenderer,
-                rendererOptions: {
-                    numberColumns: 1,
-                    toolTips: toolTip1
-                }
-            },
-        }
-    );
-});
+<body style="background-color: black; text-align:center; ">
 
-</script>
+    <div class="row">
+        <div class="col-md-6">
+            <b class="progressbar-title">HTML</b>
+            <div class="progress">
+                <div class="progress-bar" style="width: 65%; background: #ed687c;">
+                    <span class="progress-icon fa fa-check" style="border-color:#ed687c; color:#ed687c;"></span>
+                    <div class="progress-value">65%</div>
+                </div>
+            </div>
+ 
+            <h3 class="progressbar-title">CSS3</h3>
+            <div class="progress">
+                <div class="progress-bar" style="width: 50%; background: #92c26a;">
+                    <span class="progress-icon fa fa-check" style="border-color:#92c26a; color:#92c26a;"></span>
+                    <div class="progress-value">50%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>

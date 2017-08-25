@@ -10,6 +10,10 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import kr.co.asnet.migam.domain.PageDTO;
+import kr.co.asnet.migam.domain.PageDTO100;
+import kr.co.asnet.migam.domain.PageDTO25;
+import kr.co.asnet.migam.domain.PageDTO5;
+import kr.co.asnet.migam.domain.PageDTO50;
 import kr.co.asnet.migam.domain.SearchDTO;
 import kr.co.asnet.migam.domain.agent.Agent;
 import kr.co.asnet.migam.domain.call.CallAudit;
@@ -50,21 +54,79 @@ public class CallAuditServiceImpl implements CallAuditService {
 		return callAuditDao.selectCallAuditList(pageDTO, searchDTO, orderby);
 	}
 	
+	
 	@Override
 	public List<RealStat> getRealStat(PageDTO pageDTO, SearchDTO searchDTO, String orderby) {
 		return callAuditDao.selectRealStatList(pageDTO, searchDTO, orderby);
 	}
-	
 	@Override
 	public List<RealStat> getGroup(PageDTO pageDTO, SearchDTO searchDTO, String orderby) {
 		return callAuditDao.selectGroupList(pageDTO, searchDTO, orderby);
 	}
-	
 	@Override
 	public List<RealStat> getAgent(PageDTO pageDTO, SearchDTO searchDTO, String orderby) {
 		return callAuditDao.selectAgentList(pageDTO, searchDTO, orderby);
 	}
-
+	
+	@Override
+	public List<RealStat> getRealStat5(PageDTO5 pageDTO5, SearchDTO searchDTO, String orderby) {
+		return callAuditDao.selectRealStatList5(pageDTO5, searchDTO, orderby);
+	}
+	@Override
+	public List<RealStat> getGroup5(PageDTO5 pageDTO5, SearchDTO searchDTO, String orderby) {
+		return callAuditDao.selectGroupList5(pageDTO5, searchDTO, orderby);
+	}
+	@Override
+	public List<RealStat> getAgent5(PageDTO5 pageDTO5, SearchDTO searchDTO, String orderby) {
+		return callAuditDao.selectAgentList5(pageDTO5, searchDTO, orderby);
+	}
+	
+	@Override
+	public List<RealStat> getRealStat25(PageDTO25 pageDTO25, SearchDTO searchDTO, String orderby) {
+		return callAuditDao.selectRealStatList25(pageDTO25, searchDTO, orderby);
+	}
+	@Override
+	public List<RealStat> getGroup25(PageDTO25 pageDTO25, SearchDTO searchDTO, String orderby) {
+		return callAuditDao.selectGroupList25(pageDTO25, searchDTO, orderby);
+	}
+	@Override
+	public List<RealStat> getAgent25(PageDTO25 pageDTO25, SearchDTO searchDTO, String orderby) {
+		return callAuditDao.selectAgentList25(pageDTO25, searchDTO, orderby);
+	}
+	
+	@Override
+	public List<RealStat> getRealStat50(PageDTO50 pageDTO50, SearchDTO searchDTO, String orderby) {
+		return callAuditDao.selectRealStatList50(pageDTO50, searchDTO, orderby);
+	}
+	@Override
+	public List<RealStat> getGroup50(PageDTO50 pageDTO50, SearchDTO searchDTO, String orderby) {
+		return callAuditDao.selectGroupList50(pageDTO50, searchDTO, orderby);
+	}
+	@Override
+	public List<RealStat> getAgent50(PageDTO50 pageDTO50, SearchDTO searchDTO, String orderby) {
+		return callAuditDao.selectAgentList50(pageDTO50, searchDTO, orderby);
+	}
+	
+	@Override
+	public List<RealStat> getRealStat100(PageDTO100 pageDTO100, SearchDTO searchDTO, String orderby) {
+		return callAuditDao.selectRealStatList100(pageDTO100, searchDTO, orderby);
+	}
+	@Override
+	public List<RealStat> getGroup100(PageDTO100 pageDTO100, SearchDTO searchDTO, String orderby) {
+		return callAuditDao.selectGroupList100(pageDTO100, searchDTO, orderby);
+	}
+	@Override
+	public List<RealStat> getAgent100(PageDTO100 pageDTO100, SearchDTO searchDTO, String orderby) {
+		return callAuditDao.selectAgentList100(pageDTO100, searchDTO, orderby);
+	}
+	
+	
+	@Override
+	public int countgetRealStat(SearchDTO searchDTO) {
+		return callAuditDao.countgetRealStat(searchDTO);
+	}
+	
+	
 	/* (non-Javadoc)
 	 * @see kr.co.asnet.migam.service.call.CallAuditService#countAuditCallList(kr.co.asnet.migam.domain.SearchDTO)
 	 */

@@ -3,6 +3,11 @@ package kr.co.asnet.migam.service.call;
 import java.util.List;
 
 import kr.co.asnet.migam.domain.PageDTO;
+import kr.co.asnet.migam.domain.PageDTO100;
+import kr.co.asnet.migam.domain.PageDTO15;
+import kr.co.asnet.migam.domain.PageDTO25;
+import kr.co.asnet.migam.domain.PageDTO5;
+import kr.co.asnet.migam.domain.PageDTO50;
 import kr.co.asnet.migam.domain.SearchDTO;
 import kr.co.asnet.migam.domain.agent.Agent;
 import kr.co.asnet.migam.domain.call.CallAudit;
@@ -41,13 +46,29 @@ public interface CallAuditService {
 	 */
 	public List<CallAudit> getCallAuditList(PageDTO pageDTO, SearchDTO searchDTO, String orderby);
 	
+	public List<RealStat> getRealStat5(PageDTO5 pageDTO5, SearchDTO searchDTO, String orderby);
+	public List<RealStat> getGroup5(PageDTO5 pageDTO5, SearchDTO searchDTO, String orderby);
+	public List<RealStat> getAgent5(PageDTO5 pageDTO5, SearchDTO searchDTO, String orderby);
+	
 	public List<RealStat> getRealStat(PageDTO pageDTO, SearchDTO searchDTO, String orderby);
-	
 	public List<RealStat> getGroup(PageDTO pageDTO, SearchDTO searchDTO, String orderby);
-	
 	public List<RealStat> getAgent(PageDTO pageDTO, SearchDTO searchDTO, String orderby);
 
+	public List<RealStat> getRealStat25(PageDTO25 pageDTO25, SearchDTO searchDTO, String orderby);
+	public List<RealStat> getGroup25(PageDTO25 pageDTO25, SearchDTO searchDTO, String orderby);
+	public List<RealStat> getAgent25(PageDTO25 pageDTO25, SearchDTO searchDTO, String orderby);
 
+	public List<RealStat> getRealStat50(PageDTO50 pageDTO50, SearchDTO searchDTO, String orderby);
+	public List<RealStat> getGroup50(PageDTO50 pageDTO50, SearchDTO searchDTO, String orderby);
+	public List<RealStat> getAgent50(PageDTO50 pageDTO50, SearchDTO searchDTO, String orderby);
+
+	public List<RealStat> getRealStat100(PageDTO100 pageDTO100, SearchDTO searchDTO, String orderby);
+	public List<RealStat> getGroup100(PageDTO100 pageDTO100, SearchDTO searchDTO, String orderby);
+	public List<RealStat> getAgent100(PageDTO100 pageDTO100, SearchDTO searchDTO, String orderby);
+
+	
+	public int countgetRealStat(SearchDTO searchDTO);
+	
 	/**
 	 * 검색 조건에 맞는 CallAudit 객체의 갯수를 반환합니다.  
 	 * @param searchDTO

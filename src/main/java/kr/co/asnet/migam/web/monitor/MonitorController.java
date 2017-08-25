@@ -26,10 +26,16 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import kr.co.asnet.migam.domain.PageDTO;
+import kr.co.asnet.migam.domain.PageDTO100;
+import kr.co.asnet.migam.domain.PageDTO2;
+import kr.co.asnet.migam.domain.PageDTO25;
+import kr.co.asnet.migam.domain.PageDTO5;
+import kr.co.asnet.migam.domain.PageDTO50;
 import kr.co.asnet.migam.domain.SearchDTO;
 import kr.co.asnet.migam.domain.agent.Agent;
 import kr.co.asnet.migam.domain.agent.AgentGroup;
 import kr.co.asnet.migam.domain.agent.AgentHistory;
+import kr.co.asnet.migam.domain.agent.AlarmCode;
 import kr.co.asnet.migam.domain.agent.ImsiMent;
 import kr.co.asnet.migam.domain.call.CallAnalysis;
 import kr.co.asnet.migam.domain.call.CallAudit;
@@ -234,6 +240,13 @@ public class MonitorController {
 	@RequestMapping(value = "/call_list", method = RequestMethod.GET)
 	public String callList(@RequestParam(value = "page", required = false, defaultValue = "1") int page, Model model, SearchDTO searchDTO) {
 		PageDTO pageDTO = new PageDTO(page);
+		PageDTO5 pageDTO5 = new PageDTO5(page);
+		PageDTO5 pageDT10 = new PageDTO5(page);
+		PageDTO pageDTO15 = new PageDTO(page);
+		PageDTO25 pageDTO25 = new PageDTO25(page);
+		PageDTO50 pageDTO50 = new PageDTO50(page);
+		PageDTO100 pageDTO100 = new PageDTO100(page);
+
 		
 		if( searchDTO.getSearchQuery() == null ) {
 			searchDTO.setSearchQuery("");
@@ -255,18 +268,90 @@ public class MonitorController {
 		}
 		
 		
-		List<RealStat> realStatList = callAuditService.getRealStat(pageDTO, searchDTO, "order by agent_id asc");
-		model.addAttribute("realStatList", realStatList);
+		if (searchDTO.getSearchBoardIndex() == null) {
+			model.addAttribute("pageDTO", pageDTO15);
+			
+			List<RealStat> realStatList = callAuditService.getRealStat(pageDTO15, searchDTO, "order by agent_id asc");
+			model.addAttribute("realStatList", realStatList);
+			
+			List<RealStat> groupList = callAuditService.getGroup(pageDTO15, null, "order by GR.group_name asc");
+			model.addAttribute("groupList", groupList);
+			
+			List<RealStat> agentList = callAuditService.getAgent(pageDTO15, null, "order by AG.agent_name asc");
+			model.addAttribute("agentList", agentList);
+		} else {
+			if (searchDTO.getSearchBoardIndex().equals("5")) {
+				model.addAttribute("pageDTO", pageDTO5);
+				List<RealStat> realStatList = callAuditService.getRealStat5(pageDTO5, searchDTO, "order by agent_id asc");
+				model.addAttribute("realStatList", realStatList);
+				
+				List<RealStat> groupList = callAuditService.getGroup5(pageDTO5, null, "order by GR.group_name asc");
+				model.addAttribute("groupList", groupList);
+				
+				List<RealStat> agentList = callAuditService.getAgent5(pageDTO5, null, "order by AG.agent_name asc");
+				model.addAttribute("agentList", agentList);
+			} else if (searchDTO.getSearchBoardIndex().equals("15")) {
+				model.addAttribute("pageDTO", pageDTO);
+				List<RealStat> realStatList = callAuditService.getRealStat(pageDTO, searchDTO, "order by agent_id asc");
+				model.addAttribute("realStatList", realStatList);
+				
+				List<RealStat> groupList = callAuditService.getGroup(pageDTO, null, "order by GR.group_name asc");
+				model.addAttribute("groupList", groupList);
+				
+				List<RealStat> agentList = callAuditService.getAgent(pageDTO, null, "order by AG.agent_name asc");
+				model.addAttribute("agentList", agentList);
+			} else if (searchDTO.getSearchBoardIndex().equals("25")) {
+				model.addAttribute("pageDTO", pageDTO25);
+				List<RealStat> realStatList = callAuditService.getRealStat25(pageDTO25, searchDTO, "order by agent_id asc");
+				model.addAttribute("realStatList", realStatList);
+				
+				List<RealStat> groupList = callAuditService.getGroup25(pageDTO25, null, "order by GR.group_name asc");
+				model.addAttribute("groupList", groupList);
+				
+				List<RealStat> agentList = callAuditService.getAgent25(pageDTO25, null, "order by AG.agent_name asc");
+				model.addAttribute("agentList", agentList);
+			} else if (searchDTO.getSearchBoardIndex().equals("50")) {
+				model.addAttribute("pageDTO", pageDTO50);
+				List<RealStat> realStatList = callAuditService.getRealStat50(pageDTO50, searchDTO, "order by agent_id asc");
+				model.addAttribute("realStatList", realStatList);
+				
+				List<RealStat> groupList = callAuditService.getGroup50(pageDTO50, null, "order by GR.group_name asc");
+				model.addAttribute("groupList", groupList);
+				
+				List<RealStat> agentList = callAuditService.getAgent50(pageDTO50, null, "order by AG.agent_name asc");
+				model.addAttribute("agentList", agentList);
+			} else if (searchDTO.getSearchBoardIndex().equals("100")) {
+				model.addAttribute("pageDTO", pageDTO100);
+				List<RealStat> realStatList = callAuditService.getRealStat100(pageDTO100, searchDTO, "order by agent_id asc");
+				model.addAttribute("realStatList", realStatList);
+				
+				List<RealStat> groupList = callAuditService.getGroup100(pageDTO100, null, "order by GR.group_name asc");
+				model.addAttribute("groupList", groupList);
+				
+				List<RealStat> agentList = callAuditService.getAgent100(pageDTO100, null, "order by AG.agent_name asc");
+				model.addAttribute("agentList", agentList);
+			}else {
+				model.addAttribute("pageDTO", pageDTO);
+				List<RealStat> realStatList = callAuditService.getRealStat(pageDTO, searchDTO, "order by agent_id asc");
+				model.addAttribute("realStatList", realStatList);
+				
+				List<RealStat> groupList = callAuditService.getGroup(pageDTO, null, "order by GR.group_name asc");
+				model.addAttribute("groupList", groupList);
+				
+				List<RealStat> agentList = callAuditService.getAgent(pageDTO, null, "order by AG.agent_name asc");
+				model.addAttribute("agentList", agentList);
+			}
+		}
 		
-		List<RealStat> groupList = callAuditService.getGroup(pageDTO, null, "order by GR.group_name asc");
-		model.addAttribute("groupList", groupList);
 		
-		List<RealStat> agentList = callAuditService.getAgent(pageDTO, null, "order by AG.agent_name asc");
-		model.addAttribute("agentList", agentList);
+		model.addAttribute("call_list_Count", callAuditService.countgetRealStat(searchDTO));
+
+		model.addAttribute("listCount", 10);
 		
 		model.addAttribute("searchDTO", searchDTO);
 		model.addAttribute("searchId", searchDTO.getSearchId());
 		model.addAttribute("searchQuery", searchDTO.getSearchQuery());
+		model.addAttribute("searchBoardIndex", searchDTO.getSearchBoardIndex());
 		
 		/*
 		List<CallAudit> callAuditList = callAuditService.getCallAuditList(pageDTO, null, "order by agent_id asc");

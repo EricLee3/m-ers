@@ -16,6 +16,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import kr.co.asnet.migam.domain.PageDTO;
+import kr.co.asnet.migam.domain.PageDTO100;
+import kr.co.asnet.migam.domain.PageDTO25;
+import kr.co.asnet.migam.domain.PageDTO5;
+import kr.co.asnet.migam.domain.PageDTO50;
 import kr.co.asnet.migam.domain.SearchDTO;
 import kr.co.asnet.migam.domain.agent.Agent;
 import kr.co.asnet.migam.domain.call.CallAudit;
@@ -80,7 +84,6 @@ public class CallAuditDaoMapper implements CallAuditDao {
 		}
 		return sqlSession.selectList("kr.co.asnet.migam.repository.call.CallAuditDaoMapper.selectRealStatList", parameters);
 	}
-	
 	@Override
 	public List<RealStat> selectGroupList(PageDTO pageDTO, SearchDTO searchDTO, String orderby) {
 		Map<String, Object> parameters = new HashMap<String, Object>();
@@ -91,7 +94,6 @@ public class CallAuditDaoMapper implements CallAuditDao {
 		}
 		return sqlSession.selectList("kr.co.asnet.migam.repository.call.CallAuditDaoMapper.selectGroupList", parameters);
 	}
-	
 	@Override
 	public List<RealStat> selectAgentList(PageDTO pageDTO, SearchDTO searchDTO, String orderby) {
 		Map<String, Object> parameters = new HashMap<String, Object>();
@@ -102,6 +104,151 @@ public class CallAuditDaoMapper implements CallAuditDao {
 		}
 		return sqlSession.selectList("kr.co.asnet.migam.repository.call.CallAuditDaoMapper.selectAgentList", parameters);
 	}
+
+	
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	@Override
+	public List<RealStat> selectRealStatList5(PageDTO5 pageDTO5, SearchDTO searchDTO, String orderby) {
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		{
+			parameters.put("pageDTO", pageDTO5);
+			parameters.put("searchDTO", searchDTO);
+			parameters.put("orderby", orderby);
+		}
+		return sqlSession.selectList("kr.co.asnet.migam.repository.call.CallAuditDaoMapper.selectRealStatList", parameters);
+	}
+	@Override
+	public List<RealStat> selectGroupList5(PageDTO5 pageDTO5, SearchDTO searchDTO, String orderby) {
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		{
+			parameters.put("pageDTO", pageDTO5);
+			parameters.put("searchDTO", searchDTO);
+			parameters.put("orderby", orderby);
+		}
+		return sqlSession.selectList("kr.co.asnet.migam.repository.call.CallAuditDaoMapper.selectGroupList", parameters);
+	}
+	@Override
+	public List<RealStat> selectAgentList5(PageDTO5 pageDTO5, SearchDTO searchDTO, String orderby) {
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		{
+			parameters.put("pageDTO", pageDTO5);
+			parameters.put("searchDTO", searchDTO);
+			parameters.put("orderby", orderby);
+		}
+		return sqlSession.selectList("kr.co.asnet.migam.repository.call.CallAuditDaoMapper.selectAgentList", parameters);
+	}
+	
+	@Override
+	public List<RealStat> selectRealStatList25(PageDTO25 pageDTO, SearchDTO searchDTO, String orderby) {
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		{
+			parameters.put("pageDTO", pageDTO);
+			parameters.put("searchDTO", searchDTO);
+			parameters.put("orderby", orderby);
+		}
+		return sqlSession.selectList("kr.co.asnet.migam.repository.call.CallAuditDaoMapper.selectRealStatList", parameters);
+	}
+	@Override
+	public List<RealStat> selectGroupList25(PageDTO25 pageDTO, SearchDTO searchDTO, String orderby) {
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		{
+			parameters.put("pageDTO", pageDTO);
+			parameters.put("searchDTO", searchDTO);
+			parameters.put("orderby", orderby);
+		}
+		return sqlSession.selectList("kr.co.asnet.migam.repository.call.CallAuditDaoMapper.selectGroupList", parameters);
+	}
+	@Override
+	public List<RealStat> selectAgentList25(PageDTO25 pageDTO, SearchDTO searchDTO, String orderby) {
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		{
+			parameters.put("pageDTO", pageDTO);
+			parameters.put("searchDTO", searchDTO);
+			parameters.put("orderby", orderby);
+		}
+		return sqlSession.selectList("kr.co.asnet.migam.repository.call.CallAuditDaoMapper.selectAgentList", parameters);
+	}
+	
+	@Override
+	public List<RealStat> selectRealStatList50(PageDTO50 pageDTO, SearchDTO searchDTO, String orderby) {
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		{
+			parameters.put("pageDTO", pageDTO);
+			parameters.put("searchDTO", searchDTO);
+			parameters.put("orderby", orderby);
+		}
+		return sqlSession.selectList("kr.co.asnet.migam.repository.call.CallAuditDaoMapper.selectRealStatList", parameters);
+	}
+	@Override
+	public List<RealStat> selectGroupList50(PageDTO50 pageDTO, SearchDTO searchDTO, String orderby) {
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		{
+			parameters.put("pageDTO", pageDTO);
+			parameters.put("searchDTO", searchDTO);
+			parameters.put("orderby", orderby);
+		}
+		return sqlSession.selectList("kr.co.asnet.migam.repository.call.CallAuditDaoMapper.selectGroupList", parameters);
+	}
+	@Override
+	public List<RealStat> selectAgentList50(PageDTO50 pageDTO, SearchDTO searchDTO, String orderby) {
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		{
+			parameters.put("pageDTO", pageDTO);
+			parameters.put("searchDTO", searchDTO);
+			parameters.put("orderby", orderby);
+		}
+		return sqlSession.selectList("kr.co.asnet.migam.repository.call.CallAuditDaoMapper.selectAgentList", parameters);
+	}
+	
+	@Override
+	public List<RealStat> selectRealStatList100(PageDTO100 pageDTO, SearchDTO searchDTO, String orderby) {
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		{
+			parameters.put("pageDTO", pageDTO);
+			parameters.put("searchDTO", searchDTO);
+			parameters.put("orderby", orderby);
+		}
+		return sqlSession.selectList("kr.co.asnet.migam.repository.call.CallAuditDaoMapper.selectRealStatList", parameters);
+	}
+	@Override
+	public List<RealStat> selectGroupList100(PageDTO100 pageDTO, SearchDTO searchDTO, String orderby) {
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		{
+			parameters.put("pageDTO", pageDTO);
+			parameters.put("searchDTO", searchDTO);
+			parameters.put("orderby", orderby);
+		}
+		return sqlSession.selectList("kr.co.asnet.migam.repository.call.CallAuditDaoMapper.selectGroupList", parameters);
+	}
+	@Override
+	public List<RealStat> selectAgentList100(PageDTO100 pageDTO, SearchDTO searchDTO, String orderby) {
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		{
+			parameters.put("pageDTO", pageDTO);
+			parameters.put("searchDTO", searchDTO);
+			parameters.put("orderby", orderby);
+		}
+		return sqlSession.selectList("kr.co.asnet.migam.repository.call.CallAuditDaoMapper.selectAgentList", parameters);
+	}
+	
+	@Override
+	public int countgetRealStat(SearchDTO searchDTO) {
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		{
+			parameters.put("searchDTO", searchDTO);
+		}
+		return sqlSession.selectOne("kr.co.asnet.migam.repository.call.CallAuditDaoMapper.countgetRealStat", parameters);
+	}
+	
 
 	/* (non-Javadoc)
 	 * @see kr.co.asnet.migam.repository.call.CallAuditDao#selectCount(kr.co.asnet.migam.domain.SearchDTO)
