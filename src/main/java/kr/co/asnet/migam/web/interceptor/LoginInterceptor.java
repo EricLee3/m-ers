@@ -53,7 +53,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         	 System.out.println("main:::"+https);
             String rtUrl = URLEncoder.encode(requestURL, "utf-8");
             response.sendRedirect("/login?rtUrl=" + rtUrl);
-            return false;
+            return false;::::::saveUser:::::::
          }
          */
     //  }
@@ -72,8 +72,10 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
       if (StringUtils.containsAny(requestURL, adminPath)) {
          if ( !sessionUser.isLogin() ) {
             String rtUrl = URLEncoder.encode(requestURL, "utf-8");
-            response.sendRedirect("/login?rtUrl=" + rtUrl);
+            response.sendRedirect("/session_out");
             return false;
+         }else {
+            
          }
       }
 
@@ -94,7 +96,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
             sessionUser.logoutSessionUser();
             sessionUser.saveUser(new User());
             String rtUrl = URLEncoder.encode(requestURL, "utf-8");
-            response.sendRedirect("/login?rtUrl=" + rtUrl);
+            response.sendRedirect("/session_out");
             return false;
          }
       }
