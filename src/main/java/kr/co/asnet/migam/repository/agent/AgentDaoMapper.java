@@ -96,6 +96,15 @@ public class AgentDaoMapper implements AgentDao {
 	}
 
 	/* (non-Javadoc)
+	 * @see kr.co.asnet.migam.repository.agent.insertAgent(kr.co.asnet.migam.domain.Agent)
+	 */
+	@Override
+	public int deleteAgentById(String agentId) {
+		return sqlSession.delete("kr.co.asnet.migam.repository.agent.AgentDaoMapper.deleteAgentById", agentId);
+	}
+	
+	
+	/* (non-Javadoc)
 	 * @see kr.co.asnet.migam.repository.agent.AgentDao#selectAgentList(kr.co.asnet.migam.domain.PageDTO, kr.co.asnet.migam.domain.SearchDTO, java.lang.String)
 	 */
 	@Override

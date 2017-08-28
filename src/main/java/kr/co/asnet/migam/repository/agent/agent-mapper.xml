@@ -192,6 +192,12 @@
 		]]>
 	</delete>
 	
+	<delete id="deleteAgentById" parameterType="String">
+		<![CDATA[
+			delete from mecs5_agent where agent_id = #{agentId}
+		]]>
+	</delete>
+	
 	<select id="selectAgentListWithCount" parameterType="hashmap" resultMap="rmapAgent">
 		<![CDATA[
 			select A.*, B.stressCount, B.angryCount 

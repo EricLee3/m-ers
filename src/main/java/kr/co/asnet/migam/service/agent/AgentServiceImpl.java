@@ -141,6 +141,12 @@ public class AgentServiceImpl implements AgentService {
 		return agentDao.deleteAgent(index) > 0 ? true : false;	
 	}
 	
+	
+	@Override
+	public Boolean deleteAgentById(String agentId)  {
+		return agentDao.deleteAgentById(agentId) > 0 ? true : false;
+	}
+	
 	/* (non-Javadoc)
 	 * @see kr.co.asnet.migam.service.agent.AgentService#login(kr.co.asnet.migam.domain.agent.Agent)
 	 */

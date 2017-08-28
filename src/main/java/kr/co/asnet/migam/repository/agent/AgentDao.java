@@ -133,6 +133,14 @@ public interface AgentDao {
 	 */
 	public int deleteAgent(String agentIndex);
 	
+	/**
+	 * 상담원 삭제
+	 * 
+	 * @param agentId
+	 * @return
+	 * IOS
+	 */
+	public int deleteAgentById(String agentId);
 	
 	/**
 	 * 지정된 조건에 맞는 상담원 목록을 반환합니다. ( 본 메소드는 AngryCount, StressCount 값을 포함하여 반환하지만, 성능이 좋지 않습니다.  )

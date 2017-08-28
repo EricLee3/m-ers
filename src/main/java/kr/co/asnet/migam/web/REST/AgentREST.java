@@ -367,6 +367,25 @@ public class AgentREST {
 		}
 	}
 	
+	@RequestMapping(value="/repr", method = RequestMethod.DELETE)
+    public ResponseEntity<Boolean> deleteRepr(@RequestBody Agent agent, HisLog hislog) throws UnknownHostException {
+		InetAddress ip = InetAddress.getLocalHost();
+		
+		hislog.setDetail("[삭제] 상담원ID(이름) : ["+agent.getAgentName()+"("+agent.getAgentId()+")]");
+		hislog.setMenu("시스템 설정 > 상담원 목록[삭제]");
+		hislog.setUser_id("admin");
+		hislog.setUser_ip(ip.getHostAddress());
+		hislog.setUser_name("2k");
+		alarmLimitService.insertHis(hislog); 
+		
+		Boolean isDeleted = agentService.deleteAgentById(agent.getAgentId());
+		int agentchanged = agentService.insertAgentChanged(agent);
+		if(isDeleted) {
+			return new ResponseEntity<Boolean>(isDeleted, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Boolean>(HttpStatus.NO_CONTENT);
+		}
+	}
 	/**
 	 * 주어진 그룹 ID에 해당하는 상담원 목록(Agent-List)을 반환하는 엔드포인트입니다.
 	 * call_report.jsp :: ReportController에서 사용하기 위해 만들었습니다.

@@ -30,6 +30,7 @@ public interface AgentService {
 	
 	public int insertAgentChanged(Agent agent);
 
+	
 
 	/**
 	 * 지정된 번호(index)에 해당하는 Agent객체를 반환합니다. 
@@ -133,6 +134,15 @@ public interface AgentService {
 	 */
 	public Boolean deleteAgent(String index);
 
+	/*
+	 * 사용자 삭제 
+	 * 
+	 * @paran agentId
+	 * @return
+	 * IOS
+	 */
+	public Boolean deleteAgentById(String agentId);
+	
 	/**
 	 * 주어진 조건에 따라 Agent 객체 목록을 반환합니다.
 	 * 다만, 해당 상담원의 AnrgyCount에 현재 상담중인 통화가 AngerCall인지 확인하여 1 또는 0을 넣습니다.
