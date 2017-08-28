@@ -56,7 +56,8 @@
 $(document).ready(function(){
 	var protocol = location.protocol+"//";
 	var host = location.host;
-	var login = "/login";
+	var login = "/login?flag=1";
+
 	window.top.location.href = protocol+host+login;
 });
 

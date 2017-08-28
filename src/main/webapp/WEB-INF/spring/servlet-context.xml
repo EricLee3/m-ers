@@ -24,7 +24,8 @@
 		<mvc:interceptor>
 			<mvc:mapping path="" />
 			<mvc:mapping path="/" />
-			<mvc:mapping path="/**/*" />
+			<mvc:mapping path="/system/*" />
+			<mvc:mapping path="/monitor/*" /> 
 			<bean class="kr.co.asnet.migam.web.interceptor.LoginInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
