@@ -112,7 +112,7 @@
 									</div>
 								</form>
 								<!-- /. 검색 조건 -->
-
+<%--
 								<div class="col-md-12">
 									<div class="box box-info">
 										<!-- 
@@ -131,7 +131,7 @@
 										</div>
 									</div>
 								</div>
-								
+ --%>								
 								<div class="col-md-12">
 									<div class="box box-info">
 										<div class="box-body chart-responsive">

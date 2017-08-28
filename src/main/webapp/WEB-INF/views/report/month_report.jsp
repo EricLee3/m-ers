@@ -109,7 +109,7 @@
 									</div>
 								</form>
 								<!-- /. 검색 조건 -->
-
+<%--
 								<div class="col-md-12">
 									<div class="box box-default">
 										<div class="box-body chart-responsive">
@@ -123,7 +123,7 @@
 										</div>
 									</div>
 								</div>
-
+ --%>
 								<div class="col-md-12">
 									<div class="box">
 										<div class="box-body">

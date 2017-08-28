@@ -123,7 +123,7 @@
 								
 								</form>
 								<!-- /. 검색 조건 -->
-
+<%--
 								<div class="col-md-12">
 									<div class="box box-default">
 										<div class="box-body chart-responsive">
@@ -137,7 +137,7 @@
 										</div>
 									</div>
 								</div>
-
+ --%>
 								<div class="col-md-12">
 									<div class="box">
 										<div class="box-body">
@@ -293,10 +293,14 @@ $(document).ready(function(){
 			if( index != 0) agentIdList += ","; 
 			agentIdList += ("'" + $(this).attr("data-agentId") + "'");
 		});
-		if( agentIdList.length < 1 ) {
-			alert("상담원 또는 그룹을 선택하여야 합니다.");
-			return false;
+		
+		if($("select[name=selectAgent]").val() != 'selectAllAgent'){
+			if( agentIdList.length < 1 ) {
+				alert("상담원 또는 그룹을 선택하여야 합니다.");
+				return false;
+			}
 		}
+		
 
 		$("#searchId").val(agentIdList);
 	   	var tempEnddate = $("#endDate").val();

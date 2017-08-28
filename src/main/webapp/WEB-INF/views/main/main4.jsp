@@ -73,10 +73,16 @@ $(document).on("click", ".jsSearch2", function(e){
 
    <iframe name="LayerAttributeView" id="LayerAttributeView" src="/main5" width="100%" height="900px;"frameborder="0"></iframe>
 --%>
+<%--
           <li class="" id="dashboard"><a href="/main5" target="iframe2" class="jsSearch1">DashBoard</a></li>
            <li class="" id="segment"><a href="/system/segment_list" target="iframe2" class="jsSearch2">시스템 상태</a></li>
          </ul>
+       
             <iframe src="/main5" width="100%"  scrolling="no" frameborder="0" border="0" bordercolor="#000000" marginwidth="0" marginheight="0" name="iframe2" id="iframe2"></iframe>
+             --%>
+             <li class="" id="segment"><a href="/system/segment_list" target="iframe2" class="jsSearch2">시스템 상태</a></li>
+             </ul>
+             <iframe src="/system/segment_list" width="100%"  scrolling="no" frameborder="0" border="0" bordercolor="#000000" marginwidth="0" marginheight="0" name="iframe2" id="iframe2"></iframe>
       </section>
 
    <!-- Modal 콜 상세 조회 -->

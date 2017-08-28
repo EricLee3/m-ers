@@ -111,19 +111,21 @@
 								</form>
 								<!-- /. 검색 조건 -->
 
-<!-- 								<div class="col-md-12"> -->
-<!-- 									<div class="box box-default"> -->
-<!-- 										<div class="box-body chart-responsive"> -->
-<!-- 											<div class="chart" id="line-chart" style="height: 300px;"></div> -->
-<!-- 										</div> -->
-<!-- 										<div class="box-footer clearfix"> -->
-<!-- 											<span class="pull-right">  -->
-<!-- 												<i class="fa fa-minus" style="color: #de8162;"></i> 주의 단계 -->
-<!-- 												<i class="fa fa-minus" style="color: #e7cd64;"></i> 흥미 단계 -->
-<!-- 											</span> -->
-<!-- 										</div> -->
-<!-- 									</div> -->
-<!-- 								</div> -->
+<%--
+								<div class="col-md-12">
+									<div class="box box-default">
+										<div class="box-body chart-responsive">
+											<div class="chart" id="line-chart" style="height: 300px;"></div>
+										</div>
+										<div class="box-footer clearfix">
+											<span class="pull-right"> 
+												<i class="fa fa-minus" style="color: #de8162;"></i> 주의 단계
+												<i class="fa fa-minus" style="color: #e7cd64;"></i> 흥미 단계
+											</span>
+										</div>
+									</div>
+								</div>
+ --%>
 
 								<div class="col-md-12">
 									<div class="box">
