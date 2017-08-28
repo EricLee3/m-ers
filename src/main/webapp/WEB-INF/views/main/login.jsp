@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,11 +16,7 @@
 	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
 	<script src="/resources/plugins/jQuery/jQuery-2.2.0.min.js"></script>
-	<script src="/resources/bootstrap/js/bootstrap.min.js"></script><script>
-$(document).ready(function(){
-	alert("ASD");
-	});
-	</script>
+	<script src="/resources/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body class="hold-transition login-page"  style="background-color:#fff;">
 
