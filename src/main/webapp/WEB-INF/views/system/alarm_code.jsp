@@ -50,9 +50,10 @@
 								<form role="form" id="form_alarmCode_search"  action="" method="get">
 									<input type="hidden" name="page" value="" />
 									<input type="hidden" name="searchBoardIndex" id="searchBoardIndex" value="" />
+									
 									<div class="col-md-2 hidden-print">
 										<div class="form-group">
-											<input tabindex="1" type="text" id="searchQuery" name="searchQuery" class="form-control pull-right" placeholder="알람코드" value="${searchDTO.searchQuery }">
+											<input type="text" class="form-control" id="searchQuery" name="searchQuery" placeholder="알람코드" maxlength="10" value="${searchDTO.searchQuery }">
 										</div>
 									</div>
 									
@@ -71,9 +72,10 @@
 									
 									<div class="col-md-2 hidden-print">
 										<div class="form-group">
-											<input type="text" class="form-control" id="searchCondition" name="searchCondition" placeholder="설명 " value="<c:if test="${searchDTO.searchCondition ne null && searchDTO.searchCondition ne '' }">${searchDTO.searchCondition}</c:if>" maxlength="30">
+											<input type="text" class="form-control" id="searchCondition" name="searchCondition" placeholder="설명 " maxlength="30" value="<c:if test="${searchDTO.searchCondition ne null && searchDTO.searchCondition ne '' }">${searchDTO.searchCondition}</c:if>">
 										</div>
 									</div>
+									
 									<div class="col-md-2 hidden-print">
 										<button type="button" class="jsSearch btn btn-info">조회</button>
 									</div>
@@ -86,9 +88,9 @@
 											<th class="col-sm-1" style="width: 1%;">No.</th>
 											<th class="col-sm-1" style="width: 2%;">알람 코드</th>
 											<th class="col-sm-1" style="width: 2%;">알람 레벨</th>
-											<th class="col-sm-1" style="width: 2%;">알람 사용여부</th>
-											<th class="col-sm-1" style="width: 2%;">가시 사용여부</th>
-											<th class="col-sm-1" style="width: 2%;">가청 사용여부</th>
+											<th class="col-sm-1" style="width: 2%;">알람 여부</th>
+											<th class="col-sm-1" style="width: 2%;">가시 여부</th>
+											<th class="col-sm-1" style="width: 2%;">가청 여부</th>
 											<th class="col-sm-1" width="*%">설명</th>
 											<th class="col-sm-1" style="width: 2%;">관리</th>
 										</tr>
@@ -113,19 +115,19 @@
 										<td><img src="/resources/img/fa.PNG" alt="fault" width="70px;" height="25px;"></td>
 										</c:if>
 										<c:if test="${alarm.useFlag eq 0}">
-										<td>사용 안함</td>
+										<td>미사용</td>
 										</c:if>
 										<c:if test="${alarm.useFlag eq 1}">
 										<td>사용</td>
 										</c:if>
 										<c:if test="${alarm.visualFlag eq 0}">
-										<td>사용 안함</td>
+										<td>미사용</td>
 										</c:if>
 										<c:if test="${alarm.visualFlag eq 1}">
 										<td>사용</td>
 										</c:if>
 										<c:if test="${alarm.audioFlag eq 0}">
-										<td>사용 안함</td>
+										<td>미사용</td>
 										</c:if>
 										<c:if test="${alarm.audioFlag eq 1}">
 										<td>사용</td>
@@ -171,7 +173,7 @@
 								<button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#myModal">알람 등록</button>
 								
 						</div>
-						<div class="input-group input-group-sm col-md-3 pull-right" style="width:100px; margin-top: 10px;">
+						<div class="input-group input-group-sm col-md-3 pull-right" style="width:110px; margin-top: 10px;">
 							<select class="form-control" id="searchBoardIndex1" name="searchBoardIndex1">
 								<option value="">선택</option>
 								<option value="5">5개</option>
@@ -213,27 +215,27 @@
 						<input type="hidden" name="searchBoardIndex" id="searchBoardIndex" value="" />
 						<div class="modal-body">
 							<div class="form-group">
-								<label for="alarmCode">알람코드 <span class="text-danger">*</span></label><span class="pull-right"><span class="text-danger"><strong>*</strong></span>는 필수입력정보입니다.</span> 
+								<label for="alarmCode">알람 코드 <span class="text-danger">*</span></label><span class="pull-right"><span class="text-danger"><strong>*</strong></span>는 필수입력정보입니다.</span> 
 								<input type="text" class="form-control" id="alarmCode" name="alarmCode" placeholder="알람코드를 입력하세요" maxlength="10">
 								<span id="checkAlarmCodeMsg" class="help-block">
 									<i class="fa fa-exclamation-circle" aria-hidden="true"></i> 중복 검사 필요
 								</span>
 							</div>
 							<div class="form-group">
-								<label>알람 사용 여부</label> 
-								<select class="form-control" id="useFlag" name="useFlag">
-									<option value="1">사용</option>
-									<option value="0">사용안함</option>
-								</select>
-							</div>
-							<div class="form-group">
-								<label>알람레벨<span class="text-danger">*</span></label> 
+								<label>알람 레벨<span class="text-danger">*</span></label> 
 								<select class="form-control" id="alarmLv" name="alarmLv">
 									<option value="0">NORMAL</option>
 									<option value="1">MINOR</option>
 									<option value="2">MAJOR</option>
 									<option value="3">CRITICAL</option>
 									<option value="4">FAULT</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label>알람 여부</label> 
+								<select class="form-control" id="useFlag" name="useFlag">
+									<option value="1">사용</option>
+									<option value="0">사용안함</option>
 								</select>
 							</div>
 							<div class="form-group">
