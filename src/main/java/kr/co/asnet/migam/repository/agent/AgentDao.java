@@ -55,6 +55,8 @@ public interface AgentDao {
 	 */
 	public int updateAgent(Agent agent);
 	
+	public int updateAgentById(Agent agent);
+	
 	/**
 	 * 지정된 조건에 맞는 상담원 목록을 반환합니다. ( 본 메소드는 AngryCount, StressCount 값을 포함하지 않습니다. )
 	 * @param pageDTO

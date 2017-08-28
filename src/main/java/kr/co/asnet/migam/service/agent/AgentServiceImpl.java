@@ -133,6 +133,17 @@ public class AgentServiceImpl implements AgentService {
 	public int updateAgent(Agent agent) {
 		return agentDao.updateAgent(agent);
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see kr.co.asnet.migam.service.agent.AgentService#updateAgentById(kr.co.asnet.migam.domain.agent.Agent)
+	 * Agent 객체의 agentId를 사용하여 타 field update, dynamic SQL 사용
+	 */
+	@Override
+	public int updateAgentById(Agent agent) {
+		return agentDao.updateAgentById(agent);
+	}
+	
 	/* (non-Javadoc)
 	 * @see kr.co.asnet.migam.service.agent.AgentService#deleteAgent(int)
 	 */

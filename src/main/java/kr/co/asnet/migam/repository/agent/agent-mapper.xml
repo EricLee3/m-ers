@@ -166,6 +166,18 @@
 		</where>
 	</update>
 	
+	<update id="updateAgentById" parameterType="agent">
+		update mecs5_agent
+		<set>
+			<if test="agentNumber != ''">agent_no = #{agentNumber},</if>
+			<if test="agentName != ''">agent_name = #{agentName},</if>
+			<if test="agentIp != ''">agent_ip = #{agentIp}</if>
+		</set>
+		<where>
+			agent_id = #{agentId}
+		</where>
+	</update>
+	
 	<select id="selectAgentList" parameterType="hashmap" resultMap="rmapAgent">
 		<include refid="sql_agent" />
 		<include refid="sql_search" />

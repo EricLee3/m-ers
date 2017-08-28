@@ -169,6 +169,54 @@ public class AgentREST {
 		}
 	}
 	
+	/*
+	 * patch API design 
+	 */
+	@RequestMapping(value = "/repr/{agentId}", method = RequestMethod.PATCH)
+	public int fetchAgent(@PathVariable("agentId") String agentId, @RequestBody Agent agent, Model model, SearchDTO searchDTO,HisLog hislog) throws UnknownHostException {
+		int updateCount = 0;
+		int returncheck = 0;
+		int agentchanged = 0;
+		InetAddress ip = InetAddress.getLocalHost();
+		CallAudit callAudit = callAuditService.getCallAudit(agentId);
+		License license = licenseService.getLicense();
+		
+		//실시간 선택 시 
+		int	intcallAudit = 1;
+		searchDTO.setSearchIsAudit("1");
+		int auditCount = agentService.countAgentList(searchDTO);
+		if(license.getRealtimeChannel() > auditCount){
+			if(callAudit == null){
+				intcallAudit = callAuditService.insertCallAudit(agent.getAgentId(),agent.getGroupId(),0);
+			}else{
+				intcallAudit = 1;
+			}
+			returncheck = 1;
+			updateCount = agentService.updateAgentById(agent);
+			agentchanged = agentService.insertAgentChanged(agent);
+		}
+		
+		hislog.setDetail("[수정] 상담원ID(이름) : ["+agent.getAgentId()+"("+agent.getAgentName()+")"+"] "
+				+ "그룹ID(이름) : ["+agent.getGroupId()+"("+agent.getGroupName()+")] 내선번호 : ["+agent.getAgentNumber()+"] IP : ["+agent.getAgentIp()+"]"
+						+ " 비실시간 모니터링 대상 여부 : ["+"실시간"+"]");
+		hislog.setMenu("시스템 설정 > 상담원 목록[수정]");
+		hislog.setUser_id("admin");
+		hislog.setUser_ip(ip.getHostAddress());
+		hislog.setUser_name("2k");
+		alarmLimitService.insertHis(hislog);
+		
+		if(returncheck == 1){
+			if(updateCount > 0 && intcallAudit != 0) {
+				return 1;
+			} else {
+				return 0;
+			}
+		}else{
+			return 2;
+		}
+	}
+	
+	
 	/**
 	 * 주어진 상담원 정보에 따라 해당 상담원 정보를 업데이트하기 위한 엔드포인트입니다.
 	 * @param agent
@@ -370,6 +418,7 @@ public class AgentREST {
 	@RequestMapping(value="/repr", method = RequestMethod.DELETE)
     public ResponseEntity<Boolean> deleteRepr(@RequestBody Agent agent, HisLog hislog) throws UnknownHostException {
 		InetAddress ip = InetAddress.getLocalHost();
+		CallAudit callAudit = callAuditService.getCallAudit(agent.getAgentId());
 		
 		hislog.setDetail("[삭제] 상담원ID(이름) : ["+agent.getAgentName()+"("+agent.getAgentId()+")]");
 		hislog.setMenu("시스템 설정 > 상담원 목록[삭제]");
@@ -380,12 +429,20 @@ public class AgentREST {
 		
 		Boolean isDeleted = agentService.deleteAgentById(agent.getAgentId());
 		int agentchanged = agentService.insertAgentChanged(agent);
-		if(isDeleted) {
+
+		// delete mecs5_realtime_state
+		int intcallAudit = 1;
+		if (callAudit != null)  {
+			intcallAudit = callAuditService.deleteCallAudit(agent.getAgentId());
+		}
+		
+		if(isDeleted && intcallAudit != 0) {
 			return new ResponseEntity<Boolean>(isDeleted, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<Boolean>(HttpStatus.NO_CONTENT);
 		}
 	}
+	
 	/**
 	 * 주어진 그룹 ID에 해당하는 상담원 목록(Agent-List)을 반환하는 엔드포인트입니다.
 	 * call_report.jsp :: ReportController에서 사용하기 위해 만들었습니다.
