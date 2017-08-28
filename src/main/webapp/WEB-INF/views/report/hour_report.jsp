@@ -75,10 +75,10 @@
 <!-- 									</div> -->
 									<div class="col-md-2">
 										<div class="form-group">
-											<!-- 상담원 이름을 표시하기 위해 agentName 대신 searchIsNotice 를 사용했다. -->
-											<input type="hidden" id="agentName" name="searchIsNotice" value="">
-											<select class="form-control" id="selectAgent" name="searchId">
-												<option value='allAgent'>전체 상담원</option>
+											<input type="hidden" id="searchId" name="searchId" value="">
+											<select class="form-control" id="selectAgent" name="selectAgent">
+												<option value='allAgent'>-- 상담원 선택 --</option>
+												<option value='selectAllAgent'>전체 선택 </option>
 												<c:forEach items="${agentList}" var="agent">	
 												<option value="${agent.agentId }">${agent.agentName }</option>
 												</c:forEach>
@@ -134,6 +134,8 @@
 									<div class="col-md-2 hidden-print">
 										<button type="button" class="jsSearch btn btn-info">조회</button>
 									</div>
+									
+									<div class="col-md-8 box-header agentList" id="agentList"></div>
 								</form>
 								<!-- /. 검색 조건 -->
 <%--
@@ -240,17 +242,66 @@ $(document).ready(function(){
 				url : "/REST/agent/listAgent/" +agentGroupId,
 			}).done(function(resultList){
 				$("#selectAgent").empty();
-				$("#selectAgent").append("<option value='allAgent'>전체 상담원</option>");
 				if( resultList != null ) {
+					$("#selectAgent").append("<option value='allAgent'>상담원을 선택하세요 </option>");
+					$("#selectAgent").append("<option value='selectAllAgent'>전체 선택 </option>");
 					$.each(resultList, function (index, agent){
 						$("#selectAgent").append("<option value='"+agent.agentId+"'>"+agent.agentName+"</option>");
 					});	
 				}
 			});
 		} else {
-			$("#selectAgent").empty().append("<option value='allAgent'>전체 상담원</option>");
+			$("#selectAgent").empty().append("<option value='allAgent'>--상담원 선택--</option>");
 		} 	
 	});
+	
+	
+	
+	$(document).on("change", "#selectAgent", function(e){
+		e.preventDefault();
+		var agentId = $(this).val();
+		var agentName = $(this).find("option[value='"+ agentId +"']").text();
+		var agentcheck = 1;		
+		if($(".jsRemoveSearchAgent").index() == 0){
+		$(".jsRemoveSearchAgent").each(function(index){
+			if($(this).attr("data-agentId") == agentId){
+				alert(agentName+" 상담원은 이미 선택되었습니다.");
+				agentcheck = 0;
+			}		
+		});
+		}
+		if(agentcheck == 1){
+			if(agentId != "allAgent") {
+				if (agentId == "selectAllAgent") {
+					$("#selectAgent option").each(function() {
+						if ( $(this).val() != "allAgent" && $(this).val() != "selectAllAgent") {
+							/*
+							$("#agentList").append(" <span data-agentId='"
+									+$(this).val()+"' data-agentName ='"
+									+$(this).text()+"' class='btn btn-xs btn-info pull-left jsRemoveSearchAgent'>"
+									+"<i class='fa fa-times hidden-print'></i> "
+									+$(this).text()+"</span>");	
+							*/
+							$(".jsRemoveSearchAgent").remove();
+						}
+						
+					});
+				} else {
+					$("#agentList").append(" <span data-agentId='"
+						+agentId+"' data-agentName ='"
+						+agentName+"' class='btn btn-xs btn-info pull-left jsRemoveSearchAgent'>"
+						+"<i class='fa fa-times hidden-print'></i> "
+						+agentName+"</span>");
+				}
+			}
+		}
+	});
+	
+	$(document).on("click", ".jsRemoveSearchAgent", function(e){
+		e.preventDefault();
+		$(this).remove();
+	});
+
 	
 	//종료시간은 시작시작을  넘지 못하게 하는 스크립트입니다.
 	$(document).on("change", "#recordEnd", function(){

@@ -117,9 +117,7 @@
 										<button type="button" class="jsSearch btn btn-info">조회</button>
 									</div>
 							
-									<div class="col-md-8 box-header agentList" id="agentList">
-										
-									</div>
+									<div class="col-md-8 box-header agentList" id="agentList"></div>
 								
 								</form>
 								<!-- /. 검색 조건 -->
