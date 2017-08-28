@@ -74,8 +74,6 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
             String rtUrl = URLEncoder.encode(requestURL, "utf-8");
             response.sendRedirect("/login?rtUrl=" + rtUrl);
             return false;
-         }else {
-            
          }
       }
 
