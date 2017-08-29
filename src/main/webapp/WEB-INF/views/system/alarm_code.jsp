@@ -265,7 +265,7 @@
 				</div>
 				<!-- /.modal-content -->
 			</div>
-			<!-- /.modal-dialog tttt-->
+			<!-- /.modal-dialog -->
 		</div>
 
 
