@@ -20,7 +20,7 @@
 	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
 	<script src="/resources/plugins/jQuery/jQuery-2.2.0.min.js"></script>
-	<script src="/resources/bootstrap/js/bootstrap.min.js"></script>
+	<script src="/resources/bootstrap/js/bootstrap.min.js"></script>   
 	<script src="/resources/plugins/slimScroll/jquery.slimscroll.min.js"></script>
 	<script src="/resources/plugins/fastclick/fastclick.js"></script>
 	<script src="/resources/js/app.min.js"></script>
