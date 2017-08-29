@@ -88,7 +88,7 @@ $(document).ready(function(){
 
 	var get = getRequest();
 	var flag = get['flag'];
-	
+	 
 
 
 
