@@ -84,7 +84,7 @@ $(document).ready(function(){
 	    }else{
 	        return false;
 	    }
-	}
+	} 
 
 	var get = getRequest();
 	var flag = get['flag'];
