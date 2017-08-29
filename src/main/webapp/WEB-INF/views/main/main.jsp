@@ -454,41 +454,10 @@
 									</li>
 							</c:if>
 							<c:if test="${sessionScope.sessionUser.superUser}">
-								<li class="active"><a href="#"><i
-										class="fa fa-circle-o"></i> 시스템 이력 <i
-										class="fa fa-angle-left pull-right"></i></a>
+								<li class="active"><a href="#"><i class="fa fa-circle-o"></i> 시스템 이력 <i class="fa fa-angle-left pull-right"></i></a>
 									<ul class="treeview-menu">
-										<c:choose>
-											<c:when
-												test="${menuCategory eq 'system' && menu eq 'resource'}">
-												<li class="active"><a href="/system/resource_log"
-													target="iframe" style="color: #1E90FF;"><i
-														class="fa fa-circle-o"></i><font style="color: #1E90FF;">
-															리소스 이력</font></a></li>
-											</c:when>
-											<c:otherwise>
-												<li class="" id="resource_log"><a
-													href="/system/resource_log" target="iframe"
-													onclick="side(18);"><i class="fa fa-circle-o"></i> 리소스
-														이력</a></li>
-											</c:otherwise>
-										</c:choose>
-
-										<c:choose>
-											<c:when
-												test="${menuCategory eq 'system' && menu eq 'alarmLog'}">
-												<li class="active"><a href="/system/alarm_log"
-													target="iframe" style="color: #1E90FF;"><i
-														class="fa fa-circle-o"></i><font style="color: #1E90FF;">
-															알람 이력</font></a></li>
-											</c:when>
-											<c:otherwise>
-												<li class="" id="alarm_log"><a href="/system/alarm_log"
-													target="iframe" onclick="side(19);"><i
-														class="fa fa-circle-o"></i> 알람 이력</a></li>
-											</c:otherwise>
-										</c:choose>
-
+										<li class="" id="resource_log"><a href="/system/resource_log" target="iframe" onclick="side(18);"><i class="fa fa-circle-o"></i> 리소스 이력</a></li>
+										<li class="" id="alarm_log"><a href="/system/alarm_log" target="iframe" onclick="side(19);"><i class="fa fa-circle-o"></i> 알람 이력</a></li>
 										<%-- <c:choose> --%>
 										<%-- 	<c:when test="${menuCategory eq 'system' && menu eq 'hisLog'}"> --%>
 										<!-- 				<li class="active"><a href="/system/his_log" target="iframe" style="color: #1E90FF;"><i class="fa fa-circle-o"></i><font style="color: #1E90FF;"> 운영자 조작 이력</font></a></li> -->

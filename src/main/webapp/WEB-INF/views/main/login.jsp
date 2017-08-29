@@ -93,7 +93,13 @@ $(document).ready(function(){
 
 
 	if(flag == "1"){
-		alert(flag);
+		alert("세션이 끊겼습니다.");
+		
+		var protocol = location.protocol+"//";
+		var host = location.host;
+		var login = "/login";
+
+		window.top.location.href = protocol+host+login;
 }
 
 
