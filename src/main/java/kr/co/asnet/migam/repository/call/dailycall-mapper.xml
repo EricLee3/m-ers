@@ -115,9 +115,9 @@
             			and date_format(stat_time,'%Y-%m-%d') <= #{searchDTO.endDate}
             		]]>
             	</if>
-            	<if test="searchDTO.searchId != null and searchDTO.searchId != '' ">
+            	<if test="searchDTO.searchId != null">
             		<![CDATA[
-            			and agent_id = #{searchDTO.searchId} 
+            			and agent_id in (${searchDTO.searchId}) 
             		]]>
             	</if>
             	<if test="(searchDTO.searchId == null or searchDTO.searchId == '') and searchDTO.searchGroup != null">

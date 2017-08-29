@@ -38,7 +38,12 @@
 	<script src="/resources/plugins/raphael/raphael-min.js"></script>
 	<script src="/resources/plugins/morris/morris.min.js"></script>
 </head>
-
+<script>
+		$(document).ready(function(){
+			if("${searchGroup}" != null && "${searchGroup}" != '') $("select[name=searchGroup]").val("${searchGroup}").attr("selected","selected");
+			if("${searchId}" != null && "${searchId}" != '') $("select[name=selectAgent]").val("${searchId}").attr("selected","selected");
+		});
+</script>
 <body class="hold-transition skin-blue sidebar-mini">
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
@@ -73,10 +78,10 @@
 <!-- 									</div> -->
 									<div class="col-md-2">
 										<div class="form-group">
-											<!-- 상담원 이름을 표시하기 위해 agentName 대신 searchIsNotice 를 사용했다. -->
-											<input type="hidden" id="agentName" name="searchIsNotice" value="">
-											<select class="form-control" id="selectAgent" name="searchId">
-												<option value='allAgent'>전체 상담원</option>
+											<input type="hidden" id="searchId" name="searchId" value="">
+											<select class="form-control" id="selectAgent" name="selectAgent">
+												<option value='allAgent'>-- 상담원 선택 --</option>
+												<option value='selectAllAgent'>전체 선택 </option>
 												<c:forEach items="${agentList}" var="agent">	
 												<option value="${agent.agentId }">${agent.agentName }</option>
 												</c:forEach>
@@ -107,6 +112,8 @@
 									<div class="col-md-2 hidden-print">
 										<button type="button" class="jsSearch btn btn-info">조회</button>
 									</div>
+									
+									<div class="col-md-8 box-header agentList" id="agentList"></div>
 								</form>
 								<!-- /. 검색 조건 -->
 <%--
@@ -188,86 +195,7 @@
 				<!-- /.row -->
 			</section>
 			<!-- /.content -->
-		
-		<!-- Modal 콜 상세 조회 -->
-		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-			<div class="modal-dialog modal-lg" role="document">
-				<div class="modal-content modal-lg">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-						<h4 class="modal-title" id="myModalLabel">콜 상세조회</h4>
-					</div>
-					<div class="modal-body">
-						<div class="row">
-							<div class="col-md-4">
-								<div class="info-box">
-									<span class="info-box-icon bg-aqua">
-										<i class="fa fa-user"></i>
-									</span>
-									<div class="info-box-content">
-										<span class="info-box-text">고객번호</span> 
-										<span class="info-box-number">056-632-2317</span>
-									</div>
-									<!-- /.info-box-content -->
-								</div>
-								<!-- /.info-box -->
 
-								<div class="info-box">
-									<span class="info-box-icon bg-aqua">
-										<i class="fa fa-headphones"></i>
-									</span>
-									<div class="info-box-content">
-										<span class="info-box-text">상담원 : 김영희</span> 
-										<span class="info-box-text">(고객응대 1팀)</span> 
-										<span class="info-box-number">3005</span>
-									</div>
-									<!-- /.info-box-content -->
-								</div>
-								<!-- /.info-box -->
-
-								<div class="info-box">
-									<span class="info-box-icon bg-aqua">
-										<i class="fa fa-clock-o"></i>
-									</span>
-									<div class="info-box-content">
-										<span class="info-box-text">시작시간 / 통화시간</span> 
-										<span class="info-box-number">14:08 / 03:00</span>
-									</div>
-									<!-- /.info-box-content -->
-								</div>
-								<!-- /.info-box -->
-								<span class="pull-left"> 
-									<i class="fa fa-minus text-primary"></i> 고객 
-									<i class="fa fa-minus text-gray"></i> 상담원
-								</span>
-								<button type="button" class="btn-default btn-xs pull-right">
-									<i class="fa fa-play"></i>
-								</button>
-
-							</div>
-							<!-- /.col -->
-
-							<div class="col-md-8">
-								<!-- LINE CHART -->
-								<div class="row margin">
-									<canvas id="lineChart" style="height: 250px"></canvas>
-									<input id="range_1" type="text" name="range_1" value="">
-								</div>
-								<!-- /.box-body -->
-								<!-- /.box -->
-							</div>
-						</div>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-					</div>
-				</div>
-				<!-- /.modal-content -->
-			</div>
-			<!-- /.modal-dialog -->
-		</div>
 <script>
 $(document).ready(function(){
 	$(document).on("click", ".jsExcelDownload", function(e){
@@ -293,20 +221,84 @@ $(document).ready(function(){
 				url : "/REST/agent/listAgent/" +agentGroupId,
 			}).done(function(resultList){
 				$("#selectAgent").empty();
-				$("#selectAgent").append("<option value='allAgent'>전체 상담원</option>");
 				if( resultList != null ) {
+					$("#selectAgent").append("<option value='allAgent'>상담원을 선택하세요 </option>");
+					$("#selectAgent").append("<option value='selectAllAgent'>전체 선택 </option>");
 					$.each(resultList, function (index, agent){
 						$("#selectAgent").append("<option value='"+agent.agentId+"'>"+agent.agentName+"</option>");
 					});	
 				}
 			});
 		} else {
-			$("#selectAgent").empty().append("<option value='allAgent'>전체 상담원</option>");
+			$("#selectAgent").empty().append("<option value='allAgent'>--상담원 선택--</option>");
 		} 	
 	});
+	
+	
+	
+	$(document).on("change", "#selectAgent", function(e){
+		e.preventDefault();
+		var agentId = $(this).val();
+		var agentName = $(this).find("option[value='"+ agentId +"']").text();
+		var agentcheck = 1;		
+		if($(".jsRemoveSearchAgent").index() == 0){
+		$(".jsRemoveSearchAgent").each(function(index){
+			if($(this).attr("data-agentId") == agentId){
+				alert(agentName+" 상담원은 이미 선택되었습니다.");
+				agentcheck = 0;
+			}		
+		});
+		}
+		if(agentcheck == 1){
+			if(agentId != "allAgent") {
+				if (agentId == "selectAllAgent") {
+					$("#selectAgent option").each(function() {
+						if ( $(this).val() != "allAgent" && $(this).val() != "selectAllAgent") {
+							/*
+							$("#agentList").append(" <span data-agentId='"
+									+$(this).val()+"' data-agentName ='"
+									+$(this).text()+"' class='btn btn-xs btn-info pull-left jsRemoveSearchAgent'>"
+									+"<i class='fa fa-times hidden-print'></i> "
+									+$(this).text()+"</span>");	
+							*/
+							$(".jsRemoveSearchAgent").remove();
+						}
+						
+					});
+				} else {
+					$("#agentList").append(" <span data-agentId='"
+						+agentId+"' data-agentName ='"
+						+agentName+"' class='btn btn-xs btn-info pull-left jsRemoveSearchAgent'>"
+						+"<i class='fa fa-times hidden-print'></i> "
+						+agentName+"</span>");
+				}
+			}
+		}
+	});
+	
+	$(document).on("click", ".jsRemoveSearchAgent", function(e){
+		e.preventDefault();
+		$(this).remove();
+	});
+
 
 	$(document).on("click", ".jsSearch", function(e){
 		e.preventDefault();
+
+		var agentIdList = "";
+		$(".jsRemoveSearchAgent").each(function(index){
+			if( index != 0) agentIdList += ","; 
+			agentIdList += ("'" + $(this).attr("data-agentId") + "'");
+		});
+		
+		if($("select[name=selectAgent]").val() != 'selectAllAgent'){
+			if( agentIdList.length < 1 ) {
+				alert("상담원 또는 그룹을 선택하여야 합니다.");
+				return false;
+			}
+		}
+		$("#searchId").val(agentIdList);
+		
 	   	var tempEnddate = $("#endDate").val();
 		if (tempEnddate == "" || tempEnddate == null) {
 	   		alert("종료일을 입력해주세요.");
@@ -339,28 +331,8 @@ $(document).ready(function(){
         window.location.href = pathname + "?" + $("#form_callreport_search").serialize();
     });
 
-	$(function () {
 
-	    //LINE CHART
-	    var line = new Morris.Line({
-	      element: 'line-chart',
-	      resize: true,
-	      data: [
-			<c:forEach items="${monthlyCallListForChart}" var="monthlyCallItem"> {
-	        	date: '<fmt:formatDate pattern="yy/MM" value="${monthlyCallItem.statTime}" />', 
-	        	AngryCall: ${monthlyCallItem.angryCount}, 
-	        	StressCall:${monthlyCallItem.stressCount}
-	        },
-			</c:forEach>
-	      ],
-	      lineColors: ['#de8162', '#e7cd64'],
-	      xkey: 'date',
-	      ykeys: ['주의 단계', '흥미 단계'],
-	      labels: ['주의 단계', '흥미 단계'],
-	      parseTime: false,
-	      hideHover: 'auto'
-	    });
-		
+	$(function () {
 	    //Date picker
 	    $('#startDate, #endDate').datepicker({
 			format: "yyyy-mm",
@@ -377,6 +349,39 @@ $(document).ready(function(){
 
 });	
 
+
+<c:if test="${searchDTO.searchGroup != null and searchDTO.searchId == null }">
+$("#form_monthlyCall_search").find("#selectAgentGroup option[value='${searchDTO.searchGroup}']").attr("selected", "selected");
+</c:if>
+<c:if test="${searchDTO.searchId != null and searchDTO.searchGroup == null}">
+var idList = "${searchDTO.searchId}";
+idList = idList.replace(/'/gi, "");
+var idListArray = idList.split(",");
+if ( idListArray.length > 1 ) {
+	$.each(idListArray, function(idx, thisAgentId) {
+		$("#selectAgent option").each(function() {
+			if ( $(this).val() == thisAgentId ) {
+				$("#agentList").append(" <span data-agentId='"
+						+$(this).val()+"' data-agentName ='"
+						+$(this).text()+"' class='btn btn-xs btn-info pull-left jsRemoveSearchAgent'>"
+						+"<i class='fa fa-times hidden-print'></i> "
+						+$(this).text()+"</span>");
+			}
+		});			
+	});	
+} else {
+	$("#form_monthlyCall_search").find("#selectAgent option[value='" + idList + "']").attr("selected", "selected");
+	$("#selectAgent option").each(function() {
+		if ( $(this).val() == idList ) {
+			$("#agentList").append(" <span data-agentId='"
+					+$(this).val()+"' data-agentName ='"
+					+$(this).text()+"' class='btn btn-xs btn-info pull-left jsRemoveSearchAgent'>"
+					+"<i class='fa fa-times hidden-print'></i> "
+					+$(this).text()+"</span>");
+		}
+	});
+}
+</c:if>
 
 /* 시작일과 종료일을 비교하기 위한 함수입니다.
  * 시작일  > 종료일, 종료일 < 시작일 일때 경고창을 띄어 줍니다.
@@ -398,28 +403,6 @@ function checkDatepicker() {
     }
 }
 
-function lineDraw(){
-    //LINE CHART
-	var line = new Morris.Line({
-	    element: 'line-chart',
-	    resize: true,
-	    data: [
-		<c:forEach items="${monthlyCallListForChart}" var="monthlyCallItem"> {
-	      	date: '<fmt:formatDate pattern="yy/MM" value="${monthlyCallItem.statTime}" />', 
-	      	AngryCall: ${monthlyCallItem.angryCount}, 
-	      	StressCall:${monthlyCallItem.stressCount}
-	      },
-		</c:forEach>
-	    ],
-	    lineColors: ['#de8162', '#e7cd64'],
-	    xkey: 'date',
-	    ykeys: ['주의 단계', '흥미 단계'],
-	    labels: ['주의 단계', '흥미 단계'],
-	    parseTime: false,
-	    hideHover: 'auto'
-	});
-}
- 
 </script>
 </body>
 </html>

@@ -40,7 +40,12 @@
 	<script src="/resources/plugins/morris/morris.min.js"></script>
 	<script src="/resources/plugins/timepicker/bootstrap-timepicker.min.js"></script>
 </head>
-
+<script>
+		$(document).ready(function(){
+			if("${searchGroup}" != null && "${searchGroup}" != '') $("select[name=searchGroup]").val("${searchGroup}").attr("selected","selected");
+			if("${searchId}" != null && "${searchId}" != '') $("select[name=selectAgent]").val("${searchId}").attr("selected","selected");
+		});
+</script>
 <body class="hold-transition skin-blue sidebar-mini">
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
@@ -229,11 +234,6 @@ $(document).ready(function(){
 		print();
 	});
 
-	if ('matchMedia' in window) {
-	    window.matchMedia('print').addListener(function(media) {
-	    	lineDraw();
-		});
-	}
 	
 	$(document).on("change", "#selectAgentGroup", function(){
 		var agentGroupId = $("#selectAgentGroup").val();
@@ -351,6 +351,20 @@ $(document).ready(function(){
 	
 	$(document).on("click", ".jsSearch", function(e){
 		e.preventDefault();
+		
+		var agentIdList = "";
+		$(".jsRemoveSearchAgent").each(function(index){
+			if( index != 0) agentIdList += ","; 
+			agentIdList += ("'" + $(this).attr("data-agentId") + "'");
+		});
+		
+		if($("select[name=selectAgent]").val() != 'selectAllAgent'){
+			if( agentIdList.length < 1 ) {
+				alert("상담원 또는 그룹을 선택하여야 합니다.");
+				return false;
+			}
+		}
+		$("#searchId").val(agentIdList);		
 		var tempStartdate = $("#startDate").val();
 		var tempEnddate = $("#endDate").val();
 		if (tempEnddate == "" || tempEnddate == null) {
@@ -375,12 +389,41 @@ $(document).ready(function(){
 		$("#form_hourlyCall_search").find("#agentName").val(agentName);
 		$("#form_hourlyCall_search").submit();
 	});
-	<c:if test="${searchDTO.searchId != null}">
-	$("#form_hourlyCall_search").find("#selectAgent option[value='${searchDTO.searchId}']").attr("selected", "selected");
-	</c:if>
-	<c:if test="${searchDTO.searchGroup != null}">
+	
+	
+	<c:if test="${searchDTO.searchGroup != null and searchDTO.searchId == null }">
 	$("#form_hourlyCall_search").find("#selectAgentGroup option[value='${searchDTO.searchGroup}']").attr("selected", "selected");
 	</c:if>
+	<c:if test="${searchDTO.searchId != null and searchDTO.searchGroup == null}">
+	var idList = "${searchDTO.searchId}";
+	idList = idList.replace(/'/gi, "");
+	var idListArray = idList.split(",");
+	if ( idListArray.length > 1 ) {
+		$.each(idListArray, function(idx, thisAgentId) {
+			$("#selectAgent option").each(function() {
+				if ( $(this).val() == thisAgentId ) {
+					$("#agentList").append(" <span data-agentId='"
+							+$(this).val()+"' data-agentName ='"
+							+$(this).text()+"' class='btn btn-xs btn-info pull-left jsRemoveSearchAgent'>"
+							+"<i class='fa fa-times hidden-print'></i> "
+							+$(this).text()+"</span>");
+				}
+			});			
+		});	
+	} else {
+		$("#form_hourlyCall_search").find("#selectAgent option[value='" + idList + "']").attr("selected", "selected");
+		$("#selectAgent option").each(function() {
+			if ( $(this).val() == idList ) {
+				$("#agentList").append(" <span data-agentId='"
+						+$(this).val()+"' data-agentName ='"
+						+$(this).text()+"' class='btn btn-xs btn-info pull-left jsRemoveSearchAgent'>"
+						+"<i class='fa fa-times hidden-print'></i> "
+						+$(this).text()+"</span>");
+			}
+		});
+	}
+	</c:if>
+	
     /*
      * 페이징을 위해 필요한 스크립트입니다.
      * 단, 검색 상자등이 있을 경우에는 해당 항목의 이름 ( 아래에서는 form_search ) 등에 주의하셔야 합니다. 
@@ -389,102 +432,65 @@ $(document).ready(function(){
     $(document).on("click", ".pagination li a", function(e) {
         e.preventDefault();
         var page = $(this).attr("data-page");
-        $("#form_callreport_search input[name='page']").val(page);
+        $("#form_hourlyCall_search input[name='page']").val(page);
         var pathname = window.location.pathname;
-        window.location.href = pathname + "?" + $("#form_callreport_search").serialize();
+        window.location.href = pathname + "?" + $("#form_hourlyCall_search").serialize();
     });
 
-	$(function () {
+    $(function () {
+    	//Date picker
+        $('#startDate').datepicker({
+          autoclose: true
+        });
+        
+        $('#endDate').datepicker({
+            autoclose: true
+    	});
+        
+        $(".timepicker").timepicker({
+    	      showInputs: false,
+    	      showMeridian: false,
+    	      minuteStep: 60,
+    	      timeFormat: 'HH',
+    	      format : 'HH'
+    	});
+        
+      	//달력(시작일,종료일)에서 .day(일)를 클릭했을때마다 실행되는 스크립트 입니다.
+        $(document).on('click', '.day', function(e){
+        	e.preventDefault();
+        	checkDatepicker();
+        });
+    });
 
-	    //LINE CHART
-	    var line = new Morris.Line({
-	      element: 'line-chart',
-	      resize: true,
-	      data: [
-			<c:forEach items="${hourlyCallListByOrderForChart}" var="hourlyCallItem"> {
-	        	date: '<fmt:formatDate pattern="MM/dd HH:00" value="${hourlyCallItem.statTime}" />', 
-	        	AngryCall: ${hourlyCallItem.angryCount}, 
-	        	StressCall:${hourlyCallItem.stressCount},
-	        },
-			</c:forEach>
-	      ],
-	      lineColors: ['#de8162', '#e7cd64'],
-	      xkey: 'date',
-	      ykeys: ['주의 단계', '흥미 단계'],
-	      labels: ['주의 단계', '흥미 단계'],
-	      parseTime: false,
-	      hideHover: 'auto'
-	    });
-		
-	    //Date picker
-	    $('#startDate').datepicker({
-	      autoclose: true
-	    });
-	    
-	    $('#endDate').datepicker({
-	        autoclose: true
-		});
-	    
-	    $(".timepicker").timepicker({
-		      showInputs: false,
-		      showMeridian: false,
-		      minuteStep: 60,
-		      timeFormat: 'HH',
-		      format : 'HH'
-		});
-	    
-	  	//달력(시작일,종료일)에서 .day(일)를 클릭했을때마다 실행되는 스크립트 입니다.
-	    $(document).on('click', '.day', function(e){
-	    	e.preventDefault();
-	    	checkDatepicker();
-	    });
-	});
-	
+
 	
 });	
 
 
+
+
+
 /* 시작일과 종료일을 비교하기 위한 함수입니다.
- * 시작일  > 종료일, 종료일 < 시작일 일때 경고창을 띄어 줍니다.
- */
+* 시작일  > 종료일, 종료일 < 시작일 일때 경고창을 띄어 줍니다.
+*/
 function checkDatepicker() {
-	var startDate = $("#startDate").val();
-    var endDate = $("#endDate").val();
-    var startDateCompare = new Date(startDate);
-    var endDateCompare = new Date(endDate);
-    if(startDate && endDate ){
-	    if(startDateCompare.getTime() > endDateCompare.getTime()) {
-	        alert("종료일은 시작일과 같거나 이후의 날짜로 입력되어야 합니다.");
-	        $("#endDate").val("");
-	        $("#endDate").focus();
-	        $("#checkDatepicker").val("false");
-	    }else{
-	    	$("#checkDatepicker").val("true");
-	    }
+var startDate = $("#startDate").val();
+var endDate = $("#endDate").val();
+var startDateCompare = new Date(startDate);
+var endDateCompare = new Date(endDate);
+if(startDate && endDate ){
+    if(startDateCompare.getTime() > endDateCompare.getTime()) {
+        alert("종료일은 시작일과 같거나 이후의 날짜로 입력되어야 합니다.");
+        $("#endDate").val("");
+        $("#endDate").focus();
+        $("#checkDatepicker").val("false");
+    }else{
+    	$("#checkDatepicker").val("true");
     }
 }
+}
 
-function lineDraw(){
-    //LINE CHART
-    var line = new Morris.Line({
-      element: 'line-chart',
-      resize: true,
-      data: [
-		<c:forEach items="${hourlyCallListByOrderForChart}" var="hourlyCallItem"> {
-        	date: '<fmt:formatDate pattern="MM/dd HH:00" value="${hourlyCallItem.statTime}" />', 
-        	AngryCall: ${hourlyCallItem.angryCount}, 
-        	StressCall:${hourlyCallItem.stressCount}
-        },
-		</c:forEach>
-      ],
-      lineColors: ['#de8162', '#e7cd64'],
-      xkey: 'date',
-      ykeys: ['주의 단계', '흥미 단계'],
-      labels: ['주의 단계', '흥미 단계'],
-      parseTime: false,
-      hideHover: 'auto'
-    });
-} 
+
 </script>
 </body>
 </html>
