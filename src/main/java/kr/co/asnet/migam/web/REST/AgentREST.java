@@ -82,9 +82,9 @@ public class AgentREST {
         
         hislog.setDetail("[등록] 상담원ID(이름) : ["+agent.getAgentId()+"("+agent.getAgentName()+")]");
         hislog.setMenu("시스템 설정 > 상담원 목록[등록]");
-        hislog.setUser_id("in.lee");
+        hislog.setUser_id("admin");
         hislog.setUser_ip(ip.getHostAddress());
-        hislog.setUser_name("이인");
+        hislog.setUser_name("2k");
         alarmLimitService.insertHis(hislog);
         
         //모니터링 대상여부 확인
@@ -173,10 +173,11 @@ public class AgentREST {
 	 * patch API design 
 	 */
 	@RequestMapping(value = "/repr/{agentId}", method = RequestMethod.PATCH)
-	public int fetchAgent(@PathVariable("agentId") String agentId, @RequestBody Agent agent, Model model, SearchDTO searchDTO,HisLog hislog) throws UnknownHostException {
+	public ResponseEntity<Agent> patchAgent(@PathVariable("agentId") String agentId, @RequestBody Agent agent, Model model, SearchDTO searchDTO,HisLog hislog) throws UnknownHostException {
 		int updateCount = 0;
 		int returncheck = 0;
 		int agentchanged = 0;
+
 		InetAddress ip = InetAddress.getLocalHost();
 		CallAudit callAudit = callAuditService.getCallAudit(agentId);
 		License license = licenseService.getLicense();
@@ -207,12 +208,13 @@ public class AgentREST {
 		
 		if(returncheck == 1){
 			if(updateCount > 0 && intcallAudit != 0) {
-				return 1;
+				return new ResponseEntity<Agent>(HttpStatus.OK);
 			} else {
-				return 0;
+				return new ResponseEntity<Agent>(HttpStatus.NO_CONTENT);
+				//return 0;
 			}
 		}else{
-			return 2;
+			return new ResponseEntity<Agent>(HttpStatus.NOT_MODIFIED);
 		}
 	}
 	

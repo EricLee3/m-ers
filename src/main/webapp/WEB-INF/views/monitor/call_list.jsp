@@ -304,7 +304,9 @@
                             		var agentName = data.Names[i].agentName;
                             		var agentProfileName = data.Names[i].agentProfileName;
                             		var customerProfileName = data.Names[i].customerProfileName;
-                            		console.log("data list is : " + agentName + ", " + agentProfileName + ", " + customerProfileName);
+                            		var agentScript = data.Names[i].agentScript;
+                            		var customerScript = data.Names[i].customerScript;
+                            		console.log("data list is : " + agentName + ", " + agentProfileName + ", " + customerProfileName + ", " + agentScript + ", " + customerScript);
 
                             		//var rows = $("table#callListTbl tbody tr");
                             		//console.log("rows is "+rows.length);
@@ -315,8 +317,10 @@
 											var tbl = document.getElementById('callListTbl');
 											//console.log("row index is "+row.rowIndex);
 											$(this).next().next().next().text(customerProfileName);
+											$(this).next().next().next().next().text(customerScript);
 											//$(this).parent().next().next().text(agentProfileName);
 											tbl.rows[row.rowIndex+1].cells[1].innerHTML = agentProfileName;
+											tbl.rows[row.rowIndex+1].cells[2].innerHTML = agentScript;
 										}
 									});                            		
                             	}

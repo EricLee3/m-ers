@@ -449,9 +449,11 @@ public class MonitorController {
 			customerProfileName = realStatList.get(i).getCustomerProfileName();
 			agentProfileName = realStatList.get(i).getAgentProfileName();
 			
-			jTmp.put("agentName", agentName);
-			jTmp.put("customerProfileName", customerProfileName);
-			jTmp.put("agentProfileName", agentProfileName);
+			jTmp.put("agentName", realStatList.get(i).getAgentName());
+			jTmp.put("customerProfileName", realStatList.get(i).getCustomerProfileName());
+			jTmp.put("agentProfileName", realStatList.get(i).getAgentProfileName());
+			jTmp.put("customerScript", realStatList.get(i).getCustomerScript());
+			jTmp.put("agentScript", realStatList.get(i).getAgentScript());
 			
 			jArray.add(jTmp);
 		}
