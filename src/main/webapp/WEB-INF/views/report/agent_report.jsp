@@ -48,8 +48,7 @@
 			if("${searchGroup}" != null && "${searchGroup}" != '') $("select[name=searchGroup]").val("${searchGroup}").attr("selected","selected");
 			if("${searchId}" != null && "${searchId}" != '') $("select[name=selectAgent]").val("${searchId}").attr("selected","selected");
 		});
-		
-	</script>
+</script>
 <body class="hold-transition skin-blue sidebar-mini">
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
@@ -117,9 +116,7 @@
 										<button type="button" class="jsSearch btn btn-info">조회</button>
 									</div>
 							
-									<div class="col-md-8 box-header agentList" id="agentList">
-										
-									</div>
+									<div class="col-md-8 box-header agentList" id="agentList"></div>
 								
 								</form>
 								<!-- /. 검색 조건 -->
@@ -300,9 +297,8 @@ $(document).ready(function(){
 				return false;
 			}
 		}
-		
-
 		$("#searchId").val(agentIdList);
+		
 	   	var tempEnddate = $("#endDate").val();
 		if (tempEnddate == "" || tempEnddate == null) {
 	   		alert("종료일을 입력해주세요.");

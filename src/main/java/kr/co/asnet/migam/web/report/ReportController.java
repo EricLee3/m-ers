@@ -97,16 +97,16 @@ public class ReportController {
 	 * 화면 표시 핃드 값도 같이 변경해야 하니 주의 바랍니다.
 	 */
 	@RequestMapping(value = "/call_report", method = RequestMethod.GET)
-	public String callReport(@RequestParam(value = "page", required = false, defaultValue = "1") int page, Model model, SearchDTO searchDTO) {
-
-		// 조회 조건을 위한 목록 추가하기
-		
-		List<AgentGroup> agentGroupList = agentGroupService.getAgentGroupList(null, null, "order by group_name asc");
-		model.addAttribute("agentGroupList", agentGroupList);
-		if( searchDTO.getSearchGroup() != null ) {
-			List<Agent> agentList = agentService.getAgentList(null, searchDTO, "order by agent_name asc");
-			model.addAttribute("agentList", agentList);
-		}
+	public String callReport(@RequestParam(value = "page", required = false, defaultValue = "1") int page, Model model, SearchDTO searchDTO, String selectAgent) {
+		// 그룹 선택을 위한 SELECT를 만들 때 사용할 목록 표시용
+				List<AgentGroup> agentGroupList = agentGroupService.getAgentGroupList(null, null, "order by group_name *1 asc");
+				model.addAttribute("agentGroupList", agentGroupList);
+				//if( searchDTO.getSearchGroup() != null ) {
+					List<Agent> agentList = agentService.getAgentList(null, searchDTO, "order by agent_name asc");
+					model.addAttribute("agentList", agentList);
+				//}
+					System.out.println("mmm:::::::::::"+searchDTO.getSearchId());
+					
 		// 검색 조건 처리
 		if( searchDTO.getSearchGroup() != null ) { 
 			if( searchDTO.getSearchGroup().equals("allGroup") ) searchDTO.setSearchGroup(null);
@@ -131,6 +131,11 @@ public class ReportController {
 		model.addAttribute("callAnalysisList", callAnalysisList);
 		model.addAttribute("callAnalysisCount", callAnalysisService.getCallAnalysisCount(searchDTO));
 		model.addAttribute("pageDTO", pageDTO);
+		model.addAttribute("searchGroup", searchDTO.getSearchGroup());
+		if(searchDTO.getSearchId() != null) {
+			model.addAttribute("searchId", selectAgent);
+		}
+		
 		model.addAttribute("menu", "call_report");
 		model.addAttribute("menuCategory", "report");
 		return "/report/call_report";
@@ -407,36 +412,24 @@ public class ReportController {
 	 * @return
 	 */
 	@RequestMapping(value = "/day_report", method = RequestMethod.GET)
-	public String dayReport(@RequestParam(value = "page", required = false, defaultValue = "1") int page, Model model, SearchDTO searchDTO) {
+	public String dayReport(@RequestParam(value = "page", required = false, defaultValue = "1") int page, Model model, SearchDTO searchDTO,String selectAgent) {
 		
 		// 그룹 선택을 위한 SELECT를 만들 때 사용할 목록 표시용
-		List<AgentGroup> agentGroupList = agentGroupService.getAgentGroupList(null, null, "order by group_name *1 asc");
-		model.addAttribute("agentGroupList", agentGroupList);
-		if( searchDTO.getSearchGroup() != null ) {
-			List<Agent> agentList = agentService.getAgentList(null, searchDTO, "order by agent_name asc");
-			model.addAttribute("agentList", agentList);
-			
-			AgentGroup agentGroup = agentGroupService.getAgentGroup(searchDTO.getSearchGroup());
-			
-			if(agentGroup == null){
-				model.addAttribute("groupName", "전체 그룹");
-			}else{
-				String groupName = agentGroup.getGroupName();
-				model.addAttribute("groupName", groupName);
+			List<AgentGroup> agentGroupList = agentGroupService.getAgentGroupList(null, null, "order by group_name *1 asc");
+			model.addAttribute("agentGroupList", agentGroupList);
+			//if( searchDTO.getSearchGroup() != null ) {
+				List<Agent> agentList = agentService.getAgentList(null, searchDTO, "order by agent_name asc");
+				model.addAttribute("agentList", agentList);
+			//}
+
+			// 검색 조건 처리
+			if( searchDTO.getSearchGroup() != null ) { 
+				if( searchDTO.getSearchGroup().equals("allGroup") ) searchDTO.setSearchGroup(null);
 			}
-			
-			
-			Agent agent = agentService.getAgent(searchDTO.getSearchId());
-			model.addAttribute("agent", agent);
-		}
-		
-		// 검색 조건 처리
-		if( searchDTO.getSearchGroup() != null ) { 
-			if( searchDTO.getSearchGroup().equals("allGroup") ) searchDTO.setSearchGroup(null);
-		}
-		if( searchDTO.getSearchId() != null ) { 
-			if( searchDTO.getSearchId().equals("allAgent") ) searchDTO.setSearchId(null);
-		}
+			if( searchDTO.getSearchId() != null ) { 
+				if( searchDTO.getSearchId().equals("allAgent")) searchDTO.setSearchId(null);
+			}
+
 		if( searchDTO.getStartDate() == null ) {
 			Calendar calendar = Calendar.getInstance(); 
 			calendar.add(Calendar.DATE, -30); // 최근 30일
@@ -448,12 +441,12 @@ public class ReportController {
 		}
 		model.addAttribute("searchDTO", searchDTO);
 		
-		List<DailyCall> dailyCallListForChart = dailyCallService.getDailyCallListForChart(searchDTO, "order by stat_time asc");
-		model.addAttribute("dailyCallListForChart", dailyCallListForChart);
+	//	List<DailyCall> dailyCallListForChart = dailyCallService.getDailyCallListForChart(searchDTO, "order by stat_time asc");
+	//	model.addAttribute("dailyCallListForChart", dailyCallListForChart);
 		
 		List<DailyCall> dailyCallList = dailyCallService.getDailyCallListForChart(searchDTO, "order by stat_time desc");
 		model.addAttribute("dailyCallList", dailyCallList);
-		
+		/*
 		int totalCount = 0;
 		int successCount = 0;
 		int failCount = 0;
@@ -477,6 +470,11 @@ public class ReportController {
 		model.addAttribute("stressCall", stressCount);
 		model.addAttribute("incrementCount", incrementCount);
 		model.addAttribute("decrementCount", decrementCount);
+		*/
+		model.addAttribute("searchGroup", searchDTO.getSearchGroup());
+		if(searchDTO.getSearchId() != null) {
+			model.addAttribute("searchId", selectAgent);
+		}
 		
 		model.addAttribute("menu", "day_report");
 		model.addAttribute("menuCategory", "report");
@@ -492,15 +490,15 @@ public class ReportController {
 	 * @return
 	 */
 	@RequestMapping(value = "/month_report", method = RequestMethod.GET)
-	public String monthReport(@RequestParam(value = "page", required = false, defaultValue = "1") int page, Model model, SearchDTO searchDTO) {
+	public String monthReport(@RequestParam(value = "page", required = false, defaultValue = "1") int page, Model model, SearchDTO searchDTO, String selectAgent) {
 		
 		// 그룹 선택을 위한 SELECT를 만들 때 사용할 목록 표시용
 		List<AgentGroup> agentGroupList = agentGroupService.getAgentGroupList(null, null, "order by group_name *1 asc");
 		model.addAttribute("agentGroupList", agentGroupList);
-		if( searchDTO.getSearchGroup() != null ) {
+		//if( searchDTO.getSearchGroup() != null ) {
 			List<Agent> agentList = agentService.getAgentList(null, searchDTO, "order by agent_name asc");
 			model.addAttribute("agentList", agentList);
-		}
+		//}
 
 		// 검색 조건 처리
 		if( searchDTO.getSearchGroup() != null ) { 
@@ -520,12 +518,12 @@ public class ReportController {
 		}
 		model.addAttribute("searchDTO", searchDTO);
 		
-		List<MonthlyCall> monthlyCallListForChart = monthlyCallService.getMonthlyCallListForChart(searchDTO, "order by stat_time asc");
-		model.addAttribute("monthlyCallListForChart", monthlyCallListForChart);
+	//	List<MonthlyCall> monthlyCallListForChart = monthlyCallService.getMonthlyCallListForChart(searchDTO, "order by stat_time asc");
+	//	model.addAttribute("monthlyCallListForChart", monthlyCallListForChart);
 		
 		List<MonthlyCall> monthlyCallList = monthlyCallService.getMonthlyCallListForChart(searchDTO, "order by stat_time desc");
 		model.addAttribute("monthlyCallList", monthlyCallList);
-		
+		/*
 		int totalCount = 0;
 		int successCount = 0;
 		int failCount = 0;
@@ -549,6 +547,11 @@ public class ReportController {
 		model.addAttribute("stressCall", stressCount);
 		model.addAttribute("incrementCount", incrementCount);
 		model.addAttribute("decrementCount", decrementCount);
+		*/
+		model.addAttribute("searchGroup", searchDTO.getSearchGroup());
+		if(searchDTO.getSearchId() != null) {
+			model.addAttribute("searchId", selectAgent);
+		}
 		
 		model.addAttribute("menu", "month_report");
 		model.addAttribute("menuCategory", "report");
@@ -581,11 +584,11 @@ public class ReportController {
 	 * @param searchDTO
 	 * @return
 	 */
-	@RequestMapping(value = "/hour_report", method = RequestMethod.GET)
+	@RequestMapping(value = "/hour_report", method = {RequestMethod.GET, RequestMethod.POST})
 	public String hourReport(@RequestParam(value = "page", required = false, defaultValue = "1") int page,
 			@RequestParam(value = "recordStart", required = false, defaultValue = "00:00") String recordStart,
 			@RequestParam(value = "recordEnd", required = false, defaultValue = "23:00") String recordEnd, Model model,
-			SearchDTO searchDTO) {
+			SearchDTO searchDTO, String selectAgent) {
 
 		// 그룹 선택을 위한 SELECT를 만들 때 사용할 목록 표시용
 		List<AgentGroup> agentGroupList = agentGroupService.getAgentGroupList(null, null, "order by group_name *1 asc");
@@ -625,9 +628,12 @@ public class ReportController {
 		model.addAttribute("recordEnd", recordEnd);
 		model.addAttribute("searchDTO", searchDTO);
 		
+		
 		// hourlyCallListForChart 는 동일 시간대 값을 합산하여 조회. 고객 요청은 동일 시간대 합산이 아니라, 일자별로 시간대 값이 계속 표시되기를 원하여, hourlyCallListByOrder 를 추가했다.
 		//List<HourlyCall> hourlyCallListForChart = hourlyCallService.getHourlyCallListForChart(searchDTO, "order by stat_time asc");
 		//model.addAttribute("hourlyCallListForChart", hourlyCallListForChart);
+		
+		System.out.println("::::::::::::::::::"+searchDTO.getSearchId());
 		
 		List<HourlyCall> hourlyCallListByOrder = hourlyCallService.getHourlyCallListByOrder(searchDTO, "order by stat_time desc");
 		model.addAttribute("hourlyCallListByOrder", hourlyCallListByOrder);
@@ -659,6 +665,11 @@ public class ReportController {
 		model.addAttribute("incrementCount", incrementCount);
 		model.addAttribute("decrementCount", decrementCount);
 		
+		
+		model.addAttribute("searchGroup", searchDTO.getSearchGroup());
+		if(searchDTO.getSearchId() != null) {
+			model.addAttribute("searchId", selectAgent);
+		}
 		model.addAttribute("menu", "hour_report");
 		model.addAttribute("menuCategory", "report");
 		return "/report/hour_report";

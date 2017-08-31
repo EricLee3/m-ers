@@ -138,6 +138,22 @@ public class LoginController {
 		return ("redirect:/login");
 	}
 	
+	@RequestMapping(value = "/session_out", method = RequestMethod.GET)
+	public String session_out( Model model, HttpServletRequest request, HttpServletResponse response,User user) {
+		Login login = Login.getInstance();
+		//login.removeSession(user.getUserId());
+		userService.logout();
+		Calendar calendar = Calendar.getInstance();
+        java.util.Date date = calendar.getTime();
+        String today = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date));
+		/*
+		HttpSession session = request.getSession();
+		session.setAttribute("a_flag", "1");
+		session.setAttribute("a_date", "");
+		*/
+		return "main/session_out";
+	}
+	
 	/**
 	 * 404 에러 페이지
 	 * 

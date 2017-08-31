@@ -111,7 +111,7 @@
             	</if>
             	<if test="searchDTO.searchId != null and searchDTO.searchId != '' ">
 		            <![CDATA[
-		                and agent_id = #{searchDTO.searchId} 
+		              	 and agent_id in (${searchDTO.searchId})  
 		            ]]>
 				</if>
 				<if test="searchDTO.searchType == 1">

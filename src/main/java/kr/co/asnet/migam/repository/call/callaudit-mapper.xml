@@ -197,7 +197,7 @@
             <if test="searchDTO != null">
             	<if test="searchDTO.searchId != null and searchDTO.searchId != ''">
 	            	<![CDATA[
-	                	and GR.group_name = '${searchDTO.searchId}'
+	                	and AG.agent_id in (${searchDTO.searchId})  
 	            	]]>
             	</if>
             	<if test="searchDTO.searchQuery != null and searchDTO.searchQuery != ''">
