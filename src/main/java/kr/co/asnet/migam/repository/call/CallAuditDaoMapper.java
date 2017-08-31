@@ -105,17 +105,6 @@ public class CallAuditDaoMapper implements CallAuditDao {
 		return sqlSession.selectList("kr.co.asnet.migam.repository.call.CallAuditDaoMapper.selectAgentList", parameters);
 	}
 
-	
-
-
-	
-	
-	
-	
-	
-	
-	
-	
 	@Override
 	public List<RealStat> selectRealStatList5(PageDTO5 pageDTO5, SearchDTO searchDTO, String orderby) {
 		Map<String, Object> parameters = new HashMap<String, Object>();
@@ -272,6 +261,6 @@ public class CallAuditDaoMapper implements CallAuditDao {
 
 	@Override
 	public int patchCallAudit(Agent agent) {
-		return sqlSession.delete("kr.co.asnet.migam.repository.call.CallAuditDaoMapper.patchCallAudit", agent);
+		return sqlSession.update("kr.co.asnet.migam.repository.call.CallAuditDaoMapper.patchCallAudit", agent);
 	}
 }

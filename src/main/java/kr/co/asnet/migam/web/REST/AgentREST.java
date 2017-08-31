@@ -182,11 +182,14 @@ public class AgentREST {
 		CallAudit callAudit = callAuditService.getCallAudit(agentId);
 		License license = licenseService.getLicense();
 		
+		// because of being called structure IOS
+		agent.setAgentId(agentId);
+		
 		//실시간 선택 시 
 		int	intcallAudit = 1;
 		searchDTO.setSearchIsAudit("1");
-		int auditCount = agentService.countAgentList(searchDTO);
-		if(license.getRealtimeChannel() > auditCount){
+		//int auditCount = agentService.countAgentList(searchDTO);
+		//if(license.getRealtimeChannel() > auditCount){
 			if(callAudit == null){
 				intcallAudit = callAuditService.insertCallAudit(agent.getAgentId(),agent.getGroupId(),0);
 			}else{
@@ -197,7 +200,7 @@ public class AgentREST {
 			// realtime_state update
 			callAuditService.patchCallAudit(agent);
 			agentchanged = agentService.insertAgentChanged(agent);
-		}
+		//}
 		
 		hislog.setDetail("[수정] 상담원ID(이름) : ["+agent.getAgentId()+"("+agent.getAgentName()+")"+"] "
 				+ "그룹ID(이름) : ["+agent.getGroupId()+"("+agent.getGroupName()+")] 내선번호 : ["+agent.getAgentNumber()+"] IP : ["+agent.getAgentIp()+"]"

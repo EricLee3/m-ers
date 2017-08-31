@@ -47,6 +47,25 @@
 		<result property="customerProfileName" column="customer_profile_name" />
 	</resultMap>
 	
+	<resultMap id="rmapAgent" type="agent">
+        <result property="index" column="idx" />
+        <result property="agentNumber" column="agent_no" />
+        <result property="agentId" column="agent_id" />
+        <result property="agentName" column="agent_name" />
+        <result property="agentIp" column="agent_ip" />
+        <result property="isAudit" column="realtime" />
+        <result property="isAuditBatch" column="nonrealtime" />
+        <result property="groupId" column="group_id" />
+        <result property="groupName" column="group_name" />
+        <result property="stressCount" column="stressCount" />
+        <result property="angryCount" column="angryCount" />
+        <result property="callStatus" column="callStatus" />
+        <result property="agent_profile_id" column="agent_profile_id" />
+        <result property="customer_profile_id" column="customer_profile_id" />
+        <result property="profile_name_agent" column="profile_name_agent" />
+        <result property="profile_name_cus" column="profile_name_cus" />
+	</resultMap>
+	
 	<sql id="sql_callaudit_back">
 		<![CDATA[
 		select
@@ -243,7 +262,8 @@
 			delete from mecs5_realtime_state where agent_id = #{agentId}
 		]]>
 	</delete>
-	<update id="patchAgentById" parameterType="agent">
+	
+	<update id="patchCallAudit" parameterType="agent">
 		update mecs5_realtime_state
 		<set>
 			<if test="agentNumber != ''">agent_no = #{agentNumber},</if>
