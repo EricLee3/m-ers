@@ -17,7 +17,7 @@ public class ProgressLink extends BaseDomain {
 	private String indicator_level;
 	private String agent_script;
 	private String customer_script;
-
+	private String script_color;
 	
     public ProgressLink() {
 		super();
@@ -27,6 +27,7 @@ public class ProgressLink extends BaseDomain {
 		indicator_level="";
 		agent_script = "";
 		customer_script = "";
+		script_color = "";
 	}
 
 	
@@ -81,12 +82,24 @@ public class ProgressLink extends BaseDomain {
 	}
 
 
+	public String getScript_color() {
+		return script_color;
+	}
+
+
+	public void setScript_color(String script_color) {
+		this.script_color = script_color;
+	}
+
+
+
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "ImsiMent [agent_id="+agent_id+", indicator_name=" + indicator_name + ", indicator_kor_name=" + indicator_kor_name + ", indicator_level=" + indicator_level + ", agent_script=" + agent_script + ", customer_script=" + customer_script + "]";
+		return "ImsiMent [agent_id="+agent_id+", indicator_name=" + indicator_name + ", indicator_kor_name=" + indicator_kor_name + ", indicator_level=" + indicator_level + ", agent_script=" + agent_script + ", customer_script=" + customer_script +   ", script_color=" + script_color +"]";
 	}
 
 }

@@ -34,8 +34,6 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
       String requestURL = request.getRequestURL().toString();
       boolean demo= false;
       
-      System.out.println("req:::"+requestURL);
-      
       String http     = appProp.getProperty("http.port");
       String https     = appProp.getProperty("https.port");
       
