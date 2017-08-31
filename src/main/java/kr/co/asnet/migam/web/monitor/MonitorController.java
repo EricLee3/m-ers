@@ -238,7 +238,7 @@ public class MonitorController {
 	 * @return
 	 */
 	@RequestMapping(value = "/call_list", method = RequestMethod.GET)
-	public String callList(@RequestParam(value = "page", required = false, defaultValue = "1") int page, Model model, SearchDTO searchDTO) {
+	public String callList(@RequestParam(value = "page", required = false, defaultValue = "1") int page, Model model, SearchDTO searchDTO,String selectAgent) {
 		PageDTO pageDTO = new PageDTO(page);
 		PageDTO5 pageDTO5 = new PageDTO5(page);
 		PageDTO5 pageDT10 = new PageDTO5(page);
@@ -258,7 +258,7 @@ public class MonitorController {
 				searchDTO.setEndDate(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
 			}
 		}
-		
+		/*
 		if( searchDTO.getSearchQuery() == null ) {
 			searchDTO.setSearchQuery("");
 		}
@@ -266,7 +266,7 @@ public class MonitorController {
 		if( searchDTO.getSearchId() == null ) {
 			searchDTO.setSearchId("");
 		}
-		
+		*/
 		
 		if (searchDTO.getSearchBoardIndex() == null) {
 			model.addAttribute("pageDTO", pageDTO15);
@@ -279,6 +279,13 @@ public class MonitorController {
 			
 			List<RealStat> agentList = callAuditService.getAgent(pageDTO15, null, "order by AG.agent_name asc");
 			model.addAttribute("agentList", agentList);
+			
+			if( searchDTO.getSearchGroup() != null ) { 
+				if( searchDTO.getSearchGroup().equals("allGroup") ) searchDTO.setSearchGroup(null);
+			}
+			if( searchDTO.getSearchId() != null ) { 
+				if( searchDTO.getSearchId().equals("allAgent")) searchDTO.setSearchId(null);
+			}
 		} else {
 			if (searchDTO.getSearchBoardIndex().equals("5")) {
 				model.addAttribute("pageDTO", pageDTO5);
@@ -341,6 +348,14 @@ public class MonitorController {
 				List<RealStat> agentList = callAuditService.getAgent(pageDTO, null, "order by AG.agent_name asc");
 				model.addAttribute("agentList", agentList);
 			}
+			
+
+			if( searchDTO.getSearchGroup() != null ) { 
+				if( searchDTO.getSearchGroup().equals("allGroup") ) searchDTO.setSearchGroup(null);
+			}
+			if( searchDTO.getSearchId() != null ) { 
+				if( searchDTO.getSearchId().equals("allAgent")) searchDTO.setSearchId(null);
+			}
 		}
 		
 		
@@ -349,7 +364,13 @@ public class MonitorController {
 		model.addAttribute("listCount", 10);
 		
 		model.addAttribute("searchDTO", searchDTO);
-		model.addAttribute("searchId", searchDTO.getSearchId());
+		
+		model.addAttribute("searchGroup", searchDTO.getSearchGroup());
+		if(searchDTO.getSearchId() != null) {
+			model.addAttribute("searchId", selectAgent);
+		}
+		
+	//	model.addAttribute("searchId", searchDTO.getSearchId());
 		model.addAttribute("searchQuery", searchDTO.getSearchQuery());
 		model.addAttribute("searchBoardIndex", searchDTO.getSearchBoardIndex());
 		
