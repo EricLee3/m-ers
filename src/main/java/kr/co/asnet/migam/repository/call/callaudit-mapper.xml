@@ -243,4 +243,14 @@
 			delete from mecs5_realtime_state where agent_id = #{agentId}
 		]]>
 	</delete>
+	<update id="patchAgentById" parameterType="agent">
+		update mecs5_realtime_state
+		<set>
+			<if test="agentNumber != ''">agent_no = #{agentNumber},</if>
+			<if test="agentName != ''">agent_name = #{agentName}</if>
+		</set>
+		<where>
+			agent_id = #{agentId}
+		</where>
+	</update>
 </mapper> 

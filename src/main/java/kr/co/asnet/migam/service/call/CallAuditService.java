@@ -84,6 +84,11 @@ public interface CallAuditService {
 	 * @return
 	 */
 	public int deleteCallAudit(String agentId);
+	
+	/*
+	 * 상담원 정보 부분수정 IOS
+	 */
+	public int patchCallAudit(Agent agent);
 }
 
 

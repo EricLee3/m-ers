@@ -194,6 +194,8 @@ public class AgentREST {
 			}
 			returncheck = 1;
 			updateCount = agentService.updateAgentById(agent);
+			// realtime_state update
+			callAuditService.patchCallAudit(agent);
 			agentchanged = agentService.insertAgentChanged(agent);
 		}
 		

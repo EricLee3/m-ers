@@ -270,4 +270,8 @@ public class CallAuditDaoMapper implements CallAuditDao {
 		return sqlSession.delete("kr.co.asnet.migam.repository.call.CallAuditDaoMapper.deleteCallAudit", agentId);
 	}
 
+	@Override
+	public int patchCallAudit(Agent agent) {
+		return sqlSession.delete("kr.co.asnet.migam.repository.call.CallAuditDaoMapper.patchCallAudit", agent);
+	}
 }

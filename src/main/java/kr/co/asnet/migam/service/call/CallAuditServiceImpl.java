@@ -143,4 +143,8 @@ public class CallAuditServiceImpl implements CallAuditService {
 		return callAuditDao.deleteCallAudit(agentId) > 0 ? 1 : 0;	
 	}
 
+	@Override
+	public int patchCallAudit(Agent agent)  {
+		return callAuditDao.patchCallAudit(agent) > 0 ? 1 : 0;
+	}
 }
