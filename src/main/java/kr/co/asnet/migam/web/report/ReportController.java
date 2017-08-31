@@ -105,6 +105,8 @@ public class ReportController {
 					List<Agent> agentList = agentService.getAgentList(null, searchDTO, "order by agent_name asc");
 					model.addAttribute("agentList", agentList);
 				//}
+					System.out.println("mmm:::::::::::"+searchDTO.getSearchId());
+					
 		// 검색 조건 처리
 		if( searchDTO.getSearchGroup() != null ) { 
 			if( searchDTO.getSearchGroup().equals("allGroup") ) searchDTO.setSearchGroup(null);

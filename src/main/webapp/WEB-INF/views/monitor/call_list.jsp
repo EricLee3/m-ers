@@ -366,14 +366,19 @@
                 			}
                 		}
                 		$("#searchId").val(agentIdList);	
-                        
                         document.getElementById("searchBoardIndex").value = $("#searchBoardIndex1").val();
                        // document.getElementById("searchId").value = $("#searchId").val();
                        // document.getElementById("searchQuery").value = $("#searchQuery").val();
-                        $("#form_conf_search").submit();
+                      
+                       var agentName = $("#selectAgent option:selected").text(); 
+						$("#form_conf_search").find("#agentName").val(agentName);
+                       $("#form_conf_search").submit();
                     });
                     
                    
+                	<c:if test="${searchDTO.searchGroup != null and searchDTO.searchId == null }">
+                	$("#form_conf_search").find("#selectAgentGroup option[value='${searchDTO.searchGroup}']").attr("selected", "selected");
+                	</c:if>
                 	<c:if test="${searchDTO.searchId != null and searchDTO.searchGroup == null}">
                 	var idList = "${searchDTO.searchId}";
                 	idList = idList.replace(/'/gi, "");

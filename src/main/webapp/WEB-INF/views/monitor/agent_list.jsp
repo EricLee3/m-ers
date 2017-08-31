@@ -64,7 +64,7 @@
 										<c:if test="${agent.callStatus eq '1' }">
 											<c:choose>
 												<c:when test="${agent.angryCount gt angryCountParameter }">
-													<span class="pull-left auditStatus2" title="11111주의 단계" data-angrycount="${agent.angryCount }"><i class="fa fa-square"></i></span>
+													<span class="pull-left auditStatus2" title="주의 단계" data-angrycount="${agent.angryCount }"><i class="fa fa-square"></i></span>
 												</c:when>
 												<c:otherwise>
 													<span class="pull-left auditStatus1" title="Normal" data-angrycount="${agent.angryCount }"><i class="fa fa-square"></i></span>
