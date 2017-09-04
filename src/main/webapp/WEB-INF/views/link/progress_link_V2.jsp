@@ -64,7 +64,7 @@
         
         $(function() {
             $(document).ready(function() {
-            	setInterval(req_progress,1000);
+            	setInterval(req_progress,3000);
            	});
         });
         
@@ -127,13 +127,13 @@
 	<c:forEach items="${ProgressList}" var="progress">
 	<fmt:parseNumber var="indicator_level" integerOnly="true" value="${progress.indicator_level / 31 * 100}"/>
 		<div class="progress_row" style="width: 236px; height:72px; background-color: #174799;">
-			<b class="progressbar-title">
+			<b class="progressbar-title" style="color: ${progress.script_color}">
 			<c:if test="${progress.customer_script == ''}">&nbsp;</c:if>
 				${progress.customer_script}
 			</b>
             <div class="progress" style="cursor: pointer; margin-top: 5px;" onclick="pop_progress()">
-                <div class="progress-bar" style="width: ${indicator_level}%; background: #ed687c;">
-                    <span class="progress-icon fa fa-check" style="border-color:#ed687c; color:#ed687c;"></span>
+                <div class="progress-bar" style="width: ${indicator_level}%; background: ${progress.script_color}">
+                    <span class="progress-icon fa fa-check" style="border-color:${progress.script_color}; color:${progress.script_color};"></span>
                     <div class="progress-value">${indicator_level}%</div>
                 </div>
             </div>
