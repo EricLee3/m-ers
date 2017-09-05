@@ -121,7 +121,14 @@
                                                 <td id="custProName">${real.customerProfileName }</td>
                                                 <td id="custScrp">${real.customerScript }</td>
                                                 <td class="hidden-print" rowspan="2">
-                                                    <button type="button" class="jsShowModal btn btn-default btn-xs" data-index="${real.agentId }">
+                                                 <c:choose>
+										             <c:when test="${real.customerProfileName eq '' || real.customerProfileName == null}">
+										                    <button type="button" class="btn btn-default btn-xs disabled" data-index="${real.agentId }">
+										             </c:when>
+										             <c:otherwise>
+										                    <button type="button" class="jsShowModal btn btn-default btn-xs" data-index="${real.agentId }">
+										             </c:otherwise>
+							       				</c:choose>
 												<i class="fa fa-headphones"></i> 
 											</button>
                                                 </td>
