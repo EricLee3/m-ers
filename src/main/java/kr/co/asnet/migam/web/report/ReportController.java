@@ -97,16 +97,16 @@ public class ReportController {
 	 * 화면 표시 핃드 값도 같이 변경해야 하니 주의 바랍니다.
 	 */
 	@RequestMapping(value = "/call_report", method = RequestMethod.GET)
-	public String callReport(@RequestParam(value = "page", required = false, defaultValue = "1") int page, Model model, SearchDTO searchDTO) {
-
-		// 조회 조건을 위한 목록 추가하기
-		
-		List<AgentGroup> agentGroupList = agentGroupService.getAgentGroupList(null, null, "order by group_name asc");
-		model.addAttribute("agentGroupList", agentGroupList);
-		if( searchDTO.getSearchGroup() != null ) {
-			List<Agent> agentList = agentService.getAgentList(null, searchDTO, "order by agent_name asc");
-			model.addAttribute("agentList", agentList);
-		}
+	public String callReport(@RequestParam(value = "page", required = false, defaultValue = "1") int page, Model model, SearchDTO searchDTO, String selectAgent) {
+		// 그룹 선택을 위한 SELECT를 만들 때 사용할 목록 표시용
+				List<AgentGroup> agentGroupList = agentGroupService.getAgentGroupList(null, null, "order by group_name *1 asc");
+				model.addAttribute("agentGroupList", agentGroupList);
+				//if( searchDTO.getSearchGroup() != null ) {
+					List<Agent> agentList = agentService.getAgentList(null, searchDTO, "order by agent_name asc");
+					model.addAttribute("agentList", agentList);
+				//}
+					System.out.println("mmm:::::::::::"+searchDTO.getSearchId());
+					
 		// 검색 조건 처리
 		if( searchDTO.getSearchGroup() != null ) { 
 			if( searchDTO.getSearchGroup().equals("allGroup") ) searchDTO.setSearchGroup(null);
@@ -131,6 +131,11 @@ public class ReportController {
 		model.addAttribute("callAnalysisList", callAnalysisList);
 		model.addAttribute("callAnalysisCount", callAnalysisService.getCallAnalysisCount(searchDTO));
 		model.addAttribute("pageDTO", pageDTO);
+		model.addAttribute("searchGroup", searchDTO.getSearchGroup());
+		if(searchDTO.getSearchId() != null) {
+			model.addAttribute("searchId", selectAgent);
+		}
+		
 		model.addAttribute("menu", "call_report");
 		model.addAttribute("menuCategory", "report");
 		return "/report/call_report";

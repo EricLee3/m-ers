@@ -429,13 +429,25 @@ $(document).ready(function(){
      * 단, 검색 상자등이 있을 경우에는 해당 항목의 이름 ( 아래에서는 form_search ) 등에 주의하셔야 합니다. 
      * 또한,Page가 정상적으로 동작하기 위해서는 해당 페이지에 <form id="form_search "...><input type="hidden" name="page"> 와 같은 코드가 반드시 필요합니다.
      */
-    $(document).on("click", ".pagination li a", function(e) {
-        e.preventDefault();
-        var page = $(this).attr("data-page");
-        $("#form_hourlyCall_search input[name='page']").val(page);
-        var pathname = window.location.pathname;
-        window.location.href = pathname + "?" + $("#form_hourlyCall_search").serialize();
-    });
+     $(document).on("click", ".pagination li a", function(e) {
+         e.preventDefault();
+         var agentIdList = "";
+         $(".jsRemoveSearchAgent").each(function(index){
+ 			if( index != 0) agentIdList += ","; 
+ 			agentIdList += ("'" + $(this).attr("data-agentId") + "'");
+ 		});
+
+ 		$("#searchId").val(agentIdList);	
+         
+         var page = $(this).attr("data-page");
+         $("#form_hourlyCall_search input[name='page']").val(page);
+         
+         $("#form_hourlyCall_search").submit();
+         
+        // var pathname = window.location.pathname;
+       //  window.location.href = pathname + "?" + $("#form_callreport_search").serialize();
+     });
+      
 
     $(function () {
     	//Date picker

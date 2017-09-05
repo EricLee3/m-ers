@@ -64,7 +64,7 @@
         
         $(function() {
             $(document).ready(function() {
-            	setInterval(req_progress,1000);
+            	setInterval(req_progress,3000);
            	});
         });
         
@@ -88,9 +88,19 @@
     	    	       			for(var i=0;i < data.length; i ++){
     	    	       				var indicator_level_per =parseInt(data[i].indicator_level / 31 * 100);
     	    	       				var content = '<div class="progress_row" style="width: 236px; height:72px; background-color: #174799;">';
-    	    	       				content += '<b class="progressbar-title">';
+    	    	       				content += '<b class="progressbar-title" style="color:'+data[i].script_color+'">';
     	    	       				if(data[i].customer_script == "" )content += '&nbsp;';
         	    	       			content += data[i].customer_script;
+        	    	       			content += '</b>';
+        	    	       			content += '<div class="progress" style="cursor: pointer; margin-top: 5px;" onclick="pop_progress()">';
+        	    	       			content += '<div class="progress-bar" style="width: '+indicator_level_per+'%; background: '+data[i].script_color+';">';
+        	    	       			content += '<span class="progress-icon fa fa-check" style="border-color:'+data[i].script_color+'; color:'+data[i].script_color+';"></span>';
+        	    	       			content += '<div class="progress-value">'+indicator_level_per+'%</div>';
+        	    	       			content += '</div>';
+        	    	       			content += '</div>';
+        	    	       			content += '</div>';
+        	    	       			
+        	    	       			/*
         	    	       			content += '</b>';
         	    	       			content += '<div class="progress" style="cursor: pointer; margin-top: 5px;" onclick="pop_progress()">';
         	    	       			content += '<div class="progress-bar" style="width: '+indicator_level_per+'%; background: #ed687c;">';
@@ -99,6 +109,7 @@
         	    	       			content += '</div>';
         	    	       			content += '</div>';
         	    	       			content += '</div>';
+        	    	       			*/
     	    	       			$(".progress_body").append(content);
     	    	       		}
     	        	   	  }
@@ -117,13 +128,13 @@
 	<c:forEach items="${ProgressList}" var="progress">
 	<fmt:parseNumber var="indicator_level" integerOnly="true" value="${progress.indicator_level / 31 * 100}"/>
 		<div class="progress_row" style="width: 236px; height:72px; background-color: #174799;">
-			<b class="progressbar-title">
+			<b class="progressbar-title" style="color: ${progress.script_color}">
 			<c:if test="${progress.customer_script == ''}">&nbsp;</c:if>
 				${progress.customer_script}
 			</b>
             <div class="progress" style="cursor: pointer; margin-top: 5px;" onclick="pop_progress()">
-                <div class="progress-bar" style="width: ${indicator_level}%; background: #ed687c;">
-                    <span class="progress-icon fa fa-check" style="border-color:#ed687c; color:#ed687c;"></span>
+                <div class="progress-bar" style="width: ${indicator_level}%; background: ${progress.script_color}">
+                    <span class="progress-icon fa fa-check" style="border-color:${progress.script_color}; color:${progress.script_color};"></span>
                     <div class="progress-value">${indicator_level}%</div>
                 </div>
             </div>

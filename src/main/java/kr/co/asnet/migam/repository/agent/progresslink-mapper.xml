@@ -14,7 +14,8 @@
 	<select id="selectProgressLingList" parameterType="hashmap" resultMap="rmapProgressLink">
 		SELECT 
 			a.agent_id AS agent_id, a.indicator_name AS indicator_name, a.indicator_kor_name AS indicator_kor_name, a.indicator_level AS indicator_level, 
-			b.agent_script AS agent_script, b.customer_script AS customer_script
+			b.agent_script AS agent_script, b.customer_script AS customer_script,
+			(SELECT script_color FROM mecs5_emotion_script_web c WHERE b.customer_script = c.script) AS script_color
 			FROM mecs5_realtime_ind_state a LEFT JOIN mecs5_realtime_state b ON a.agent_id = b.agent_id
 			WHERE 
 		   a.agent_id=#{progressLink.agent_id}

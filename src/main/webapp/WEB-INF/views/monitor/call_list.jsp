@@ -38,10 +38,13 @@
             <script>
                 $(document).ready(function() {
                     if ("${searchBoardIndex}" != null && "${searchBoardIndex}" != '') $("select[name=searchBoardIndex1]").val("${searchBoardIndex}").attr("selected", "selected");
-                    if ("${searchId}" != null && "${searchId}" != '') $("select[name=searchId]").val("${searchId}").attr("selected", "selected");
                     if ("${searchQuery}" != null && "${searchQuery}" != '') $("select[name=searchQuery]").val("${searchQuery}").attr("selected", "selected");
+                    if("${searchGroup}" != null && "${searchGroup}" != '') $("select[name=searchGroup]").val("${searchGroup}").attr("selected","selected");
+                    if("${searchId}" != null && "${searchId}" != '') $("select[name=selectAgent]").val("${searchId}").attr("selected","selected");
+                    
                 });
             </script>
+            
         </head>
 
         <body class="hold-transition skin-blue sidebar-mini" id="test_tr">
@@ -72,23 +75,26 @@
 <!-- 											</select> -->
 <!--                                         </div> -->
 <!--                                     </div> -->
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <select class="form-control" id="searchQuery" name="searchQuery">
-												<option value="">상담원선택</option>
-												<c:forEach items="${agentList}" var="agent">
-													<option value="${agent.agentName}">${agent.agentName}</option>
+                                   <div class="col-md-2">
+										<div class="form-group">
+											<input type="hidden" id="searchId" name="searchId" value="">
+											<select class="form-control" id="selectAgent" name="selectAgent">
+												<option value='allAgent'>-- 상담원 선택 --</option>
+												<option value='selectAllAgent'>전체 선택 </option>
+												<c:forEach items="${agentList}" var="agent">	
+												<option value="${agent.agentId }">${agent.agentName }</option>
 												</c:forEach>
 											</select>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-2 hidden-print">
+										</div>
+									</div>
+                                    <div class="col-md-2">
                                         <button type="button" class="jsSearch btn btn-info">모니터링</button>
+                                        
                                     </div>
                                     <%--
 									<button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#myModal" style="margin-right: 10px;">등록</button>
 									--%>
+									<div class="col-md-8 box-header agentList" id="agentList"></div>
                                 </form>
 
                                 <!-- table hovering disabled IOS -->
@@ -171,19 +177,7 @@
             <div class="modal fade" id="modalCallDetail" tabindex="-1" role="dialog" aria-labelledby=""></div>
 
             <script>
-            /*
-            * 페이징을 위해 필요한 스크립트입니다.
-            * 단, 검색 상자등이 있을 경우에는 해당 항목의 이름 ( 아래에서는 form_search ) 등에 주의하셔야 합니다. 
-            * 또한,Page가 정상적으로 동작하기 위해서는 해당 페이지에 <form id="form_search "...><input type="hidden" name="page"> 와 같은 코드가 반드시 필요합니다.
-            */
-           $(document).on("click", ".pagination li a", function(e) {
-               e.preventDefault();
-               var page = $(this).attr("data-page");
-               $("#form_conf_search input[name='page']").val(page);
-               document.getElementById("searchBoardIndex").value = $("#searchBoardIndex1").val();
-               var pathname = window.location.pathname;
-               window.location.href = pathname + "?" + $("#form_conf_search").serialize();
-           });
+          
             
                 var mainTimer;
                 var modalTimer;
@@ -259,16 +253,162 @@
                         data: [0]
                     }]
                 };
+                
                 $(document).ready(function() {
+                	
+                	  /*
+                     * 페이징을 위해 필요한 스크립트입니다.
+                     * 단, 검색 상자등이 있을 경우에는 해당 항목의 이름 ( 아래에서는 form_search ) 등에 주의하셔야 합니다. 
+                     * 또한,Page가 정상적으로 동작하기 위해서는 해당 페이지에 <form id="form_search "...><input type="hidden" name="page"> 와 같은 코드가 반드시 필요합니다.
+                     */
+                    $(document).on("click", ".pagination li a", function(e) {
+                        e.preventDefault();
+                        
+                        var agentIdList = "";
+                        $(".jsRemoveSearchAgent").each(function(index){
+                			if( index != 0) agentIdList += ","; 
+                			agentIdList += ("'" + $(this).attr("data-agentId") + "'");
+                		});
+                        
+                        $("#searchId").val(agentIdList);	
+                        
+                        var page = $(this).attr("data-page");
+                        $("#form_conf_search input[name='page']").val(page);
+                        document.getElementById("searchBoardIndex").value = $("#searchBoardIndex1").val();
+                     
+                        $("#form_conf_search").submit();
+                        //   var pathname = window.location.pathname;
+                      //  window.location.href = pathname + "?" + $("#form_conf_search").serialize();
+                    });
+                	
+                	$(document).on("change", "#selectAgentGroup", function(){
+                		var agentGroupId = $("#selectAgentGroup").val();
+                		if(agentGroupId != "allGroup") {
+                			$.ajax({
+                				url : "/REST/agent/listAgent/" +agentGroupId,
+                			}).done(function(resultList){
+                				$("#selectAgent").empty();
+                				if( resultList != null ) {
+                					$("#selectAgent").append("<option value='allAgent'>상담원을 선택하세요 </option>");
+                					$("#selectAgent").append("<option value='selectAllAgent'>전체 선택 </option>");
+                					$.each(resultList, function (index, agent){
+                						$("#selectAgent").append("<option value='"+agent.agentId+"'>"+agent.agentName+"</option>");
+                					});	
+                				}
+                			});
+                		} else {
+                			$("#selectAgent").empty().append("<option value='allAgent'>--상담원 선택--</option>");
+                		} 	
+                	});
+                	
+                	
+                	
+                	$(document).on("change", "#selectAgent", function(e){
+                		e.preventDefault();
+                		var agentId = $(this).val();
+                		var agentName = $(this).find("option[value='"+ agentId +"']").text();
+                		var agentcheck = 1;		
+                		if($(".jsRemoveSearchAgent").index() == 0){
+                		$(".jsRemoveSearchAgent").each(function(index){
+                			if($(this).attr("data-agentId") == agentId){
+                				alert(agentName+" 상담원은 이미 선택되었습니다.");
+                				agentcheck = 0;
+                			}		
+                		});
+                		}
+                		if(agentcheck == 1){
+                			if(agentId != "allAgent") {
+                				if (agentId == "selectAllAgent") {
+                					$("#selectAgent option").each(function() {
+                						if ( $(this).val() != "allAgent" && $(this).val() != "selectAllAgent") {
+                							/*
+                							$("#agentList").append(" <span data-agentId='"
+                									+$(this).val()+"' data-agentName ='"
+                									+$(this).text()+"' class='btn btn-xs btn-info pull-left jsRemoveSearchAgent'>"
+                									+"<i class='fa fa-times hidden-print'></i> "
+                									+$(this).text()+"</span>");	
+                							*/
+                							$(".jsRemoveSearchAgent").remove();
+                						}
+                						
+                					});
+                				} else {
+                					$("#agentList").append(" <span data-agentId='"
+                						+agentId+"' data-agentName ='"
+                						+agentName+"' class='btn btn-xs btn-info pull-left jsRemoveSearchAgent'>"
+                						+"<i class='fa fa-times hidden-print'></i> "
+                						+agentName+"</span>");
+                				}
+                			}
+                		}
+                	});
+                	
+                	$(document).on("click", ".jsRemoveSearchAgent", function(e){
+                		e.preventDefault();
+                		$(this).remove();
+                	});
+                	
+                	
                     //검색
                     $(document).on("click", ".jsSearch", function(e) {
                         e.preventDefault();
                     
+                        var agentIdList = "";
+                		$(".jsRemoveSearchAgent").each(function(index){
+                			if( index != 0) agentIdList += ","; 
+                			agentIdList += ("'" + $(this).attr("data-agentId") + "'");
+                		});
+                		
+                		if($("select[name=selectAgent]").val() != 'selectAllAgent'){
+                			if( agentIdList.length < 1 ) {
+                				alert("상담원 또는 그룹을 선택하여야 합니다.");
+                				return false;
+                			}
+                		}
+                		$("#searchId").val(agentIdList);	
                         document.getElementById("searchBoardIndex").value = $("#searchBoardIndex1").val();
                        // document.getElementById("searchId").value = $("#searchId").val();
                        // document.getElementById("searchQuery").value = $("#searchQuery").val();
-                        $("#form_conf_search").submit();
+                      
+                       var agentName = $("#selectAgent option:selected").text(); 
+						$("#form_conf_search").find("#agentName").val(agentName);
+                       $("#form_conf_search").submit();
                     });
+                    
+                   
+                	<c:if test="${searchDTO.searchGroup != null and searchDTO.searchId == null }">
+                	$("#form_conf_search").find("#selectAgentGroup option[value='${searchDTO.searchGroup}']").attr("selected", "selected");
+                	</c:if>
+                	<c:if test="${searchDTO.searchId != null and searchDTO.searchGroup == null}">
+                	var idList = "${searchDTO.searchId}";
+                	idList = idList.replace(/'/gi, "");
+                	var idListArray = idList.split(",");
+                	if ( idListArray.length > 1 ) {
+                		$.each(idListArray, function(idx, thisAgentId) {
+                			$("#selectAgent option").each(function() {
+                				if ( $(this).val() == thisAgentId ) {
+                					$("#agentList").append(" <span data-agentId='"
+                							+$(this).val()+"' data-agentName ='"
+                							+$(this).text()+"' class='btn btn-xs btn-info pull-left jsRemoveSearchAgent'>"
+                							+"<i class='fa fa-times hidden-print'></i> "
+                							+$(this).text()+"</span>");
+                				}
+                			});			
+                		});	
+                	} else {
+                		$("#form_conf_search").find("#selectAgent option[value='" + idList + "']").attr("selected", "selected");
+                		$("#selectAgent option").each(function() {
+                			if ( $(this).val() == idList ) {
+                				$("#agentList").append(" <span data-agentId='"
+                						+$(this).val()+"' data-agentName ='"
+                						+$(this).text()+"' class='btn btn-xs btn-info pull-left jsRemoveSearchAgent'>"
+                						+"<i class='fa fa-times hidden-print'></i> "
+                						+$(this).text()+"</span>");
+                			}
+                		});
+                	}
+                	</c:if>
+                    
 
                     // timer settings	
                     mainTimer = window.setInterval(updateCallListTest, 5000);

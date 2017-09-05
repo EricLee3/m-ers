@@ -78,7 +78,7 @@ public class MainController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String intro(Model model) {
-		return ("redirect:/main");
+		return ("redirect:/login");
 	}
 	/**
 	 * MIGAM 메인페이지 입니다.

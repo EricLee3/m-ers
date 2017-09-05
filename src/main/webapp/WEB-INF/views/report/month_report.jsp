@@ -331,6 +331,26 @@ $(document).ready(function(){
         window.location.href = pathname + "?" + $("#form_callreport_search").serialize();
     });
 
+     $(document).on("click", ".pagination li a", function(e) {
+         e.preventDefault();
+         var agentIdList = "";
+         $(".jsRemoveSearchAgent").each(function(index){
+ 			if( index != 0) agentIdList += ","; 
+ 			agentIdList += ("'" + $(this).attr("data-agentId") + "'");
+ 		});
+
+ 		$("#searchId").val(agentIdList);	
+         
+         var page = $(this).attr("data-page");
+         $("#form_monthlyCall_search input[name='page']").val(page);
+         
+         $("#form_monthlyCall_search").submit();
+         
+        // var pathname = window.location.pathname;
+       //  window.location.href = pathname + "?" + $("#form_callreport_search").serialize();
+     });
+     
+     
 
 	$(function () {
 	    //Date picker
