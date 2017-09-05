@@ -68,6 +68,10 @@ public class AgentREST {
          */
 //        agent.setProfile_name_agent("2k_상담원스트레스");
 //        agent.setProfile_name_cus("2k_고객감정");
+    	
+    	final HttpHeaders headers = new HttpHeaders();
+    	
+    	
         agent.setGroupName("2k");
         agent.setGroupId("2k");
         agent.setProfile_name_agent("7");
@@ -76,9 +80,14 @@ public class AgentREST {
         
         logger.debug(agent.toString());
         InetAddress ip = InetAddress.getLocalHost();
-        
-        int agentIndex = agentService.insertAgent(agent);
-        int agentchanged = agentService.insertAgentChanged(agent);
+        int agentIndex = 0;
+        int agentchanged = 0;
+        try {
+        	agentIndex = agentService.insertAgent(agent);
+        	agentchanged = agentService.insertAgentChanged(agent);
+        } catch (Exception e)  {
+        	return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+        }
         
         hislog.setDetail("[등록] 상담원ID(이름) : ["+agent.getAgentId()+"("+agent.getAgentName()+")]");
         hislog.setMenu("시스템 설정 > 상담원 목록[등록]");
@@ -94,9 +103,8 @@ public class AgentREST {
         //}
         
         if(agentIndex > 0 && intcallAudit != 0) {
-            final HttpHeaders headers = new HttpHeaders();
-            //return new ResponseEntity<Void>(headers, HttpStatus.OK);
-            return new ResponseEntity<Void>(HttpStatus.OK);
+            return new ResponseEntity<Void>(headers, HttpStatus.OK);
+            //return new ResponseEntity<Void>(HttpStatus.OK);
         } else {
             return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
         }
