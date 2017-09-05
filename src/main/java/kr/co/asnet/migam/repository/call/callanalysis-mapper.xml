@@ -145,7 +145,49 @@
 
 	<select id="selectCallAnalysisList" parameterType="hashmap" resultMap="rmapCallAnalysis">
 		<include refid="sql_callAnalysis" />
-		<include refid="sql_search" />
+		<!-- <include refid="sql_search" /> -->
+		
+		<where>
+		<if test="searchDTO != null">
+            	<if test="searchDTO.startDate != null and searchDTO.startDate != '' ">
+            		<![CDATA[
+            			and date_format(insert_date,'%Y-%m-%d') >= #{searchDTO.startDate} 
+            			and date_format(insert_date,'%Y-%m-%d') <= #{searchDTO.endDate}
+            		]]>
+            	</if>
+            	<if test="searchDTO.searchId != null and searchDTO.searchId != '' ">
+		            <![CDATA[
+		              	 and agent_id in (${searchDTO.searchId})  
+		            ]]>
+				</if>
+				<if test="searchDTO.searchType == 1">
+		            <![CDATA[
+		                and customer_result = '1'
+		                and customer_fail_code = '0'
+		            ]]>
+				</if>
+				<if test="searchDTO.searchType == 2">
+		            <![CDATA[
+		                and agent_result = '1'
+		                and agent_fail_code = '0'
+		            ]]>
+				</if>
+				<if test="searchDTO.searchType == 3">
+		            <![CDATA[
+		                and (( customer_result = '1'
+		                and customer_fail_code = '0' )
+		                or ( agent_result = '1'
+		                and agent_fail_code = '0' ))
+		            ]]>
+				</if>
+				<if test="searchDTO.searchQuery != null and searchDTO.searchQuery != '' ">
+		            <![CDATA[
+		                and customer_no like CONCAT('%',#{searchDTO.searchQuery},'%')
+		            ]]>
+				</if>
+			</if>
+		</where>
+		
 		<![CDATA[${orderby}]]>
 		<include refid="sql_paging" />
 	</select> 
@@ -160,7 +202,47 @@
 	<select id="selectCount" parameterType="hashmap" resultType="int">
 		<![CDATA[select count(*) from (]]>
 		<include refid="sql_callAnalysis" />
-		<include refid="sql_search" />
+				<!-- <include refid="sql_search" /> -->
+		<where>
+		<if test="searchDTO != null">
+            	<if test="searchDTO.startDate != null and searchDTO.startDate != '' ">
+            		<![CDATA[
+            			and date_format(insert_date,'%Y-%m-%d') >= #{searchDTO.startDate} 
+            			and date_format(insert_date,'%Y-%m-%d') <= #{searchDTO.endDate}
+            		]]>
+            	</if>
+            	<if test="searchDTO.searchId != null and searchDTO.searchId != '' ">
+		            <![CDATA[
+		              	 and agent_id in (${searchDTO.searchId})  
+		            ]]>
+				</if>
+				<if test="searchDTO.searchType == 1">
+		            <![CDATA[
+		                and customer_result = '1'
+		                and customer_fail_code = '0'
+		            ]]>
+				</if>
+				<if test="searchDTO.searchType == 2">
+		            <![CDATA[
+		                and agent_result = '1'
+		                and agent_fail_code = '0'
+		            ]]>
+				</if>
+				<if test="searchDTO.searchType == 3">
+		            <![CDATA[
+		                and (( customer_result = '1'
+		                and customer_fail_code = '0' )
+		                or ( agent_result = '1'
+		                and agent_fail_code = '0' ))
+		            ]]>
+				</if>
+				<if test="searchDTO.searchQuery != null and searchDTO.searchQuery != '' ">
+		            <![CDATA[
+		                and customer_no like CONCAT('%',#{searchDTO.searchQuery},'%')
+		            ]]>
+				</if>
+			</if>
+		</where>
 		<![CDATA[) cnt]]>
 	</select>
 	

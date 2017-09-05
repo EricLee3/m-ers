@@ -141,10 +141,10 @@
 														<th class="no-sort">전체 호</th>
 														<th class="no-sort">성공 호</th>
 														<th class="no-sort">실패 호</th>
-														<th class="no-sort">주의단계</th>
-														<th class="no-sort">흥미단계</th>
-														<th class="no-sort">욕구단계</th>
-														<!--th class="no-sort">고객불만 감소</th -->
+														<th class="no-sort">분노 단계</th>
+														<th class="no-sort">스트레스 단계</th>
+<!-- 														<th class="no-sort">욕구단계</th> -->
+														<!-- th class="no-sort">고객불만 감소</th -->
 													</tr>
 												</thead>
 												<tbody>
@@ -166,8 +166,8 @@
 														<td>${monthlyCall.failCount}</td>
 														<td><span class="text-danger">${monthlyCall.angryCount}</span></td>
 														<td><span class="text-info">${monthlyCall.stressCount}</span></td>
-														<td>${monthlyCall.incrementCount}</td>
-														<!-- td>${monthlyCall.decrementCount}</td-->
+<%-- 														<td>${monthlyCall.incrementCount}</td> --%>
+														<!-- td>${monthlyCall.decrementCount}</td -->
 													</tr>
 													</c:forEach>
 													<c:if test="${empty monthlyCallList }">

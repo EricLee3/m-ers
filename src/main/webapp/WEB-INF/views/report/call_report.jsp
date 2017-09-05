@@ -41,6 +41,10 @@
 		$(document).ready(function(){
 			if("${searchGroup}" != null && "${searchGroup}" != '') $("select[name=searchGroup]").val("${searchGroup}").attr("selected","selected");
 			if("${searchId}" != null && "${searchId}" != '') $("select[name=selectAgent]").val("${searchId}").attr("selected","selected");
+			if("${SearchType}" != null && "${SearchType}" != '') $("select[name=searchType]").val("${SearchType}").attr("selected","selected");
+			
+			
+			
 		});
 </script>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -109,7 +113,7 @@
 											<select class="form-control" id="selectCallType" name="searchType">
 												<option value="0">전체 Call</option>
 												<option value="1">분노 단계</option>
-												<option value="2">스트레스 단곈</option>
+												<option value="2">스트레스 단계</option>
 												<option value="3">분노 or 스트레스 단계</option>
 											</select>
 										</div>
