@@ -26,16 +26,16 @@
 //                                         attention = 0,
 //                                         interest = 0,
 //                                         desire = 0,
-                                        angry = 0,
+                                        angry = 0;
 //                                         boredom = 0,
 //                                         uncomfortable = 0,
-                                        stressCallee = 0,
-                                        energeticCallee = 0,
-                                        uncertain = 0,
-                                        concentration = 0,
-                                        dissatisfaction = 0,
-                                        stressCaller = 0,
-                                        energeticCaller = 0;
+//                                        stressCallee = 0,
+//                                       energeticCallee = 0,
+//                                        uncertain = 0,
+//                                        concentration = 0,
+//                                        dissatisfaction = 0,
+//                                        stressCaller = 0,
+//                                        energeticCaller = 0;
                                     refreshInterval = setInterval(function() {
                                         $.ajax({
                                             url: '/monitor/call_linegraph?agentId=' + '${agent_id}',
@@ -52,13 +52,13 @@
                                                     if (name == "Angry") angry = val;
                                                     //if (name == "Boredom") boredom = val;
                                                     //if (name == "Uncomfortable") uncomfortable = val;
-                                                    if (name == "StressCallee") stressCallee = val;
-                                                    if (name == "EnergeticCallee") energeticCallee = val;
-                                                    if (name == "Uncertain") uncertain = val;
-                                                    if (name == "Concentration") concentration = val;
-                                                    if (name == "Dissatisfaction") dissatisfaction = val;
-                                                    if (name == "StressCaller") stressCaller = val;
-                                                    if (name == "EnergeticCaller") energeticCaller = val;
+                                                    //if (name == "StressCallee") stressCallee = val;
+                                                    //if (name == "EnergeticCallee") energeticCallee = val;
+                                                    //if (name == "Uncertain") uncertain = val;
+                                                    //if (name == "Concentration") concentration = val;
+                                                    //if (name == "Dissatisfaction") dissatisfaction = val;
+                                                    //if (name == "StressCaller") stressCaller = val;
+                                                    //if (name == "EnergeticCaller") energeticCaller = val;
                                                     
                                                 }
                                             }
@@ -76,14 +76,14 @@
 
 
                                         // static code for STM version only, requested by Cho E IOS[170711] 
-                                        series[0].addPoint([x, parseInt(angry)			], false, true);
-                                        series[1].addPoint([x, parseInt(stressCallee)	], false, true);
-                                        series[2].addPoint([x, parseInt(energeticCallee)], false, true);
-                                        series[3].addPoint([x, parseInt(uncertain)		], false, true);
-                                        series[4].addPoint([x, parseInt(concentration)	], false, true);
-                                        series[5].addPoint([x, parseInt(dissatisfaction)], false, true);
-                                        series[6].addPoint([x, parseInt(stressCaller)	], false, true);
-                                        series[7].addPoint([x, parseInt(energeticCaller)], true,  true);
+                                        series[0].addPoint([x, parseInt(angry)			], true, true);
+                                        //series[1].addPoint([x, parseInt(stressCallee)	], false, true);
+                                        //series[2].addPoint([x, parseInt(energeticCallee)], false, true);
+                                        //series[3].addPoint([x, parseInt(uncertain)		], false, true);
+                                        //series[4].addPoint([x, parseInt(concentration)	], false, true);
+                                        //series[5].addPoint([x, parseInt(dissatisfaction)], false, true);
+                                        //series[6].addPoint([x, parseInt(stressCaller)	], false, true);
+                                        //series[7].addPoint([x, parseInt(energeticCaller)], true,  true);
                                         
 //                                         series[0].addPoint([x, parseInt(attention)], false, true);
 //                                         series[1].addPoint([x, parseInt(interest)], false, true);
@@ -91,14 +91,14 @@
 //                                         series[4].addPoint([x, parseInt(boredom)], false, true);
 //                                         series[5].addPoint([x, parseInt(uncomfortable)], false, true);
 
-                                        angry = 0,
-                                        stressCallee = 0,
-                                        energeticCallee = 0,
-                                        uncertain = 0,
-                                        concentration = 0,
-                                        dissatisfaction = 0,
-                                        stressCaller = 0,
-                                        energeticCaller = 0;
+                                        angry = 0;
+                                        //stressCallee = 0,
+                                        //energeticCallee = 0,
+                                        //uncertain = 0,
+                                        //concentration = 0,
+                                        //dissatisfaction = 0,
+                                        //stressCaller = 0,
+                                        //energeticCaller = 0;
                                     }, 1000);
                                 }
                             }
@@ -144,69 +144,6 @@
                                 }
                                 return data;
                             })()
-                        }, {
-                            name: '스트레스(고객)',
-                            data: (function() {
-                                var data = [], time = (new Date()).getTime(), i;
-                                for (i = -15; i <= 0; i++) {
-                                    data.push({x: time + i * 1000, y: 0});
-                                }
-                                return data;
-                            })()
-                        }, {
-                            name: '활력(고객)',
-                            data: (function() {
-                                var data = [], time = (new Date()).getTime(), i;
-                                for (i = -15; i <= 0; i++) {
-                                    data.push({x: time + i * 1000, y: 0});
-                                }
-                                return data;
-                            })()
-                        }, {
-                            name: '불확실',
-                            data: (function() {
-                                var data = [], time = (new Date()).getTime(), i;
-                                for (i = -15; i <= 0; i++) {
-                                    data.push({x: time + i * 1000, y: 0});
-                                }
-                                return data;
-                            })()
-                        }, {
-                            name: '집중',
-                            data: (function() {
-                                var data = [], time = (new Date()).getTime(), i;
-                                for (i = -15; i <= 0; i++) {
-                                    data.push({x: time + i * 1000, y: 0});
-                                }
-                                return data;
-                            })()
-                        }, {
-                            name: '불만족',
-                            data: (function() {
-                                var data = [], time = (new Date()).getTime(), i;
-                                for (i = -15; i <= 0; i++) {
-                                    data.push({x: time + i * 1000, y: 0});
-                                }
-                                return data;
-                            })()
-                        }, {
-                            name: '스트레스(상담사)',
-                            data: (function() {
-                                var data = [], time = (new Date()).getTime(), i;
-                                for (i = -15; i <= 0; i++) {
-                                    data.push({x: time + i * 1000, y: 0});
-                                }
-                                return data;
-                            })()
-                        }, {
-                            name: '활력(상담사)',
-                            data: (function() {
-                                var data = [], time = (new Date()).getTime(), i;
-                                for (i = -15; i <= 0; i++) {
-                                    data.push({x: time + i * 1000, y: 0});
-                                }
-                                return data;
-                            })()
                         }
 //                         , {
 //                             name: '불확실',
@@ -235,46 +172,12 @@
             });
         </script>
 
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content modal-lg">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-                    <h4 class="modal-title" id="myModalLabel">콜 상세조회</h4>
-                </div>
-                <div class="modal-body">
+
+                    <h4 class="modal-title" id="myModalLabel" style="text-align: center">실시간 감성지표</h4>
+                <div>
                     <div class="row">
                         <div class="col-md-4">
-                            <div class="info-box">
-                                <span class="info-box-icon bg-aqua"><i class="fa fa-user"></i></span>
-                                <div class="info-box-content">
-                                    <span class="info-box-text">고객번호</span>
-                                    <span class="info-box-number" id="customerNumber">${callAudit.customerNumber }</span>
-                                </div>
-                                <!-- /.info-box-content -->
-                            </div>
-                            <!-- /.info-box -->
 
-                            <div class="info-box">
-                                <span class="info-box-icon bg-aqua"><i class="fa fa-headphones"></i></span>
-                                <div class="info-box-content">
-                                    <span class="info-box-text" id="agentName">상담원 : ${callAudit.agentName }</span>
-                                    <span class="info-box-text" id="groupName">(${callAudit.groupName})</span>
-                                    <span class="info-box-number" id="agentNumber">${callAudit.agentNumber}</span>
-                                </div>
-                                <!-- /.info-box-content -->
-                            </div>
-                            <!-- /.info-box -->
-
-                            <div class="info-box">
-                                <span class="info-box-icon bg-aqua"><i class="fa fa-clock-o"></i></span>
-                                <div class="info-box-content" id="div_call_view">
-                                    <span class="info-box-text">시작시간 / 통화시간</span>
-                                    <span class="info-box-number" id="startTime"><fmt:formatDate pattern="HH:mm:ss" value="${callAudit.startTime}" /> / ${callAudit.callDuration}초</span>
-                                </div>
-                                <!-- /.info-box-content -->
-                            </div>
                             <!-- /.info-box -->
                             <!--  
 								<div class="col-md-6">
@@ -316,7 +219,13 @@
 					</div>
 				</div>
 				<!-- /.modal-content -->
-                                <form id="dummyforData" class="hide">
-                                    <input id='callStartTime' type='text' value='<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${callAudit.startTime}" />'>
-                                </form>
+           
+                            </div>
+                
+							<div class="info-box" style="text-align: center">
+                                <span class="info-box-icon bg-aqua"><i class="fa fa-user"></i></span>
+                                <div class="info-box-content">
+                                    <span class="info-box-text">고객번호 : </span>
+                                    <span class="info-box-number" id="customerNumber">${custom_num} &nbsp;&nbsp;상담원 : ${agent_id}&nbsp;&nbsp; 시작시간 : ${time}</span>
+                                </div>
                             </div>

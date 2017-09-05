@@ -39,35 +39,19 @@ public class ProgressController {
 	@RequestMapping(value = "/progress_link", method = { RequestMethod.GET, RequestMethod.POST })
 	public String progress_link(@RequestParam(value = "page", required = false, defaultValue = "1") int page,
 			Model model, ProgressLink progressLink) {
+
+		 
 		List<ProgressLink> progresslinkList = progressLinkService.getprogressbar(progressLink);
 
 		model.addAttribute("agent_id", progressLink.getAgent_id());
+
 		model.addAttribute("indicator_name", progressLink.getIndicator_name());
+		model.addAttribute("custom_num", progressLink.getCustom_num());
 		model.addAttribute("ProgressList", progresslinkList);
 
 		return "/link/progress_link"; // 메인페이지가 완성되지 않아 임시 주석처리합니다.
 	}
-	@RequestMapping(value = "/progress_link_V2", method = { RequestMethod.GET, RequestMethod.POST })
-	public String progress_link_V2(@RequestParam(value = "page", required = false, defaultValue = "1") int page,
-			Model model, ProgressLink progressLink) {
-		List<ProgressLink> progresslinkList = progressLinkService.getprogressbar(progressLink);
 
-		model.addAttribute("agent_id", progressLink.getAgent_id());
-		model.addAttribute("indicator_name", progressLink.getIndicator_name());
-		model.addAttribute("ProgressList", progresslinkList);
-
-		return "/link/progress_link_V2"; // 메인페이지가 완성되지 않아 임시 주석처리합니다.
-	}
-
-	@RequestMapping(value = "/progress_link_V3", method = { RequestMethod.GET, RequestMethod.POST })
-	public String progress_link_V3(@RequestParam(value = "page", required = false, defaultValue = "1") int page,
-			Model model, ProgressLink progressLink) {
-		List<ProgressLink> progresslinkList = progressLinkService.getprogressbar(progressLink);
-		model.addAttribute("agent_id", progressLink.getAgent_id());
-		model.addAttribute("indicator_name", progressLink.getIndicator_name());
-		model.addAttribute("ProgressList", progresslinkList);
-		return "/link/progress_link_V3"; // 메인페이지가 완성되지 않아 임시 주석처리합니다.
-	}
 	
 
 	@RequestMapping(value = "/req_progress", method = { RequestMethod.POST, RequestMethod.GET })
@@ -82,7 +66,13 @@ public class ProgressController {
 	@RequestMapping(value = "/pop_linegraph", method = { RequestMethod.GET, RequestMethod.POST })
 	public String pop_linegraph(@RequestParam(value = "page", required = false, defaultValue = "1") int page,
 			Model model, ProgressLink progressLink) {
+		
+		java.text.SimpleDateFormat formatter = new java.text.SimpleDateFormat("HH:mm:ss");		
+		String time = formatter.format(new java.util.Date());
+		
+		model.addAttribute("time", time);
 		model.addAttribute("agent_id", progressLink.getAgent_id());
+		model.addAttribute("custom_num", progressLink.getCustom_num());
 		return "/link/pop_linegraph"; // 메인페이지가 완성되지 않아 임시 주석처리합니다.
 	}
 
