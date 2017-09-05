@@ -77,6 +77,15 @@ public class ProgressController {
 	}
 	
 
+	
+
+	@RequestMapping(value = "/pop_linegraph", method = { RequestMethod.GET, RequestMethod.POST })
+	public String pop_linegraph(@RequestParam(value = "page", required = false, defaultValue = "1") int page,
+			Model model, ProgressLink progressLink) {
+		model.addAttribute("agent_id", progressLink.getAgent_id());
+		return "/link/pop_linegraph"; // 메인페이지가 완성되지 않아 임시 주석처리합니다.
+	}
+
 
 
 }
