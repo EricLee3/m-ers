@@ -83,6 +83,7 @@
     	    	        data: {agent_id : "${agent_id}" ,indicator_name : "${indicator_name}"},
     	    	        success:function(data, textStatus, jqXHR) 
     	    	        {	    	        	
+        	    	      if(data.length != 0 ){
     	    	       		$(".progress_row").remove();
     	    	       			for(var i=0;i < data.length; i ++){
     	    	       				var indicator_level_per =parseInt(data[i].indicator_level / 31 * 100);
@@ -100,7 +101,7 @@
         	    	       			content += '</div>';
     	    	       			$(".progress_body").append(content);
     	    	       		}
-
+    	        	   	  }
 
     	   		        },
     	   		        error: function(jqXHR, textStatus, errorThrown) 
