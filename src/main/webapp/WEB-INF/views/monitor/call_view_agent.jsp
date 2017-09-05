@@ -135,9 +135,11 @@ function linegraph(mdata){
 									<!--  <canvas id="lineChart" style="height: 250px"></canvas>-->
 									<div id="linegraph_display"  style="margin-top:20px; margin-left:5px; width:560px; height:300px;"></div>
  								</div>
+ 								<!-- 
  								<span class="col-md-12">
 									<audio id="audioPlayer" src="/resources/wav/${fn:replace(callAnalysis.mixedWavePath, '/home/mecs/PSNR/', '')}" controls preload="auto"></audio>
 								</span>
+								 -->
 							</div>
 						</div>
 					</div>
