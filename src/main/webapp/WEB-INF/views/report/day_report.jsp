@@ -140,13 +140,13 @@
 											<table class="table table-bordered table-striped">
 												<thead>
 													<tr>
-														<th class="no-sort">상담일</th>
+														<th class="no-sort">일</th>
 														<th class="no-sort">전체 호</th>
 														<th class="no-sort">성공 호</th>
 														<th class="no-sort">실패 호</th>
-														<th class="no-sort">주의단계</th>
-														<th class="no-sort">흥미단계</th>
-														<th class="no-sort">욕구단계</th>
+														<th class="no-sort">분노 단계</th>
+														<th class="no-sort">스트레스 단계</th>
+<!-- 														<th class="no-sort">욕구단계</th> -->
 														<!-- th class="no-sort">고객불만 감소</th -->
 													</tr>
 													
@@ -159,22 +159,22 @@
 														<td >${failCount }</td>
 														<td >${angerCall }</td>
 														<td >${stressCall }</td>
-														<td >${incrementCount }</td>
-														<!--td >${decrementCount }</td -->
+<%-- 														<td >${incrementCount }</td> --%>
+														<!-- td >${decrementCount }</td -->
 													</tr>
 													<c:forEach items="${dailyCallList }"  var="dailyCall" >
 													<tr>
-														<td><fmt:formatDate pattern="yy-MM-dd" value="${dailyCall.statTime}" /></td>
+														<td><fmt:formatDate pattern="MM/dd" value="${dailyCall.statTime}" /></td>
 														<td>${dailyCall.totalCount}</td>
 														<td>${dailyCall.successCount}</td>
 														<td>${dailyCall.failCount}</td>
 														<td><span class="text-danger">${dailyCall.angryCount}</span></td>
 														<td><span class="text-info">${dailyCall.stressCount}</span></td>
-														<td>${dailyCall.incrementCount}</td>
-														<!--td>${dailyCall.decrementCount}</td-->
+<%-- 														<td>${dailyCall.incrementCount}</td> --%>
+														<!-- td>${dailyCall.decrementCount}</td -->
 													</tr>
 													</c:forEach>
-													<c:if test="${empty dailyCallListForChart }">
+													<c:if test="${empty dailyCallList }">
 														<tr class="empty">
 															<td colspan="8">조회 결과가 없습니다.</td>
 														</tr>

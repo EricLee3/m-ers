@@ -51,7 +51,7 @@
 								${agent.angryCount }
 							</span>
 							<div class="info-box-content-agent">
-								<span class="info-box-text"><h4 class="box-title">주의 단계</h4></span> 
+								<span class="info-box-text"><h4 class="box-title">분노 단계</h4></span> 
 								<span class="text-muted">최근 7일간 합산 값입니다.</span>
 							</div>
 						</div>
@@ -60,7 +60,7 @@
 								${agent.stressCount }
 							</span>
 							<div class="info-box-content-agent">
-								<span class="info-box-text"><h4 class="box-title">욕구단계</h4></span> 
+								<span class="info-box-text"><h4 class="box-title">스트레스 단계</h4></span> 
 								<span class="text-muted">최근 7일간 합산 값입니다.</span>
 							</div>
 						</div>
@@ -164,8 +164,8 @@
 										<tr>
 											<th class="no-sort col-sm-1">고객번호</th>
 											<th class="no-sort col-sm-1">시작시간</th>
-											<th class="no-sort col-sm-1">주의 단계</th>
-											<th class="no-sort col-sm-1">흥미 단계</th>
+											<th class="no-sort col-sm-1">분노 단계</th>
+											<th class="no-sort col-sm-1">스트레스 단계</th>
 											<th class="no-sort col-sm-1">상세조회</th>
 										</tr>
 									</thead>
@@ -216,8 +216,8 @@
 											<tr>
 												<th>상담원</th>
 												<th>그룹 ID</th>
-												<th>주의 단계</th>
-												<th>흥미 단계</th>
+												<th>분노 단계</th>
+												<th>스트레스 단계</th>
 											</tr>
 										</thead>
 										<tbody>
