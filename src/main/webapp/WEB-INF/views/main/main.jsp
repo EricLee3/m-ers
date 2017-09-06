@@ -101,7 +101,7 @@
 		//		document.getElementById('sens_basic').setAttribute("class", "");
 		//		document.getElementById('sens_demo').setAttribute("class", "");
 
-		if("${sessionScope.sessionUser.superUser}" == "ture"){
+		if("${sessionScope.sessionUser.superUser}" == "true"){
 			document.getElementById('pro_meta').setAttribute("class", "");
 			document.getElementById('pro_conf').setAttribute("class", "");
 		}
