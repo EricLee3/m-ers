@@ -172,7 +172,7 @@
 													</c:forEach>
 													<c:if test="${empty monthlyCallList }">
 														<tr class="empty">
-															<td colspan="8">조회 결과가 없습니다.</td>
+															<td colspan="6">조회 결과가 없습니다.</td>
 														</tr>
 													</c:if>
 												</tbody>
