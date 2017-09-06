@@ -68,7 +68,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
          userRole = sessionUser.getCurrentUser().getRole(); 
       }
 
-      String[] adminPath = {"/monitor", "/report", "/service", "/main"};
+      String[] adminPath = {"/monitor", "/report", "/service", "/main", "system"};
       if (StringUtils.containsAny(requestURL, adminPath)) {
          if ( !sessionUser.isLogin() ) {
             String rtUrl = URLEncoder.encode(requestURL, "utf-8");
@@ -102,6 +102,19 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
          }
       }
       */
+      
+      String[] superadminPath = { "/system/pro_conf","/system/pro_conf"};
+      if (StringUtils.containsAny(requestURL, superadminPath)) {
+          if (demo == true) {
+             return true;
+          }else if ( !sessionUser.isSuperUser()) {
+             sessionUser.logoutSessionUser();
+             sessionUser.saveUser(new User());
+             String rtUrl = URLEncoder.encode(requestURL, "utf-8");
+             response.sendRedirect("/session_out");
+             return false;
+          }
+       }
       return true;
    }
 }

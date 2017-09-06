@@ -70,6 +70,7 @@
 	
 	 });
 	 */
+
 	function side(gubun) {
 
 		document.getElementById('agent_list').setAttribute("class", "");
@@ -96,11 +97,16 @@
 		//		document.getElementById('fault_alarm_log').setAttribute("class", "");
 		//		document.getElementById('sens_meta').setAttribute("class", "");
 		//		document.getElementById('sens_conf').setAttribute("class", "");
-		//		document.getElementById('pro_meta').setAttribute("class", "");
-		//		document.getElementById('pro_conf').setAttribute("class", "");
+				
 		//		document.getElementById('sens_basic').setAttribute("class", "");
 		//		document.getElementById('sens_demo').setAttribute("class", "");
 
+		if("${sessionScope.sessionUser.superUser}" == "ture"){
+			document.getElementById('pro_meta').setAttribute("class", "");
+			document.getElementById('pro_conf').setAttribute("class", "");
+		}
+		
+		
 		if (gubun == 0) {
 			document.getElementById('agent_list').setAttribute("class",
 					"active");
@@ -417,7 +423,29 @@
 							class="fa fa-angle-left pull-right"></i>
 					</a>
 						<ul class="treeview-menu">
-
+						<c:if test="${sessionScope.sessionUser.superUser}">
+							<li class="active">
+				              <a href="#"><i class="fa fa-circle-o"></i> 서비스 설정  <i class="fa fa-angle-left pull-right"></i></a>
+				              <ul class="treeview-menu">
+								<c:choose>
+									<c:when test="${menuCategory eq 'system' && menu eq 'pro_conf'}">
+												<li class="active"><a href="/system/pro_conf" target="iframe" style="color: #1E90FF;"><i class="fa fa-circle-o"></i><font style="color: #1E90FF;"> 프로파일 설정</font></a></li>
+									</c:when>
+									<c:otherwise>
+												<li class="" id="pro_conf"><a href="/system/pro_conf" target="iframe" onclick="side(25);"><i class="fa fa-circle-o"></i> 프로파일 설정</a></li>
+									</c:otherwise>
+								</c:choose>
+								<c:choose>
+									<c:when test="${menuCategory eq 'system' && menu eq 'pro_meta'}">
+									<li class="active"><a href="/system/pro_meta" target="iframe" style="color: #1E90FF;"><i class="fa fa-circle-o"></i><font style="color: #1E90FF;"> 프로파일 기초정보 설정</font></a></li>
+									</c:when>
+									<c:otherwise>
+												<li class="" id="pro_meta"><a href="/system/pro_meta" target="iframe" onclick="side(24);"><i class="fa fa-circle-o"></i> 프로파일 기초정보 설정</a></li>
+									</c:otherwise>
+								</c:choose>
+				              </ul>
+				            </li>          
+						</c:if>
 							<%--<c:if test="${sessionScope.sessionUser.superUser}">--%>
 								<li class="active"><a href="#"><i
 										class="fa fa-circle-o"></i> 시스템 설정 <i

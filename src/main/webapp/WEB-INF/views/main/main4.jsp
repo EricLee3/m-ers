@@ -45,18 +45,18 @@
 </head>
 <script type="text/javascript">
 window.onload = function () {
-	document.getElementById('dashboard').setAttribute("class","active");
+//	document.getElementById('dashboard').setAttribute("class","active");
     document.getElementById('segment').setAttribute("class","");
 }
 
 
 $(document).on("click", ".jsSearch1", function(e){
-	      document.getElementById('dashboard').setAttribute("class","active");
+	    //  document.getElementById('dashboard').setAttribute("class","active");
 	      document.getElementById('segment').setAttribute("class","");
 });
 
 $(document).on("click", ".jsSearch2", function(e){
-	      document.getElementById('dashboard').setAttribute("class","");
+	    //  document.getElementById('dashboard').setAttribute("class","");
 	      document.getElementById('segment').setAttribute("class","active");
 });
 
