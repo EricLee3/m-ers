@@ -89,7 +89,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
             return false;
          }
       }*/
-      
+      /*
       if (StringUtils.contains(requestURL, "/system")) {
          if (demo == true) {
             return true;
@@ -101,7 +101,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
             return false;
          }
       }
-      
+      */
       return true;
    }
 }

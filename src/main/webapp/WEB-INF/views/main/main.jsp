@@ -418,7 +418,7 @@
 					</a>
 						<ul class="treeview-menu">
 
-							<c:if test="${sessionScope.sessionUser.superUser}">
+							<%--<c:if test="${sessionScope.sessionUser.superUser}">--%>
 								<li class="active"><a href="#"><i
 										class="fa fa-circle-o"></i> 시스템 설정 <i
 										class="fa fa-angle-left pull-right"></i></a>
@@ -481,8 +481,8 @@
 											</c:otherwise>
 										</c:choose>
 									</ul></li>
-							</c:if>
-							<c:if test="${sessionScope.sessionUser.superUser}">
+							<%--</c:if>
+							<c:if test="${sessionScope.sessionUser.superUser}">--%>
 								<li class="active"><a href="#"><i
 										class="fa fa-circle-o"></i> 시스템 이력 <i
 										class="fa fa-angle-left pull-right"></i></a>
@@ -509,7 +509,7 @@
 										<!-- 				<li class="" id="fault_alarm_log"><a href="/system/fault_alarm_log" target="iframe" onclick="side(21);"><i class="fa fa-circle-o"></i> Fault 알람 이력</a></li> -->
 										<%-- 	</c:otherwise> --%>
 										<%-- </c:choose> --%>
-							</c:if>
+							<%--</c:if>--%>
 						</ul>
 				</ul>
 				</li>
