@@ -79,6 +79,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
          }
       }
 
+      
       /*if (StringUtils.contains(requestURL, "/system")) {
          if ( !sessionUser.isSuperUser() && demo != true ) {
             sessionUser.logoutSessionUser();
