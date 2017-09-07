@@ -9,6 +9,8 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -177,6 +180,47 @@ public class AgentREST {
 		}
 	}
 	
+	
+	@RequestMapping(value="/repr", method=RequestMethod.GET)
+	public @ResponseBody String getAgent(SearchDTO searchDTO, HisLog hislog) throws UnknownHostException  {
+		JSONArray jArray = new JSONArray();
+		
+		List<Agent> agentList = agentService.getAgentList(null, searchDTO, "order by agent_name  asc");
+		
+		if(agentList != null) {
+			for (int i=0; i < agentList.size(); i++)  {
+				JSONObject jTmp = new JSONObject();
+				
+				jTmp.put("agentId",  agentList.get(i).getAgentId());
+				jTmp.put("agentName", agentList.get(i).getAgentName());
+				jTmp.put("agentIp", agentList.get(i).getAgentIp());
+				jTmp.put("agentNumber", agentList.get(i).getAgentNumber());
+
+				jArray.add(jTmp);
+			}
+			return jArray.toJSONString();
+		} else {
+			return "NO_CONTENT";
+		}
+	}
+	
+	@RequestMapping(value="/repr/{agentId}", method=RequestMethod.GET)
+	public @ResponseBody String getAgentById(@PathVariable("agentId") String agentId, HisLog hislog) throws UnknownHostException  {
+		Agent agent = agentService.getAgent(agentId);
+		
+		if(agent != null) {
+			JSONObject jTmp = new JSONObject();
+			
+			//jTmp.put("agentId",  agent.getAgentId());
+			jTmp.put("agentName", agent.getAgentName());
+			jTmp.put("agentIp", agent.getAgentIp());
+			jTmp.put("agentNumber", agent.getAgentNumber());
+
+			return jTmp.toString();
+		} else {
+			return "NO_CONTENT";
+		}
+	}
 	/*
 	 * patch API design 
 	 */
