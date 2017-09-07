@@ -97,7 +97,6 @@
 		//		document.getElementById('fault_alarm_log').setAttribute("class", "");
 		//		document.getElementById('sens_meta').setAttribute("class", "");
 		//		document.getElementById('sens_conf').setAttribute("class", "");
-				
 		//		document.getElementById('sens_basic').setAttribute("class", "");
 		//		document.getElementById('sens_demo').setAttribute("class", "");
 
@@ -107,87 +106,35 @@
 		}
 		
 		
-		if (gubun == 0) {
-			document.getElementById('agent_list').setAttribute("class",
-					"active");
-		} else if (gubun == 1) {
-			document.getElementById('call_list')
-					.setAttribute("class", "active");
-		} else if (gubun == 2) {
-			document.getElementById('call_report').setAttribute("class",
-					"active");
-		} else if (gubun == 3) {
-			document.getElementById('customer_report').setAttribute("class",
-					"active");
-		} else if (gubun == 4) {
-			document.getElementById('hour_report').setAttribute("class",
-					"active");
-		} else if (gubun == 5) {
-			document.getElementById('day_report').setAttribute("class",
-					"active");
-		} else if (gubun == 6) {
-			document.getElementById('month_report').setAttribute("class",
-					"active");
-		} else if (gubun == 7) {
-			document.getElementById('agent_report').setAttribute("class",
-					"active");
-		} else if (gubun == 8) {
-			document.getElementById('performance_report').setAttribute("class",
-					"active");
-		} else if (gubun == 9) {
-			document.getElementById('batch_list').setAttribute("class",
-					"active");
-		} else if (gubun == 10) {
-			document.getElementById('batch_log')
-					.setAttribute("class", "active");
-		} else if (gubun == 11) {
-			document.getElementById('config_limit').setAttribute("class",
-					"active");
-		} else if (gubun == 12) {
-			document.getElementById('license').setAttribute("class", "active");
-		} else if (gubun == 13) {
-			document.getElementById('user_list')
-					.setAttribute("class", "active");
-		} else if (gubun == 14) {
-			document.getElementById('s_agent_list').setAttribute("class",
-					"active");
-		} else if (gubun == 15) {
-			document.getElementById('group_list').setAttribute("class",
-					"active");
-		} else if (gubun == 16) {
-			document.getElementById('alarm_code').setAttribute("class",
-					"active");
-		} else if (gubun == 17) {
-			document.getElementById('alarm_limit').setAttribute("class",
-					"active");
-		} else if (gubun == 18) {
-			document.getElementById('resource_log').setAttribute("class",
-					"active");
-		} else if (gubun == 19) {
-			document.getElementById('alarm_log')
-					.setAttribute("class", "active");
-		} else if (gubun == 20) {
-			document.getElementById('his_log').setAttribute("class", "active");
-		} else if (gubun == 21) {
-			document.getElementById('fault_alarm_log').setAttribute("class",
-					"active");
-		} else if (gubun == 22) {
-			document.getElementById('sens_meta')
-					.setAttribute("class", "active");
-		} else if (gubun == 23) {
-			document.getElementById('sens_conf')
-					.setAttribute("class", "active");
-		} else if (gubun == 24) {
-			document.getElementById('pro_meta').setAttribute("class", "active");
-		} else if (gubun == 25) {
-			document.getElementById('pro_conf').setAttribute("class", "active");
-		} else if (gubun == 26) {
-			document.getElementById('sens_basic').setAttribute("class",
-					"active");
-		} else if (gubun == 27) {
-			document.getElementById('sens_demo')
-					.setAttribute("class", "active");
-		}
+		if (gubun == 0) document.getElementById('agent_list').setAttribute("class","active");
+		else if (gubun == 1)document.getElementById('call_list').setAttribute("class", "active");
+		else if (gubun == 2) document.getElementById('call_report').setAttribute("class","active");
+		else if (gubun == 3) document.getElementById('customer_report').setAttribute("class","active");
+		else if (gubun == 4) document.getElementById('hour_report').setAttribute("class","active");
+		else if (gubun == 5) document.getElementById('day_report').setAttribute("class","active");
+		else if (gubun == 6) document.getElementById('month_report').setAttribute("class","active");
+		else if (gubun == 7) document.getElementById('agent_report').setAttribute("class","active");
+		else if (gubun == 8) document.getElementById('performance_report').setAttribute("class","active");
+		else if (gubun == 9) document.getElementById('batch_list').setAttribute("class","active");
+		else if (gubun == 10) document.getElementById('batch_log').setAttribute("class", "active");
+		else if (gubun == 11) document.getElementById('config_limit').setAttribute("class","active");
+		else if (gubun == 12) document.getElementById('license').setAttribute("class", "active");
+		else if (gubun == 13) document.getElementById('user_list').setAttribute("class", "active");
+		else if (gubun == 14) document.getElementById('s_agent_list').setAttribute("class","active");
+		else if (gubun == 15) document.getElementById('group_list').setAttribute("class","active");
+		else if (gubun == 16) document.getElementById('alarm_code').setAttribute("class","active");
+		else if (gubun == 17) document.getElementById('alarm_limit').setAttribute("class","active");
+		else if (gubun == 18) document.getElementById('resource_log').setAttribute("class","active");
+		else if (gubun == 19) document.getElementById('alarm_log').setAttribute("class", "active");
+		else if (gubun == 20) document.getElementById('his_log').setAttribute("class", "active");
+		else if (gubun == 21) document.getElementById('fault_alarm_log').setAttribute("class","active");
+		else if (gubun == 22) document.getElementById('sens_meta').setAttribute("class", "active");
+		else if (gubun == 23) document.getElementById('sens_conf').setAttribute("class", "active");
+		else if (gubun == 24) document.getElementById('pro_meta').setAttribute("class", "active");
+		else if (gubun == 25) document.getElementById('pro_conf').setAttribute("class", "active");
+		else if (gubun == 26) document.getElementById('sens_basic').setAttribute("class","active");
+		else if (gubun == 27) document.getElementById('sens_demo').setAttribute("class", "active");
+		
 
 	}
 </script>
@@ -271,150 +218,26 @@
 				<ul class="sidebar-menu">
 					<li class="header">MAIN NAVIGATION</li>
 					<li class="treeview active"><a href="#"> <i
-							class="fa fa-dashboard"></i> <span>모니터</span> <i
-							class="fa fa-angle-left pull-right"></i>
+							class="fa fa-dashboard"></i> <span>모니터</span> <i class="fa fa-angle-left pull-right"></i>
 					</a>
 						<ul class="treeview-menu">
-							<c:choose>
-								<c:when test="${menuCategory eq 'monitor' && menu eq 'agent'}">
-									<li class="active"><a href="/monitor/agent_list"
-										target="iframe" style="color: #1E90FF;"><i
-											class="fa fa-circle-o"></i><font style="color: #1E90FF;">
-												상담원 목록</font></a></li>
-								</c:when>
-								<c:otherwise>
-									<li class="" id="agent_list"><a href="/monitor/agent_list"
-										target="iframe" onclick="side(0);"><i
-											class="fa fa-circle-o"></i> 상담원 목록</a></li>
-								</c:otherwise>
-							</c:choose>
-							<c:choose>
-								<c:when test="${menuCategory eq 'monitor' && menu eq 'call'}">
-									<li class="active"><a href="/monitor/call_list"
-										target="iframe" style="color: #1E90FF;"><i
-											class="fa fa-circle-o"></i><font style="color: #1E90FF;">
-												콜 목록</font></a></li>
-								</c:when>
-								<c:otherwise>
-									<li class="" id="call_list"><a href="/monitor/call_list"
-										target="iframe" onclick="side(1);"><i
-											class="fa fa-circle-o"></i> 콜 목록</a></li>
-								</c:otherwise>
-							</c:choose>
+									<li class="" id="agent_list"><a href="/monitor/agent_list"	target="iframe" onclick="side(0);"><iclass="fa fa-circle-o"></i> 상담원 목록</a></li>
+									<li class="" id="call_list"><a href="/monitor/call_list" target="iframe" onclick="side(1);"><i class="fa fa-circle-o"></i> 콜 목록</a></li>
 						</ul></li>
 
-					<li class="treeview active"><a href="#"> <i
-							class="fa fa-files-o"></i> <span>리포트</span> <i
-							class="fa fa-angle-left pull-right"></i>
+					<li class="treeview active"><a href="#"> <i class="fa fa-files-o"></i> <span>리포트</span> <i class="fa fa-angle-left pull-right"></i>
 					</a>
 						<ul class="treeview-menu">
-							<c:choose>
-								<c:when
-									test="${menuCategory eq 'report' && menu eq 'call_report'}">
-									<li class="active"><a href="/report/call_report"
-										target="iframe" style="color: #1E90FF;"><i
-											class="fa fa-circle-o"></i><font style="color: #1E90FF;">
-												콜별 리포트</font></a></li>
-								</c:when>
-								<c:otherwise>
-									<li class="" id="call_report"><a
-										href="/report/call_report" target="iframe" onclick="side(2);"><i
-											class="fa fa-circle-o"></i> 콜별 리포트</a></li>
-								</c:otherwise>
-							</c:choose>
-							<%-- <c:choose> --%>
-							<%-- 	<c:when test="${menuCategory eq 'report' && menu eq 'customer_report'}"> --%>
-							<!-- 			<li class="active"><a href="/report/customer_report" target="iframe" style="color: #1E90FF;"><i class="fa fa-circle-o"></i><font style="color: #1E90FF;"> 고객 리포트</font></a></li> -->
-							<%-- 	</c:when> --%>
-							<%-- 	<c:otherwise> --%>
-							<!-- 			<li class="" id="customer_report"><a href="/report/customer_report" target="iframe" onclick="side(3);"><i class="fa fa-circle-o"></i> 고객 리포트</a></li> -->
-							<%-- 	</c:otherwise> --%>
-							<%-- </c:choose> --%>
+									<li class="" id="call_report"><a href="/report/call_report" target="iframe" onclick="side(2);"><i class="fa fa-circle-o"></i> 콜별 리포트</a></li>
 						</ul></li>
 
-					<li class="treeview active"><a href="#"> <i
-							class="fa fa-line-chart"></i> <span>통계</span> <i
-							class="fa fa-angle-left pull-right"></i>
+					<li class="treeview active"><a href="#"> <i class="fa fa-line-chart"></i> <span>통계</span> <i class="fa fa-angle-left pull-right"></i>
 					</a>
 						<ul class="treeview-menu">
-							<c:choose>
-								<c:when
-									test="${menuCategory eq 'report' && menu eq 'hour_report'}">
-									<li class="active"><a href="/report/hour_report"
-										target="iframe" style="color: #1E90FF;"><i
-											class="fa fa-circle-o"></i><font style="color: #1E90FF;">
-												시간대별 통계</font></a></li>
-								</c:when>
-								<c:otherwise>
-									<li class="" id="hour_report"><a
-										href="/report/hour_report" target="iframe" onclick="side(4);"><i
-											class="fa fa-circle-o"></i> 시간대별 통계</a></li>
-								</c:otherwise>
-							</c:choose>
-							<c:choose>
-								<c:when
-									test="${menuCategory eq 'report' && menu eq 'day_report'}">
-									<li class="active"><a href="/report/day_report"
-										target="iframe" style="color: #1E90FF;"><i
-											class="fa fa-circle-o"></i><font style="color: #1E90FF;">
-												일별 통계</font></a></li>
-								</c:when>
-								<c:otherwise>
-									<li class="" id="day_report"><a href="/report/day_report"
-										target="iframe" onclick="side(5);"><i
-											class="fa fa-circle-o"></i> 일별 통계</a></li>
-								</c:otherwise>
-							</c:choose>
-							<c:choose>
-								<c:when
-									test="${menuCategory eq 'report' && menu eq 'month_report'}">
-									<li class="active"><a href="/report/month_report"
-										target="iframe" style="color: #1E90FF;"><i
-											class="fa fa-circle-o"></i><font style="color: #1E90FF;">
-												월별 통계</font></a></li>
-								</c:when>
-								<c:otherwise>
-									<li class="" id="month_report"><a
-										href="/report/month_report" target="iframe" onclick="side(6);"><i
-											class="fa fa-circle-o"></i> 월별 통계</a></li>
-								</c:otherwise>
-							</c:choose>
-							<!-- <c:choose>
-	<c:when test="${menuCategory eq 'report' && menu eq 'week_report'}">
-			<li class="active"><a href="/report/week_report"><i class="fa fa-circle-o"></i> 주간별 통계</a></li>
-	</c:when>
-	<c:otherwise>
-			<li><a href="/report/week_report"><i class="fa fa-circle-o"></i> 주간별 통계</a></li>
-	</c:otherwise>
-</c:choose>-->
-							<c:choose>
-								<c:when
-									test="${menuCategory eq 'report' && menu eq 'agent_report'}">
-									<li class="active"><a href="/report/agent_report"
-										target="iframe" style="color: #1E90FF;"><i
-											class="fa fa-circle-o"></i><font style="color: #1E90FF;">
-												상담원별 통계</font></a></li>
-								</c:when>
-								<c:otherwise>
-									<li class="" id="agent_report"><a
-										href="/report/agent_report" target="iframe" onclick="side(7);"><i
-											class="fa fa-circle-o"></i> 상담원별 통계</a></li>
-								</c:otherwise>
-							</c:choose>
-							<%-- 							<c:choose> --%>
-							<%-- 								<c:when --%>
-							<%-- 									test="${menuCategory eq 'report' && menu eq 'performance_report'}"> --%>
-							<!-- 									<li class="active"><a href="/report/performance_report" -->
-							<!-- 										target="iframe" style="color: #1E90FF;"><i -->
-							<!-- 											class="fa fa-circle-o"></i><font style="color: #1E90FF;"> -->
-							<!-- 												근무성과별 통계</font></a></li> -->
-							<%-- 								</c:when> --%>
-							<%-- 								<c:otherwise> --%>
-							<!-- 									<li class="" id="performance_report"><a -->
-							<!-- 										href="/report/performance_report" target="iframe" -->
-							<!-- 										onclick="side(8);"><i class="fa fa-circle-o"></i> 근무성과별 통계</a></li> -->
-							<%-- 								</c:otherwise> --%>
-							<%-- 							</c:choose> --%>
+									<li class="" id="hour_report"><a href="/report/hour_report" target="iframe" onclick="side(4);"><i class="fa fa-circle-o"></i> 시간대별 통계</a></li>
+									<li class="" id="day_report"><a href="/report/day_report" target="iframe" onclick="side(5);"><i class="fa fa-circle-o"></i> 일별 통계</a></li>
+									<li class="" id="month_report"><a href="/report/month_report" target="iframe" onclick="side(6);"><i class="fa fa-circle-o"></i> 월별 통계</a></li>
+									<li class="" id="agent_report"><a href="/report/agent_report" target="iframe" onclick="side(7);"><i class="fa fa-circle-o"></i> 상담원별 통계</a></li>
 						</ul></li>
 
 
@@ -427,119 +250,26 @@
 							<li class="active">
 				              <a href="#"><i class="fa fa-circle-o"></i> 서비스 설정  <i class="fa fa-angle-left pull-right"></i></a>
 				              <ul class="treeview-menu">
-								<c:choose>
-									<c:when test="${menuCategory eq 'system' && menu eq 'pro_conf'}">
-												<li class="active"><a href="/system/pro_conf" target="iframe" style="color: #1E90FF;"><i class="fa fa-circle-o"></i><font style="color: #1E90FF;"> 프로파일 설정</font></a></li>
-									</c:when>
-									<c:otherwise>
-												<li class="" id="pro_conf"><a href="/system/pro_conf" target="iframe" onclick="side(25);"><i class="fa fa-circle-o"></i> 프로파일 설정</a></li>
-									</c:otherwise>
-								</c:choose>
-								<c:choose>
-									<c:when test="${menuCategory eq 'system' && menu eq 'pro_meta'}">
-									<li class="active"><a href="/system/pro_meta" target="iframe" style="color: #1E90FF;"><i class="fa fa-circle-o"></i><font style="color: #1E90FF;"> 프로파일 기초정보 설정</font></a></li>
-									</c:when>
-									<c:otherwise>
-												<li class="" id="pro_meta"><a href="/system/pro_meta" target="iframe" onclick="side(24);"><i class="fa fa-circle-o"></i> 프로파일 기초정보 설정</a></li>
-									</c:otherwise>
-								</c:choose>
+									<li class="" id="pro_conf"><a href="/system/pro_conf" target="iframe" onclick="side(25);"><i class="fa fa-circle-o"></i> 프로파일 설정</a></li>
+									<li class="" id="pro_meta"><a href="/system/pro_meta" target="iframe" onclick="side(24);"><i class="fa fa-circle-o"></i> 프로파일 기초정보 설정</a></li>
 				              </ul>
 				            </li>          
 						</c:if>
-							<%--<c:if test="${sessionScope.sessionUser.superUser}">--%>
-								<li class="active"><a href="#"><i
-										class="fa fa-circle-o"></i> 시스템 설정 <i
-										class="fa fa-angle-left pull-right"></i></a>
-									<ul class="treeview-menu">
-									
-																<c:choose>
-								<c:when test="${menuCategory eq 'system' && menu eq 'user'}">
-									<li class="active"><a href="/system/user_list"
-										target="iframe" style="color: #1E90FF;"><i
-											class="fa fa-circle-o"></i><font style="color: #1E90FF;">
-												사용자 설정</font></a></li>
-								</c:when>
-								<c:otherwise>
-									<li class="" id="user_list"><a href="/system/user_list"
-										target="iframe" onclick="side(13);"><i
-											class="fa fa-circle-o"></i> 사용자 설정</a></li>
-								</c:otherwise>
-							</c:choose>
-<%-- 							<c:choose> --%>
-<%-- 								<c:when test="${menuCategory eq 'system' && menu eq 'agent'}"> --%>
-<!-- 									<li class="active"><a href="/system/agent_list" -->
-<!-- 										target="iframe" style="color: #1E90FF;"><i -->
-<!-- 											class="fa fa-circle-o"></i><font style="color: #1E90FF;"> -->
-<!-- 												상담원 목록</font></a></li> -->
-<%-- 								</c:when> --%>
-<%-- 								<c:otherwise> --%>
-<!-- 									<li class="" id="s_agent_list"><a -->
-<!-- 										href="/system/agent_list" target="iframe" onclick="side(14);"><i -->
-<!-- 											class="fa fa-circle-o"></i> 상담원 목록</a></li> -->
-<%-- 								</c:otherwise> --%>
-<%-- 							</c:choose> --%>
-										<c:choose>
-											<c:when
-												test="${menuCategory eq 'system' && menu eq 'alarmCode'}">
-												<li class="active"><a href="/system/alarm_code"
-													target="iframe" style="color: #1E90FF;"><i
-														class="fa fa-circle-o"></i><font style="color: #1E90FF;">
-															알람 코드 설정</font></a></li>
-											</c:when>
-											<c:otherwise>
-												<li class="" id="alarm_code"><a
-													href="/system/alarm_code" target="iframe"
-													onclick="side(16);"><i class="fa fa-circle-o"></i> 알람
-														코드 설정</a></li>
-											</c:otherwise>
-										</c:choose>
-										<c:choose>
-											<c:when
-												test="${menuCategory eq 'system' && menu eq 'alarmLimit'}">
-												<li class="active"><a href="/system/alarm_limit"
-													target="iframe" style="color: #1E90FF;"><i
-														class="fa fa-circle-o"></i><font style="color: #1E90FF;">
-															알람 임계치 설정</font></a></li>
-											</c:when>
-											<c:otherwise>
-												<li class="" id="alarm_limit"><a
-													href="/system/alarm_limit" target="iframe"
-													onclick="side(17);"><i class="fa fa-circle-o"></i> 알람
-														임계치 설정</a></li>
-											</c:otherwise>
-										</c:choose>
-									</ul></li>
-							<%--</c:if>
-							<c:if test="${sessionScope.sessionUser.superUser}">--%>
-								<li class="active"><a href="#"><i
-										class="fa fa-circle-o"></i> 시스템 이력 <i
-										class="fa fa-angle-left pull-right"></i></a>
-									<ul class="treeview-menu">
-										<li class="" id="resource_log"><a
-											href="/system/resource_log" target="iframe"
-											onclick="side(18);"><i class="fa fa-circle-o"></i> 리소스 이력</a></li>
-										<li class="" id="alarm_log"><a href="/system/alarm_log"
-											target="iframe" onclick="side(19);"><i
-												class="fa fa-circle-o"></i> 알람 이력</a></li>
-										<%-- <c:choose> --%>
-										<%-- 	<c:when test="${menuCategory eq 'system' && menu eq 'hisLog'}"> --%>
-										<!-- 				<li class="active"><a href="/system/his_log" target="iframe" style="color: #1E90FF;"><i class="fa fa-circle-o"></i><font style="color: #1E90FF;"> 운영자 조작 이력</font></a></li> -->
-										<%-- 	</c:when> --%>
-										<%-- 	<c:otherwise> --%>
-										<!-- 				<li class="" id="his_log"><a href="/system/his_log" target="iframe" onclick="side(20);"><i class="fa fa-circle-o"></i> 운영자 조작 이력</a></li> -->
-										<%-- 	</c:otherwise> --%>
-										<%-- </c:choose> --%>
-										<%-- <c:choose> --%>
-										<%-- 	<c:when test="${menuCategory eq 'system' && menu eq 'faultalarmLog'}"> --%>
-										<!-- 				<li class="active"><a href="/system/fault_alarm_log" target="iframe" style="color: #1E90FF;"><i class="fa fa-circle-o"></i><font style="color: #1E90FF;"> Fault 알람 이력</font></a></li> -->
-										<%-- 	</c:when> --%>
-										<%-- 	<c:otherwise> --%>
-										<!-- 				<li class="" id="fault_alarm_log"><a href="/system/fault_alarm_log" target="iframe" onclick="side(21);"><i class="fa fa-circle-o"></i> Fault 알람 이력</a></li> -->
-										<%-- 	</c:otherwise> --%>
-										<%-- </c:choose> --%>
-							<%--</c:if>--%>
+							<li class="active"><a href="#"><i
+									class="fa fa-circle-o"></i> 시스템 설정 <i
+									class="fa fa-angle-left pull-right"></i></a>
+								<ul class="treeview-menu">
+								<li class="" id="user_list"><a href="/system/user_list" target="iframe" onclick="side(13);"><i class="fa fa-circle-o"></i> 사용자 설정</a></li>
+									<li class="" id="alarm_code"><a href="/system/alarm_code" target="iframe" onclick="side(16);"><i class="fa fa-circle-o"></i> 알람 코드 설정</a></li>
+									<li class="" id="alarm_limit"><a href="/system/alarm_limit" target="iframe" onclick="side(17);"><i class="fa fa-circle-o"></i> 알람 임계치 설정</a></li>
+								</ul></li>
+						
+							<li class="active"><a href="#"><i class="fa fa-circle-o"></i> 시스템 이력 <i class="fa fa-angle-left pull-right"></i></a>
+								<ul class="treeview-menu">
+									<li class="" id="resource_log"><a href="/system/resource_log" target="iframe" onclick="side(18);"><i class="fa fa-circle-o"></i> 리소스 이력</a></li>
+									<li class="" id="alarm_log"><a href="/system/alarm_log" target="iframe" onclick="side(19);"><i class="fa fa-circle-o"></i> 알람 이력</a></li>
+								</ul>
 						</ul>
-				</ul>
 				</li>
 				</ul>
 			</section>
