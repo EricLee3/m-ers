@@ -221,7 +221,7 @@
 							class="fa fa-dashboard"></i> <span>모니터</span> <i class="fa fa-angle-left pull-right"></i>
 					</a>
 						<ul class="treeview-menu">
-									<li class="" id="agent_list"><a href="/monitor/agent_list"	target="iframe" onclick="side(0);"><iclass="fa fa-circle-o"></i> 상담원 목록</a></li>
+									<li class="" id="agent_list"><a href="/monitor/agent_list"	target="iframe" onclick="side(0);"><i class="fa fa-circle-o"></i> 상담원 목록</a></li>
 									<li class="" id="call_list"><a href="/monitor/call_list" target="iframe" onclick="side(1);"><i class="fa fa-circle-o"></i> 콜 목록</a></li>
 						</ul></li>
 

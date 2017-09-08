@@ -123,10 +123,10 @@
                                                 <td class="hidden-print" rowspan="2">
                                                  <c:choose>
 										             <c:when test="${real.customerProfileName eq '' || real.customerProfileName == null}">
-										                    <button type="button" class="btn btn-default btn-xs disabled" data-index="${real.agentId }">
+										                    <button type="button" id="sbtn" class="btn btn-default btn-xs disabled" data-index="${real.agentId }">
 										             </c:when>
 										             <c:otherwise>
-										                    <button type="button" class="jsShowModal btn btn-default btn-xs" data-index="${real.agentId }">
+										                    <button type="button" id="sbtn" class="jsShowModal btn btn-default btn-xs" data-index="${real.agentId }">
 										             </c:otherwise>
 							       				</c:choose>
 												<i class="fa fa-headphones"></i> 
@@ -447,6 +447,14 @@
                             		//console.log("reprScrp is : "+$(this).text());
                             		$(this).text("");
                             	});
+                            	
+                            	if(data.Names.length == 0 ){
+	                            	$("[id=sbtn]").each(function(index)  {
+	                                		$(this).attr('class', 'btn btn-default btn-xs disabled'); 
+	                                	
+	                            	});   
+                            	}
+                            	
                             	for (i=0; i < data.Names.length; i++)  {
                             		var agentName = data.Names[i].agentName;
                             		var agentProfileName = data.Names[i].agentProfileName;
@@ -456,8 +464,7 @@
                             		console.log("data list is : " + agentName + ", " + agentProfileName + ", " + customerProfileName + ", " + agentScript + ", " + customerScript);
 
                             		//var rows = $("table#callListTbl tbody tr");
-                            		//console.log("rows is "+rows.length);
-                            		                            		
+                            		//console.log("rows is "+rows.length);           		
                             		$("[id=agentName]").each(function(index)  {
 										if ($(this).text() == agentName)  {
 											var row = $(this).parent().get(0);
@@ -468,9 +475,20 @@
 											//$(this).parent().next().next().text(agentProfileName);
 											tbl.rows[row.rowIndex+1].cells[1].innerHTML = agentProfileName;
 											tbl.rows[row.rowIndex+1].cells[2].innerHTML = agentScript;
+						
 										}
-									});                            		
+									});  
+                            		
+                            		$("[id=sbtn]").each(function(index)  {
+                            			if(customerProfileName == null || customerProfileName == ''){
+                            				$(this).attr('class', 'btn btn-default btn-xs disabled'); 
+										}else{
+											$(this).attr('class', 'jsShowModal btn btn-default btn-xs'); 
+										}
+                                	});   
                             	}
+                            	
+                            	
                             }
                         })
                     }
