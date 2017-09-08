@@ -181,7 +181,7 @@ public class AgentREST {
 	}
 	
 	
-	@RequestMapping(value="/repr", method=RequestMethod.GET)
+	@RequestMapping(value="/repr", produces="text/plain;charset=UTF-8", method=RequestMethod.GET)
 	public @ResponseBody String getAgent(SearchDTO searchDTO, HisLog hislog) throws UnknownHostException  {
 		JSONArray jArray = new JSONArray();
 		
@@ -198,13 +198,13 @@ public class AgentREST {
 
 				jArray.add(jTmp);
 			}
-			return jArray.toJSONString();
+			return jArray.toString();
 		} else {
 			return "NO_CONTENT";
 		}
 	}
 	
-	@RequestMapping(value="/repr/{agentId}", method=RequestMethod.GET)
+	@RequestMapping(value="/repr/{agentId}", produces="text/plain;charset=UTF-8", method=RequestMethod.GET)
 	public @ResponseBody String getAgentById(@PathVariable("agentId") String agentId, HisLog hislog) throws UnknownHostException  {
 		Agent agent = agentService.getAgent(agentId);
 		
