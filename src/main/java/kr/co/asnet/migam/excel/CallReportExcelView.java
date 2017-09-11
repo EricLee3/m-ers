@@ -114,13 +114,13 @@ public class CallReportExcelView extends AbstractXlsxView {
 			row.createCell(colNum++).setCellValue( callAnalysis.getStartTime() == null ? "" : simpleDateFormatTime.format(callAnalysis.getStartTime()) );
 			row.createCell(colNum++).setCellValue( callAnalysis.getEndTime() == null ? "" : simpleDateFormatTime.format(callAnalysis.getEndTime()) );
 			row.createCell(colNum++).setCellValue( (Integer)callAnalysis.getCallDuration() == null ? 0 : callAnalysis.getCallDuration() );
-			if( callAnalysis.getCustomerResultFlag() == 1 &&  callAnalysis.getCustomerFailCode() == 0 ) {
-				row.createCell(colNum++).setCellValue( "Y (" + callAnalysis.getCustomerResult() + " )");
+			if( callAnalysis.getCustomerResult() == 1 &&  callAnalysis.getCustomerFailCode() == 0 ) {
+				row.createCell(colNum++).setCellValue( "" + callAnalysis.getCustomerResultString() + " ");
 			} else if ( (Integer)callAnalysis.getCustomerResultFlag() == null || (Integer)callAnalysis.getCustomerResultFlag() == null ){
 				row.createCell(colNum++).setCellValue("");
 			}
-			if( callAnalysis.getAgentResultFlag() == 1 &&  callAnalysis.getAgentFailCode() == 0 ) {
-				row.createCell(colNum++).setCellValue( "Y (" + callAnalysis.getAgentResult() + " )");
+			if( callAnalysis.getAgentResult() == 1 &&  callAnalysis.getAgentFailCode() == 0 ) {
+				row.createCell(colNum++).setCellValue( "" + callAnalysis.getAgentResultString() + " ");
 			} else if ( (Integer)callAnalysis.getAgentResultFlag() == null || (Integer)callAnalysis.getAgentFailCode() == null ){
 				row.createCell(colNum++).setCellValue("");
 			}

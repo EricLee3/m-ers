@@ -180,14 +180,14 @@
 													<td><fmt:formatDate pattern="HH:mm:ss" value="${callAnalysis.endTime }" /></td>
 													<td>${callAnalysis.callDuration }</td>
 													<td><span class="text-info">
-														<c:if test="${callAnalysis.customerResultFlag eq 1 &&  callAnalysis.customerFailCode eq 0 }">
-															<span class="text-danger">Y</span> (${callAnalysis.customerResult })
+														<c:if test="${callAnalysis.customerResult eq 1 &&  callAnalysis.customerFailCode eq 0 }">
+															${callAnalysis.customerResultString }
 														</c:if>
 														</span>
 													</td>
 													<td><span class="text-info">
-														<c:if test="${callAnalysis.agentResultFlag eq 1 &&  callAnalysis.agentFailCode eq 0 }">
-															<span class="text-danger">Y</span> (${callAnalysis.agentResult })
+														<c:if test="${callAnalysis.agentResult eq 1 &&  callAnalysis.agentFailCode eq 0 }">
+															${callAnalysis.agentResultString }
 														</c:if>
 														</span>
 													</td>
