@@ -74,7 +74,6 @@ public class AgentREST {
     	
     	final HttpHeaders headers = new HttpHeaders();
     	
-    	
         agent.setGroupName("2k");
         agent.setGroupId("2k");
         agent.setProfile_name_agent("7");
@@ -99,13 +98,10 @@ public class AgentREST {
         hislog.setUser_name("2k");
         alarmLimitService.insertHis(hislog);
         
-        //모니터링 대상여부 확인
-        //int    intcallAudit = 1;
-        //if(agent.getIsAudit() == 1){
-        int    intcallAudit = callAuditService.insertCallAudit(agent.getAgentId(),agent.getGroupId(),0);
-        //}
+        //모니터링 대상여부 확인 - MECS5_REALTIME_STATE에 기입하는 로직, 삭제함 [IOS 11-SEP 2017]
+        //int    intcallAudit = callAuditService.insertCallAudit(agent.getAgentId(),agent.getGroupId(),0);
         
-        if(agentIndex > 0 && intcallAudit != 0) {
+        if(agentIndex > 0 /*&& intcallAudit != 0*/) {
             return new ResponseEntity<Void>(headers, HttpStatus.OK);
             //return new ResponseEntity<Void>(HttpStatus.OK);
         } else {
