@@ -368,7 +368,7 @@
                 		
                 		if($("select[name=selectAgent]").val() != 'selectAllAgent'){
                 			if( agentIdList.length < 1 ) {
-                				alert("상담원 또는 그룹을 선택하여야 합니다.");
+                				alert("상담원을 선택하여야 합니다.");
                 				return false;
                 			}
                 		}
@@ -418,12 +418,12 @@
                     
 
                     // timer settings	
-                    mainTimer = window.setInterval(updateCallListTest, 5000);
+                    mainTimer = window.setInterval(updateCallListAlchg, 5000);
                     modalTimer = window.setInterval(updateChartData, 3000);
                     refreshAudioTimer1 = window.setInterval(audioPlayer1Callback, 3000);
                     refreshAudioTimer2 = window.setInterval(audioPlayer2Callback, 3000);
 
-                    function updateCallListTest() {
+                    function updateCallListAlchg() {
                         if (isModalShow == true) return;
                         $.ajax({
                             url: '/monitor/call_list_refresh_IOS',
@@ -432,26 +432,21 @@
                             success: function(data) {
                             	// Erase whole <td> text profiles in the table
                             	$("[id=custProName]").each(function(index)  {
-                            		//console.log("custProName is : "+$(this).text());
                             		$(this).text("");
                             	});
                             	$("[id=custScrp]").each(function(index)  {
-                            		//console.log("custScrp is : "+$(this).text());
                             		$(this).text("");
                             	});
                             	$("[id=reprProName]").each(function(index)  {
-                            		//console.log("reprProName is : "+$(this).text());
                             		$(this).text("");
                             	});
                             	$("[id=reprScrp]").each(function(index)  {
-                            		//console.log("reprScrp is : "+$(this).text());
                             		$(this).text("");
                             	});
                             	
                             	if(data.Names.length == 0 ){
 	                            	$("[id=sbtn]").each(function(index)  {
 	                                		$(this).attr('class', 'btn btn-default btn-xs disabled'); 
-	                                	
 	                            	});   
                             	}
                             	
@@ -461,7 +456,7 @@
                             		var customerProfileName = data.Names[i].customerProfileName;
                             		var agentScript = data.Names[i].agentScript;
                             		var customerScript = data.Names[i].customerScript;
-                            		console.log("data list is : " + agentName + ", " + agentProfileName + ", " + customerProfileName + ", " + agentScript + ", " + customerScript);
+                            		//console.log("data list is : " + agentName + ", " + agentProfileName + ", " + customerProfileName + ", " + agentScript + ", " + customerScript);
 
                             		//var rows = $("table#callListTbl tbody tr");
                             		//console.log("rows is "+rows.length);           		
@@ -475,7 +470,6 @@
 											//$(this).parent().next().next().text(agentProfileName);
 											tbl.rows[row.rowIndex+1].cells[1].innerHTML = agentProfileName;
 											tbl.rows[row.rowIndex+1].cells[2].innerHTML = agentScript;
-						
 										}
 									});  
                             		
@@ -487,8 +481,6 @@
 										}
                                 	});   
                             	}
-                            	
-                            	
                             }
                         })
                     }

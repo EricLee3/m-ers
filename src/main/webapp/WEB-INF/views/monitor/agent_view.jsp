@@ -175,14 +175,14 @@
 											<td>${callAnalysis.customerNumber }</td>
 											<td><fmt:formatDate pattern="yy/MM/dd HH:mm" value="${callAnalysis.startTime}" /></td>
 											<td>
-											<c:if test="${callAnalysis.customerResultFlag eq 1 &&  callAnalysis.customerFailCode eq 0 }">
-												<span class="text-danger">Y</span> (${callAnalysis.customerResult })
-											</c:if>
+<%-- 											<c:if test="${callAnalysis.customerResultFlag eq 0 &&  callAnalysis.customerFailCode eq 0 }"> --%>
+												<span class="text-danger">${callAnalysis.customerResultString }</span>
+<%-- 											</c:if> --%>
 											</td>
 											<td>
-											<c:if test="${callAnalysis.agentResultFlag eq 1 &&  callAnalysis.agentFailCode eq 0 }">
-												<span class="text-danger">Y</span> (${callAnalysis.agentResult })
-											</c:if>
+<%-- 											<c:if test="${callAnalysis.agentResultFlag eq 0 &&  callAnalysis.agentFailCode eq 0 }"> --%>
+												<span class="text-danger"> ${callAnalysis.agentResultString }</span>
+<%-- 											</c:if> --%>
 											</td>
 											<td>
 												<button type="button" class="jsShowModal btn btn-default btn-xs" data-index="${callAnalysis.index }">

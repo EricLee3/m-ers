@@ -293,7 +293,7 @@ $(document).ready(function(){
 		
 		if($("select[name=selectAgent]").val() != 'selectAllAgent'){
 			if( agentIdList.length < 1 ) {
-				alert("상담원 또는 그룹을 선택하여야 합니다.");
+				alert("상담원을 선택하여야 합니다.");
 				return false;
 			}
 		}

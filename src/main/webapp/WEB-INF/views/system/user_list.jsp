@@ -210,7 +210,7 @@ $(document).ready(function(){
 								<select class="form-control" id="role" name="role">
 									<option value="MANAGER">Manager</option>
 									<option value="ADMIN">Administrator</option>
-									<option value="SUPERUSER">Superuser</option>
+									<!-- <option value="SUPERUSER">Superuser</option>  -->
 								</select>
 							</div>
 							<div class="form-group">
@@ -286,7 +286,7 @@ $(document).ready(function(){
 								<select class="form-control" id="role" name="role">
 									<option value="MANAGER">Manager</option>
 									<option value="ADMIN">Administrator</option>
-									<option value="SUPERUSER">Superuser</option>
+<!--  									<option value="SUPERUSER">Superuser</option>-->
 								</select>
 							</div>
 							<div class="form-group">
