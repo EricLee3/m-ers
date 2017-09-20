@@ -19,7 +19,7 @@
 	
 	<!-- Application Loggers -->
 	<logger name="kr.co.asnet">
-		<level value="DEBUG" />
+<!-- 		<level value="DEBUG" /> -->
 	</logger>
 	
 	<!-- 3rdparty Loggers -->
@@ -64,11 +64,11 @@
      
     <!-- Query Loggers -->
     <logger name="jdbc.sqlonly" additivity="false"> 
-        <level value="DEBUG"/> 
+<!--         <level value="DEBUG"/>  -->
         <appender-ref ref="console-infolog"/> 
     </logger>
     <logger name="jdbc.resultsettable" additivity="false"> 
-        <level value="INFO"/> 
+<!--         <level value="INFO"/>  -->
         <appender-ref ref="console"/> 
     </logger> 
   

@@ -95,12 +95,12 @@
 		document.getElementById('alarm_log').setAttribute("class", "");
 		//		document.getElementById('his_log').setAttribute("class", "");
 		//		document.getElementById('fault_alarm_log').setAttribute("class", "");
-		document.getElementById('sens_meta').setAttribute("class", "");
-		document.getElementById('sens_conf').setAttribute("class", "");
-		document.getElementById('sens_basic').setAttribute("class", "");
 		//		document.getElementById('sens_demo').setAttribute("class", "");
 
 		if("${sessionScope.sessionUser.superUser}" == "true"){
+			document.getElementById('sens_meta').setAttribute("class", "");
+			document.getElementById('sens_conf').setAttribute("class", "");
+			document.getElementById('sens_basic').setAttribute("class", "");
 			document.getElementById('pro_meta').setAttribute("class", "");
 			document.getElementById('pro_conf').setAttribute("class", "");
 		}
