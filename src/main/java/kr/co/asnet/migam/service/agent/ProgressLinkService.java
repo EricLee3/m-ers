@@ -19,6 +19,9 @@ public interface ProgressLinkService {
 	 * 10개
 	 */
 	public List<ProgressLink> getprogressbar(ProgressLink progressLink);
+	
+	public int phone_up(ProgressLink progressLink);
+
 
 	
 }

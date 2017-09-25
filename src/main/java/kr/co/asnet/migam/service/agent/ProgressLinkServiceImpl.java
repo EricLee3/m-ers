@@ -35,5 +35,14 @@ public class ProgressLinkServiceImpl implements ProgressLinkService {
 	public List<ProgressLink> getprogressbar(ProgressLink progressLink) {
 		return progressLinkDao.selectProgressLingList(progressLink);
 	}
+
+
+	@Override
+	public int phone_up(ProgressLink progressLink) {
+		// 
+		return progressLinkDao.updatephone(progressLink);
+	}
+	
+	
 	
 }
