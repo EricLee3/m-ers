@@ -37,6 +37,9 @@
 	<script src="/resources/plugins/ionslider/ion.rangeSlider.min.js"></script>
 	<script src="/resources/plugins/raphael/raphael-min.js"></script>
 	<script src="/resources/plugins/morris/morris.min.js"></script>
+	<script src="/resources/plugins/input-mask/jquery.inputmask.js"></script>
+	<script src="/resources/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+	<script src="/resources/plugins/input-mask/jquery.inputmask.extensions.js"></script>
 </head>
 <script>
 		$(document).ready(function(){

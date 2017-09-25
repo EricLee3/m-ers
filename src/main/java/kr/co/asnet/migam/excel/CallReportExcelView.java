@@ -201,7 +201,7 @@ public class CallReportExcelView extends AbstractXlsxView {
 		List<HourlyCall> hourlyCallList = (List<HourlyCall>)model.get("hourlyCallList"); 
 		int colNum = 0;
 		row = worksheet.createRow(0);
-		row.createCell(colNum++).setCellValue("일련번호");
+		//row.createCell(colNum++).setCellValue("일련번호");
 		row.createCell(colNum++).setCellValue("시간");
 		row.createCell(colNum++).setCellValue("전체 호");
 		row.createCell(colNum++).setCellValue("성공 호");
@@ -224,13 +224,13 @@ public class CallReportExcelView extends AbstractXlsxView {
 			failCount += hourlyCall.getFailCount();
 			angerCount += hourlyCall.getAngryCount();
 			stressCount += hourlyCall.getStressCount();
-			incrementCount += hourlyCall.getIncrementCount();
-			decrementCount += hourlyCall.getDecrementCount();
+			//incrementCount += hourlyCall.getIncrementCount();
+			//decrementCount += hourlyCall.getDecrementCount();
 		}
 		
 		colNum = 0;
 		row = worksheet.createRow(1);
-		row.createCell(colNum++).setCellValue("");
+		//row.createCell(colNum++).setCellValue("");
 		row.createCell(colNum++).setCellValue("합계");
 		row.createCell(colNum++).setCellValue( totalCount );
 		row.createCell(colNum++).setCellValue( successCount );
@@ -245,15 +245,15 @@ public class CallReportExcelView extends AbstractXlsxView {
 		for(HourlyCall hourlyCall : hourlyCallList){
 			colNum = 0;
 			row = worksheet.createRow(++i);
-			row.createCell(colNum++).setCellValue( i-1 );
+			//row.createCell(colNum++).setCellValue( i-1 );
 			row.createCell(colNum++).setCellValue( hourlyCall.getStatTime() == null ? "" : simpleDateFormatDate.format(hourlyCall.getStatTime()) );
 			row.createCell(colNum++).setCellValue( (Integer)hourlyCall.getTotalCount() == null ? 0 : hourlyCall.getTotalCount() );
 			row.createCell(colNum++).setCellValue( (Integer)hourlyCall.getSuccessCount() == null ? 0 : hourlyCall.getSuccessCount() );
 			row.createCell(colNum++).setCellValue( (Integer)hourlyCall.getFailCount() == null ? 0 : hourlyCall.getFailCount() );
 			row.createCell(colNum++).setCellValue( (Integer)hourlyCall.getAngryCount() == null ? 0 : hourlyCall.getAngryCount() );
 			row.createCell(colNum++).setCellValue( (Integer)hourlyCall.getStressCount() == null ? 0 : hourlyCall.getStressCount() );
-			row.createCell(colNum++).setCellValue( (Integer)hourlyCall.getIncrementCount() == null ? 0 : hourlyCall.getIncrementCount() );
-			row.createCell(colNum++).setCellValue( (Integer)hourlyCall.getDecrementCount() == null ? 0 : hourlyCall.getDecrementCount() );
+			//row.createCell(colNum++).setCellValue( (Integer)hourlyCall.getIncrementCount() == null ? 0 : hourlyCall.getIncrementCount() );
+			//row.createCell(colNum++).setCellValue( (Integer)hourlyCall.getDecrementCount() == null ? 0 : hourlyCall.getDecrementCount() );
 		}
 		return excelName;
 	}
@@ -277,7 +277,7 @@ public class CallReportExcelView extends AbstractXlsxView {
 		List<DailyCall> dailyCallList = (List<DailyCall>)model.get("dailyCallList"); 
 		int colNum = 0;
 		row = worksheet.createRow(0);
-		row.createCell(colNum++).setCellValue("일련번호");
+		//row.createCell(colNum++).setCellValue("일련번호");
 		row.createCell(colNum++).setCellValue("상담일");
 		row.createCell(colNum++).setCellValue("전체 호");
 		row.createCell(colNum++).setCellValue("성공 호");
@@ -306,7 +306,7 @@ public class CallReportExcelView extends AbstractXlsxView {
 		
 		colNum = 0;
 		row = worksheet.createRow(1);
-		row.createCell(colNum++).setCellValue("");
+		//row.createCell(colNum++).setCellValue("");
 		row.createCell(colNum++).setCellValue("합계");
 		row.createCell(colNum++).setCellValue( totalCount );
 		row.createCell(colNum++).setCellValue( successCount );
@@ -321,7 +321,7 @@ public class CallReportExcelView extends AbstractXlsxView {
 		for(DailyCall dailyCall : dailyCallList){
 			colNum = 0;
 			row = worksheet.createRow(++i);
-			row.createCell(colNum++).setCellValue( i-1 );
+			//row.createCell(colNum++).setCellValue( i-1 );
 			row.createCell(colNum++).setCellValue( dailyCall.getStatTime() == null ? "" : simpleDateFormatDate.format(dailyCall.getStatTime()) );
 			row.createCell(colNum++).setCellValue( (Integer)dailyCall.getTotalCount() == null ? 0 : dailyCall.getTotalCount() );
 			row.createCell(colNum++).setCellValue( (Integer)dailyCall.getSuccessCount() == null ? 0 : dailyCall.getSuccessCount() );
@@ -429,7 +429,7 @@ public class CallReportExcelView extends AbstractXlsxView {
 		List<AgentCall> agentCallList = (List<AgentCall>)model.get("agentCallList"); 
 		int colNum = 0;
 		row = worksheet.createRow(0);
-		row.createCell(colNum++).setCellValue("일련번호");
+		//row.createCell(colNum++).setCellValue("일련번호");
 		row.createCell(colNum++).setCellValue("상담원");
 		row.createCell(colNum++).setCellValue("전체 호");
 		row.createCell(colNum++).setCellValue("성공 호");
@@ -458,7 +458,7 @@ public class CallReportExcelView extends AbstractXlsxView {
 		
 		colNum = 0;
 		row = worksheet.createRow(1);
-		row.createCell(colNum++).setCellValue("");
+		//row.createCell(colNum++).setCellValue("");
 		row.createCell(colNum++).setCellValue("합계");
 		row.createCell(colNum++).setCellValue( totalCount );
 		row.createCell(colNum++).setCellValue( successCount );
@@ -472,7 +472,7 @@ public class CallReportExcelView extends AbstractXlsxView {
 		for(AgentCall agentCall : agentCallList){
 			colNum = 0;
 			row = worksheet.createRow(++i);
-			row.createCell(colNum++).setCellValue( i-1 );
+			//row.createCell(colNum++).setCellValue( i-1 );
 			row.createCell(colNum++).setCellValue( agentCall.getAgentName() == null ? "" : agentCall.getAgentName() );
 			row.createCell(colNum++).setCellValue( (Integer)agentCall.getTotalCount() == null ? 0 : agentCall.getTotalCount() );
 			row.createCell(colNum++).setCellValue( (Integer)agentCall.getSuccessCount() == null ? 0 : agentCall.getSuccessCount() );

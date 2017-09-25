@@ -446,7 +446,6 @@ public class ReportController {
 		
 		List<DailyCall> dailyCallList = dailyCallService.getDailyCallListForChart(searchDTO, "order by stat_time desc");
 		model.addAttribute("dailyCallList", dailyCallList);
-		/*
 		int totalCount = 0;
 		int successCount = 0;
 		int failCount = 0;
@@ -454,7 +453,8 @@ public class ReportController {
 		int stressCount = 0;
 		int incrementCount = 0;
 		int decrementCount = 0;
-		for (DailyCall dailyCall : dailyCallListForChart ) {
+		
+		for (DailyCall dailyCall : dailyCallList ) {
 			totalCount += dailyCall.getTotalCount();
 			successCount += dailyCall.getSuccessCount();
 			failCount += dailyCall.getFailCount();
@@ -470,7 +470,6 @@ public class ReportController {
 		model.addAttribute("stressCall", stressCount);
 		model.addAttribute("incrementCount", incrementCount);
 		model.addAttribute("decrementCount", decrementCount);
-		*/
 		model.addAttribute("searchGroup", searchDTO.getSearchGroup());
 		if(searchDTO.getSearchId() != null) {
 			model.addAttribute("searchId", selectAgent);
@@ -523,7 +522,6 @@ public class ReportController {
 		
 		List<MonthlyCall> monthlyCallList = monthlyCallService.getMonthlyCallListForChart(searchDTO, "order by stat_time desc");
 		model.addAttribute("monthlyCallList", monthlyCallList);
-		/*
 		int totalCount = 0;
 		int successCount = 0;
 		int failCount = 0;
@@ -531,7 +529,7 @@ public class ReportController {
 		int stressCount = 0;
 		int incrementCount = 0;
 		int decrementCount = 0;
-		for (MonthlyCall monthlyCall : monthlyCallListForChart ) {
+		for (MonthlyCall monthlyCall : monthlyCallList ) {
 			totalCount += monthlyCall.getTotalCount();
 			successCount += monthlyCall.getSuccessCount();
 			failCount += monthlyCall.getFailCount();
@@ -547,7 +545,6 @@ public class ReportController {
 		model.addAttribute("stressCall", stressCount);
 		model.addAttribute("incrementCount", incrementCount);
 		model.addAttribute("decrementCount", decrementCount);
-		*/
 		model.addAttribute("searchGroup", searchDTO.getSearchGroup());
 		if(searchDTO.getSearchId() != null) {
 			model.addAttribute("searchId", selectAgent);
