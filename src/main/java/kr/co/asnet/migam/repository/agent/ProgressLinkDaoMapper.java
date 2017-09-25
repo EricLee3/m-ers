@@ -33,5 +33,15 @@ public class ProgressLinkDaoMapper implements ProgressLinkDao {
 		return sqlSession.selectList("kr.co.asnet.migam.repository.agent.ProgressLinkDaoMapper.selectProgressLingList", parameters);
 	}
 
+	@Override
+	public int updatephone(ProgressLink progressLink) {
+		// TODO Auto-generated method stub
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		{
+			parameters.put("ProgressLink", progressLink);
+		}
+		return sqlSession.update("kr.co.asnet.migam.repository.agent.ProgressLinkDaoMapper.updatephone", parameters);
+	}
+
 
 }

@@ -16,5 +16,7 @@ public interface ProgressLinkDao {
 
 	public List<ProgressLink> selectProgressLingList(ProgressLink progressLink);
 
+	public int updatephone(ProgressLink progressLink);
+
 	
 }
