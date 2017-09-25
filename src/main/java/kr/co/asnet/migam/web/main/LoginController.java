@@ -114,6 +114,7 @@ public class LoginController {
 					model.addAttribute("a_date", (String)session.getAttribute("a_date"));
 					return ("redirect:/main");
 		}
+				model.addAttribute("flag","0");
 		return ("redirect:/login");
 	        }
 	}

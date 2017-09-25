@@ -91,16 +91,23 @@ $(document).ready(function(){
 	 
 
 
-
+if (flag != null && flag != ''){
+	
 	if(flag == "1"){
 		alert("세션이 끊겼습니다.");
-		
-		var protocol = location.protocol+"//";
-		var host = location.host;
-		var login = "/login";
+	}else{
+		alert("아이디 패스워드를 확인해주세요.");
+	}	
 
-		window.top.location.href = protocol+host+login;
+	
+	var protocol = location.protocol+"//";
+	var host = location.host;
+	var login = "/login";
+
+	window.top.location.href = protocol+host+login;
 }
+
+
 
 
 });
