@@ -42,14 +42,17 @@ public class ProgressController {
 
 		 
 		List<ProgressLink> progresslinkList = progressLinkService.getprogressbar(progressLink);
-
+		progressLinkService.phone_up(progressLink);
 		model.addAttribute("agent_id", progressLink.getAgent_id());
 
 		model.addAttribute("indicator_name", progressLink.getIndicator_name());
 		model.addAttribute("custom_num", progressLink.getCustom_num());
 		model.addAttribute("ProgressList", progresslinkList);
 
-		return "/link/progress_link"; // 메인페이지가 완성되지 않아 임시 주석처리합니다.
+		System.out.println("IOS-----------------------------");
+		System.out.println(progressLink.toString());
+		
+		return "/link/progress_link"; 
 	}
 
 	
@@ -73,7 +76,7 @@ public class ProgressController {
 		model.addAttribute("time", time);
 		model.addAttribute("agent_id", progressLink.getAgent_id());
 		model.addAttribute("custom_num", progressLink.getCustom_num());
-		return "/link/pop_linegraph"; // 메인페이지가 완성되지 않아 임시 주석처리합니다.
+		return "/link/pop_linegraph"; 
 	}
 
 

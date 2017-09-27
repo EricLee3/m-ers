@@ -259,8 +259,8 @@
                                 <span class="info-box-icon bg-aqua"><i class="fa fa-headphones"></i></span>
                                 <div class="info-box-content">
                                     <span class="info-box-text" id="agentName">상담원 : ${callAudit.agentName }</span>
-                                    <span class="info-box-text" id="groupName">(${callAudit.groupName})</span>
-                                    <span class="info-box-number" id="agentNumber">${callAudit.agentNumber}</span>
+<%--                                     <span class="info-box-text" id="groupName">(${callAudit.groupName})</span> --%>
+<%--                                     <span class="info-box-number" id="agentNumber">${callAudit.agentNumber}</span> --%>
                                 </div>
                                 <!-- /.info-box-content -->
                             </div>

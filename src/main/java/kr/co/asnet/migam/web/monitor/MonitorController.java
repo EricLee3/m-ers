@@ -114,12 +114,13 @@ public class MonitorController {
 		Parameter parameter = parameterService.getParameter();
 		model.addAttribute("angryCountParameter", parameter.getAngryCount());
 		
-		//오늘의 콜 정보 
+		//오늘 콜 정보 
 		SearchDTO hourlySearchDTO = new SearchDTO();
 		String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 		hourlySearchDTO.setStartDate(today);
 		hourlySearchDTO.setEndDate(today);
-		List<HourlyCall> hourlyCallList = hourlyCallService.getHourlyCallList(pageDTO, hourlySearchDTO, "order by stat_time asc");
+		//List<HourlyCall> hourlyCallList = hourlyCallService.getHourlyCallList(pageDTO, hourlySearchDTO, "order by stat_time asc");
+		List<HourlyCall> hourlyCallList = hourlyCallService.getHourlyCallList(null, hourlySearchDTO, "order by stat_time asc");
 		int totalCount = 0;
 		int angerCount = 0;
 		int stressCount = 0;

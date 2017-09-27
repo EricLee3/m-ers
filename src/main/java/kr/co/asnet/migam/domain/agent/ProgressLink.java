@@ -108,9 +108,9 @@ public class ProgressLink extends BaseDomain {
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
-	@Override
+/*	@Override
 	public String toString() {
-		return "ImsiMent [agent_id="+agent_id+", indicator_name=" + indicator_name + ", indicator_kor_name=" + indicator_kor_name + ", indicator_level=" + indicator_level + ", agent_script=" + agent_script + ", customer_script=" + customer_script +   ", script_color=" + script_color +"]";
+		return "ImsiMent [agent_id="+agent_id+", custom_num="+custom_num+", indicator_name=" + indicator_name + ", indicator_kor_name=" + indicator_kor_name + ", indicator_level=" + indicator_level + ", agent_script=" + agent_script + ", customer_script=" + customer_script +   ", script_color=" + script_color +"]";
 	}
-
+*/
 }

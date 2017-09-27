@@ -26,7 +26,7 @@
 									<div class="info-box-content">
 										<span class="info-box-text" id="agentName">상담원 : ${callAnalysis.agentName }</span> 
 										<span class="info-box-text" id="groupName">(${callAnalysis.groupId})</span> 
-										<span class="info-box-number" id="agentNumber">${callAnalysis.agentNumber}</span>
+<%-- 										<span class="info-box-number" id="agentNumber">${callAnalysis.agentNumber}</span> --%>
 									</div>
 									<!-- /.info-box-content -->
 								</div>

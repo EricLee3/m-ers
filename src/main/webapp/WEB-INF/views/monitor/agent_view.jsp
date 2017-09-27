@@ -41,7 +41,8 @@
 			<!-- Main content -->
 			<section class="content">
 
-				<h2 class="page-header">${agent.agentName } (${agent.groupName }, ${agent.agentNumber })</h2>
+<%-- 				<h2 class="page-header">${agent.agentName } (${agent.groupName }, ${agent.agentNumber })</h2> --%>
+				<h2 class="page-header">${agent.agentName } (${agent.groupName })</h2>
 
 				<div class="row">
 					<div class="col-md-3">
