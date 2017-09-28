@@ -183,7 +183,11 @@ function SoundStop( soundObj )
 	                  success:function(data, textStatus, jqXHR) 
 	                  {                     
 	                       $(".process_row").remove();
+	                       
 	                       for(var i=0;i < data.length; i ++){
+		                       console.log("IOS: data["+i+"].value is :"+ data[i].value);
+		                       console.log("IOS: data["+i+"].category is :"+ data[i].category);
+
 	                    	   var val = data[i].value.split('#');
 	                    	   var bb = val[0] * 1;
 	                    	   var cc = val[1];
