@@ -3,12 +3,34 @@ package kr.co.asnet.migam.utils;
 import java.io.*;
 import java.lang.ProcessBuilder.Redirect;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import kr.co.asnet.migam.web.REST.ProcessGroupREST;
+
 public class ShellExecute {
+	private final Logger logger = LoggerFactory.getLogger(ProcessGroupREST.class);
 	public void byProcessBuilderRedirect(String[] command) throws IOException, InterruptedException {
-	    ProcessBuilder builder = new ProcessBuilder(command); 
+//	    Runtime rt = Runtime.getRuntime();
+//	    Process ppp = rt.exec("cmd /K c:\\\"Program Files\"\\Git\\git-bash.exe c:\\home\\mecs\\script\\BOT-MECS -m CDRP");
+	    
+	    
+		ProcessBuilder builder = new ProcessBuilder(command); 
 	    builder.redirectOutput(Redirect.INHERIT);
 	    builder.redirectError(Redirect.INHERIT);
+	    builder.redirectErrorStream(false);
 	    builder.start();
+	    
+	    
+//	    BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+//	    String line = null;
+//	    while ((line=reader.readLine()) != null)  {
+//	    	ret.append(line);
+//	    }
+	    logger.debug("IOS=========================================================");
+	    logger.info("IOSINFO=======================================================");
+//	    logger.debug(ret.toString());
+//	    logger.info(ret.toString());
 	}
    
    public String execute(String category) {

@@ -31,7 +31,7 @@ public class SessionUser implements Serializable {
 	 */
 	public SessionUser() {
 		super();
-		System.out.println(":::::SessionUser::::::");
+		//System.out.println(":::::SessionUser::::::");
 		logoutSessionUser();
 	}
 	
@@ -39,7 +39,7 @@ public class SessionUser implements Serializable {
 	 * 현재 사용자의 정보를 강제로 초기화 합니다. 
 	 */
 	public void logoutSessionUser() {
-		System.out.println(":::::logoutSessionUser::::::");
+		//System.out.println(":::::logoutSessionUser::::::");
 		this.superUser = false;
 		this.login = false;
 		this.admin = false;
@@ -122,7 +122,7 @@ public class SessionUser implements Serializable {
 	 * @param user
 	 */
 	public void saveUser(User user) {
-		System.out.println("::::::saveUser:::::::");
+		//System.out.println("::::::saveUser:::::::");
 		this.currentUser = user;
 		this.superUser = this.isSuperUser();
 		this.login = this.isLogin();
@@ -131,7 +131,7 @@ public class SessionUser implements Serializable {
 	}
 
 	public void removeUser() {
-		System.out.println("::::::removeUser:::::::");
+		//System.out.println("::::::removeUser:::::::");
 		this.saveUser(new User());
 	}
 

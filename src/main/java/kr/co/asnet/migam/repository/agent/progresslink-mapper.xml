@@ -8,6 +8,7 @@
         <result property="indicator_level" column="indicator_level" />
         <result property="agent_script" column="agent_script" />
         <result property="customer_script" column="customer_script" />
+        <result property="custom_num" column="custom_num" />
 	</resultMap>
 
 	
@@ -22,5 +23,10 @@
 		   AND indicator_name = #{progressLink.indicator_name}
 	</select>
 	
-
+	<update id="updatephone" parameterType="ProgressLink" >
+		update mecs5_realtime_state 
+		<set> customer_no = #{progressLink.custom_num}</set>  
+		<where> agent_id = #{progressLink.agent_id} </where> 
+	</update>
+	
 </mapper> 

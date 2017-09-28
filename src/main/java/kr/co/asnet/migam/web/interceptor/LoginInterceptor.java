@@ -60,6 +60,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
       
       Login login = Login.getInstance();
       String userRole = null;
+      
       /* 세션 생성 */
       if (sessionUser.getCurrentUser() == null) {
          sessionUser.logoutSessionUser();
@@ -72,7 +73,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
       if (StringUtils.containsAny(requestURL, adminPath)) {
          if ( !sessionUser.isLogin() ) {
             String rtUrl = URLEncoder.encode(requestURL, "utf-8");
-            response.sendRedirect("/session_out");
+            response.sendRedirect("/session_out?flag=0");
             return false;
          }else {
             
@@ -111,7 +112,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
              sessionUser.logoutSessionUser();
              sessionUser.saveUser(new User());
              String rtUrl = URLEncoder.encode(requestURL, "utf-8");
-             response.sendRedirect("/session_out");
+             response.sendRedirect("/session_out?flag=0");
              return false;
           }
        }

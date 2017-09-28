@@ -154,11 +154,11 @@
 												<tbody>
 													<tr class="info">
 														<td >합계</td>
-														<td >${totalCall }</td>
-														<td >${successCount }</td>
-														<td >${failCount }</td>
-														<td >${angerCall }</td>
-														<td >${stressCall }</td>
+														<td >${totalCall}</td>
+														<td >${successCount}</td>
+														<td >${failCount}</td>
+														<td >${angerCall}</td>
+														<td >${stressCall}</td>
 <%-- 														<td >${incrementCount }</td> --%>
 														<!--td >${decrementCount }</td-->
 													</tr>
@@ -344,26 +344,6 @@ $(document).ready(function(){
 	</c:if>
 	
 	$(function () {
-		<c:if test="${searchDTO.searchId != null}">
-		var bar = new Morris.Bar({
-		      element: 'bar-chart',
-		      resize: true,
-		      data: [
-				<c:forEach items="${agentCallListForChart}" var="agentCallItem"> {
-		        	agentName: '${agentCallItem.agentName}', 
-		        	AngryCall: ${agentCallItem.angryCount}, 
-		        	StressCall:${agentCallItem.stressCount}
-		        },
-				</c:forEach>
-		      ],
-		      barColors: ['#de8162', '#e7cd64'],
-		      xkey: 'agentName',
-		      ykeys: ['주의 단계', '흥미 단계'],
-		      labels: ['분노 단계', '스트레스 단계'],
-		      parseTime: false,
-		      hideHover: 'auto'
-		    });		
-		</c:if>
 		
 	    //Date picker
 	    $('#startDate').datepicker({
@@ -381,26 +361,6 @@ $(document).ready(function(){
 	    });
 	});
 
-	function lineDraw(){
-		var bar = new Morris.Bar({
-			element: 'bar-chart',
-			resize: true,
-			data: [
-			<c:forEach items="${agentCallListForChart}" var="agentCallItem"> {
-				agentName: '${agentCallItem.agentName}', 
-				AngryCall: ${agentCallItem.angryCount}, 
-				StressCall:${agentCallItem.stressCount}
-				},
-			</c:forEach>
-			],
-			barColors: ['#de8162', '#e7cd64'],
-			xkey: 'agentName',
-			ykeys: ['주의 단계', '흥미 단계'],
-			labels: ['분노 단계', '스트레스 단계'],
-			parseTime: false,
-			hideHover: 'auto'
-		});
-	}
 });	
 
 

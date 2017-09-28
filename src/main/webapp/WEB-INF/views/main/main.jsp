@@ -95,12 +95,12 @@
 		document.getElementById('alarm_log').setAttribute("class", "");
 		//		document.getElementById('his_log').setAttribute("class", "");
 		//		document.getElementById('fault_alarm_log').setAttribute("class", "");
-		//		document.getElementById('sens_meta').setAttribute("class", "");
-		//		document.getElementById('sens_conf').setAttribute("class", "");
-		//		document.getElementById('sens_basic').setAttribute("class", "");
 		//		document.getElementById('sens_demo').setAttribute("class", "");
 
 		if("${sessionScope.sessionUser.superUser}" == "true"){
+			document.getElementById('sens_meta').setAttribute("class", "");
+			document.getElementById('sens_conf').setAttribute("class", "");
+			document.getElementById('sens_basic').setAttribute("class", "");
 			document.getElementById('pro_meta').setAttribute("class", "");
 			document.getElementById('pro_conf').setAttribute("class", "");
 		}
@@ -250,8 +250,12 @@
 							<li class="active">
 				              <a href="#"><i class="fa fa-circle-o"></i> 서비스 설정  <i class="fa fa-angle-left pull-right"></i></a>
 				              <ul class="treeview-menu">
+									<li class="" id="sens_basic"><a href="/system/sens_basic" target="iframe" onclick="side(26);"><i class="fa fa-circle-o"></i> 기본 감성지표 관리 </a></li>
+									<li class="" id="sens_conf"><a href="/system/sens_conf" target="iframe" onclick="side(23);"><i class="fa fa-circle-o"></i> 감성지표 설정</a></li>
+									<li class="" id="sens_meta"><a href="/system/sens_meta" target="iframe" onclick="side(22);"><i class="fa fa-circle-o"></i> 서비스 감성 지표 기초정보 관리</a></li>
 									<li class="" id="pro_conf"><a href="/system/pro_conf" target="iframe" onclick="side(25);"><i class="fa fa-circle-o"></i> 프로파일 설정</a></li>
 									<li class="" id="pro_meta"><a href="/system/pro_meta" target="iframe" onclick="side(24);"><i class="fa fa-circle-o"></i> 프로파일 기초정보 설정</a></li>
+
 				              </ul>
 				            </li>          
 						</c:if>

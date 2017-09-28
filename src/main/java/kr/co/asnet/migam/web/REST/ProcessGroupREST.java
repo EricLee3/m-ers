@@ -67,7 +67,32 @@ public class ProcessGroupREST {
 		//isDeleted = shellexe.execute(category);
 		//String[] a ={"cmd", "/c", "taskkill /F /IM 9380"}; 
 		
-		String[] a ={"cmd", "/c", "python c:\\home\\mecs\\script\\chkpid.py kill "+category};
+		//String[] a ={"cmd", "/c", "python c:\\home\\mecs\\script\\chkpid.py kill "+category};
+		if (category.equals("STAP") || category.equals("PSNR") || category.equals("CDRP") || category.equals("BAAP") || category.equals("MOXI") || 
+			    category.equals("QAEP") || category.equals("LOGD") || category.equals("PMON")) {
+			String[] a = {"cmd", "/c", "\"c:\\Program Files\\Git\\git-bash.exe\"", "c:\\home\\mecs\\script\\HLT-MECS", category};
+			try {
+				shellexe.byProcessBuilderRedirect(a);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else  {
+			String[] a = {"cmd", "/c", "\"c:\\Program Files\\Git\\git-bash.exe\"", "c:\\home\\mecs\\script\\nssm", "stop", category};
+			try {
+				shellexe.byProcessBuilderRedirect(a);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 		Calendar calendar = Calendar.getInstance();
         java.util.Date date = calendar.getTime();
         String today = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date));
@@ -76,15 +101,7 @@ public class ProcessGroupREST {
 		session.setAttribute("a_date", today);
 		model.addAttribute("a_flag", (String)session.getAttribute("a_flag"));
 		model.addAttribute("a_date", (String)session.getAttribute("a_date"));
-		try {
-			shellexe.byProcessBuilderRedirect(a);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		response.setHeader("Cache-Control", "no-store");
 		response.setHeader("Pragma", "");
 		response.setHeader("Expires", "0");
@@ -106,34 +123,23 @@ public class ProcessGroupREST {
 	public ResponseEntity<String> startProcess(@PathVariable("category") String category, Model model, SearchDTO searchDTO, HttpServletResponse response) {
 		
 		ShellExecute shellexe = new ShellExecute();
-		//String isDeleted = shellexe.execute("C:\\Program Files (x86)\\SQLyog\\SQLyog.exe");
 		String isStarted ="";
 		//isStarted = shellexe.execute("PowerShell -NoProfile -ExecutionPolicy unrestricted -Command c:\\home\\mecs\\script\\hideproc c:\\home\\mecs\\PSNR\\bin\\"+category+".exe ''");
 		//isStarted = shellexe.execute2(category);
-		if(category.equals("CDRP") || category.equals("BAAP") || category.equals("MOXI") || category.equals("PMON")) {
-			String[] a = {"cmd", "/c", "PowerShell -NoProfile -ExecutionPolicy unrestricted -Command c:\\home\\mecs\\script\\hideproc c:\\home\\mecs\\"+category+"\\bin\\"+category+".exe '1 start'"};
+		if (category.equals("STAP") || category.equals("PSNR") || category.equals("CDRP") || category.equals("BAAP") || category.equals("MOXI") || 
+		    category.equals("QAEP") || category.equals("LOGD") || category.equals("PMON")) {
+			//String[] a = {"cmd", "/c", "PowerShell -NoProfile -ExecutionPolicy unrestricted -Command c:\\home\\mecs\\script\\hideproc c:\\home\\mecs\\"+category+"\\bin\\"+category+".exe '1 start'"};
+			String[] a = {"cmd", "/c", "\"c:\\Program Files\\Git\\git-bash.exe\"", "c:\\home\\mecs\\script\\BOT-MECS", category};
+			
 			try {
 				shellexe.byProcessBuilderRedirect(a);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}else if(category.equals("LOGD")) {
-			String[] b = {"cmd", "/c", "PowerShell -NoProfile -ExecutionPolicy unrestricted -Command c:\\home\\mecs\\script\\hideproc c:\\home\\mecs\\"+category+"\\bin\\"+category+".exe 'start'"};
-			try {
-				shellexe.byProcessBuilderRedirect(b);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}else if(category.equals("OAMD") || category.equals("STAP") || category.equals("PSNR")) {
-			String[] c = {"cmd", "/c", "PowerShell -NoProfile -ExecutionPolicy unrestricted -Command c:\\home\\mecs\\script\\hideproc c:\\home\\mecs\\"+category+"\\bin\\"+category+".exe ''"};
+		} else if (category.equals("OAMD") || category.equals("EPNP")) {
+			String[] c = {"cmd", "/c", "\"c:\\Program Files\\Git\\git-bash.exe\"", "c:\\home\\mecs\\script\\nssm", "start", category};
 			try {
 				shellexe.byProcessBuilderRedirect(c);
 			} catch (IOException e) {
@@ -143,22 +149,11 @@ public class ProcessGroupREST {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}else {
-			String[] d = {"cmd", "/c", "PowerShell -NoProfile -ExecutionPolicy unrestricted -Command c:\\home\\mecs\\script\\hideproc c:\\home\\mecs\\"+category+"\\bin\\"+category+".exe './Res/config.xml'"};
-			try {
-				shellexe.byProcessBuilderRedirect(d);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 		}
+		
 		response.setHeader("Cache-Control", "no-store");
 		response.setHeader("Pragma", "");
 		response.setHeader("Expires", "0");
-		
         
 		if(isStarted.equals("")) {
 			return new ResponseEntity<String>(isStarted, HttpStatus.OK);
