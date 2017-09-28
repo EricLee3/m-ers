@@ -517,12 +517,12 @@ public class ReportController {
 			searchDTO.setSearchType("0");
 		}
 		model.addAttribute("searchDTO", searchDTO);
-		
 	//	List<MonthlyCall> monthlyCallListForChart = monthlyCallService.getMonthlyCallListForChart(searchDTO, "order by stat_time asc");
 	//	model.addAttribute("monthlyCallListForChart", monthlyCallListForChart);
-		
-		List<MonthlyCall> monthlyCallList = monthlyCallService.getMonthlyCallListForChart(searchDTO, "order by stat_time desc");
-		model.addAttribute("monthlyCallList", monthlyCallList);
+		if(searchDTO.getSearchId() != null) {
+			List<MonthlyCall> monthlyCallList = monthlyCallService.getMonthlyCallListForChart(searchDTO, "order by stat_time desc");
+			model.addAttribute("monthlyCallList", monthlyCallList);
+		}
 		/*
 		int totalCount = 0;
 		int successCount = 0;
@@ -633,37 +633,16 @@ public class ReportController {
 		//List<HourlyCall> hourlyCallListForChart = hourlyCallService.getHourlyCallListForChart(searchDTO, "order by stat_time asc");
 		//model.addAttribute("hourlyCallListForChart", hourlyCallListForChart);
 		
-		System.out.println("::::::::::::::::::"+searchDTO.getSearchId());
+		List<HourlyCall> hourlyCallListByOrder = null;
+		if(searchDTO.getSearchId() != null) {
+			hourlyCallListByOrder = hourlyCallService.getHourlyCallListByOrder(searchDTO, "order by stat_time desc");
+		}
 		
-		List<HourlyCall> hourlyCallListByOrder = hourlyCallService.getHourlyCallListByOrder(searchDTO, "order by stat_time desc");
 		model.addAttribute("hourlyCallListByOrder", hourlyCallListByOrder);
-		
+		/*
 		List<HourlyCall> hourlyCallListByOrderForChart = hourlyCallService.getHourlyCallListByOrder(searchDTO, "order by stat_time asc");
 		model.addAttribute("hourlyCallListByOrderForChart", hourlyCallListByOrderForChart);
-		
-		int totalCount = 0;
-		int successCount = 0;
-		int failCount = 0;
-		int angerCount = 0;
-		int stressCount = 0;
-		int incrementCount = 0;
-		int decrementCount = 0;
-		for (HourlyCall hourlyCall : hourlyCallListByOrder ) {
-			totalCount += hourlyCall.getTotalCount();
-			successCount += hourlyCall.getSuccessCount();
-			failCount += hourlyCall.getFailCount();
-			angerCount += hourlyCall.getAngryCount();
-			stressCount += hourlyCall.getStressCount();
-			incrementCount += hourlyCall.getIncrementCount();
-			decrementCount += hourlyCall.getDecrementCount();
-		}
-		model.addAttribute("totalCall", totalCount);
-		model.addAttribute("successCount", successCount);
-		model.addAttribute("failCount", failCount);
-		model.addAttribute("angerCall", angerCount);
-		model.addAttribute("stressCall", stressCount);
-		model.addAttribute("incrementCount", incrementCount);
-		model.addAttribute("decrementCount", decrementCount);
+		*/
 		
 		
 		model.addAttribute("searchGroup", searchDTO.getSearchGroup());
@@ -674,6 +653,92 @@ public class ReportController {
 		model.addAttribute("menuCategory", "report");
 		return "/report/hour_report";
 	}
+	
+	
+	@RequestMapping(value = "/report_linegraph", method = RequestMethod.GET, produces="text/plain;charset=UTF-8")
+    public @ResponseBody String report_linegraph( @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+			@RequestParam(value = "recordStart", required = false, defaultValue = "00:00") String recordStart,
+			@RequestParam(value = "recordEnd", required = false, defaultValue = "23:00") String recordEnd, Model model,
+			SearchDTO searchDTO, String selectAgent) {
+
+	
+
+		// 검색 조건 처리
+		if( searchDTO.getSearchGroup() != null ) { 
+			if( searchDTO.getSearchGroup().equals("allGroup") ) searchDTO.setSearchGroup(null);
+		}
+		if( searchDTO.getSearchId() != null ) { 
+			if( searchDTO.getSearchId().equals("allAgent") ) searchDTO.setSearchId(null);
+		}
+		if( searchDTO.getStartDate() == null ) {
+			Calendar calendar = Calendar.getInstance(); 
+			//calendar.add(Calendar.DATE, -30); // 최근 30일
+			//searchDTO.setStartDate(new SimpleDateFormat("yyyy-MM-dd").format(calendar.getTime()));
+			searchDTO.setStartDate(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+			searchDTO.setEndDate(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+		}
+		if( searchDTO.getSearchType() == null ) {
+			searchDTO.setSearchType("0");
+		}
+		model.addAttribute("startDate", searchDTO.getStartDate());
+		model.addAttribute("endDate", searchDTO.getEndDate());
+		if(searchDTO.getStartDate() != null){
+			String statDateStart = searchDTO.getStartDate()+" "+recordStart.substring(0,2);
+			String statDateEnd = searchDTO.getEndDate()+" "+recordEnd.substring(0,2);
+			searchDTO.setStartDate(statDateStart);
+			searchDTO.setEndDate(statDateEnd);
+		}
+		
+		model.addAttribute("recordStart", recordStart);
+		model.addAttribute("recordEnd", recordEnd);
+		model.addAttribute("searchDTO", searchDTO);
+		
+		Gson gson = new Gson();
+        
+		List<HourlyCall> hourlyCallListByOrder = null;
+	//	if(searchDTO.getSearchId() != null) {
+			hourlyCallListByOrder = hourlyCallService.getHourlyCallListByOrder(searchDTO, "order by stat_time desc");
+		//}
+		 
+		
+		
+		List<Map> hashlist = new ArrayList<Map>();
+		Date start_time = null;
+		int[] angry_cnt= new int[hourlyCallListByOrder.size()];
+		int[] stress_cnt =new int[hourlyCallListByOrder.size()];
+		DecimalFormat format = new DecimalFormat("#");
+	      HashMap hashmap = new HashMap();
+		Object[] angryCnt = new Object[hourlyCallListByOrder.size()];
+		Object[] stressCnt = new Object[hourlyCallListByOrder.size()];
+		String[] name1 = new String[1];
+		String[] name2 = new String[1];
+		name1[0] = "Angry";
+		name2[0] = "Stress";
+		Object[] ind_name = new Object[2];
+		ind_name[0] = name1;
+		ind_name[1] = name2;
+		
+		for(int i=0;i< hourlyCallListByOrder.size();i++){
+			start_time = hourlyCallListByOrder.get(i).getStatTime();
+			angry_cnt[i] =  hourlyCallListByOrder.get(i).getAngryCount();
+			stress_cnt[i] =  hourlyCallListByOrder.get(i).getStressCount();
+			
+			
+			angryCnt[i] = angry_cnt[i];
+			stressCnt[i] = stress_cnt;
+			  
+		}
+		
+		
+		
+	  hashmap.put("data", angryCnt);
+      hashmap.put("name", ind_name);
+    
+      hashlist.add(hashmap);
+        return gson.toJson(hashlist);
+    }
+	
+	
 	
 	/**
 	 * 통계::근무성과별 통계
