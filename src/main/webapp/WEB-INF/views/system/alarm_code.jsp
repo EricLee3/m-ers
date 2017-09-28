@@ -38,7 +38,7 @@
 			</section> 
 			<!-- Main content -->
 			<section class="content">
-				<div class="row">
+				<div class="row" style="height: 800px;">
 					<div class="col-xs-12">
 						<div class="box box-success">
 							<div class="box-header">

@@ -38,13 +38,93 @@
 	<script src="/resources/plugins/ionslider/ion.rangeSlider.min.js"></script>
 	<script src="/resources/plugins/raphael/raphael-min.js"></script>
 	<script src="/resources/plugins/morris/morris.min.js"></script>
-	<script src="/resources/plugins/timepicker/bootstrap-timepicker.min.js"></script>
+	<script src="/resources/plugins/timepicker/bootstrap-timepicker.min_sub2.js"></script>
 </head>
 <script>
+function linegraph(mdata){
+	Highcharts.setOptions({
+	    colors: ['#b6728e', '#6dc066', '#ff6666', '#66cdaa', '#f08080', 
+	             '#ffc82e', '#ffb6c1','#11a51b', '#738b9a', '#7ac5cd',
+	             '#4f90c1', '#222d4a','#9c3b30', '#db8e4e', '#dbbc5d',
+	             '#ff8fcf', '#d11141','#6663bf', '#16f14b', '#d0a92b']
+	});
+   // Highcharts.chart('linegraph_display', {
+    	Highcharts.stockChart('linegraph_display', {
+    	chart: {
+            type: 'spline'
+    	},
+	    title: {
+	        text: ' '
+	    },
+	    tooltip: {
+	    	shared: true,
+	        useHTML: true,
+	        headerFormat: '<small>{point.x}</small><table>',
+	        pointFormat: '<tr><td style="color: {series.color}">{series.name}: </td>' +
+	            		  '<td style="text-align: right"><b>{point.y}</b></td></tr>',
+	        footerFormat: '</table>',
+	        valueDecimals:0
+	    },
+	    yAxis: {
+	        title: {
+	        	  text: ' ',
+	        	  allowDecimals: false // 정수로만 표기
+	        } 
+	    },
+	    xAxis: {
+	    	labels: {  formatter: function () {return this.value;} },
+	        // tickInterval: 2,
+	         minPadding: 0.05,
+	         maxPadding: 0.05,
+	         scrollbar: {	enabled: true}
+	    },
+	    legend: {
+	    	enabled: true,
+	        layout: 'horizontal',
+	        align: 'center',
+	        verticalAlign: 'bottom'
+	    },
+	    plotOptions: {
+	        series: {pointStart: 0},
+	        line: { dataLabels: { enabled: true } } 
+	    },    
+	    navigator: {
+		    enabled: false
+        },
+        scrollbar: {
+        	enabled: false
+        },
+	    rangeSelector: {
+	    	selected: 0,
+	    	buttons: [
+	    	          {type: 'millisecond',  count: 10, text: '2초' },
+	    	          {type: 'all',text: 'All'}
+	    	          ],
+	      //  buttonTheme: {visibility: 'hidden' },
+	        labelStyle: {visibility: 'hidden' },
+	        inputStyle:{visibility: 'hidden' },
+	        inputDateFormat: '%L',
+	        inputEditDateFormat: '%L',
+	        allButtonsEnabled: false
+	    },	       
+/* series: [{ data: [["0", 29.9],["1", 71.5],  ["7", 106.4]]}] */
+	   series:mdata   
+	}); 
+	
+}
+
 		$(document).ready(function(){
 			if("${searchGroup}" != null && "${searchGroup}" != '') $("select[name=searchGroup]").val("${searchGroup}").attr("selected","selected");
 			if("${searchId}" != null && "${searchId}" != '') $("select[name=selectAgent]").val("${searchId}").attr("selected","selected");
+			
+		
 		});
+		
+		
+		
+
+
+		
 </script>
 <body class="hold-transition skin-blue sidebar-mini">
 			<!-- Content Header (Page header) -->
@@ -58,7 +138,7 @@
 					<div class="col-xs-12">
 						<div class="box box-success">
 							<div class="box-header">
-								<h3 class="box-title">시간대별 통계 <strong>(기간 : ${searchDTO.startDate}:00 ~ ${searchDTO.endDate}:00)</strong></h3>
+								<h3 class="box-title">시간대별 통계 <strong>(기간 : ${searchDTO.startDate} ~ ${searchDTO.endDate})</strong></h3>
 							</div>
 							<!-- /.box-header -->
 							
@@ -312,7 +392,6 @@ $(document).ready(function(){
 	    var endDate = $("#endDate").val();
 	    var startDateCompare = new Date(startDate);
 	    var endDateCompare = new Date(endDate);
-
 		if(startDateCompare.getTime() == endDateCompare.getTime()) {
 		    if(recordStart && recordEnd ){
 			    if(recordStart > recordEnd) {

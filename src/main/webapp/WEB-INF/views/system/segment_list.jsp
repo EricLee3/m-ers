@@ -145,6 +145,8 @@ function SoundStop( soundObj )
 	                    	   var aa = valper.toFixed(1);
 	                    	   var a = Math.round(val[0] / val[1] * 100);
 	                    	   
+	                    	   var aa_round = Math.round(aa);
+	                    	   
 	                    	   if(data[i].alarm_lv == 0) {
 	                    		   content += "<div class=\"memory info-box bg-green\" style=\"height: 160px; text-align: center;\">";
 	                    	   }else if(data[i].alarm_lv == 1) {
@@ -155,7 +157,7 @@ function SoundStop( soundObj )
 	                    		   content += "<div class=\"memory info-box bg-red\" style=\"height: 160px; text-align: center;\">";
 	                    	   }
 	                    	   content += "<span class=\"info-box-text\"><font style=\"font-size: 30px;\">MEMORY</font></span>";
-	                    	   content += "<span class=\"info-box-number\"><font style=\"font-size: 60px;\">"+aa+" %</font></span>";
+	                    	   content += "<span class=\"info-box-number\"><font style=\"font-size: 50px;\">"+aa_round+" %</font></span>";
 	                    	   content += "<span class=\"info-box-number\"><font style=\"font-size: 20px;\">("+data[i].value+" GB)</font></span></div>";
 	                    	   $(".memory_body").append(content);
 	                       }
@@ -624,8 +626,8 @@ function SoundStop( soundObj )
 								<table id="example1" class="table no-margin" style="width: 100%;">
 									<thead>
 										<tr>
-											<th class="no-sort" width="50%">이름</th>
-											<th class="no-sort" width="50%">사용량</th> 
+											<th class="no-sort" width="50%">파티션</th>
+											<th class="no-sort" width="50%">사용율</th> 
 										</tr>
 									</thead>
 									<tbody class="disk_body">
