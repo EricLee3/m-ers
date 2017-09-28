@@ -630,7 +630,6 @@ public class ReportController {
 		//List<HourlyCall> hourlyCallListForChart = hourlyCallService.getHourlyCallListForChart(searchDTO, "order by stat_time asc");
 		//model.addAttribute("hourlyCallListForChart", hourlyCallListForChart);
 		
-		System.out.println("::::::::::::::::::"+searchDTO.getSearchId());
 		
 		List<HourlyCall> hourlyCallListByOrder = hourlyCallService.getHourlyCallListByOrder(searchDTO, "order by stat_time desc");
 		model.addAttribute("hourlyCallListByOrder", hourlyCallListByOrder);

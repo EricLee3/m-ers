@@ -38,7 +38,7 @@
 	<script src="/resources/plugins/ionslider/ion.rangeSlider.min.js"></script>
 	<script src="/resources/plugins/raphael/raphael-min.js"></script>
 	<script src="/resources/plugins/morris/morris.min.js"></script>
-	<script src="/resources/plugins/timepicker/bootstrap-timepicker.min.js"></script>
+	<script src="/resources/plugins/timepicker/bootstrap-timepicker.min_sub2.js"></script>
 </head>
 <script>
 function linegraph(mdata){
@@ -117,10 +117,7 @@ function linegraph(mdata){
 			if("${searchGroup}" != null && "${searchGroup}" != '') $("select[name=searchGroup]").val("${searchGroup}").attr("selected","selected");
 			if("${searchId}" != null && "${searchId}" != '') $("select[name=selectAgent]").val("${searchId}").attr("selected","selected");
 			
-			$.getJSON("https://"+location.host+"/report/report_linegraph??page=${pageDTO.page }&searchGroup=${searchDTO.searchGroup}&searchId=${searchDTO.searchId}&startDate=${searchDTO.startDate}&endDate=${searchDTO.endDate}&searchType=${searchDTO.searchType}&recordStart=${recordStart}&recordEnd=${recordEnd}&searchIsNotice=${searchDTO.searchIsNotice}",
-					  function(data) {
-					      linegraph(data);
-			});
+		
 		});
 		
 		
@@ -141,7 +138,7 @@ function linegraph(mdata){
 					<div class="col-xs-12">
 						<div class="box box-success">
 							<div class="box-header">
-								<h3 class="box-title">시간대별 통계 <strong>(기간 : ${searchDTO.startDate}:00 ~ ${searchDTO.endDate}:00)</strong></h3>
+								<h3 class="box-title">시간대별 통계 <strong>(기간 : ${searchDTO.startDate} ~ ${searchDTO.endDate})</strong></h3>
 							</div>
 							<!-- /.box-header -->
 							
@@ -395,7 +392,6 @@ $(document).ready(function(){
 	    var endDate = $("#endDate").val();
 	    var startDateCompare = new Date(startDate);
 	    var endDateCompare = new Date(endDate);
-
 		if(startDateCompare.getTime() == endDateCompare.getTime()) {
 		    if(recordStart && recordEnd ){
 			    if(recordStart > recordEnd) {

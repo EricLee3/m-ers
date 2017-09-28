@@ -241,7 +241,7 @@
       minute = minute < 10 ? '0' + minute : minute;
       second = second < 10 ? '0' + second : second;
 
-      return hour + ':' + minute + (this.showSeconds ? ':' + second : '') + (this.showMeridian ? ' ' + meridian : '');
+      return hour + ''  + (this.showSeconds ? ':' + second : '') + (this.showMeridian ? ' ' + meridian : '');
     },
 
     getCursorPosition: function() {
@@ -284,8 +284,6 @@
       templateContent = '<table>'+
          '<tr>'+
            '<td><a href="#" data-action="incrementHour"><i class="' + this.upArrowStyle + '"></i></a></td>'+
-           '<td class="separator">&nbsp;</td>'+
-           '<td><a href="#" data-action="incrementMinute"><i class="' + this.upArrowStyle + '"></i></a></td>'+
            (this.showSeconds ?
              '<td class="separator">&nbsp;</td>'+
              '<td><a href="#" data-action="incrementSecond"><i class="' + this.upArrowStyle + '"></i></a></td>'
@@ -297,8 +295,6 @@
          '</tr>'+
          '<tr>'+
            '<td>'+ hourTemplate +'</td> '+
-           '<td class="separator">:</td>'+
-           '<td>'+ minuteTemplate +'</td> '+
            (this.showSeconds ?
             '<td class="separator">:</td>'+
             '<td>'+ secondTemplate +'</td>'
@@ -310,8 +306,6 @@
          '</tr>'+
          '<tr>'+
            '<td><a href="#" data-action="decrementHour"><i class="' + this.downArrowStyle + '"></i></a></td>'+
-           '<td class="separator"></td>'+
-           '<td><a href="#" data-action="decrementMinute"><i class="' + this.downArrowStyle + '"></i></a></td>'+
            (this.showSeconds ?
             '<td class="separator">&nbsp;</td>'+
             '<td><a href="#" data-action="decrementSecond"><i class="' + this.downArrowStyle + '"></i></a></td>'
