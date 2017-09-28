@@ -40,7 +40,7 @@ $(document).ready(function(){
 			<!-- Main content -->
 			<section class="content">
 				<div class="row"  style="height:800px">
-					<div class="col-xs-9">
+					<div class="col-xs-12">
 						<div class="box box-primary">
 							<div class="box-header">
 								<h3 class="box-title">전체 목록</h3>
@@ -57,6 +57,7 @@ $(document).ready(function(){
 											<th class="no-sort col-sm-1">이름</th>
 											<th class="no-sort col-sm-1">직급</th>
 											<th class="no-sort col-sm-1">전화번호</th>
+											<th class="no-sort col-sm-1">최근 로그인 시간</th>
 											<th class="no-sort col-sm-1">수정/삭제</th>
 										</tr>
 									</thead>
@@ -70,6 +71,7 @@ $(document).ready(function(){
 												<td>${user.userName}</td>
 												<td>${user.position}</td>
 												<td>${user.phone}</td>
+												<td>${user.visitDate}</td>
 												<td>
 													<div class="btn-group">
 														<button type="button" class="jsShowModal btn btn-default btn-xs" data-index="${user.index }">수정</button>
@@ -122,51 +124,6 @@ $(document).ready(function(){
 						</div>
 						</div>
 						<!-- /.box -->
-	
-					</div>
-					<!-- /.col -->
-	
-					<div class="col-lg-3 col-xs-6">
-	
-						<!-- TABLE: 최근 접속 기록 -->
-						<div class="box box-default">
-							<div class="box-header with-border">
-								<h3 class="box-title">최근 로그인</h3>
-							</div>
-							<!-- /.box-header -->
-							<div class="box-body">
-								<div class="table-responsive">
-									<table class="table no-margin">
-										<thead>
-											<tr>
-												<th>ID</th>
-												<th>등급</th>
-												<th>로그인 시간</th>
-											</tr>
-										</thead>
-										<tbody>
-											<c:forEach items="${loginList}" var="loginUser">
-												<tr>
-													<td>${loginUser.userId }</td>
-													<td>${loginUser.role}</td>
-													<td><fmt:formatDate pattern="yyyy.MM.dd HH:mm:ss" value="${loginUser.visitDate}" /></td>
-												</tr>
-											</c:forEach>
-											<c:if test="${empty loginList }">
-												<tr>
-													<td colspan="3">저장된 로그인 기록이 없습니다.</td>
-												</tr>
-											</c:if>
-										</tbody>
-									</table>
-								</div>
-								<!-- /.table-responsive -->
-							</div>
-							<!-- /.box-body -->
-	
-						</div>
-						<!-- /.box -->
-	
 	
 					</div>
 					<!-- /.col -->
