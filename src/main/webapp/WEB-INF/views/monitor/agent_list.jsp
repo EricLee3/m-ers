@@ -236,7 +236,8 @@
 										<tbody>
 											<c:forEach items="${lastWeekAgentList }" var="agent">
 											<tr>
-												<td><a href="/monitor/agent_view/${agent.agentId }">${agent.agentName }</a></td>
+												<!--  td><a href="/monitor/agent_view/${agent.agentId }">${agent.agentName }</a></td -->
+												<td>${agent.agentName }</td>
 <!-- 												<td> -->
 <%-- 												<c:forEach items="${groupList }" var="group" > --%>
 <%-- 													<c:if test="${group.groupId eq agent.groupId }"> --%>

@@ -764,6 +764,17 @@ public class SystemController {
 		String[] cri = req.getParameterValues("criticalValue");
 		String[] mj = req.getParameterValues("majorValue");
 		String[] mi = req.getParameterValues("minorValue");
+		
+		String[] array_idx1 = req.getParameterValues("idx1");
+		String[] cri1 = req.getParameterValues("criticalValue1");
+		String[] mj1 = req.getParameterValues("majorValue1");
+		String[] mi1 = req.getParameterValues("minorValue1");
+		
+		String[] array_idx2 = req.getParameterValues("idx2");
+		String[] cri2 = req.getParameterValues("criticalValue2");
+		String[] mj2 = req.getParameterValues("majorValue2");
+		String[] mi2 = req.getParameterValues("minorValue2");
+		String idx = "";
 
 		for (int i = 0; i < array_idx.length; i++) {
 
@@ -773,26 +784,60 @@ public class SystemController {
 			alarmLimit.setMinorValue(mi[i]);
 
 			alarmLimitService.updateAlarmLimit(alarmLimit);
-		}
-
-		String idx = "";
-
-		if (alarmLimit.getAlarmIdx().equals("0")) {
+			
 			idx = "CPU";
-		} else if (alarmLimit.getAlarmIdx().equals("1")) {
+			
+			hislog.setDetail("시스템  [" + idx + "] CRITICAL_VALUE [" + alarmLimit.getCriticalValue() + "]" + " MAJOR_VALUE ["
+					+ alarmLimit.getMajorValue() + "] MINOR_VALUE [" + alarmLimit.getMinorValue() + "] 로 설정");
+			hislog.setMenu("시스템 설정 > 알람 임계치 설정");
+			hislog.setUser_id(userid);
+			hislog.setUser_ip(ip.getHostAddress());
+			hislog.setUser_name(username);
+			alarmLimitService.insertHis(hislog);
+		}
+		
+		for (int i = 0; i < array_idx1.length; i++) {
+
+			alarmLimit.setAlarmIdx(array_idx1[i]);
+			alarmLimit.setCriticalValue(cri1[i]);
+			alarmLimit.setMajorValue(mj1[i]);
+			alarmLimit.setMinorValue(mi1[i]);
+
+			alarmLimitService.updateAlarmLimit(alarmLimit);
+			
 			idx = "DISK";
-		} else {
+			
+			
+			hislog.setDetail("시스템  [" + idx + "] CRITICAL_VALUE [" + alarmLimit.getCriticalValue() + "]" + " MAJOR_VALUE ["
+					+ alarmLimit.getMajorValue() + "] MINOR_VALUE [" + alarmLimit.getMinorValue() + "] 로 설정");
+			hislog.setMenu("시스템 설정 > 알람 임계치 설정");
+			hislog.setUser_id(userid);
+			hislog.setUser_ip(ip.getHostAddress());
+			hislog.setUser_name(username);
+			alarmLimitService.insertHis(hislog);
+		}
+		
+		for (int i = 0; i < array_idx2.length; i++) {
+
+			alarmLimit.setAlarmIdx(array_idx2[i]);
+			alarmLimit.setCriticalValue(cri2[i]);
+			alarmLimit.setMajorValue(mj2[i]);
+			alarmLimit.setMinorValue(mi2[i]);
+
+			alarmLimitService.updateAlarmLimit(alarmLimit);
+			
 			idx = "MEMORY";
+			
+			hislog.setDetail("시스템  [" + idx + "] CRITICAL_VALUE [" + alarmLimit.getCriticalValue() + "]" + " MAJOR_VALUE ["
+					+ alarmLimit.getMajorValue() + "] MINOR_VALUE [" + alarmLimit.getMinorValue() + "] 로 설정");
+			hislog.setMenu("시스템 설정 > 알람 임계치 설정");
+			hislog.setUser_id(userid);
+			hislog.setUser_ip(ip.getHostAddress());
+			hislog.setUser_name(username);
+			alarmLimitService.insertHis(hislog);
 		}
 
-		hislog.setDetail("시스템  [" + idx + "] CRITICAL_VALUE [" + alarmLimit.getCriticalValue() + "]" + " MAJOR_VALUE ["
-				+ alarmLimit.getMajorValue() + "] MINOR_VALUE [" + alarmLimit.getMinorValue() + "] 로 설정");
-		hislog.setMenu("시스템 설정 > 알람 임계치 설정");
-		hislog.setUser_id(userid);
-		hislog.setUser_ip(ip.getHostAddress());
-		hislog.setUser_name(username);
-		alarmLimitService.insertHis(hislog);
-
+		
 		List<AlarmLimit> recognitionAlarmLimit = alarmLimitService.getAlarmLimitList(pageDTO, searchDTO,
 				"order by alarm_idx desc");
 

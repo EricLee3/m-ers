@@ -36,6 +36,22 @@
         	SELECT LAST_INSERT_ID();
         </selectKey>
 	</insert>
+	
+	<update id="updateAgentHistory" parameterType="agentHistory" useGeneratedKeys="true" keyProperty="index">
+		<![CDATA[
+		
+		update  mecs5_agent_history
+		
+		set description = #{description} , insert_date =now()
+		
+		where agent_id = #{agentId}
+
+		]]>
+	    <selectKey resultType="Integer" keyProperty="index" order="AFTER">
+        	SELECT LAST_INSERT_ID();
+        </selectKey>
+	</update>
+	
 
 	<sql id="sql_paging">
 		<if test="pageDTO != null">

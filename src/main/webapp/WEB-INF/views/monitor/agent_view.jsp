@@ -439,7 +439,7 @@ $(document).ready(function(){
     		method : "POST",
     		success : function(result) {
 	    		if( result ) {
-	    			if( result.index > 0 ) { 
+	    			if( result > 0 ) { 
     					location.reload();
 	    			} else {
 	    				alert("새로운 모니터링 지정 사유 등록에 실패하였습니다.");

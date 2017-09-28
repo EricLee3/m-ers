@@ -39,6 +39,16 @@ public class AgentHistoryDaoMapper implements AgentHistoryDao {
 	/* (non-Javadoc)
 	 * @see kr.co.asnet.migam.repository.agent.AgentHistoryDao#selectAgentHistory(int)
 	 */
+	
+	@Override
+	public int updateAgentHistory(AgentHistory agentHistory) {
+		return sqlSession.insert("kr.co.asnet.migam.repository.agent.AgentHistoryDaoMapper.updateAgentHistory", agentHistory);
+	}
+
+	/* (non-Javadoc)
+	 * @see kr.co.asnet.migam.repository.agent.AgentHistoryDao#selectAgentHistory(int)
+	 */
+	
 	@Override
 	public AgentHistory selectAgentHistory(int index) {
 		return sqlSession.selectOne("kr.co.asnet.migam.repository.agent.AgentHistoryDaoMapper.selectAgentHistory", index);	

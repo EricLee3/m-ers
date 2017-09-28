@@ -105,56 +105,166 @@ $(document).ready(function(){
 									<div class="col-sm-1"></div>
 								</div>
 								
-								<div class="form-group">
-									<label for="criticalValue" class="col-sm-2 control-label">CRITICAL</label>
-									<div class="col-sm-1 text-right">0</div>
-									<div class="col-sm-8">
-										<input type="hidden" name="alarmIdx" value="${recognitionAlarmLimit.alarmIdx}">
-										<input type="text" id="criticalValue" name="criticalValue"
-											value="" class="slider form-control" data-slider-min="0"
-											data-slider-max="100"
-											data-slider-value="${recognitionAlarmLimit.cpuCri }"
-											data-slider-orientation="horizontal"
-											data-slider-selection="before" data-slider-tooltip="always"
-											data-slider-id="critical" />
-									</div>
-									<div class="col-sm-1">100</div>
-								</div>
-								<div class="form-group"></div>
-								<div class="form-group">
-									<label for="majorValue" class="col-sm-2 control-label">MAJOR</label>
-									<div class="col-sm-1 text-right">0</div>
-									<div class="col-sm-8">
-										<input type="text" id="majorValue" name="majorValue" value=""
-											class="slider form-control" data-slider-min="0"
-											data-slider-max="100"
-											data-slider-value="${recognitionAlarmLimit.cpuMajor}"
-											data-slider-orientation="horizontal"
-											data-slider-selection="before" data-slider-tooltip="always"
-											data-slider-id="major" />
-									</div>
-									<div class="col-sm-1">100</div>
-								</div>
-
-								<div class="form-group"></div>
-								<div class="form-group">
-									<label for="minorValue" class="col-sm-2 control-label">MINOR</label>
-									<div class="col-sm-1 text-right">0</div>
-									<div class="col-sm-8">
-										<input type="text" id="minorValue" name="minorValue" value=""
-											class="slider form-control" data-slider-min="0"
-											data-slider-max="100" data-slider-step="1"
-											data-slider-value="${recognitionAlarmLimit.cpuMinor}"
-											data-slider-orientation="horizontal"
-											data-slider-selection="before" data-slider-tooltip="always"
-											data-slider-id="minor">
-									</div>
-									<div class="col-sm-1">100</div>
-								</div>
-								<input type="hidden" name="cri" id="cri" value="${recognitionAlarmLimit.cpuCri }">
-								<input type="hidden" name="mj" id="mj" value="${recognitionAlarmLimit.cpuMajor }">
-								<input type="hidden" name="mi" id="mi" value="${recognitionAlarmLimit.cpuMinor }">
-								<input type="hidden" name="idx" id="idx" value="${recognitionAlarmLimit.alarmIdx}">
+								
+								<c:choose>
+									 <c:when test="${recognitionAlarmLimit.alarmIdx eq '0'}">
+										<div class="form-group">
+											<label for="criticalValue" class="col-sm-2 control-label">CRITICAL</label>
+											<div class="col-sm-1 text-right">0</div>
+											<div class="col-sm-8">
+												<input type="hidden" name="alarmIdx" value="${recognitionAlarmLimit.alarmIdx}">
+												<input type="text" id="criticalValue" name="criticalValue"
+													value="" class="slider form-control" data-slider-min="0"
+													data-slider-max="100"
+													data-slider-value="${recognitionAlarmLimit.cpuCri }"
+													data-slider-orientation="horizontal"
+													data-slider-selection="before" data-slider-tooltip="always"
+													data-slider-id="critical" />
+											</div>
+											<div class="col-sm-1">100</div>
+										</div>
+										<div class="form-group"></div>
+										<div class="form-group">
+											<label for="majorValue" class="col-sm-2 control-label">MAJOR</label>
+											<div class="col-sm-1 text-right">0</div>
+											<div class="col-sm-8">
+												<input type="text" id="majorValue" name="majorValue" value=""
+													class="slider form-control" data-slider-min="0"
+													data-slider-max="100"
+													data-slider-value="${recognitionAlarmLimit.cpuMajor}"
+													data-slider-orientation="horizontal"
+													data-slider-selection="before" data-slider-tooltip="always"
+													data-slider-id="major" />
+											</div>
+											<div class="col-sm-1">100</div>
+										</div>
+		
+										<div class="form-group"></div>
+										<div class="form-group">
+											<label for="minorValue" class="col-sm-2 control-label">MINOR</label>
+											<div class="col-sm-1 text-right">0</div>
+											<div class="col-sm-8">
+												<input type="text" id="minorValue" name="minorValue" value=""
+													class="slider form-control" data-slider-min="0"
+													data-slider-max="100" data-slider-step="1"
+													data-slider-value="${recognitionAlarmLimit.cpuMinor}"
+													data-slider-orientation="horizontal"
+													data-slider-selection="before" data-slider-tooltip="always"
+													data-slider-id="minor">
+											</div>
+											<div class="col-sm-1">100</div>
+										</div>
+										<input type="hidden" name="cri" id="cri" value="${recognitionAlarmLimit.cpuCri }">
+										<input type="hidden" name="mj" id="mj" value="${recognitionAlarmLimit.cpuMajor }">
+										<input type="hidden" name="mi" id="mi" value="${recognitionAlarmLimit.cpuMinor }">
+										<input type="hidden" name="idx" id="idx" value="${recognitionAlarmLimit.alarmIdx}">
+									 </c:when>
+									 <c:when test="${recognitionAlarmLimit.alarmIdx eq '1'}">
+											<div class="form-group">
+											<label for="criticalValue1" class="col-sm-2 control-label">CRITICAL</label>
+											<div class="col-sm-1 text-right">0</div>
+											<div class="col-sm-8">
+												<input type="hidden" name="alarmIdx" value="${recognitionAlarmLimit.alarmIdx}">
+												<input type="text" id="criticalValue1" name="criticalValue1"
+													value="" class="slider form-control" data-slider-min="0"
+													data-slider-max="100"
+													data-slider-value="${recognitionAlarmLimit.cpuCri }"
+													data-slider-orientation="horizontal"
+													data-slider-selection="before" data-slider-tooltip="always"
+													data-slider-id="critical" />
+											</div>
+											<div class="col-sm-1">100</div>
+										</div>
+										<div class="form-group"></div>
+										<div class="form-group">
+											<label for="majorValue1" class="col-sm-2 control-label">MAJOR</label>
+											<div class="col-sm-1 text-right">0</div>
+											<div class="col-sm-8">
+												<input type="text" id="majorValue1" name="majorValue1" value=""
+													class="slider form-control" data-slider-min="0"
+													data-slider-max="100"
+													data-slider-value="${recognitionAlarmLimit.cpuMajor}"
+													data-slider-orientation="horizontal"
+													data-slider-selection="before" data-slider-tooltip="always"
+													data-slider-id="major" />
+											</div>
+											<div class="col-sm-1">100</div>
+										</div>
+		
+										<div class="form-group"></div>
+										<div class="form-group">
+											<label for="minorValue1" class="col-sm-2 control-label">MINOR</label>
+											<div class="col-sm-1 text-right">0</div>
+											<div class="col-sm-8">
+												<input type="text" id="minorValue1" name="minorValue1" value=""
+													class="slider form-control" data-slider-min="0"
+													data-slider-max="100" data-slider-step="1"
+													data-slider-value="${recognitionAlarmLimit.cpuMinor}"
+													data-slider-orientation="horizontal"
+													data-slider-selection="before" data-slider-tooltip="always"
+													data-slider-id="minor">
+											</div>
+											<div class="col-sm-1">100</div>
+										</div>
+										<input type="hidden" name="cri1" id="cri1" value="${recognitionAlarmLimit.cpuCri }">
+										<input type="hidden" name="mj1" id="mj1" value="${recognitionAlarmLimit.cpuMajor }">
+										<input type="hidden" name="mi1" id="mi1" value="${recognitionAlarmLimit.cpuMinor }">
+										<input type="hidden" name="idx1" id="idx1" value="${recognitionAlarmLimit.alarmIdx}">
+									 </c:when>
+									 <c:otherwise>
+											 <div class="form-group">
+											<label for="criticalValue2" class="col-sm-2 control-label">CRITICAL</label>
+											<div class="col-sm-1 text-right">0</div>
+											<div class="col-sm-8">
+												<input type="hidden" name="alarmIdx" value="${recognitionAlarmLimit.alarmIdx}">
+												<input type="text" id="criticalValue2" name="criticalValue2"
+													value="" class="slider form-control" data-slider-min="0"
+													data-slider-max="100"
+													data-slider-value="${recognitionAlarmLimit.cpuCri }"
+													data-slider-orientation="horizontal"
+													data-slider-selection="before" data-slider-tooltip="always"
+													data-slider-id="critical" />
+											</div>
+											<div class="col-sm-1">100</div>
+										</div>
+										<div class="form-group"></div>
+										<div class="form-group">
+											<label for="majorValue2" class="col-sm-2 control-label">MAJOR</label>
+											<div class="col-sm-1 text-right">0</div>
+											<div class="col-sm-8">
+												<input type="text" id="majorValue2" name="majorValue2" value=""
+													class="slider form-control" data-slider-min="0"
+													data-slider-max="100"
+													data-slider-value="${recognitionAlarmLimit.cpuMajor}"
+													data-slider-orientation="horizontal"
+													data-slider-selection="before" data-slider-tooltip="always"
+													data-slider-id="major" />
+											</div>
+											<div class="col-sm-1">100</div>
+										</div>
+		
+										<div class="form-group"></div>
+										<div class="form-group">
+											<label for="minorValue2" class="col-sm-2 control-label">MINOR</label>
+											<div class="col-sm-1 text-right">0</div>
+											<div class="col-sm-8">
+												<input type="text" id="minorValue2" name="minorValue2" value=""
+													class="slider form-control" data-slider-min="0"
+													data-slider-max="100" data-slider-step="1"
+													data-slider-value="${recognitionAlarmLimit.cpuMinor}"
+													data-slider-orientation="horizontal"
+													data-slider-selection="before" data-slider-tooltip="always"
+													data-slider-id="minor">
+											</div>
+											<div class="col-sm-1">100</div>
+										</div>
+										<input type="hidden" name="cri2" id="cri2" value="${recognitionAlarmLimit.cpuCri }">
+										<input type="hidden" name="mj2" id="mj2" value="${recognitionAlarmLimit.cpuMajor }">
+										<input type="hidden" name="mi2" id="mi2" value="${recognitionAlarmLimit.cpuMinor }">
+										<input type="hidden" name="idx2" id="idx2" value="${recognitionAlarmLimit.alarmIdx}">
+									 </c:otherwise>
+								</c:choose>
+								
 							</c:forEach>
 								<div class="col-sm-12 text-center" >
 									<button type="button" class="jsUpdate btn btn-info">설정 값 적용</button>
@@ -204,6 +314,30 @@ $(document).ready(function(){
 				var cri = $("#cri").val();
 				var mj = $("#mj").val();
 				var mi = $("#mi").val();
+
+
+				var cval1 = $("#criticalValue1").val();
+				cval1 *= 1;
+				var maval1 = $("#majorValue1").val();
+				maval1 *= 1;
+				var mival1 = $("#minorValue1").val();
+				mival1 *= 1;
+				
+				var cri1 = $("#cri1").val();
+				var mj1 = $("#mj1").val();
+				var mi1 = $("#mi1").val();
+
+				var cval2 = $("#criticalValue2").val();
+				cval2 *= 1;
+				var maval2 = $("#majorValue2").val();
+				maval2 *= 1;
+				var mival2 = $("#minorValue2").val();
+				mival2 *= 1;
+				
+				var cri2 = $("#cri2").val();
+				var mj2 = $("#mj2").val();
+				var mi2 = $("#mi2").val();
+
 				
 				if(cval < maval) {
 					alert("MAJOR_VALUE가 CRITICAL_VALUE보다 클 수 없습니다.");
@@ -236,6 +370,80 @@ $(document).ready(function(){
 					$("#minorValue").slider ("refresh");
 					$("#majorValue").val (mj);
 					$("#majorValue").slider ("refresh");
+					return false;
+				}else{
+					update_flag = 1;
+				}
+
+				//DISK
+				if(cval1 < maval1) {
+					alert("MAJOR_VALUE가 CRITICAL_VALUE보다 클 수 없습니다.");
+					update_flag = 0;
+					$("#criticalValue1").val (cri1);
+					$("#criticalValue1").slider ("refresh");
+					$("#majorValue1").val (mj1);
+					$("#majorValue1").slider ("refresh");
+					return false;
+				}else{
+					update_flag = 1;
+				}
+				
+				if(cval1 < mival1) {
+					alert("MINOR_VALUE가 CRITICAL_VALUE보다 클 수 없습니다.");
+					update_flag = 0;
+					$("#minorValue1").val (mi1);
+					$("#minorValue1").slider ("refresh");
+					$("#criticalValue1").val(cri1);
+					$("#criticalValue1").slider ("refresh");
+					return false;
+				}else{
+					update_flag = 1;
+				}
+				
+				if(maval1 < mival1) {
+					alert("MINOR_VALUE가 MAJOR_VALUE보다 클 수 없습니다.");
+					update_flag = 0;
+					$("#minorValue1").val (mi1);
+					$("#minorValue1").slider ("refresh");
+					$("#majorValue1").val (mj1);
+					$("#majorValue1").slider ("refresh");
+					return false;
+				}else{
+					update_flag = 1;
+				}
+
+				//memory
+				if(cval2 < maval2) {
+					alert("MAJOR_VALUE가 CRITICAL_VALUE보다 클 수 없습니다.");
+					update_flag = 0;
+					$("#criticalValue2").val (cri2);
+					$("#criticalValue2").slider ("refresh");
+					$("#majorValue2").val (mj2);
+					$("#majorValue2").slider ("refresh");
+					return false;
+				}else{
+					update_flag = 1;
+				}
+				
+				if(cval2 < mival2) {
+					alert("MINOR_VALUE가 CRITICAL_VALUE보다 클 수 없습니다.");
+					update_flag = 0;
+					$("#minorValue2").val (mi2);
+					$("#minorValue2").slider ("refresh");
+					$("#criticalValue2").val(cri2);
+					$("#criticalValue2").slider ("refresh");
+					return false;
+				}else{
+					update_flag = 1;
+				}
+				
+				if(maval2 < mival2) {
+					alert("MINOR_VALUE가 MAJOR_VALUE보다 클 수 없습니다.");
+					update_flag = 0;
+					$("#minorValue2").val (mi2);
+					$("#minorValue2").slider ("refresh");
+					$("#majorValue2").val (mj2);
+					$("#majorValue2").slider ("refresh");
 					return false;
 				}else{
 					update_flag = 1;

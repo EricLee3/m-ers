@@ -1,6 +1,8 @@
 package kr.co.asnet.migam.web.REST;
 
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import kr.co.asnet.migam.domain.PageDTO;
+import kr.co.asnet.migam.domain.SearchDTO;
 import kr.co.asnet.migam.domain.agent.AgentHistory;
 import kr.co.asnet.migam.service.agent.AgentHistoryService;
 
@@ -37,14 +41,25 @@ public class AgentHistoryREST {
 	 *  성공하면, agent정보를 JSON형태로 반환 합니다.
 	 */
 	@RequestMapping(value = "/createAgentHistory", method = RequestMethod.POST)
-	public ResponseEntity<AgentHistory> createAgentHistory(AgentHistory agentHistory, Model model) {
+	public int createAgentHistory(AgentHistory agentHistory, Model model, SearchDTO searchDTO ,String agentId) {
 		// logger.debug(agent.toString());
-		int agentHistoryIndex = agentHistoryService.insertAgentHistory(agentHistory);
-		if(agentHistoryIndex > 0) {
-			return new ResponseEntity<AgentHistory>(agentHistory, HttpStatus.OK);
-		} else {
-			return new ResponseEntity<AgentHistory>(HttpStatus.NO_CONTENT);
+		PageDTO pageDTO = new PageDTO(1);
+		pageDTO.setItemPerPage(20);
+		searchDTO.setSearchId(agentId);
+		int  agentHistoryIndex = 0;
+		List<AgentHistory> agentHistoryList = agentHistoryService.getAgentHistoryList(pageDTO, searchDTO, "order by idx desc"); 
+		
+		if (agentHistoryList.size() > 0){
+			agentHistoryIndex = agentHistoryService.updateAgentHistory(agentHistory);
+			System.out.println("testtt" + agentHistoryIndex);
+		}else{
+			agentHistoryIndex = agentHistoryService.insertAgentHistory(agentHistory);
+			System.out.println("testtt2" + agentHistoryIndex);
 		}
+		
+		
+			return agentHistoryIndex;
+
 	}
 
 	/**

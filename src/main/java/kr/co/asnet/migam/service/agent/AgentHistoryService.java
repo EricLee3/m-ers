@@ -22,6 +22,7 @@ public interface AgentHistoryService {
 	public int insertAgentHistory(AgentHistory agentHistory);
 
 
+	public int updateAgentHistory(AgentHistory agentHistory);
 	/**
 	 * 지정된 번호(index)에 해당하는 AgentHistory객체를 반환합니다. 
 	 * @param index
