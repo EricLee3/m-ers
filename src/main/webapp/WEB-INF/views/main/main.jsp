@@ -243,9 +243,7 @@
 
 
 
-					<li class="treeview active"><a href="#"> <i
-							class="fa fa-th"></i> <span>시스템</span> <i
-							class="fa fa-angle-left pull-right"></i>
+					<li class="treeview active"><a href="#"> <i class="fa fa-th"></i> <span>시스템</span> <i class="fa fa-angle-left pull-right"></i>
 					</a>
 						<ul class="treeview-menu">
 						<c:if test="${sessionScope.sessionUser.superUser}">
@@ -261,9 +259,7 @@
 				              </ul>
 				            </li>          
 						</c:if>
-							<li class="active"><a href="#"><i
-									class="fa fa-circle-o"></i> 시스템 설정 <i
-									class="fa fa-angle-left pull-right"></i></a>
+							<li class="active"><a href="#"><i class="fa fa-circle-o"></i> 시스템 설정 <i class="fa fa-angle-left pull-right"></i></a>
 								<ul class="treeview-menu">
 								<li class="" id="user_list"><a href="/system/user_list" target="iframe" onclick="side(13);"><i class="fa fa-circle-o"></i> 사용자 설정</a></li>
 									<li class="" id="alarm_code"><a href="/system/alarm_code" target="iframe" onclick="side(16);"><i class="fa fa-circle-o"></i> 알람 코드 설정</a></li>

@@ -132,9 +132,6 @@ public class SensREST {
 		String array_min2="";
 		String array_max2="";
 		
-		System.out.println("array_min:::" + array_min.length);
-		System.out.println("array_max:::" + array_max.length);
-		
 		for(int i = 0; i < array_min.length; i++) {
 			if(array_min[i].length() != 0) {
 				array_min2 += array_min[i] + ",";
@@ -153,10 +150,19 @@ public class SensREST {
 		
 		String groupId = sensBasicService.insertSensMeta(sensMeta);
 		
+		 String min_default="0";
+		 String max_default="0";
 		for(int i = 0; i < array.length; i++) {
+			
+			if(min_split[i].equals("") || min_split[i] == null) min_default = "0";
+			else min_default = min_split[i];
+			
+			if(max_split[i].equals("") || max_split[i] == null) max_default = "0";
+			else max_default = max_split[i];
+			
 			sensMeta.setBasic_idx(array[i]);
-			sensMeta.setB_min(min_split[i]);
-			sensMeta.setB_max(max_split[i]);
+			sensMeta.setB_min(min_default);
+			sensMeta.setB_max(max_default);
 			sensBasicService.insertSensMap(sensMeta);
 		}
 		
@@ -185,8 +191,6 @@ public class SensREST {
 		//String groupId = proMetaService.insertProMeta(proMeta);
 		String groupId = "";
 		ProMeta proMeta2 = proMetaService.getProIdx(groupId);
-		
-		System.out.println("proMeta2:::::::" + proMeta2.getProfile_meta_idx());
 		
 		String pro_idx = proMeta2.getProfile_meta_idx();
 		
@@ -471,9 +475,6 @@ public class SensREST {
 		String array_min2="";
 		String array_max2="";
 		
-		System.out.println("array_min:::" + array_min.length);
-		System.out.println("array_max:::" + array_max.length);
-		
 		for(int i = 0; i < array_min.length; i++) {
 			if(array_min[i].length() != 0) {
 				array_min2 += array_min[i] + ",";
@@ -503,7 +504,15 @@ public class SensREST {
 		int updateCount = sensMetaService.updateSensMeta(sensMeta);
 		Boolean isDeleted = sensMetaService.deleteSensMeta(sensMeta.getSvc_meta_idx());
 		
+		String min_default="0";
+		String max_default="0";
 		for(int i = 0; i < array.length; i++) {
+			if(min_split[i].equals("") || min_split[i] == null) min_default = "0";
+			else min_default = min_split[i];
+			
+			if(max_split[i].equals("") || max_split[i] == null) max_default = "0";
+			else max_default = max_split[i];
+			
 			sensMeta.setBasic_idx(array[i]);
 			sensMeta.setB_min(min_split[i]);
 			sensMeta.setB_max(max_split[i]);

@@ -44,13 +44,10 @@
         var chk = document.getElementsByName(obj);
         if ( all_check.checked == true ){
             for (var i=0; i < count; i++) {
-                //var b = "document.adminfrm.nationcode"+i;
                 chk[i].checked = true;
             }
         }else{
-            //alert("BBBBBBBBBBBBBBBBBBBBBB::::::["+natsize+"]");
             for (var i=0; i < count; i++) {
-                //var b = "document.adminfrm.nationcode"+i;
                 chk[i].checked = false;
             }
         }
