@@ -158,8 +158,8 @@
 													<th class="no-sort">시작시간</th>
 													<th class="no-sort">종료시간</th>
 													<th class="no-sort">통화시간(초)</th>
-													<th class="no-sort">고객</th>
-													<th class="no-sort">상담원</th>
+													<th class="no-sort">고객감정</th>
+													<th class="no-sort">상담원감정</th>
 													<!-- <th class="no-sort">Angry
 														<span data-toggle="tooltip" title="Angry Call (Angry Count) : Angry Call 일 경우 Y (Angry Count) 와 같이 표시됩니다. Angry Call 이 아닐 경우 아무 것도 표시하지 않습니다." class="fa fa-question-circle"></span>
 													</th>

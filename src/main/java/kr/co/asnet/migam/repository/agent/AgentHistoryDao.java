@@ -19,6 +19,17 @@ public interface AgentHistoryDao {
 	 */
 	public int insertAgentHistory(AgentHistory agentHistory);
 
+	
+	/**
+	 * 상담원관련 메모사항 정보를 데이터베이스에 수정합니다. 
+	 * 
+	 * @param agentHistory
+	 * @return
+	 *  성공적으로 추가되면, 헤당 정보의 idx값을 반환합니다.
+	 */
+	public int updateAgentHistory(AgentHistory agentHistory);
+	
+	
 	/**
 	 * 주어진 고유번호를 기반으로 해당 메모 사항 정보를 반환합니다. 
 	 * 

@@ -31,7 +31,16 @@ public class AgentHistoryServiceImpl implements AgentHistoryService {
 	public int insertAgentHistory(AgentHistory agentHistory) {
 		return agentHistoryDao.insertAgentHistory(agentHistory);
 	}
+	
+	/* (non-Javadoc)
+	 * @see kr.co.asnet.migam.service.agent.AgentHistoryService#insertAgentHistory(kr.co.asnet.migam.domain.agent.AgentHistory)
+	 */
+	@Override
+	public int updateAgentHistory(AgentHistory agentHistory) {
+		return agentHistoryDao.updateAgentHistory(agentHistory);
+	}
 
+	
 	/* (non-Javadoc)
 	 * @see kr.co.asnet.migam.service.agent.AgentHistoryService#getAgentHistory(int)
 	 */

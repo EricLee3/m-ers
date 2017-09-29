@@ -211,7 +211,8 @@ $(document).ready(function(){
 									<tbody>
 										<c:forEach items="${LatestagentList}" var="Latestagent">
 										<tr>
-											<td><a href="/monitor/agent_view/${Latestagent.agentId}">${Latestagent.agentName }</a></td>
+											<!--  td><a href="/monitor/agent_view/${Latestagent.agentId}">${Latestagent.agentName }</a></td -->
+											<td>${Latestagent.agentName }</td>
 											<td>${Latestagent.groupName}</td>
 											<td>${Latestagent.agentNumber }</td>
 										</tr>
