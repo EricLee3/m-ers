@@ -231,6 +231,7 @@
 									<li class="" id="call_report"><a href="/report/call_report" target="iframe" onclick="side(2);"><i class="fa fa-circle-o"></i> 콜별 리포트</a></li>
 						</ul></li>
 
+
 					<li class="treeview active"><a href="#"> <i class="fa fa-line-chart"></i> <span>통계</span> <i class="fa fa-angle-left pull-right"></i>
 					</a>
 						<ul class="treeview-menu">
@@ -240,6 +241,148 @@
 									<li class="" id="agent_report"><a href="/report/agent_report" target="iframe" onclick="side(7);"><i class="fa fa-circle-o"></i> 상담원별 통계</a></li>
 						</ul></li>
 
+		<li class="treeview active">
+          <a href="#">
+            <i class="fa fa-th"></i>
+            <span>시스템</span>
+            <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu">
+			<li class="active">
+              <a href="#"><i class="fa fa-circle-o"></i> 서비스 설정  <i class="fa fa-angle-left pull-right"></i></a>
+              <ul class="treeview-menu">
+<c:choose>
+	<c:when test="${menuCategory eq 'service' && menu eq 'sens_demo'}">
+				<li class="active"><a href="/system/sens_demo" target="iframe" style="color: #1E90FF;"><i class="fa fa-circle-o"></i><font style="color: #1E90FF;"> 감성 분석 데모</font></a></li>
+	</c:when>
+	<c:otherwise>
+				<li class="" id="sens_demo"><a href="/system/sens_demo" target="iframe" onclick="side(27);"><i class="fa fa-circle-o"></i> 감성 분석 데모</a></li>
+	</c:otherwise>
+</c:choose>
+<c:choose>
+	<c:when test="${menuCategory eq 'service' && menu eq 'batch'}">
+				<li class="active"><a href="/service/batch_list" target="iframe" style="color: #1E90FF;"><i class="fa fa-circle-o"></i><font style="color: #1E90FF;"> 자동 수행 작업 목록</font></a></li>
+	</c:when>
+	<c:otherwise>
+				<li class="" id="batch_list"><a href="/service/batch_list" target="iframe" onclick="side(9);"><i class="fa fa-circle-o"></i> 자동 수행 작업 목록</a></li>
+	</c:otherwise>
+</c:choose>
+<c:choose>
+	<c:when test="${menuCategory eq 'service' && menu eq 'batch_log'}">
+				<li class="active"><a href="/service/batch_log" target="iframe" style="color: #1E90FF;"><i class="fa fa-circle-o"></i><font style="color: #1E90FF;"> 자동 수행 작업 이력</font></a></li>
+	</c:when>
+	<c:otherwise>
+				<li class="" id="batch_log"><a href="/service/batch_log" target="iframe" onclick="side(10);"><i class="fa fa-circle-o"></i> 자동 수행 작업 이력</a></li>
+	</c:otherwise>
+</c:choose>
+<!-- 
+<c:choose>
+	<c:when test="${menuCategory eq 'service' && menu eq 'config'}">
+				<li class="active"><a href="/service/config_limit" target="iframe" style="color: #1E90FF;"><i class="fa fa-circle-o"></i><font style="color: #1E90FF;"> 임계치 설정</font></a></li>
+	</c:when>
+	<c:otherwise>
+				<li class="" id="config_limit"><a href="/service/config_limit" target="iframe" onclick="side(11);"><i class="fa fa-circle-o"></i> 임계치 설정</a></li>
+	</c:otherwise>
+</c:choose>
+ -->
+<!--  this is test context IOS -->
+<c:choose>
+	<c:when test="${menuCategory eq 'system' && menu eq 'sens_conf'}">
+				<li class="active"><a href="/system/sens_conf" target="iframe" style="color: #1E90FF;"><i class="fa fa-circle-o"></i><font style="color: #1E90FF;"> 감성지표 설정</font></a></li>
+	</c:when>
+	<c:otherwise>
+				<li class="" id="sens_conf"><a href="/system/sens_conf" target="iframe" onclick="side(23);"><i class="fa fa-circle-o"></i> 감성지표 설정</a></li>
+	</c:otherwise>
+</c:choose>
+<c:choose>
+	<c:when test="${menuCategory eq 'system' && menu eq 'pro_conf'}">
+				<li class="active"><a href="/system/pro_conf" target="iframe" style="color: #1E90FF;"><i class="fa fa-circle-o"></i><font style="color: #1E90FF;"> 프로파일 설정</font></a></li>
+	</c:when>
+	<c:otherwise>
+				<li class="" id="pro_conf"><a href="/system/pro_conf" target="iframe" onclick="side(25);"><i class="fa fa-circle-o"></i> 프로파일 설정</a></li>
+	</c:otherwise>
+</c:choose>
+              </ul>
+            </li>          
+<c:if test="${sessionScope.sessionUser.superUser}" >
+			<li class="active">
+              <a href="#"><i class="fa fa-circle-o"></i> 시스템 설정  <i class="fa fa-angle-left pull-right"></i></a>
+              <ul class="treeview-menu">
+<c:choose>
+	<c:when test="${menuCategory eq 'system' && menu eq 'license'}">
+				<li class="active"><a href="/system/license"  target="iframe"style="color: #1E90FF;"><i class="fa fa-circle-o"></i><font style="color: #1E90FF;"> 라이선스 설정</font></a></li>
+	</c:when>
+	<c:otherwise>
+				<li class="" id="license" ><a href="/system/license" target="iframe" onclick="side(12);"><i class="fa fa-circle-o"></i> 라이선스 설정</a></li>
+	</c:otherwise>
+</c:choose>
+<c:choose>
+	<c:when test="${menuCategory eq 'system' && menu eq 'user'}">
+				<li class="active"><a href="/system/user_list" target="iframe" style="color: #1E90FF;"><i class="fa fa-circle-o"></i><font style="color: #1E90FF;"> 사용자 목록</font></a></li>
+	</c:when>
+	<c:otherwise>
+				<li class="" id="user_list" ><a href="/system/user_list" target="iframe" onclick="side(13);"><i class="fa fa-circle-o"></i> 사용자 목록</a></li>
+	</c:otherwise>
+</c:choose>
+<c:choose>
+	<c:when test="${menuCategory eq 'system' && menu eq 'agent'}">
+				<li class="active"><a href="/system/agent_list" target="iframe" style="color: #1E90FF;"><i class="fa fa-circle-o"></i><font style="color: #1E90FF;"> 상담원 목록</font></a></li>
+	</c:when>
+	<c:otherwise>
+				<li class="" id="s_agent_list"><a href="/system/agent_list" target="iframe" onclick="side(14);"><i class="fa fa-circle-o"></i> 상담원 목록</a></li>
+	</c:otherwise>
+</c:choose>
+<c:choose>
+	<c:when test="${menuCategory eq 'system' && menu eq 'group'}">
+				<li class="active"><a href="/system/group_list" target="iframe" style="color: #1E90FF;"><i class="fa fa-circle-o"></i><font style="color: #1E90FF;"> 그룹 관리</font></a></li>
+	</c:when>
+	<c:otherwise>
+				<li class="" id="group_list"><a href="/system/group_list" target="iframe" onclick="side(15);"><i class="fa fa-circle-o"></i> 그룹 관리</a></li>
+	</c:otherwise>
+</c:choose>
+<!--  
+<c:choose>
+	<c:when test="${menuCategory eq 'system' && menu eq 'segment'}">
+				<li class="active"><a href="/system/segment_list"><i class="fa fa-circle-o"></i> 시스템 상태 관리</a></li>
+	</c:when>
+	<c:otherwise>
+				<li><a href="/system/segment_list"><i class="fa fa-circle-o"></i> 시스템 상태 관리</a></li>
+	</c:otherwise>
+</c:choose>
+-->
+<c:choose>
+	<c:when test="${menuCategory eq 'system' && menu eq 'alarmCode'}">
+				<li class="active"><a href="/system/alarm_code" target="iframe" style="color: #1E90FF;"><i class="fa fa-circle-o"></i><font style="color: #1E90FF;"> 알람 코드 설정</font></a></li>
+	</c:when>
+	<c:otherwise>
+				<li class="" id="alarm_code"><a href="/system/alarm_code" target="iframe" onclick="side(16);"><i class="fa fa-circle-o"></i> 알람 코드 설정</a></li>
+	</c:otherwise>
+</c:choose>
+<c:choose>
+	<c:when test="${menuCategory eq 'system' && menu eq 'alarmLimit'}">
+				<li class="active"><a href="/system/alarm_limit"  target="iframe"style="color: #1E90FF;"><i class="fa fa-circle-o"></i><font style="color: #1E90FF;"> 알람 임계치 설정</font></a></li>
+	</c:when>
+	<c:otherwise>
+				<li class="" id="alarm_limit"><a href="/system/alarm_limit" target="iframe" onclick="side(17);"><i class="fa fa-circle-o"></i> 알람 임계치 설정</a></li>
+	</c:otherwise>
+</c:choose>
+<c:choose> 
+	<c:when test="${menuCategory eq 'system' && menu eq 'sens_basic'}">
+				<li class="active"><a href="/system/sens_basic" target="iframe" style="color: #1E90FF;"><i class="fa fa-circle-o"></i><font style="color: #1E90FF;"> 기본 감성지표 관리 </font></a></li>
+	</c:when>
+	<c:otherwise>
+				<li class="" id="sens_basic"><a href="/system/sens_basic" target="iframe" onclick="side(26);"><i class="fa fa-circle-o"></i> 기본 감성지표 관리 </a></li>
+	</c:otherwise>
+</c:choose>
+<c:choose> 
+	<c:when test="${menuCategory eq 'system' && menu eq 'sens_meta'}">
+				<li class="active"><a href="/system/sens_meta" target="iframe" style="color: #1E90FF;"><i class="fa fa-circle-o"></i><font style="color: #1E90FF;"> 서비스 감성 지표 기초 정보 관리</font></a></li>
+	</c:when>
+	<c:otherwise>
+				<li class="" id="sens_meta"><a href="/system/sens_meta" target="iframe" onclick="side(22);"><i class="fa fa-circle-o"></i> 서비스 감성 지표 기초 정보 관리</a></li>
+	</c:otherwise>
+</c:choose>
+>>>>>>> 8e18db5825ac0a5db62721a56cd2beb5e0782cef
 
 					<li class="treeview active"><a href="#"> <i
 							class="fa fa-th"></i> <span>시스템</span> <i
