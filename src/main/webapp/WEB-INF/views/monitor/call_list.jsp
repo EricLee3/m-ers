@@ -55,7 +55,7 @@
 
             <!-- Main content -->
             <section class="content">
-                <div class="row" style="height: 800px;">
+                <div class="row" style="height: 100%;">
                     <div class="col-xs-12">
                         <div class="box box-primary">
                             <div class="box-header">
