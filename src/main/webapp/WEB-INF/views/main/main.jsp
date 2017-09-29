@@ -231,6 +231,7 @@
 									<li class="" id="call_report"><a href="/report/call_report" target="iframe" onclick="side(2);"><i class="fa fa-circle-o"></i> 콜별 리포트</a></li>
 						</ul></li>
 
+
 					<li class="treeview active"><a href="#"> <i class="fa fa-line-chart"></i> <span>통계</span> <i class="fa fa-angle-left pull-right"></i>
 					</a>
 						<ul class="treeview-menu">
@@ -239,6 +240,7 @@
 									<li class="" id="month_report"><a href="/report/month_report" target="iframe" onclick="side(6);"><i class="fa fa-circle-o"></i> 월별 통계</a></li>
 									<li class="" id="agent_report"><a href="/report/agent_report" target="iframe" onclick="side(7);"><i class="fa fa-circle-o"></i> 상담원별 통계</a></li>
 						</ul></li>
+
 
 
 					<li class="treeview active"><a href="#"> <i class="fa fa-th"></i> <span>시스템</span> <i class="fa fa-angle-left pull-right"></i>
