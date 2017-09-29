@@ -413,7 +413,7 @@ public class ReportController {
 	 */
 	@RequestMapping(value = "/day_report", method = RequestMethod.GET)
 	public String dayReport(@RequestParam(value = "page", required = false, defaultValue = "1") int page, Model model, SearchDTO searchDTO,String selectAgent) {
-		
+			Boolean allagent=false;
 		// 그룹 선택을 위한 SELECT를 만들 때 사용할 목록 표시용
 			List<AgentGroup> agentGroupList = agentGroupService.getAgentGroupList(null, null, "order by group_name *1 asc");
 			model.addAttribute("agentGroupList", agentGroupList);
@@ -421,15 +421,19 @@ public class ReportController {
 				List<Agent> agentList = agentService.getAgentList(null, searchDTO, "order by agent_name asc");
 				model.addAttribute("agentList", agentList);
 			//}
-
 			// 검색 조건 처리
 			if( searchDTO.getSearchGroup() != null ) { 
 				if( searchDTO.getSearchGroup().equals("allGroup") ) searchDTO.setSearchGroup(null);
 			}
-			if( searchDTO.getSearchId() != null ) { 
-				if( searchDTO.getSearchId().equals("allAgent")) searchDTO.setSearchId(null);
-			}
+			
 
+			if( searchDTO.getSearchId() != null ) { 
+				if( searchDTO.getSearchId().equals("allAgent")  ) {
+					searchDTO.setSearchId(null);
+				}
+					allagent=true;
+			}
+			
 		if( searchDTO.getStartDate() == null ) {
 			Calendar calendar = Calendar.getInstance(); 
 			calendar.add(Calendar.DATE, -30); // 최근 30일
@@ -443,9 +447,11 @@ public class ReportController {
 		
 	//	List<DailyCall> dailyCallListForChart = dailyCallService.getDailyCallListForChart(searchDTO, "order by stat_time asc");
 	//	model.addAttribute("dailyCallListForChart", dailyCallListForChart);
-		
-		List<DailyCall> dailyCallList = dailyCallService.getDailyCallListForChart(searchDTO, "order by stat_time desc");
-		model.addAttribute("dailyCallList", dailyCallList);
+		if(allagent ==true) {
+			List<DailyCall> dailyCallList = dailyCallService.getDailyCallListForChart(searchDTO, "order by stat_time desc");
+			model.addAttribute("dailyCallList", dailyCallList);
+		}
+		/*
 		int totalCount = 0;
 		int successCount = 0;
 		int failCount = 0;
@@ -470,6 +476,8 @@ public class ReportController {
 		model.addAttribute("stressCall", stressCount);
 		model.addAttribute("incrementCount", incrementCount);
 		model.addAttribute("decrementCount", decrementCount);
+		*/
+		
 		model.addAttribute("searchGroup", searchDTO.getSearchGroup());
 		if(searchDTO.getSearchId() != null) {
 			model.addAttribute("searchId", selectAgent);
@@ -490,7 +498,7 @@ public class ReportController {
 	 */
 	@RequestMapping(value = "/month_report", method = RequestMethod.GET)
 	public String monthReport(@RequestParam(value = "page", required = false, defaultValue = "1") int page, Model model, SearchDTO searchDTO, String selectAgent) {
-		
+		Boolean allagent=false;
 		// 그룹 선택을 위한 SELECT를 만들 때 사용할 목록 표시용
 		List<AgentGroup> agentGroupList = agentGroupService.getAgentGroupList(null, null, "order by group_name *1 asc");
 		model.addAttribute("agentGroupList", agentGroupList);
@@ -504,7 +512,10 @@ public class ReportController {
 			if( searchDTO.getSearchGroup().equals("allGroup") ) searchDTO.setSearchGroup(null);
 		}
 		if( searchDTO.getSearchId() != null ) { 
-			if( searchDTO.getSearchId().equals("allAgent") ) searchDTO.setSearchId(null);
+			if( searchDTO.getSearchId().equals("allAgent")  ) {
+				searchDTO.setSearchId(null);
+			}
+				allagent=true;
 		}
 		if( searchDTO.getStartDate() == null ) {
 			Calendar calendar = Calendar.getInstance(); 
@@ -519,9 +530,11 @@ public class ReportController {
 		
 	//	List<MonthlyCall> monthlyCallListForChart = monthlyCallService.getMonthlyCallListForChart(searchDTO, "order by stat_time asc");
 	//	model.addAttribute("monthlyCallListForChart", monthlyCallListForChart);
-		
-		List<MonthlyCall> monthlyCallList = monthlyCallService.getMonthlyCallListForChart(searchDTO, "order by stat_time desc");
-		model.addAttribute("monthlyCallList", monthlyCallList);
+		if(allagent ==true) {
+			List<MonthlyCall> monthlyCallList = monthlyCallService.getMonthlyCallListForChart(searchDTO, "order by stat_time desc");
+			model.addAttribute("monthlyCallList", monthlyCallList);
+		}
+		/*
 		int totalCount = 0;
 		int successCount = 0;
 		int failCount = 0;
@@ -545,6 +558,7 @@ public class ReportController {
 		model.addAttribute("stressCall", stressCount);
 		model.addAttribute("incrementCount", incrementCount);
 		model.addAttribute("decrementCount", decrementCount);
+		*/
 		model.addAttribute("searchGroup", searchDTO.getSearchGroup());
 		if(searchDTO.getSearchId() != null) {
 			model.addAttribute("searchId", selectAgent);
@@ -594,13 +608,16 @@ public class ReportController {
 			List<Agent> agentList = agentService.getAgentList(null, searchDTO, "order by agent_name asc");
 			model.addAttribute("agentList", agentList);
 		//}
-
+		Boolean allagent=false;
 		// 검색 조건 처리
 		if( searchDTO.getSearchGroup() != null ) { 
 			if( searchDTO.getSearchGroup().equals("allGroup") ) searchDTO.setSearchGroup(null);
 		}
 		if( searchDTO.getSearchId() != null ) { 
-			if( searchDTO.getSearchId().equals("allAgent") ) searchDTO.setSearchId(null);
+			if( searchDTO.getSearchId().equals("allAgent")  ) {
+				searchDTO.setSearchId(null);
+			}
+				allagent=true;
 		}
 		if( searchDTO.getStartDate() == null ) {
 			Calendar calendar = Calendar.getInstance(); 
@@ -630,10 +647,12 @@ public class ReportController {
 		//List<HourlyCall> hourlyCallListForChart = hourlyCallService.getHourlyCallListForChart(searchDTO, "order by stat_time asc");
 		//model.addAttribute("hourlyCallListForChart", hourlyCallListForChart);
 		
+		if(allagent ==true) {
+			List<HourlyCall> hourlyCallListByOrder = hourlyCallService.getHourlyCallListByOrder(searchDTO, "order by stat_time desc");
+			model.addAttribute("hourlyCallListByOrder", hourlyCallListByOrder);
+		}
 		
-		List<HourlyCall> hourlyCallListByOrder = hourlyCallService.getHourlyCallListByOrder(searchDTO, "order by stat_time desc");
-		model.addAttribute("hourlyCallListByOrder", hourlyCallListByOrder);
-		
+		/*
 		List<HourlyCall> hourlyCallListByOrderForChart = hourlyCallService.getHourlyCallListByOrder(searchDTO, "order by stat_time asc");
 		model.addAttribute("hourlyCallListByOrderForChart", hourlyCallListByOrderForChart);
 		
@@ -661,7 +680,7 @@ public class ReportController {
 		model.addAttribute("incrementCount", incrementCount);
 		model.addAttribute("decrementCount", decrementCount);
 		
-		
+		*/
 		model.addAttribute("searchGroup", searchDTO.getSearchGroup());
 		if(searchDTO.getSearchId() != null) {
 			model.addAttribute("searchId", selectAgent);
