@@ -42,6 +42,7 @@ public class ProgressController {
 
 		 
 		List<ProgressLink> progresslinkList = progressLinkService.getprogressbar(progressLink);
+		// write custom_num into mecs5_realtime_state 
 		progressLinkService.phone_up(progressLink);
 		model.addAttribute("agent_id", progressLink.getAgent_id());
 
@@ -49,8 +50,8 @@ public class ProgressController {
 		model.addAttribute("custom_num", progressLink.getCustom_num());
 		model.addAttribute("ProgressList", progresslinkList);
 
-		System.out.println("IOS-----------------------------");
-		System.out.println(progressLink.toString());
+//		System.out.println("IOS-----------------------------");
+//		System.out.println(progressLink.toString());
 		
 		return "/link/progress_link"; 
 	}
