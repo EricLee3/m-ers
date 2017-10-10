@@ -43,7 +43,16 @@ public class ProgressController {
 		 
 		List<ProgressLink> progresslinkList = progressLinkService.getprogressbar(progressLink);
 		// write custom_num into mecs5_realtime_state 
+		
+		//번호 업데이트
 		progressLinkService.phone_up(progressLink);
+		//콜 타입
+		if(progressLink.getCall_type().equals("1") || progressLink.getCall_type().equals("2")){
+			progressLinkService.call_type_up(progressLink);
+		}else{
+			progressLink.setCall_type("1");
+			progressLinkService.call_type_up(progressLink);
+		}
 		model.addAttribute("agent_id", progressLink.getAgent_id());
 
 		model.addAttribute("indicator_name", progressLink.getIndicator_name());

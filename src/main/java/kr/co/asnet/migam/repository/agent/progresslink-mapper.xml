@@ -29,4 +29,10 @@
 		<where> agent_id = #{progressLink.agent_id} </where> 
 	</update>
 	
+	
+	<update id="updatecalltype" parameterType="ProgressLink" >
+		update mecs5_realtime_state 
+		<set> call_type = #{progressLink.call_type}</set>  
+		<where> agent_id = #{progressLink.agent_id} </where> 
+	</update>
 </mapper> 

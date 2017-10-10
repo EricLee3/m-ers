@@ -18,5 +18,6 @@ public interface ProgressLinkDao {
 
 	public int updatephone(ProgressLink progressLink);
 
+	public int updatecalltype(ProgressLink progressLink);
 	
 }

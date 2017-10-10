@@ -21,6 +21,8 @@ public interface ProgressLinkService {
 	public List<ProgressLink> getprogressbar(ProgressLink progressLink);
 	
 	public int phone_up(ProgressLink progressLink);
+	
+	public int call_type_up(ProgressLink progressLink);
 
 
 	

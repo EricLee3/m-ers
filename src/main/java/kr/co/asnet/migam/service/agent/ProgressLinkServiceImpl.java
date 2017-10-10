@@ -44,5 +44,10 @@ public class ProgressLinkServiceImpl implements ProgressLinkService {
 	}
 	
 	
+	@Override
+	public int call_type_up(ProgressLink progressLink) {
+		// 
+		return progressLinkDao.updatecalltype(progressLink);
+	}
 	
 }

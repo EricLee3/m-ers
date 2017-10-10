@@ -19,6 +19,7 @@ public class ProgressLink extends BaseDomain {
 	private String customer_script;
 	private String script_color;
 	private String custom_num;
+	private String call_type;
 	
     public ProgressLink() {
 		super();
@@ -30,6 +31,7 @@ public class ProgressLink extends BaseDomain {
 		customer_script = "";
 		script_color = "";
 		custom_num = "";
+		call_type = "";
 	}
 
 	
@@ -100,6 +102,18 @@ public class ProgressLink extends BaseDomain {
 
 	public void setCustom_num(String custom_num) {
 		this.custom_num = custom_num;
+	}
+
+
+	public String getCall_type() {
+		return call_type;
+	}
+
+
+
+
+	public void setCall_type(String call_type) {
+		this.call_type = call_type;
 	}
 
 
