@@ -31,6 +31,8 @@ public interface AgentService {
 	public int insertAgentChanged(Agent agent);
 
 	
+	public List<Agent> AgentList_u(Agent agent);
+	
 
 	/**
 	 * 지정된 번호(index)에 해당하는 Agent객체를 반환합니다. 
@@ -126,7 +128,7 @@ public interface AgentService {
 	public int updateAgentById(Agent agent);
 	
 	
-	public int updateAgentByIp(Agent agent);
+	public int updateAgentByIp(String  agent_id);
 	/**
 	 * 사용자 정보를 업데이트합니다. 
 	 * 만일 비밀번호가 null이거나 ''(blank) 라면, 비번은 업데이트하지 않습니다. 
