@@ -126,6 +126,7 @@ public interface AgentService {
 	public int updateAgentById(Agent agent);
 	
 	
+	public int updateAgentByIp(Agent agent);
 	/**
 	 * 사용자 정보를 업데이트합니다. 
 	 * 만일 비밀번호가 null이거나 ''(blank) 라면, 비번은 업데이트하지 않습니다. 

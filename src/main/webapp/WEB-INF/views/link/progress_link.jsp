@@ -87,7 +87,7 @@
     	    	       		$(".progress_row").remove();
     	    	       			for(var i=0;i < data.length; i ++){
     	    	       				var indicator_level_per =parseInt(data[i].indicator_level / 31 * 100);
-    	    	       				var content = '<div class="progress_row" style="width: 236px; height:72px; background-color: #174799;">';
+    	    	       				var content = '<div class="progress_row" style="width: 216px; height:72px; background-color: #174799;">';
     	    	       				content += '<b class="progressbar-title" style="color:'+data[i].script_color+'">';
     	    	       				if(data[i].customer_script == "" )content += '&nbsp;';
         	    	       			content += data[i].customer_script;
@@ -112,7 +112,32 @@
         	    	       			*/
     	    	       			$(".progress_body").append(content);
     	    	       		}
-    	        	   	  }
+    	        	   	  }else{
+	    	       				var indicator_level_per =parseInt(data[i].indicator_level / 31 * 100);
+	    	       				var content = '<div class="progress_row" style="width: 216px; height:72px; background-color: #174799;">';
+	    	       				content += '<b class="progressbar-title" style="color: #0BC904">';
+    	    	       			content += '통화 대기중입니다.';
+    	    	       			content += '</b>';
+    	    	       			content += '<div class="progress" style="cursor: pointer; margin-top: 5px;" onclick="pop_progress()">';
+    	    	       			content += ' <div class="progress-bar" style="width: 0%; background: #0BC904">';
+    	    	       			content += ' <span class="progress-icon fa fa-check" style="border-color:#0BC904; color:#0BC904;"></span>';
+    	    	       			content += ' <div class="progress-value">0%</div>';
+    	    	       			content += '</div>';
+    	    	       			content += '</div>';
+    	    	       			content += '</div>';
+    	    	       			
+    	    	       			/*
+    	    	       			content += '</b>';
+    	    	       			content += '<div class="progress" style="cursor: pointer; margin-top: 5px;" onclick="pop_progress()">';
+    	    	       			content += '<div class="progress-bar" style="width: '+indicator_level_per+'%; background: #ed687c;">';
+    	    	       			content += '<span class="progress-icon fa fa-check" style="border-color:#ed687c; color:#ed687c;"></span>';
+    	    	       			content += '<div class="progress-value">'+indicator_level_per+'%</div>';
+    	    	       			content += '</div>';
+    	    	       			content += '</div>';
+    	    	       			content += '</div>';
+    	    	       			*/
+	    	       			$(".progress_body").append(content);
+        	        	  }
 
     	   		        },
     	   		        error: function(jqXHR, textStatus, errorThrown) 
@@ -128,7 +153,7 @@
 	<c:if test="${!empty ProgressList}"> 
 	<c:forEach items="${ProgressList}" var="progress">
 		<fmt:parseNumber var="indicator_level" integerOnly="true" value="${progress.indicator_level / 31 * 100}"/>
-			<div class="progress_row" style="width: 236px; height:72px; background-color: #174799;">
+			<div class="progress_row" style="width: 216px; height:72px; background-color: #174799;">
 				<b class="progressbar-title" style="color: ${progress.script_color}">
 				<c:if test="${progress.customer_script == ''}">&nbsp;</c:if>
 					${progress.customer_script}
@@ -144,7 +169,7 @@
        </c:if>
        
        	<c:if test="${empty ProgressList}"> 
-		<div class="progress_row" style="width: 236px; height:72px; background-color: #174799;">
+		<div class="progress_row" style="width: 216px; height:72px; background-color: #174799;">
 			<b class="progressbar-title" style="color: #0BC904">
 				통화 대기중입니다.
 			</b>
