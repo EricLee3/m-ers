@@ -178,14 +178,6 @@
 	</update>
 	
 	<update id="updateAgentById" parameterType="agent">
-		update mecs5_realtime_state
-		<set>
-			<if test="agentIp != ''">agent_ip = #{agentIp}</if>
-		</set>
-		<where>
-			agent_id = #{agentId}
-		</where>
-		
 		update mecs5_agent
 		<set>
 			<if test="agentNumber != ''">agent_no = #{agentNumber},</if>
@@ -193,13 +185,12 @@
 			<if test="agentIp != ''">agent_ip = #{agentIp}</if>
 		</set>
 		<where>
-			agent_id = #{agentId}
+			agent_id = #{agentId};
 		</where>
 	</update>
 	
-	<update id="updateAgentByIp" parameterType="hashmap" >
-		update mecs5_agent set agent_ip = '' where agent_id = '${agent_id}'
-		update mecs5_realtime_state set agent_ip = '' where agent_id = '${agent_id}'
+	<update id="updateAgentByIp" parameterType="hashmap"  >
+		update mecs5_agent set agent_ip = '' where agent_id = '${agent_id}';
 	</update>
 	
 	<select id="selectAgentList" parameterType="hashmap" resultMap="rmapAgent">
