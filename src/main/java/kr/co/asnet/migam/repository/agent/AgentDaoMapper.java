@@ -49,6 +49,16 @@ public class AgentDaoMapper implements AgentDao {
 		return 0; 
 	}
 
+	@Override
+	public List<Agent> AgentList_u(Agent agent) {
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		{
+			parameters.put("agent", agent);
+
+		}
+		return sqlSession.selectList("kr.co.asnet.migam.repository.agent.AgentDaoMapper.AgentList_u", parameters);
+	}
+	
 	/* (non-Javadoc)
 	 * @see kr.co.asnet.migam.repository.agent.selectAgent(int)
 	 */
@@ -81,8 +91,12 @@ public class AgentDaoMapper implements AgentDao {
 	}
 	
 	@Override
-	public int updateAgentByIp(Agent agent) {
-		return sqlSession.update("kr.co.asnet.migam.repository.agent.AgentDaoMapper.updateAgentByIp", agent);
+	public int updateAgentByIp(String agent_id) {
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		{
+			parameters.put("agent_id", agent_id);
+		}
+		return sqlSession.update("kr.co.asnet.migam.repository.agent.AgentDaoMapper.updateAgentByIp", parameters);
 	}
 
 

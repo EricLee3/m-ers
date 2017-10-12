@@ -3,7 +3,9 @@ package kr.co.asnet.migam.web.REST;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -225,6 +227,7 @@ public class AgentREST {
 		int updateCount = 0;
 		int returncheck = 0;
 		int agentchanged = 0;
+		String agent_id="";
 
 		InetAddress ip = InetAddress.getLocalHost();
 		CallAudit callAudit = callAuditService.getCallAudit(agentId);
@@ -244,7 +247,15 @@ public class AgentREST {
 				intcallAudit = 1;
 			}
 			returncheck = 1;
-			agentService.updateAgentByIp(agent);
+			List<Agent> agentList = agentService.AgentList_u(agent);
+
+			  for (int i=0; agentList.size() < i; i++) {
+
+				  agent_id = agentList.get(i).getAgentId();
+				  agentService.updateAgentByIp(agent_id);
+			  }
+
+			
 			updateCount = agentService.updateAgentById(agent);
 			// realtime_state update
 			callAuditService.patchCallAudit(agent);

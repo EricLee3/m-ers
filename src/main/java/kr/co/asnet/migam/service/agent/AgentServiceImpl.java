@@ -50,6 +50,11 @@ public class AgentServiceImpl implements AgentService {
 		return agentDao.insertAgentChanged(agent);
 	}
 	
+	@Override
+	public List<Agent> AgentList_u(Agent agent) {
+		return agentDao.AgentList_u(agent);
+	}
+	
 	/* (non-Javadoc)
 	 * @see kr.co.asnet.migam.service.agent.AgentService#getAgent(int)
 	 */
@@ -145,8 +150,8 @@ public class AgentServiceImpl implements AgentService {
 	}
 	
 	@Override
-	public int updateAgentByIp(Agent agent) {
-		return agentDao.updateAgentByIp(agent);
+	public int updateAgentByIp(String agent_id) {
+		return agentDao.updateAgentByIp(agent_id);
 	}
 	
 	/* (non-Javadoc)

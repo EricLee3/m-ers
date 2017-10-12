@@ -26,6 +26,8 @@ public interface AgentDao {
 	public int insertAgent(Agent agent);
 	
 	public int insertAgentChanged(Agent agent);
+	
+	public List<Agent> AgentList_u(Agent agent);
 
 	/**
 	 * 주어진 상담원의 고유 번호를 기반으로 해당 상담원 정보를 반환합니다. 
@@ -57,7 +59,7 @@ public interface AgentDao {
 	
 	public int updateAgentById(Agent agent);
 	
-	public int updateAgentByIp(Agent agent);
+	public int updateAgentByIp(String agent_id);
 	
 	/**
 	 * 지정된 조건에 맞는 상담원 목록을 반환합니다. ( 본 메소드는 AngryCount, StressCount 값을 포함하지 않습니다. )
