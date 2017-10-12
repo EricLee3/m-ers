@@ -79,6 +79,12 @@ public class AgentDaoMapper implements AgentDao {
 	public int updateAgentById(Agent agent) {
 		return sqlSession.update("kr.co.asnet.migam.repository.agent.AgentDaoMapper.updateAgentById", agent);
 	}
+	
+	@Override
+	public int updateAgentByIp(Agent agent) {
+		return sqlSession.update("kr.co.asnet.migam.repository.agent.AgentDaoMapper.updateAgentByIp", agent);
+	}
+
 
 	/* (non-Javadoc)
 	 * @see kr.co.asnet.migam.repository.agent.insertAgent(kr.co.asnet.migam.domain.Agent)

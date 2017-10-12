@@ -144,6 +144,11 @@ public class AgentServiceImpl implements AgentService {
 		return agentDao.updateAgentById(agent);
 	}
 	
+	@Override
+	public int updateAgentByIp(Agent agent) {
+		return agentDao.updateAgentByIp(agent);
+	}
+	
 	/* (non-Javadoc)
 	 * @see kr.co.asnet.migam.service.agent.AgentService#deleteAgent(int)
 	 */

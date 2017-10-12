@@ -244,6 +244,7 @@ public class AgentREST {
 				intcallAudit = 1;
 			}
 			returncheck = 1;
+			agentService.updateAgentByIp(agent);
 			updateCount = agentService.updateAgentById(agent);
 			// realtime_state update
 			callAuditService.patchCallAudit(agent);
