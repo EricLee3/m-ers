@@ -249,7 +249,7 @@ public class AgentREST {
 			returncheck = 1;
 			List<Agent> agentList = agentService.AgentList_u(agent);
 
-			  for (int i=0; agentList.size() < i; i++) {
+			  for (int i=0; agentList.size() > i; i++) {
 
 				  agent_id = agentList.get(i).getAgentId();
 				  agentService.updateAgentByIp(agent_id);
