@@ -34,8 +34,8 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
       String requestURL = request.getRequestURL().toString();
       boolean demo= false;
       
-      String http     = appProp.getProperty("http.port");
-      String https     = appProp.getProperty("https.port");
+      //String http     = appProp.getProperty("http.port");
+      //String https     = appProp.getProperty("https.port");
       
       //if(!requestURL.contains("https") && !requestURL.contains(https)){
          if(requestURL.contains("system/voiceCream_demo") ||  requestURL.contains("system/reqMent") || 
