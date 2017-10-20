@@ -32,8 +32,8 @@
     position: relative;
 }
 .progress .progress-icon{
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
     line-height: 25px;
     border-radius: 50%;
     font-size: 13px;
@@ -45,10 +45,10 @@
     border-style: solid;
 }
 .progress-value{
-    font-size: 13px;
+    font-size: 10px;
     color: white;
     position: absolute;
-    top: 16px;
+    top: 0px;
     right: 0;
 }
 @-webkit-keyframes animate-positive {
@@ -69,7 +69,7 @@
         });
         
         function pop_progress(){
-        	window.open('pop_linegraph?agent_id=${agent_id}&custom_num=${custom_num}','pop_linegraph','location=no, directories=no,resizable=no,status=no,toolbar=no,menubar=no,channelmode=no,status=no, height=500px, width=600px, left=0,top=0');  
+        	window.open('pop_linegraph?agent_id=${agent_id}&custom_num=${custom_num}','pop_linegraph','location=no, directories=no,resizable=no,status=no,toolbar=no,menubar=no,channelmode=no,status=no, height=500px, width=570px, left=0,top=0');  
         	
         }
         
@@ -87,12 +87,12 @@
     	    	       		$(".progress_row").remove();
     	    	       			for(var i=0;i < data.length; i ++){
     	    	       				var indicator_level_per =parseInt(data[i].indicator_level / 31 * 100);
-    	    	       				var content = '<div class="progress_row" style="width: 216px; height:72px; background-color: #174799;">';
+    	    	       				var content = '<div class="progress_row" style="width: 216px; height:62px; background-color: #174799;">';
     	    	       				content += '<b class="progressbar-title" style="color:'+data[i].script_color+'">';
     	    	       				if(data[i].customer_script == "" )content += '&nbsp;';
         	    	       			content += data[i].customer_script;
         	    	       			content += '</b>';
-        	    	       			content += '<div class="progress" style="cursor: pointer; margin-top: 5px;" onclick="pop_progress()">';
+        	    	       			content += '<div class="progress" style="cursor: pointer; margin-top: 3px;" onclick="pop_progress()">';
         	    	       			content += '<div class="progress-bar" style="width: '+indicator_level_per+'%; background: '+data[i].script_color+';">';
         	    	       			content += '<span class="progress-icon fa fa-check" style="border-color:'+data[i].script_color+'; color:'+data[i].script_color+';"></span>';
         	    	       			content += '<div class="progress-value">'+indicator_level_per+'%</div>';
@@ -102,7 +102,7 @@
         	    	       			
         	    	       			/*
         	    	       			content += '</b>';
-        	    	       			content += '<div class="progress" style="cursor: pointer; margin-top: 5px;" onclick="pop_progress()">';
+        	    	       			content += '<div class="progress" style="cursor: pointer; margin-top: 3px;" onclick="pop_progress()">';
         	    	       			content += '<div class="progress-bar" style="width: '+indicator_level_per+'%; background: #ed687c;">';
         	    	       			content += '<span class="progress-icon fa fa-check" style="border-color:#ed687c; color:#ed687c;"></span>';
         	    	       			content += '<div class="progress-value">'+indicator_level_per+'%</div>';
@@ -113,12 +113,12 @@
     	    	       			$(".progress_body").append(content);
     	    	       		}
     	        	   	  }else{
-	    	       				var indicator_level_per =parseInt(data[i].indicator_level / 31 * 100);
-	    	       				var content = '<div class="progress_row" style="width: 216px; height:72px; background-color: #174799;">';
+    	        	   		$(".progress_row").remove();
+	    	       				var content = '<div class="progress_row" style="width: 216px; height:62px; background-color: #174799;">';
 	    	       				content += '<b class="progressbar-title" style="color: #0BC904">';
     	    	       			content += '통화 대기중입니다.';
     	    	       			content += '</b>';
-    	    	       			content += '<div class="progress" style="cursor: pointer; margin-top: 5px;" onclick="pop_progress()">';
+    	    	       			content += '<div class="progress" style="cursor: pointer; margin-top: 3px;" onclick="pop_progress()">';
     	    	       			content += ' <div class="progress-bar" style="width: 0%; background: #0BC904">';
     	    	       			content += ' <span class="progress-icon fa fa-check" style="border-color:#0BC904; color:#0BC904;"></span>';
     	    	       			content += ' <div class="progress-value">0%</div>';
@@ -128,7 +128,7 @@
     	    	       			
     	    	       			/*
     	    	       			content += '</b>';
-    	    	       			content += '<div class="progress" style="cursor: pointer; margin-top: 5px;" onclick="pop_progress()">';
+    	    	       			content += '<div class="progress" style="cursor: pointer; margin-top: 3px;" onclick="pop_progress()">';
     	    	       			content += '<div class="progress-bar" style="width: '+indicator_level_per+'%; background: #ed687c;">';
     	    	       			content += '<span class="progress-icon fa fa-check" style="border-color:#ed687c; color:#ed687c;"></span>';
     	    	       			content += '<div class="progress-value">'+indicator_level_per+'%</div>';
@@ -153,12 +153,12 @@
 	<c:if test="${!empty ProgressList}"> 
 	<c:forEach items="${ProgressList}" var="progress">
 		<fmt:parseNumber var="indicator_level" integerOnly="true" value="${progress.indicator_level / 31 * 100}"/>
-			<div class="progress_row" style="width: 216px; height:72px; background-color: #174799;">
+			<div class="progress_row" style="width: 216px; height:62px; background-color: #174799;">
 				<b class="progressbar-title" style="color: ${progress.script_color}">
 				<c:if test="${progress.customer_script == ''}">&nbsp;</c:if>
 					${progress.customer_script}
 				</b>
-	            <div class="progress" style="cursor: pointer; margin-top: 5px;" onclick="pop_progress()">
+	            <div class="progress" style="cursor: pointer; margin-top: 3px;" onclick="pop_progress()">
 	                <div class="progress-bar" style="width: ${indicator_level}%; background: ${progress.script_color}">
 	                    <span class="progress-icon fa fa-check" style="border-color:${progress.script_color}; color:${progress.script_color};"></span>
 	                    <div class="progress-value">${indicator_level}%</div>
@@ -169,11 +169,11 @@
        </c:if>
        
        	<c:if test="${empty ProgressList}"> 
-		<div class="progress_row" style="width: 216px; height:72px; background-color: #174799;">
+		<div class="progress_row" style="width: 216px; height:62px; background-color: #174799;">
 			<b class="progressbar-title" style="color: #0BC904">
 				통화 대기중입니다.
 			</b>
-            <div class="progress" style="cursor: pointer; margin-top: 5px;" onclick="pop_progress()">
+            <div class="progress" style="cursor: pointer; margin-top: 3px;" onclick="pop_progress()">
                 <div class="progress-bar" style="width: 0%; background: #0BC904">
                     <span class="progress-icon fa fa-check" style="border-color:#0BC904; color:#0BC904;"></span>
                     <div class="progress-value">0%</div>
