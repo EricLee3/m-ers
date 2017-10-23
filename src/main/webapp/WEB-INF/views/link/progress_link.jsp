@@ -89,12 +89,8 @@
     	    	       				var indicator_level_per =parseInt(data[i].indicator_level / 31 * 100);
     	    	       				var content = '<div class="progress_row" style="width: 216px; height:62px; background-color: #174799;">';
     	    	       				content += '<b class="progressbar-title" style="color:'+data[i].script_color+'">';
-    	    	       				
-    	    	       				if(data[i].customer_script == "불편함이 감지되지 않았습니다" )  {
-    	    	       					content += '정상 통화 중입니다';
-    	    	       				} else  { 
-        	    	       				content += data[i].customer_script;
-    	    	       				}
+    	    	       				if(data[i].customer_script == "" )content += '&nbsp;';
+        	    	       			content += data[i].customer_script;
         	    	       			content += '</b>';
         	    	       			content += '<div class="progress" style="cursor: pointer; margin-top: 3px;" onclick="pop_progress()">';
         	    	       			content += '<div class="progress-bar" style="width: '+indicator_level_per+'%; background: '+data[i].script_color+';">';

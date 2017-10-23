@@ -222,10 +222,14 @@
            
                             </div>
                 
-							<div class="info-box" style="text-align: center">
+							<div class="info-box" style="text-align: left; margin-left: 20px;">
                                 <span class="info-box-icon bg-aqua"><i class="fa fa-user"></i></span>
                                 <div class="info-box-content">
                                     <span class="info-box-text">고객번호 : </span>
-                                    <span class="info-box-number" id="customerNumber">${custom_num} &nbsp;&nbsp;상담원 : ${agent_id}&nbsp;&nbsp; 시작시간 : ${time}</span>
+                                    <span class="info-box-number" id="customerNumber">${custom_num} &nbsp;&nbsp;</span>
+                                    <br>
+                                  	<span class="info-box-text">상담원 : ${agent_id}&nbsp;&nbsp;</span> 
+                                  	<br>
+                                  	<span class="info-box-text">시작시간 : ${time}</span>
                                 </div>
                             </div>
