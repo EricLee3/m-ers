@@ -69,7 +69,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
          userRole = sessionUser.getCurrentUser().getRole(); 
       }
 
-      String[] adminPath = {"/monitor", "/report", "/service", "/main", "system"};
+      String[] adminPath = {"/report", "/service", "/main", "system"};
       if (StringUtils.containsAny(requestURL, adminPath)) {
          if ( !sessionUser.isLogin() ) {
             String rtUrl = URLEncoder.encode(requestURL, "utf-8");

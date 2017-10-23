@@ -77,77 +77,77 @@
     		var formURL = "req_progress";
     	    $.ajax(
     	    {
-    	    	        url : formURL,
-    	    	        type: "POST",
-    	    	        timeout: 3000,	    
-    	    	        data: {agent_id : "${agent_id}" ,indicator_name : "${indicator_name}"},
-    	    	        success:function(data, textStatus, jqXHR) 
-    	    	        {	    	        	
-        	    	      if(data.length != 0 ){
-    	    	       		$(".progress_row").remove();
-    	    	       			for(var i=0;i < data.length; i ++){
-    	    	       				var indicator_level_per =parseInt(data[i].indicator_level / 31 * 100);
-    	    	       				var content = '<div class="progress_row" style="width: 216px; height:62px; background-color: #174799;">';
-    	    	       				content += '<b class="progressbar-title" style="color:'+data[i].script_color+'">';
-    	    	       				
-    	    	       				if(data[i].customer_script == "불편함이 감지되지 않았습니다" )  {
-    	    	       					content += '정상 통화 중입니다';
-    	    	       				} else  { 
-        	    	       				content += data[i].customer_script;
-    	    	       				}
-        	    	       			content += '</b>';
-        	    	       			content += '<div class="progress" style="cursor: pointer; margin-top: 3px;" onclick="pop_progress()">';
-        	    	       			content += '<div class="progress-bar" style="width: '+indicator_level_per+'%; background: '+data[i].script_color+';">';
-        	    	       			content += '<span class="progress-icon fa fa-check" style="border-color:'+data[i].script_color+'; color:'+data[i].script_color+';"></span>';
-        	    	       			content += '<div class="progress-value">'+indicator_level_per+'%</div>';
-        	    	       			content += '</div>';
-        	    	       			content += '</div>';
-        	    	       			content += '</div>';
-        	    	       			
-        	    	       			/*
-        	    	       			content += '</b>';
-        	    	       			content += '<div class="progress" style="cursor: pointer; margin-top: 3px;" onclick="pop_progress()">';
-        	    	       			content += '<div class="progress-bar" style="width: '+indicator_level_per+'%; background: #ed687c;">';
-        	    	       			content += '<span class="progress-icon fa fa-check" style="border-color:#ed687c; color:#ed687c;"></span>';
-        	    	       			content += '<div class="progress-value">'+indicator_level_per+'%</div>';
-        	    	       			content += '</div>';
-        	    	       			content += '</div>';
-        	    	       			content += '</div>';
-        	    	       			*/
-    	    	       			$(".progress_body").append(content);
-    	    	       		}
-    	        	   	  }else{
-    	        	   		$(".progress_row").remove();
-	    	       				var content = '<div class="progress_row" style="width: 216px; height:62px; background-color: #174799;">';
-	    	       				content += '<b class="progressbar-title" style="color: #0BC904">';
-    	    	       			content += '통화 대기중입니다.';
-    	    	       			content += '</b>';
-    	    	       			content += '<div class="progress" style="cursor: pointer; margin-top: 3px;" onclick="pop_progress()">';
-    	    	       			content += ' <div class="progress-bar" style="width: 0%; background: #0BC904">';
-    	    	       			content += ' <span class="progress-icon fa fa-check" style="border-color:#0BC904; color:#0BC904;"></span>';
-    	    	       			content += ' <div class="progress-value">0%</div>';
-    	    	       			content += '</div>';
-    	    	       			content += '</div>';
-    	    	       			content += '</div>';
-    	    	       			
-    	    	       			/*
-    	    	       			content += '</b>';
-    	    	       			content += '<div class="progress" style="cursor: pointer; margin-top: 3px;" onclick="pop_progress()">';
-    	    	       			content += '<div class="progress-bar" style="width: '+indicator_level_per+'%; background: #ed687c;">';
-    	    	       			content += '<span class="progress-icon fa fa-check" style="border-color:#ed687c; color:#ed687c;"></span>';
-    	    	       			content += '<div class="progress-value">'+indicator_level_per+'%</div>';
-    	    	       			content += '</div>';
-    	    	       			content += '</div>';
-    	    	       			content += '</div>';
-    	    	       			*/
-	    	       			$(".progress_body").append(content);
-        	        	  }
+   	    	        url : formURL,
+   	    	        type: "POST",
+   	    	        timeout: 3000,	    
+   	    	        data: {agent_id : "${agent_id}" ,indicator_name : "${indicator_name}"},
+   	    	        success:function(data, textStatus, jqXHR) 
+   	    	        {	    	        	
+       	    	      if(data.length != 0 ){
+   	    	       		$(".progress_row").remove();
+   	    	       			for(var i=0;i < data.length; i ++){
+   	    	       				var indicator_level_per =parseInt(data[i].indicator_level / 31 * 100);
+   	    	       				var content = '<div class="progress_row" style="width: 216px; height:62px; background-color: #174799;">';
+   	    	       				content += '<b class="progressbar-title" style="color:'+data[i].script_color+'">';
+   	    	       				if(data[i].customer_script == "" )content += '&nbsp;'; //만약에 스크립트에 데이터가 없을 경우 널처리
+   	    	       				if(data[i].customer_script == "불편함이 감지되지 않았습니다" )  {
+   	    	       					content += '정상 통화 중입니다';
+   	    	       				} else  { 
+       	    	       				content += data[i].customer_script;
+   	    	       				}
+       	    	       			content += '</b>';
+       	    	       			content += '<div class="progress" style="cursor: pointer; margin-top: 3px;" onclick="pop_progress()">';
+       	    	       			content += '<div class="progress-bar" style="width: '+indicator_level_per+'%; background: '+data[i].script_color+';">';
+       	    	       			content += '<span class="progress-icon fa fa-check" style="border-color:'+data[i].script_color+'; color:'+data[i].script_color+';"></span>';
+       	    	       			content += '<div class="progress-value">'+indicator_level_per+'%</div>';
+       	    	       			content += '</div>';
+       	    	       			content += '</div>';
+       	    	       			content += '</div>';
+       	    	       			
+       	    	       			/*
+       	    	       			content += '</b>';
+       	    	       			content += '<div class="progress" style="cursor: pointer; margin-top: 3px;" onclick="pop_progress()">';
+       	    	       			content += '<div class="progress-bar" style="width: '+indicator_level_per+'%; background: #ed687c;">';
+       	    	       			content += '<span class="progress-icon fa fa-check" style="border-color:#ed687c; color:#ed687c;"></span>';
+       	    	       			content += '<div class="progress-value">'+indicator_level_per+'%</div>';
+       	    	       			content += '</div>';
+       	    	       			content += '</div>';
+       	    	       			content += '</div>';
+       	    	       			*/
+   	    	       			$(".progress_body").append(content);
+   	    	       		}
+   	        	   	  }else{
+   	        	   		$(".progress_row").remove();
+    	       				var content = '<div class="progress_row" style="width: 216px; height:62px; background-color: #174799;">';
+    	       				content += '<b class="progressbar-title" style="color: #0BC904">';
+   	    	       			content += '통화 대기중입니다.';
+   	    	       			content += '</b>';
+   	    	       			content += '<div class="progress" style="cursor: pointer; margin-top: 3px;" onclick="pop_progress()">';
+   	    	       			content += ' <div class="progress-bar" style="width: 0%; background: #0BC904">';
+   	    	       			content += ' <span class="progress-icon fa fa-check" style="border-color:#0BC904; color:#0BC904;"></span>';
+   	    	       			content += ' <div class="progress-value">0%</div>';
+   	    	       			content += '</div>';
+   	    	       			content += '</div>';
+   	    	       			content += '</div>';
+   	    	       			
+   	    	       			/*
+   	    	       			content += '</b>';
+   	    	       			content += '<div class="progress" style="cursor: pointer; margin-top: 3px;" onclick="pop_progress()">';
+   	    	       			content += '<div class="progress-bar" style="width: '+indicator_level_per+'%; background: #ed687c;">';
+   	    	       			content += '<span class="progress-icon fa fa-check" style="border-color:#ed687c; color:#ed687c;"></span>';
+   	    	       			content += '<div class="progress-value">'+indicator_level_per+'%</div>';
+   	    	       			content += '</div>';
+   	    	       			content += '</div>';
+   	    	       			content += '</div>';
+   	    	       			*/
+    	       			$(".progress_body").append(content);
+       	        	  }
 
-    	   		        },
-    	   		        error: function(jqXHR, textStatus, errorThrown) 
-    	   		        {   		     
-    	   		         	alert("에러가 발생하였습니다. 관리자에게 알려주세요.\ncode:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);							
-    	   		        }
+   	   		        },
+   	   		        error: function(jqXHR, textStatus, errorThrown) 
+   	   		        {   		     
+   	   		         	alert("에러가 발생하였습니다. 관리자에게 알려주세요.\ncode:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);							
+   	   		        }
     	  });	
     	}
 
