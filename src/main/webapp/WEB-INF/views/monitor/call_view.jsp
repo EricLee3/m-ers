@@ -58,12 +58,40 @@
                                                     if (name == "Dissatisfaction") dissatisfaction = val;
                                                     if (name == "StressCaller") stressCaller = val;
                                                     if (name == "EnergeticCaller") energeticCaller = val;
-                                                    
+													
                                                 }
                                             }
                                         })
 
                                         // x should be here because of the case returned fail  IOS[170717] 
+                                       
+                                        var date = new Date();
+                                        
+                                        var start_time  = '<fmt:formatDate pattern="HHmmss" value="${callAudit.startTime}" />';
+										var hour = start_time.substr(0,2) * 60 * 60;
+										var minute= start_time.substr(2,2) *60;
+										var second = start_time.substr(4,2);
+
+										
+										
+										var hour_s = date.getHours() * 60 * 60;
+										var minute_s= date.getMinutes() * 60;
+										var second_s = date.getSeconds();
+
+										
+                                        var now_date = (hour_s + minute_s+ second_s)-((parseInt(hour) + parseInt(minute) + parseInt(second)));
+
+
+
+
+                                       
+                                        $(".time_row").remove();
+                                        var content = '<div class=" time_row" >';
+                                        content += '<span class="info-box-number" id="startTime"><fmt:formatDate pattern="HH:mm:ss" value="${callAudit.startTime}" /> / '+now_date+'초</span>';
+                                        content +='</div>';
+                                       
+                                        $(".time_body").append(content);
+                                        
                                         var x = (new Date()).getTime(); // current time
 
                                         //series[0].addPoint([x, parseInt(angry)], false, true);
@@ -270,7 +298,11 @@
                                 <span class="info-box-icon bg-aqua"><i class="fa fa-clock-o"></i></span>
                                 <div class="info-box-content" id="div_call_view">
                                     <span class="info-box-text">시작시간 / 통화시간</span>
-                                    <span class="info-box-number" id="startTime"><fmt:formatDate pattern="HH:mm:ss" value="${callAudit.startTime}" /> / ${callAudit.callDuration}초</span>
+                                    <div class="time_body">
+                                    	<div class=" time_row">
+                                    		<span class="info-box-number" id="startTime"><fmt:formatDate pattern="HH:mm:ss" value="${callAudit.startTime}" /> / ${callAudit.callDuration}초</span>
+                                		</div>
+                                	</div>
                                 </div>
                                 <!-- /.info-box-content -->
                             </div>
