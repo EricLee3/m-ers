@@ -86,7 +86,7 @@
        	    	      if(data.length != 0 ){
    	    	       		$(".progress_row").remove();
    	    	       			for(var i=0;i < data.length; i ++){
-   	    	       				var indicator_level_per =parseInt(data[i].indicator_level / 31 * 100);
+   	    	       				var indicator_level_per =parseInt(data[i].indicator_level / 10 * 100);
    	    	       				var content = '<div class="progress_row" style="width: 216px; height:62px; background-color: #174799;">';
    	    	       				content += '<b class="progressbar-title" style="color:'+data[i].script_color+'">';
    	    	       				if(data[i].customer_script == "" )content += '&nbsp;'; //만약에 스크립트에 데이터가 없을 경우 널처리
@@ -156,7 +156,7 @@
 	<div class=" progress_body" align="center">
 	<c:if test="${!empty ProgressList}"> 
 	<c:forEach items="${ProgressList}" var="progress">
-		<fmt:parseNumber var="indicator_level" integerOnly="true" value="${progress.indicator_level / 31 * 100}"/>
+		<fmt:parseNumber var="indicator_level" integerOnly="true" value="${progress.indicator_level / 10 * 100}"/>
 			<div class="progress_row" style="width: 216px; height:62px; background-color: #174799;">
 				<b class="progressbar-title" style="color: ${progress.script_color}">
 				<c:if test="${progress.customer_script == ''}">&nbsp;</c:if>
