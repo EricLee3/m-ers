@@ -25,7 +25,7 @@
 
 	<div class="login-box">
 		<div class="login-logo">
-			<h4 class="text-info">콜센터를 위한 감정 인식 서비스</h4>
+			<h4 class="text-info">제주관광정보센터 감정 인식 서비스</h4>
 			<strong>VoiceCream</strong>
 		</div>
 		<div class="login-box-body">
@@ -49,12 +49,6 @@
 					</div>
 				</div>
 			</form>
-		</div>
-		<div class="col-md-12">
-			<h5 class="text-info">
-				주식회사 <strong>미래손</strong> | <br>서울시 금천구 서부샛길 606 대성 디폴리스 A동
-				1301호
-			</h5>
 		</div>
 	</div>
 	<script>
