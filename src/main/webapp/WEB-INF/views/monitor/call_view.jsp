@@ -35,9 +35,11 @@
                                         dissatisfaction = 0,
                                         stressCaller = 0,
                                         energeticCaller = 0;
+                                    
                                     refreshInterval = setInterval(function() {
                                         $.ajax({
-                                            url: '/monitor/call_linegraph?agentId=' + '${agentId}',
+                                            //url: 'https://localhost:8090/monitor/call_linegraph?agentId=' + '${agentId}',
+                                            url: document.location.origin + '/monitor/call_linegraph?agentId=' + '${agentId}',
                                             success: function(data) {
                                                 //var x = (new Date()).getTime(); // current time
                                                 for (var i = 0; i < data.length; i++) {
