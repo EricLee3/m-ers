@@ -38,6 +38,7 @@
 			<section class="content">
 				<div class="row">
 					<!-- left column grid 1-9 start -->
+					<!-- 상담원 버튼 리스트 IOS  -->
 					<div class="col-lg-9" id="div_agent_list">
 						
 						<c:set var="j" value="0" />
@@ -54,8 +55,9 @@
 <!-- 								</div> -->
 <!-- 								<a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>  -->
 <!-- 							</div> -->
+							
+							
 							<div class="row">
-								
 								<c:set var="i" value="0" />
 								<c:forEach items="${group.agentList}" var="agent" >
 								<div class="col-sm-6 col-xs-12">
@@ -91,6 +93,8 @@
 									</div>
 								</div>
 							</div>
+							
+							
 						</div>
 						<c:set var="j" value="${j+1 }" />
 						</c:forEach>

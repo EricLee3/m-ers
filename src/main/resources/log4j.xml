@@ -59,7 +59,7 @@
 	</logger>
 	
 	<logger name="java.sql.ResultSet">
-	    <level value="" />
+	    <level value="OFF" />
 	</logger>	
      
     <!-- Query Loggers -->

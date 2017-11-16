@@ -319,7 +319,7 @@
 											content += "</tr>";
 											$(".alarm_body").append(content);
 											var mi = new Audio(
-													"/resources/wav/C1_Minor.mp3");
+													"/resources/mp/C1_Minor.mp3");
 											mi.play();
 										} else if (data[0].alarm_lv == 2) {
 											var content = "<tr class='alarm_row'>";
@@ -348,7 +348,7 @@
 											content += "</tr>";
 											$(".alarm_body").append(content);
 											var mj = new Audio(
-													"/resources/wav/C1_Major.mp3");
+													"/resources/mp/C1_Major.mp3");
 											mj.play();
 										} else if (data[0].alarm_lv == 3) {
 											var content = "<tr class='alarm_row'>";
@@ -377,7 +377,7 @@
 											content += "</tr>";
 											$(".alarm_body").append(content);
 											var ct = new Audio(
-													"/resources/wav/C1_critical.mp3");
+													"/resources/mp/C1_critical.mp3");
 											ct.play();
 										}
 									}
@@ -438,7 +438,7 @@
 											content += "</tr>";
 											$(".alarm_body").append(content);
 											var mi = new Audio(
-													"/resources/wav/C1_Minor.mp3");
+													"/resources/mp/C1_Minor.mp3");
 											mi.play();
 										} else if (data[0].alarm_lv == 2) {
 											var content = "<tr class='alarm_row'>";
@@ -467,7 +467,7 @@
 											content += "</tr>";
 											$(".alarm_body").append(content);
 											var mj = new Audio(
-													"/resources/wav/C1_Major.mp3");
+													"/resources/mp/C1_Major.mp3");
 											mj.play();
 										} else if (data[0].alarm_lv == 3) {
 											var content = "<tr class='alarm_row'>";
@@ -496,7 +496,7 @@
 											content += "</tr>";
 											$(".alarm_body").append(content);
 											var ct = new Audio(
-													"/resources/wav/C1_critical.mp3");
+													"/resources/mp/C1_critical.mp3");
 											ct.play();
 										}
 									} else {
@@ -530,7 +530,7 @@
 												$(".alarm_body")
 														.append(content);
 												var mi = new Audio(
-														"/resources/wav/C1_Minor.mp3");
+														"/resources/mp/C1_Minor.mp3");
 												mi.play();
 											} else if (data[0].alarm_lv == 2) {
 												var content = "<tr class='alarm_row'>";
@@ -561,7 +561,7 @@
 												$(".alarm_body")
 														.append(content);
 												var mi = new Audio(
-														"/resources/wav/C1_Major.mp3");
+														"/resources/mp/C1_Major.mp3");
 												mi.play();
 											} else if (data[0].alarm_lv == 3) {
 												var content = "<tr class='alarm_row'>";
@@ -592,7 +592,7 @@
 												$(".alarm_body")
 														.append(content);
 												var ct = new Audio(
-														"/resources/wav/C1_critical.mp3");
+														"/resources/mp/C1_critical.mp3");
 												ct.play();
 											}
 										}
