@@ -262,13 +262,13 @@ function SoundStop( soundObj )
 	                    	   		if(data[0].audio_flag == 1) {	//듣기 ON이고
 	                    	   			if(data[0].alarmed_time.substring(0,19) > "${a_date}") {	//최근 데이터날짜가 접속 날짜보다 크면
 	                    	   				if(data[0].alarm_lv ==1) {
-	                    					   var mi = new Audio("/resources/wav/C1_Minor.mp3");
+	                    					   var mi = new Audio("/resources/mp/C1_Minor.mp3");
 	                    					   mi.play();
 		                    			   }else if(data[0].alarm_lv ==2) {
-		                    				   var mj = new Audio("/resources/wav/C1_Major.mp3");
+		                    				   var mj = new Audio("/resources/mp/C1_Major.mp3");
 		                    				   mj.play();
 		                    			   }else if(data[0].alarm_lv ==3) {
-		                    				   var ct = new Audio("/resources/wav/C1_critical.mp3");
+		                    				   var ct = new Audio("/resources/mp/C1_critical.mp3");
 		                    				   ct.play();
 		                    			   }
 	                    	   			}else {		//최근 데이터날짜가 접속 날짜보다 작으면
@@ -297,13 +297,13 @@ function SoundStop( soundObj )
 		                       
 	                    	   		if(data[0].audio_flag == 1) {	//듣기 ON이고
 	                    	   			if(data[0].alarm_lv ==1) {
-	                    					   var mi = new Audio("/resources/wav/C1_Minor.mp3");
+	                    					   var mi = new Audio("/resources/mp/C1_Minor.mp3");
 	                    					   mi.play();
 		                    			   }else if(data[0].alarm_lv ==2) {
-		                    				   var mj = new Audio("/resources/wav/C1_Major.mp3");
+		                    				   var mj = new Audio("/resources/mp/C1_Major.mp3");
 		                    				   mj.play();
 		                    			   }else if(data[0].alarm_lv ==3) {
-		                    				   var ct = new Audio("/resources/wav/C1_critical.mp3");
+		                    				   var ct = new Audio("/resources/mp/C1_critical.mp3");
 		                    				   ct.play();
 		                    			   }
 	                    	   	}

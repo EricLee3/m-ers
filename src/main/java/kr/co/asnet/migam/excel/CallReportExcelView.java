@@ -109,7 +109,15 @@ public class CallReportExcelView extends AbstractXlsxView {
 			row = worksheet.createRow(++i);
 			row.createCell(colNum++).setCellValue( i);
 			row.createCell(colNum++).setCellValue( callAnalysis.getAgentName() == null ? "" : callAnalysis.getAgentName() );
-			row.createCell(colNum++).setCellValue( callAnalysis.getCustomerNumber() == null ? "" : callAnalysis.getCustomerNumber() );
+			
+			if (callAnalysis.getCustomerNumber().isEmpty())		// requested from 황정교GM to substitute private info. with asterisks IOS[03-Nov-2017]
+				row.createCell(colNum++).setCellValue("");
+			else  { 
+				String temp = callAnalysis.getCustomerNumber().substring(0, (callAnalysis.getCustomerNumber().length()-4))+"****";
+				row.createCell(colNum++).setCellValue(temp);
+			}
+			
+			
 			row.createCell(colNum++).setCellValue( callAnalysis.getStartTime() == null ? "" : simpleDateFormatDate.format(callAnalysis.getStartTime()) );
 			row.createCell(colNum++).setCellValue( callAnalysis.getStartTime() == null ? "" : simpleDateFormatTime.format(callAnalysis.getStartTime()) );
 			row.createCell(colNum++).setCellValue( callAnalysis.getEndTime() == null ? "" : simpleDateFormatTime.format(callAnalysis.getEndTime()) );
@@ -133,7 +141,7 @@ public class CallReportExcelView extends AbstractXlsxView {
 	 * @param model
 	 * @param workbook
 	 * @return
-	 * @throws Exception
+	 * @throws Exception 
 	 */
 	private String makeExcelCustomerReport(Map<String, Object> model, Workbook workbook) throws Exception {
 		String today =  new SimpleDateFormat("yyyyMMdd").format(new Date());
