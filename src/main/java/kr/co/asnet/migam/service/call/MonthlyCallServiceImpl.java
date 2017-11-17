@@ -15,6 +15,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import kr.co.asnet.migam.domain.PageDTO;
+import kr.co.asnet.migam.domain.PageDTO2;
 import kr.co.asnet.migam.domain.SearchDTO;
 import kr.co.asnet.migam.domain.call.CallAnalysis;
 import kr.co.asnet.migam.domain.call.MonthlyCall;
@@ -46,8 +47,8 @@ public class MonthlyCallServiceImpl implements MonthlyCallService {
 	 * @see kr.co.asnet.migam.service.call.MonthlyCallService#getMonthlyCallListforChart(kr.co.asnet.migam.domain.PageDTO, kr.co.asnet.migam.domain.SearchDTO, java.lang.String)
 	 */
 	@Override
-	public List<MonthlyCall> getMonthlyCallListForChart(SearchDTO searchDTO, String orderby) {
-		return monthlyCallDao.selectMonthlyCallListForChart(searchDTO, orderby);
+	public List<MonthlyCall> getMonthlyCallListForChart(PageDTO2 pageDTO2,SearchDTO searchDTO, String orderby) {
+		return monthlyCallDao.selectMonthlyCallListForChart(pageDTO2, searchDTO, orderby);
 	}
 
 	/* (non-Javadoc)
@@ -102,6 +103,11 @@ public class MonthlyCallServiceImpl implements MonthlyCallService {
 			}
 		}
 		return monthlyCall;
+	}
+	
+	@Override
+	public int selectMonthMonitorStatCount(SearchDTO searchDTO) {
+		return monthlyCallDao.selectMonthMonitorStatCount(searchDTO);
 	}
 
 }

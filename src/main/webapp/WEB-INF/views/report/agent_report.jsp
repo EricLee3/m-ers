@@ -68,6 +68,7 @@
 							<div class="box-body">
 								<!-- 검색 조건 -->
 								<form role="form" id="form_agentCall_search" action="/report/agent_report" method="post">
+									<input type="hidden" name="page" value="">
 									<input type="hidden" name="searchType" value="${searchDTO.searchType}">
 <!-- 									<div class="col-md-2"> -->
 <!-- 										<div class="form-group"> -->
@@ -181,6 +182,16 @@
 													</c:if>
 												</tbody>
 											</table>
+											<div class="box-footer clearfix text-center">
+						                        <ul class="pagination pagination-sm no-margin">
+													<asnetPage:Pagination 
+														page="${pageDTO.page }" 
+														itemPerPage="${pageDTO.itemPerPage }" 
+														pagePerGroup="${pageDTO.pagePerGroup }" 
+														itemCount="${call_list_Count }" 
+													/>
+												</ul> 
+						                  </div>
 										</div>
 										<div class="box-footer chart-responsive">
 											<button type="button" class="btn btn-default pull-right hidden-print jsPrint"><i class="fa fa-print"></i><small> 인쇄</small></button>
@@ -215,7 +226,28 @@ $(document).ready(function(){
 	    	lineDraw();
 		});
 	}
-	
+
+
+    $(document).on("click", ".pagination li a", function(e) {
+        e.preventDefault();
+        var agentIdList = "";
+        $(".jsRemoveSearchAgent").each(function(index){
+			if( index != 0) agentIdList += ","; 
+			agentIdList += ("'" + $(this).attr("data-agentId") + "'");
+		});
+
+		$("#searchId").val(agentIdList);	
+        
+        var page = $(this).attr("data-page");
+        $("#form_agentCall_search input[name='page']").val(page);
+        
+        $("#form_agentCall_search").submit();
+        
+       // var pathname = window.location.pathname;
+      //  window.location.href = pathname + "?" + $("#form_callreport_search").serialize();
+    });
+
+    
 	$(document).on("change", "#selectAgentGroup", function(){
 		var agentGroupId = $("#selectAgentGroup").val();
 		if(agentGroupId != "allGroup") {

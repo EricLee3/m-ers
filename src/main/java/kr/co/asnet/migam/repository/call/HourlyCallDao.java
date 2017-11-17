@@ -3,6 +3,7 @@ package kr.co.asnet.migam.repository.call;
 import java.util.List;
 
 import kr.co.asnet.migam.domain.PageDTO;
+import kr.co.asnet.migam.domain.PageDTO2;
 import kr.co.asnet.migam.domain.SearchDTO;
 import kr.co.asnet.migam.domain.call.DailyCall;
 import kr.co.asnet.migam.domain.call.HourlyCall;
@@ -41,5 +42,8 @@ public interface HourlyCallDao {
 	 * @param orderby
 	 * @return
 	 */
-	public List<HourlyCall> selectHourlyCallListByOrderForYmdH(SearchDTO searchDTO, String orderby);
+	public List<HourlyCall> selectHourlyCallListByOrderForYmdH(PageDTO2 pageDTO2, SearchDTO searchDTO, String orderby);
+	
+	
+	public int selectHourMonitorStatCount(SearchDTO searchDTO);
 }

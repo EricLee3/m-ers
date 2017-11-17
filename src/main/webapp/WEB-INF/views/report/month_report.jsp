@@ -180,6 +180,16 @@
 													</c:if>
 												</tbody>
 											</table>
+											<div class="box-footer clearfix text-center">
+						                        <ul class="pagination pagination-sm no-margin">
+													<asnetPage:Pagination 
+														page="${pageDTO.page }" 
+														itemPerPage="${pageDTO.itemPerPage }" 
+														pagePerGroup="${pageDTO.pagePerGroup }" 
+														itemCount="${call_list_Count }" 
+													/>
+												</ul> 
+						                  </div>
 										</div>
 										<div class="box-footer chart-responsive">
 											<button type="button" class="btn btn-default pull-right hidden-print jsPrint"><i class="fa fa-print"></i><small> 인쇄</small></button>

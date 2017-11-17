@@ -2,6 +2,7 @@ package kr.co.asnet.migam.service.call;
 
 import java.util.List;
 
+import kr.co.asnet.migam.domain.PageDTO2;
 import kr.co.asnet.migam.domain.SearchDTO;
 import kr.co.asnet.migam.domain.call.AgentCall;
 
@@ -17,5 +18,7 @@ public interface AgentCallService {
 	 * @param orderby
 	 * @return
 	 */
-	public List<AgentCall> getAgentCallListForChart(SearchDTO searchDTO, String orderby);
+	public List<AgentCall> getAgentCallListForChart(PageDTO2 pageDTO2, SearchDTO searchDTO, String orderby);
+	
+	public int selectAgentMonitorStatCount(SearchDTO searchDTO);
 }

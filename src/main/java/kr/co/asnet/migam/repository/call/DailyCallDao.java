@@ -3,6 +3,7 @@ package kr.co.asnet.migam.repository.call;
 import java.util.List;
 
 import kr.co.asnet.migam.domain.PageDTO;
+import kr.co.asnet.migam.domain.PageDTO2;
 import kr.co.asnet.migam.domain.SearchDTO;
 import kr.co.asnet.migam.domain.call.DailyCall;
 
@@ -32,5 +33,8 @@ public interface DailyCallDao {
 	 * @param orderby
 	 * @return
 	 */
-	public List<DailyCall> selectDailyCallListForChart(SearchDTO searchDTO, String orderby);
+	public List<DailyCall> selectDailyCallListForChart(PageDTO2 pageDTO2,SearchDTO searchDTO, String orderby);
+	
+	
+	public int selectDayMonitorStatCount(SearchDTO searchDTO);
 }

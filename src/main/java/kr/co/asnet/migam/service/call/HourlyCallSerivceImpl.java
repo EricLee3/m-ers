@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import kr.co.asnet.migam.domain.PageDTO;
+import kr.co.asnet.migam.domain.PageDTO2;
 import kr.co.asnet.migam.domain.SearchDTO;
 import kr.co.asnet.migam.domain.call.DailyCall;
 import kr.co.asnet.migam.domain.call.HourlyCall;
@@ -48,8 +49,13 @@ public class HourlyCallSerivceImpl implements HourlyCallService {
 	 * @see kr.co.asnet.migam.service.call.HourlyCallService#getHourlyCallListForChart(kr.co.asnet.migam.domain.SearchDTO, java.lang.String)
 	 */
 	@Override
-	public List<HourlyCall> getHourlyCallListByOrder(SearchDTO searchDTO, String orderby) {
-		return hourlyCallDao.selectHourlyCallListByOrderForYmdH(searchDTO, orderby);
+	public List<HourlyCall> getHourlyCallListByOrder(PageDTO2 pageDTO2,SearchDTO searchDTO, String orderby) {
+		return hourlyCallDao.selectHourlyCallListByOrderForYmdH(pageDTO2,searchDTO, orderby);
 	}
 
+	
+	@Override
+	public int selectHourMonitorStatCount(SearchDTO searchDTO) {
+		return hourlyCallDao.selectHourMonitorStatCount(searchDTO);
+	}
 }

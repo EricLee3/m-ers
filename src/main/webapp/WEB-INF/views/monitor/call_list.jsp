@@ -365,13 +365,18 @@
                 			if( index != 0) agentIdList += ","; 
                 			agentIdList += ("'" + $(this).attr("data-agentId") + "'");
                 		});
-                		
+
+
+                		//상담원 선택 제거
+                		/*
                 		if($("select[name=selectAgent]").val() != 'selectAllAgent'){
                 			if( agentIdList.length < 1 ) {
                 				alert("상담원을 선택하여야 합니다.");
                 				return false;
                 			}
                 		}
+                		*/
+                		
                 		$("#searchId").val(agentIdList);	
                         document.getElementById("searchBoardIndex").value = $("#searchBoardIndex1").val();
                        // document.getElementById("searchId").value = $("#searchId").val();

@@ -14,6 +14,15 @@
 		<result property="decrementCount" column="decr_cnt" />
 	</resultMap>
 
+
+	<sql id="sql_paging">
+		<if test="pageDTO != null">
+			<![CDATA[
+			limit #{pageDTO.startRow}, #{pageDTO.itemPerPage}
+			]]>
+		</if>
+	</sql>
+	
 	<select id="selectAgentCallListForChart" parameterType="hashmap" resultMap="rmapAgentCall">
 		<![CDATA[
 			select
@@ -50,5 +59,45 @@
 			group by mecs5_agent_stat_daily.agent_id
 		]]>
 		<![CDATA[${orderby}]]>
+		<include refid="sql_paging" />
+	</select>
+	
+	<select id="selectAgentMonitorStatCount" parameterType="hashmap" resultType="int">
+		<![CDATA[select count(*) from (]]>
+			<![CDATA[
+			select
+				sum(total_cnt) as total_cnt,
+				sum(succ_cnt) as succ_cnt,
+				sum(fail_cnt) as fail_cnt,
+				sum(angry_cnt) as angry_cnt,
+				sum(stress_cnt) as stress_cnt,
+				sum(incr_cnt) as incr_cnt,
+				sum(decr_cnt) as decr_cnt,
+	            mecs5_agent_stat_daily.agent_id,
+				mecs5_agent.agent_name as agent_name
+			from 
+				mecs5_agent_stat_daily
+				LEFT join mecs5_agent
+				ON mecs5_agent.agent_id = mecs5_agent_stat_daily.agent_id 
+		]]>
+		<where>
+            <if test="searchDTO != null">
+            	<if test="searchDTO.startDate != null and searchDTO.startDate != '' ">
+            		<![CDATA[
+            			and date_format(stat_time,'%Y-%m-%d') >= #{searchDTO.startDate} 
+            			and date_format(stat_time,'%Y-%m-%d') <= #{searchDTO.endDate}
+            		]]>
+            	</if>
+            	<if test="searchDTO.searchId != null and searchDTO.searchId != '' ">
+            		<![CDATA[
+            			and mecs5_agent_stat_daily.agent_id in (${searchDTO.searchId}) 
+            		]]>
+            	</if>
+            </if>
+		</where>
+		<![CDATA[
+			group by mecs5_agent_stat_daily.agent_id
+		]]>
+		<![CDATA[) cnt]]>
 	</select>
 </mapper> 

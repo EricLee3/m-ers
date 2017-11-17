@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import kr.co.asnet.migam.domain.PageDTO;
+import kr.co.asnet.migam.domain.PageDTO2;
 import kr.co.asnet.migam.domain.SearchDTO;
 import kr.co.asnet.migam.domain.call.CallAnalysis;
 import kr.co.asnet.migam.domain.call.DailyCall;
@@ -48,8 +49,8 @@ public class DailyCallServiceImpl implements DailyCallService {
 	 * @see kr.co.asnet.migam.service.call.DailyCallService#getDailyCallListforChart(kr.co.asnet.migam.domain.PageDTO, kr.co.asnet.migam.domain.SearchDTO, java.lang.String)
 	 */
 	@Override
-	public List<DailyCall> getDailyCallListForChart(SearchDTO searchDTO, String orderby) {
-		return dailyCallDao.selectDailyCallListForChart(searchDTO, orderby);
+	public List<DailyCall> getDailyCallListForChart(PageDTO2 pageDTO2,SearchDTO searchDTO, String orderby) {
+		return dailyCallDao.selectDailyCallListForChart(pageDTO2, searchDTO, orderby);
 	}
 
 	/* (non-Javadoc)
@@ -109,6 +110,11 @@ public class DailyCallServiceImpl implements DailyCallService {
 			}
 		}
 		return dailyCall;
+	}
+	
+	@Override
+	public int selectDayMonitorStatCount(SearchDTO searchDTO) {
+		return dailyCallDao.selectDayMonitorStatCount(searchDTO);
 	}
 
 }

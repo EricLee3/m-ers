@@ -147,6 +147,7 @@ function linegraph(mdata){
 								<!-- 검색 조건 -->
 								<form role="form" id="form_hourlyCall_search" action="/report/hour_report" mehtod="post">
 									<input type="hidden" name="page" value="">
+									<input type="hidden" name="searchBoardIndex" id="searchBoardIndex" value="" />
 									<input type="hidden" name="searchType" value="${searchDTO.searchType}">
 <!-- 									<div class="col-md-2 col-sm-2"> -->
 <!-- 										<div class="form-group"> -->
@@ -285,10 +286,28 @@ function linegraph(mdata){
 													</c:if>
 												</tbody>
 											</table>
+											<div class="box-footer clearfix text-center">
+						                        <ul class="pagination pagination-sm no-margin">
+													<asnetPage:Pagination 
+														page="${pageDTO.page }" 
+														itemPerPage="${pageDTO.itemPerPage }" 
+														pagePerGroup="${pageDTO.pagePerGroup }" 
+														itemCount="${call_list_Count }" 
+													/>
+												</ul> 
+						                  </div>
 										</div>
 										<div class="box-footer chart-responsive">
 											<button type="button" class="btn btn-default pull-right hidden-print jsPrint"><i class="fa fa-print"></i><small> 인쇄</small></button>
 											<button type="button" class="btn btn-default pull-right hidden-print jsExcelDownload" ><i class="fa fa-file-excel-o"></i><small> 다운로드</small></button>
+												<!-- select style="width:150px;" class="form-control" id="searchBoardIndex1" name="searchBoardIndex1">
+													<option value="">선택</option>
+													<option value="5">5개</option>
+													<option value="15" selected="selected">15개</option>
+													<option value="25">25개</option>
+													<option value="50">50개</option>
+													<option value="100">100개</option>
+												</select -->
 										</div>
 									</div>
 								</div>
@@ -315,6 +334,7 @@ $(document).ready(function(){
 		print();
 	});
 
+	if ("${searchBoardIndex}" != null && "${searchBoardIndex}" != '') $("select[name=searchBoardIndex1]").val("${searchBoardIndex}").attr("selected", "selected");
 	
 	$(document).on("change", "#selectAgentGroup", function(){
 		var agentGroupId = $("#selectAgentGroup").val();
@@ -433,6 +453,7 @@ $(document).ready(function(){
 		e.preventDefault();
 		
 		var agentIdList = "";
+		document.getElementById("searchBoardIndex").value = $("#searchBoardIndex1").val();
 		$(".jsRemoveSearchAgent").each(function(index){
 			if( index != 0) agentIdList += ","; 
 			agentIdList += ("'" + $(this).attr("data-agentId") + "'");
@@ -444,6 +465,7 @@ $(document).ready(function(){
 				return false;
 			}
 		}
+		
 		$("#searchId").val(agentIdList);		
 		var tempStartdate = $("#startDate").val();
 		var tempEnddate = $("#endDate").val();
@@ -521,6 +543,7 @@ $(document).ready(function(){
          
          var page = $(this).attr("data-page");
          $("#form_hourlyCall_search input[name='page']").val(page);
+         document.getElementById("searchBoardIndex").value = $("#searchBoardIndex1").val();
          
          $("#form_hourlyCall_search").submit();
          

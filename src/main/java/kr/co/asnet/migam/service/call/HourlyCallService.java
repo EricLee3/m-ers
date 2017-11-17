@@ -3,6 +3,7 @@ package kr.co.asnet.migam.service.call;
 import java.util.List;
 
 import kr.co.asnet.migam.domain.PageDTO;
+import kr.co.asnet.migam.domain.PageDTO2;
 import kr.co.asnet.migam.domain.SearchDTO;
 import kr.co.asnet.migam.domain.call.DailyCall;
 import kr.co.asnet.migam.domain.call.HourlyCall;
@@ -37,7 +38,15 @@ public interface HourlyCallService {
 	 * @param orderby
 	 * @return
 	 */
-	public List<HourlyCall> getHourlyCallListByOrder(SearchDTO searchDTO, String orderby);
+	public List<HourlyCall> getHourlyCallListByOrder(PageDTO2 pageDTO2, SearchDTO searchDTO, String orderby);
+	
+	/**
+	 * 주어진 조건에 따라  HourlyCall객체 목록을 반환합니다.
+	 * 시간대별 통계 자료를 순서대로 가져 오며, sum 등 합산을 하지 않은 상태의 리스트로 count 저장됩니다.
+	 * @param searchDTO
+	 * @return
+	 */
+	public int selectHourMonitorStatCount(SearchDTO searchDTO);
 }
 
 

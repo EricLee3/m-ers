@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 
 import kr.co.asnet.migam.domain.PageDTO;
+import kr.co.asnet.migam.domain.PageDTO2;
 import kr.co.asnet.migam.domain.SearchDTO;
 import kr.co.asnet.migam.domain.agent.Agent;
 import kr.co.asnet.migam.domain.agent.AgentGroup;
@@ -302,6 +303,9 @@ public class ReportController {
 	@RequestMapping(value = "/agent_report", method = {RequestMethod.GET,RequestMethod.POST})
 	public String agentReport(@RequestParam(value = "page", required = false, defaultValue = "1") int page, Model model, SearchDTO searchDTO,String selectAgent) {
 		// 그룹 선택을 위한 SELECT를 만들 때 사용할 목록 표시용
+		
+		PageDTO2 pageDTO2 = new PageDTO2(page);
+		
 		List<AgentGroup> agentGroupList = agentGroupService.getAgentGroupList(null, null, "order by group_name *1 asc");
 		model.addAttribute("agentGroupList", agentGroupList);
 		//if( searchDTO.getSearchGroup() != null ) {
@@ -322,10 +326,10 @@ public class ReportController {
 			searchDTO.setStartDate(new SimpleDateFormat("yyyy-MM-dd").format(calendar.getTime()));
 			searchDTO.setEndDate(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
 		}
-		model.addAttribute("searchDTO", searchDTO);
 		
 		if( searchDTO.getSearchId() != null ) { 
-			List<AgentCall> agentCallListForChart = agentCallService.getAgentCallListForChart(searchDTO, "order by agent_id asc");
+			List<AgentCall> agentCallListForChart = agentCallService.getAgentCallListForChart(pageDTO2, searchDTO, "order by agent_id asc");
+			model.addAttribute("call_list_Count", agentCallService.selectAgentMonitorStatCount(searchDTO));
 			model.addAttribute("agentCallListForChart", agentCallListForChart);
 			
 			int totalCount = 0;
@@ -357,6 +361,10 @@ public class ReportController {
 		if(searchDTO.getSearchId() != null) {
 			model.addAttribute("searchId", selectAgent);
 		}
+		
+		model.addAttribute("pageDTO", pageDTO2);
+		model.addAttribute("searchDTO", searchDTO);
+		model.addAttribute("listCount", 10);
 		model.addAttribute("menu", "agent_report");
 		model.addAttribute("menuCategory", "report");
 		
@@ -414,6 +422,8 @@ public class ReportController {
 	@RequestMapping(value = "/day_report", method = RequestMethod.GET)
 	public String dayReport(@RequestParam(value = "page", required = false, defaultValue = "1") int page, Model model, SearchDTO searchDTO,String selectAgent) {
 			Boolean allagent=false;
+			
+			PageDTO2 pageDTO2 = new PageDTO2(page);
 		// 그룹 선택을 위한 SELECT를 만들 때 사용할 목록 표시용
 			List<AgentGroup> agentGroupList = agentGroupService.getAgentGroupList(null, null, "order by group_name *1 asc");
 			model.addAttribute("agentGroupList", agentGroupList);
@@ -443,12 +453,12 @@ public class ReportController {
 		if( searchDTO.getSearchType() == null ) {
 			searchDTO.setSearchType("0");
 		}
-		model.addAttribute("searchDTO", searchDTO);
 		
 	//	List<DailyCall> dailyCallListForChart = dailyCallService.getDailyCallListForChart(searchDTO, "order by stat_time asc");
 	//	model.addAttribute("dailyCallListForChart", dailyCallListForChart);
 		if(allagent ==true) {
-			List<DailyCall> dailyCallList = dailyCallService.getDailyCallListForChart(searchDTO, "order by stat_time desc");
+			List<DailyCall> dailyCallList = dailyCallService.getDailyCallListForChart(pageDTO2, searchDTO, "order by stat_time desc");
+			model.addAttribute("call_list_Count", dailyCallService.selectDayMonitorStatCount(searchDTO));
 			model.addAttribute("dailyCallList", dailyCallList);
 		}
 		/*
@@ -483,6 +493,11 @@ public class ReportController {
 			model.addAttribute("searchId", selectAgent);
 		}
 		
+		
+		
+		model.addAttribute("pageDTO", pageDTO2);
+		model.addAttribute("searchDTO", searchDTO);
+		model.addAttribute("listCount", 10);
 		model.addAttribute("menu", "day_report");
 		model.addAttribute("menuCategory", "report");
 		return "/report/day_report";
@@ -499,6 +514,8 @@ public class ReportController {
 	@RequestMapping(value = "/month_report", method = RequestMethod.GET)
 	public String monthReport(@RequestParam(value = "page", required = false, defaultValue = "1") int page, Model model, SearchDTO searchDTO, String selectAgent) {
 		Boolean allagent=false;
+		
+		PageDTO2 pageDTO2 = new PageDTO2(page);
 		// 그룹 선택을 위한 SELECT를 만들 때 사용할 목록 표시용
 		List<AgentGroup> agentGroupList = agentGroupService.getAgentGroupList(null, null, "order by group_name *1 asc");
 		model.addAttribute("agentGroupList", agentGroupList);
@@ -531,7 +548,8 @@ public class ReportController {
 	//	List<MonthlyCall> monthlyCallListForChart = monthlyCallService.getMonthlyCallListForChart(searchDTO, "order by stat_time asc");
 	//	model.addAttribute("monthlyCallListForChart", monthlyCallListForChart);
 		if(allagent ==true) {
-			List<MonthlyCall> monthlyCallList = monthlyCallService.getMonthlyCallListForChart(searchDTO, "order by stat_time desc");
+			List<MonthlyCall> monthlyCallList = monthlyCallService.getMonthlyCallListForChart(pageDTO2,searchDTO, "order by stat_time desc");
+			model.addAttribute("call_list_Count", monthlyCallService.selectMonthMonitorStatCount(searchDTO));
 			model.addAttribute("monthlyCallList", monthlyCallList);
 		}
 		/*
@@ -564,6 +582,9 @@ public class ReportController {
 			model.addAttribute("searchId", selectAgent);
 		}
 		
+		model.addAttribute("pageDTO", pageDTO2);
+		model.addAttribute("searchDTO", searchDTO);
+		model.addAttribute("listCount", 10);
 		model.addAttribute("menu", "month_report");
 		model.addAttribute("menuCategory", "report");
 		return "/report/month_report";
@@ -601,11 +622,14 @@ public class ReportController {
 			@RequestParam(value = "recordEnd", required = false, defaultValue = "23:00") String recordEnd, Model model,
 			SearchDTO searchDTO, String selectAgent) {
 
+		
+		PageDTO2 pageDTO2 = new PageDTO2(page);
+		
 		// 그룹 선택을 위한 SELECT를 만들 때 사용할 목록 표시용
 		List<AgentGroup> agentGroupList = agentGroupService.getAgentGroupList(null, null, "order by group_name *1 asc");
 		model.addAttribute("agentGroupList", agentGroupList);
 		//if( searchDTO.getSearchId() != null ) {
-			List<Agent> agentList = agentService.getAgentList(null, searchDTO, "order by agent_name asc");
+			List<Agent> agentList = agentService.getAgentList(pageDTO2, searchDTO, "order by agent_name asc");
 			model.addAttribute("agentList", agentList);
 		//}
 		Boolean allagent=false;
@@ -638,17 +662,14 @@ public class ReportController {
 			searchDTO.setEndDate(statDateEnd);
 		}
 		
-		model.addAttribute("recordStart", recordStart);
-		model.addAttribute("recordEnd", recordEnd);
-		model.addAttribute("searchDTO", searchDTO);
-		
+
 		
 		// hourlyCallListForChart 는 동일 시간대 값을 합산하여 조회. 고객 요청은 동일 시간대 합산이 아니라, 일자별로 시간대 값이 계속 표시되기를 원하여, hourlyCallListByOrder 를 추가했다.
 		//List<HourlyCall> hourlyCallListForChart = hourlyCallService.getHourlyCallListForChart(searchDTO, "order by stat_time asc");
 		//model.addAttribute("hourlyCallListForChart", hourlyCallListForChart);
 		
 		if(allagent ==true) {
-			List<HourlyCall> hourlyCallListByOrder = hourlyCallService.getHourlyCallListByOrder(searchDTO, "order by stat_time desc");
+			List<HourlyCall> hourlyCallListByOrder = hourlyCallService.getHourlyCallListByOrder(pageDTO2, searchDTO, "order by stat_time desc");
 			model.addAttribute("hourlyCallListByOrder", hourlyCallListByOrder);
 		}
 		
@@ -685,6 +706,12 @@ public class ReportController {
 		if(searchDTO.getSearchId() != null) {
 			model.addAttribute("searchId", selectAgent);
 		}
+		model.addAttribute("call_list_Count", hourlyCallService.selectHourMonitorStatCount(searchDTO));
+		model.addAttribute("pageDTO", pageDTO2);
+		model.addAttribute("listCount", 10);
+		model.addAttribute("recordStart", recordStart);
+		model.addAttribute("recordEnd", recordEnd);
+		model.addAttribute("searchDTO", searchDTO);
 		model.addAttribute("menu", "hour_report");
 		model.addAttribute("menuCategory", "report");
 		return "/report/hour_report";
@@ -701,6 +728,7 @@ public class ReportController {
 	@RequestMapping(value = "/performance_report", method = RequestMethod.GET)
 	public String batchReport(@RequestParam(value = "page", required = false, defaultValue = "1") int page, Model model, SearchDTO searchDTO, String selval) {
 		// 그룹 선택을 위한 SELECT를 만들 때 사용할 목록 표시용
+		PageDTO2 pageDTO2 = new PageDTO2(page);
 		List<AgentGroup> agentGroupList = agentGroupService.getAgentGroupList(null, null, "order by group_name *1 asc");
 		model.addAttribute("agentGroupList", agentGroupList);
 		if( searchDTO.getSearchGroup() != null ) {
@@ -724,7 +752,7 @@ public class ReportController {
 		model.addAttribute("searchDTO", searchDTO);
 		
 		if( searchDTO.getSearchId() != null ) { 
-			List<AgentCall> agentCallListForChart = agentCallService.getAgentCallListForChart(searchDTO, "order by agent_id asc");
+			List<AgentCall> agentCallListForChart = agentCallService.getAgentCallListForChart(null,searchDTO, "order by agent_id asc");
 			model.addAttribute("agentCallListForChart", agentCallListForChart);
 			
 			int totalCount = 0;
@@ -805,8 +833,10 @@ public class ReportController {
 	 * @return
 	 */
 	@RequestMapping(value = "/hour_report_download", method = RequestMethod.GET)
-	public String hourlyReportExcelDownload(SearchDTO searchDTO, Model model) {
+	public String hourlyReportExcelDownload(@RequestParam(value = "page", required = false, defaultValue = "1") int page, SearchDTO searchDTO, Model model) {
 		// 검색 조건 처리
+		PageDTO2 pageDTO2 = new PageDTO2(page);
+		
 		if( searchDTO.getSearchGroup() != null ) { 
 			if( searchDTO.getSearchGroup().equals("allGroup") ) searchDTO.setSearchGroup(null);
 			if( searchDTO.getSearchGroup().equals("") ) searchDTO.setSearchGroup(null);
@@ -822,7 +852,7 @@ public class ReportController {
 		PageDTO pageDTO = new PageDTO();
 		pageDTO.setItemPerPage(10000);
 		model.addAttribute("excelType", Const.EXCELDOWNLOAD_STATHOURLY);
-		List<HourlyCall> hourlyCallList = hourlyCallService.getHourlyCallListByOrder(searchDTO, "order by stat_time desc");
+		List<HourlyCall> hourlyCallList = hourlyCallService.getHourlyCallListByOrder(null, searchDTO, "order by stat_time desc");
 		model.addAttribute("hourlyCallList", hourlyCallList);
 		return "callReportExcelView";
 	}
@@ -851,7 +881,7 @@ public class ReportController {
 		PageDTO pageDTO = new PageDTO();
 		pageDTO.setItemPerPage(10000);
 		model.addAttribute("excelType", Const.EXCELDOWNLOAD_STATDAILY);
-		List<DailyCall> dailyCallList = dailyCallService.getDailyCallListForChart(searchDTO, "order by stat_time desc");
+		List<DailyCall> dailyCallList = dailyCallService.getDailyCallListForChart(null,searchDTO, "order by stat_time desc");
 		model.addAttribute("dailyCallList", dailyCallList);
 		return "callReportExcelView";
 	}
@@ -880,7 +910,7 @@ public class ReportController {
 		PageDTO pageDTO = new PageDTO();
 		pageDTO.setItemPerPage(10000);
 		model.addAttribute("excelType", Const.EXCELDOWNLOAD_STATMONTHLY);
-		List<MonthlyCall> monthlyCallList = monthlyCallService.getMonthlyCallListForChart(searchDTO, "order by stat_time desc");
+		List<MonthlyCall> monthlyCallList = monthlyCallService.getMonthlyCallListForChart(null,searchDTO, "order by stat_time desc");
 		model.addAttribute("monthlyCallList", monthlyCallList);
 		return "callReportExcelView";
 	}
@@ -909,7 +939,7 @@ public class ReportController {
 		PageDTO pageDTO = new PageDTO();
 		pageDTO.setItemPerPage(10000);
 		model.addAttribute("excelType", Const.EXCELDOWNLOAD_STATAGENT);
-		List<AgentCall> agentCallList = agentCallService.getAgentCallListForChart(searchDTO, "order by agent_id asc");
+		List<AgentCall> agentCallList = agentCallService.getAgentCallListForChart(null,searchDTO, "order by agent_id asc");
 		model.addAttribute("agentCallList", agentCallList);
 		return "callReportExcelView";
 	}
@@ -938,7 +968,7 @@ public class ReportController {
 		PageDTO pageDTO = new PageDTO();
 		pageDTO.setItemPerPage(10000);
 		model.addAttribute("excelType", Const.EXCELDOWNLOAD_STATAGENT);
-		List<AgentCall> agentCallList = agentCallService.getAgentCallListForChart(searchDTO, "order by agent_id asc");
+		List<AgentCall> agentCallList = agentCallService.getAgentCallListForChart(null,searchDTO, "order by agent_id asc");
 		model.addAttribute("agentCallList", agentCallList);
 		return "callReportExcelView";
 	}

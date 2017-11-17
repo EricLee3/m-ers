@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import kr.co.asnet.migam.domain.PageDTO2;
 import kr.co.asnet.migam.domain.SearchDTO;
 import kr.co.asnet.migam.domain.call.AgentCall;
 
@@ -36,12 +37,23 @@ public class AgentCallDaoMapper implements AgentCallDao {
 	 * @see kr.co.asnet.migam.repository.call.AgentCallDao#selectAgentCallListforChart(kr.co.asnet.migam.domain.PageDTO, kr.co.asnet.migam.domain.SearchDTO, java.lang.String)
 	 */
 	@Override
-	public List<AgentCall> selectAgentCallListForChart(SearchDTO searchDTO, String orderby) {
+	public List<AgentCall> selectAgentCallListForChart(PageDTO2 pageDTO2,SearchDTO searchDTO, String orderby) {
 		Map<String, Object> parameters = new HashMap<String, Object>();
 		{
+			parameters.put("pageDTO", pageDTO2);
 			parameters.put("searchDTO", searchDTO);
 			parameters.put("orderby", orderby);
 		}
 		return sqlSession.selectList("kr.co.asnet.migam.repository.call.AgentCallDaoMapper.selectAgentCallListForChart", parameters);
+	}
+	
+	
+	@Override
+	public int selectAgentMonitorStatCount(SearchDTO searchDTO) {
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		{
+			parameters.put("searchDTO", searchDTO);
+		}
+		return sqlSession.selectOne("kr.co.asnet.migam.repository.call.AgentCallDaoMapper.selectAgentMonitorStatCount", parameters);
 	}
 }

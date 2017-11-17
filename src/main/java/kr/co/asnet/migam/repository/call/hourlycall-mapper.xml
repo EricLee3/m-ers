@@ -99,6 +99,7 @@
 		</where>
 		<![CDATA[group by date_format(stat_time, '%H')]]>
 		<![CDATA[${orderby}]]>
+		<include refid="sql_paging" />
 	</select>
 	
 		<select id="selectHourlyCallListByOrder" parameterType="hashmap" resultMap="rmapHourlyCall">
@@ -175,6 +176,47 @@
 		</where>
 		<![CDATA[group by date_format(stat_time, '%d%H')]]>
 		<![CDATA[${orderby}]]>
+		<include refid="sql_paging" />
+	</select>
+	
+	
+	<select id="selectHourMonitorStatCount" parameterType="hashmap" resultType="int">
+		<![CDATA[select count(*) from (]]>
+		<![CDATA[
+			select 
+				stat_time, 
+				sum(total_cnt) as total_cnt,
+				sum(succ_cnt) as succ_cnt,
+				sum(fail_cnt) as fail_cnt,
+				sum(angry_cnt) as angry_cnt, 
+				sum(stress_cnt) as stress_cnt,
+				sum(incr_cnt) as incr_cnt,
+				sum(decr_cnt) as decr_cnt 
+			from 
+				mecs5_agent_stat_hourly
+		]]>
+		<where>
+            <if test="searchDTO != null">
+            	<if test="searchDTO.startDate != null and searchDTO.startDate != '' ">
+            		<![CDATA[
+            			and date_format(stat_time,'%Y-%m-%d %H') >= #{searchDTO.startDate} 
+            			and date_format(stat_time,'%Y-%m-%d %H') <= #{searchDTO.endDate}
+            		]]>
+            	</if>
+            	<if test="searchDTO.searchId != null and searchDTO.searchId != ''">
+            		<![CDATA[
+            			and agent_id in (${searchDTO.searchId}) 
+            		]]>
+            	</if>
+            	<if test="searchDTO.searchId == null and searchDTO.searchGroup != null">
+            		<![CDATA[
+            			and agent_id in ( select agent_id from mecs5_agent where group_id=#{searchDTO.searchGroup} )
+            		]]>
+            	</if>
+            </if>
+		</where>
+		<![CDATA[group by date_format(stat_time, '%d%H')]]>
+		<![CDATA[) cnt]]>
 	</select>
 	
 </mapper> 
