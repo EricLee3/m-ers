@@ -138,7 +138,7 @@ public class MainController {
 		model.addAttribute("searchDTO", searchDTO);
 		
 		// 지난달 1일부터 마지막 날까지 값
-		List<DailyCall> dailyLastMonthCallListForChart = dailyCallService.getDailyCallListForChart(searchDTO, "order by stat_time asc");
+		List<DailyCall> dailyLastMonthCallListForChart = dailyCallService.getDailyCallListForChart(null,searchDTO, "order by stat_time asc");
 		model.addAttribute("dailyLastMonthCallListForChart", dailyLastMonthCallListForChart);
 		
 		// 이번 달 1일부터 어제까지를 시작일과 종료일로 지정합니다.
@@ -151,7 +151,7 @@ public class MainController {
 		searchDTO.setStartDate(new SimpleDateFormat("yyyy-MM-dd").format(calendar.getTime())); // 이번 달 1일
 		
 		// 이번달 1일부터 어제까지 값
-		List<DailyCall> dailyCallListForChart = dailyCallService.getDailyCallListForChart(searchDTO, "order by stat_time asc");
+		List<DailyCall> dailyCallListForChart = dailyCallService.getDailyCallListForChart(null,searchDTO, "order by stat_time asc");
 		model.addAttribute("dailyCallListForChart", dailyCallListForChart);
 		
 		searchDTO.setSearchIsAudit("1");
@@ -167,7 +167,7 @@ public class MainController {
 		}
 		searchDTO.setSearchId(agentIdList);
 		
-		List<AgentCall> agentCallListForChart = agentCallService.getAgentCallListForChart(searchDTO, "order by agent_id asc");
+		List<AgentCall> agentCallListForChart = agentCallService.getAgentCallListForChart(null,searchDTO, "order by agent_id asc");
 		model.addAttribute("agentCallListForChart", agentCallListForChart);
 		
 		List<CallAnalysis> agentDailyAngryCallForDashBoard = callAnalysisService.getAgentDailyAngryCallForDashBoard(null, searchDTO, "order by agent_id asc");
@@ -255,7 +255,7 @@ public class MainController {
 	      model.addAttribute("searchDTO", searchDTO);
 	      
 	      // 지난달 1일부터 마지막 날까지 값
-	      List<DailyCall> dailyLastMonthCallListForChart = dailyCallService.getDailyCallListForChart(searchDTO, "order by stat_time asc");
+	      List<DailyCall> dailyLastMonthCallListForChart = dailyCallService.getDailyCallListForChart(null,searchDTO, "order by stat_time asc");
 	      model.addAttribute("dailyLastMonthCallListForChart", dailyLastMonthCallListForChart);
 	      
 	      // 이번 달 1일부터 어제까지를 시작일과 종료일로 지정합니다.
@@ -268,7 +268,7 @@ public class MainController {
 	      searchDTO.setStartDate(new SimpleDateFormat("yyyy-MM-dd").format(calendar.getTime())); // 이번 달 1일
 	      
 	      // 이번달 1일부터 어제까지 값
-	      List<DailyCall> dailyCallListForChart = dailyCallService.getDailyCallListForChart(searchDTO, "order by stat_time asc");
+	      List<DailyCall> dailyCallListForChart = dailyCallService.getDailyCallListForChart(null,searchDTO, "order by stat_time asc");
 	      model.addAttribute("dailyCallListForChart", dailyCallListForChart);
 	      
 	      searchDTO.setSearchIsAudit("1");
@@ -284,7 +284,7 @@ public class MainController {
 	      }
 	      searchDTO.setSearchId(agentIdList);
 	      
-	      List<AgentCall> agentCallListForChart = agentCallService.getAgentCallListForChart(searchDTO, "order by agent_id asc");
+	      List<AgentCall> agentCallListForChart = agentCallService.getAgentCallListForChart(null,searchDTO, "order by agent_id asc");
 	      model.addAttribute("agentCallListForChart", agentCallListForChart);
 	      
 	      List<CallAnalysis> agentDailyAngryCallForDashBoard = callAnalysisService.getAgentDailyAngryCallForDashBoard(null, searchDTO, "order by agent_id asc");
