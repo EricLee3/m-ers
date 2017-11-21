@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-    <%@include file="../include/taglib.jsp"%>
-        <script type="text/javascript" src="/resources/highcharts/highcharts.js"></script>
-        <script type="text/javascript" src="/resources/highcharts/exporting.js"></script>
-        <script>
-            $(function() {
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@include file="../include/taglib.jsp"%>
+
+<script>
+    $(function() {
                 $(document).ready(function() {
                     Highcharts.setOptions({
                         global: {
@@ -63,27 +63,17 @@
                                             }
                                         })
 
-                                        // x should be here because of the case returned fail  IOS[170717] 
-                                       
+                                        // 통화시간 변경분 표시 
                                         var date = new Date();
-                                        
                                         var start_time  = '<fmt:formatDate pattern="HHmmss" value="${callAudit.startTime}" />';
 										var hour = start_time.substr(0,2) * 60 * 60;
 										var minute= start_time.substr(2,2) *60;
 										var second = start_time.substr(4,2);
-
-										
 										
 										var hour_s = date.getHours() * 60 * 60;
 										var minute_s= date.getMinutes() * 60;
 										var second_s = date.getSeconds();
-
-										
                                         var now_date = (hour_s + minute_s+ second_s)-((parseInt(hour) + parseInt(minute) + parseInt(second)));
-
-
-
-
                                        
                                         $(".time_row").remove();
                                         var content = '<div class=" time_row" >';
@@ -92,6 +82,7 @@
                                        
                                         $(".time_body").append(content);
                                         
+                                        // x should be here because of the case returned fail  IOS[170717] 
                                         var x = (new Date()).getTime(); // current time
 
                                         //series[0].addPoint([x, parseInt(angry)], false, true);
@@ -262,52 +253,58 @@
             });
         </script>
 
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content modal-lg">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-                    <h4 class="modal-title" id="myModalLabel">콜 상세조회</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="info-box">
-                                <span class="info-box-icon bg-aqua"><i class="fa fa-user"></i></span>
-                                <div class="info-box-content">
-                                    <span class="info-box-text">고객번호</span>
-                                    <span class="info-box-number" id="customerNumber">${callAudit.customerNumber }</span>
-                                </div>
-                                <!-- /.info-box-content -->
-                            </div>
-                            <!-- /.info-box -->
+<div class="modal-dialog modal-lg" role="document">
+	<div class="modal-content modal-lg">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal"
+				aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+			<h4 class="modal-title" id="myModalLabel">콜 상세조회</h4>
+		</div>
+		<div class="modal-body">
+			<div class="row">
+				<div class="col-md-4">
+					<div class="info-box">
+						<span class="info-box-icon bg-aqua"><i class="fa fa-user"></i></span>
+						<div class="info-box-content">
+							<span class="info-box-text">고객번호</span> <span
+								class="info-box-number" id="customerNumber">${callAudit.customerNumber }</span>
+						</div>
+						<!-- /.info-box-content -->
+					</div>
+					<!-- /.info-box -->
 
-                            <div class="info-box">
-                                <span class="info-box-icon bg-aqua"><i class="fa fa-headphones"></i></span>
-                                <div class="info-box-content">
-                                    <span class="info-box-text" id="agentName">상담원 : ${callAudit.agentName }</span>
-<%--                                     <span class="info-box-text" id="groupName">(${callAudit.groupName})</span> --%>
-<%--                                     <span class="info-box-number" id="agentNumber">${callAudit.agentNumber}</span> --%>
-                                </div>
-                                <!-- /.info-box-content -->
-                            </div>
-                            <!-- /.info-box -->
+					<div class="info-box">
+						<span class="info-box-icon bg-aqua"><i
+							class="fa fa-headphones"></i></span>
+						<div class="info-box-content">
+							<span class="info-box-text" id="agentName">상담원 :
+								${callAudit.agentName }</span>
+							<%--                                     <span class="info-box-text" id="groupName">(${callAudit.groupName})</span> --%>
+							<%--                                     <span class="info-box-number" id="agentNumber">${callAudit.agentNumber}</span> --%>
+						</div>
+						<!-- /.info-box-content -->
+					</div>
+					<!-- /.info-box -->
 
-                            <div class="info-box">
-                                <span class="info-box-icon bg-aqua"><i class="fa fa-clock-o"></i></span>
-                                <div class="info-box-content" id="div_call_view">
-                                    <span class="info-box-text">시작시간 / 통화시간</span>
-                                    <div class="time_body">
-                                    	<div class=" time_row">
-                                    		<span class="info-box-number" id="startTime"><fmt:formatDate pattern="HH:mm:ss" value="${callAudit.startTime}" /> / ${callAudit.callDuration}초</span>
-                                		</div>
-                                	</div>
-                                </div>
-                                <!-- /.info-box-content -->
-                            </div>
-                            <!-- /.info-box -->
-                            <!--  
+					<div class="info-box">
+						<span class="info-box-icon bg-aqua"><i
+							class="fa fa-clock-o"></i></span>
+						<div class="info-box-content" id="div_call_view">
+							<span class="info-box-text">시작시간 / 통화시간</span>
+							<div class="time_body">
+								<div class=" time_row">
+									<span class="info-box-number" id="startTime"><fmt:formatDate
+											pattern="HH:mm:ss" value="${callAudit.startTime}" /> /
+										${callAudit.callDuration}초</span>
+								</div>
+							</div>
+						</div>
+						<!-- /.info-box-content -->
+					</div>
+					<!-- /.info-box -->
+					<!--  
 								<div class="col-md-6">
 									<span class="pull-left"> 
 										<i class="fa fa-minus text-primary"></i> 고객
@@ -325,14 +322,15 @@
 									</span>
 								</div>
 								-->
-                        </div>
-                        <!-- /.col -->
-                        <div class="col-md-8">
-                            <!-- LINE CHART -->
-                            <div class="row margin">
-                                <!--  <canvas id="lineChart" style="height: 250px"></canvas>-->
-                                <div id="linegraph_display" style="margin-top:20px; margin-left:5px; width:560px; height:300px;"></div>
-                                <!--  
+				</div>
+				<!-- /.col -->
+				<div class="col-md-8">
+					<!-- LINE CHART -->
+					<div class="row margin">
+						<!--  <canvas id="lineChart" style="height: 250px"></canvas>-->
+						<div id="linegraph_display"
+							style="margin-top: 20px; margin-left: 5px; width: 560px; height: 300px;"></div>
+						<!--  
 									<span class="col-md-12">
 										<audio id="audioPlayer1" src="/resources/wav/${fn:replace(callAudit.customerWavePath, '/home/mecs/PSNR/', '')}" controls preload="auto" ></audio>
 										<audio id="audioPlayer2" src="/resources/wav/${fn:replace(callAudit.agentWavePath, '/home/mecs/PSNR/', '')}" controls preload="auto" ></audio>
@@ -347,7 +345,8 @@
 					</div>
 				</div>
 				<!-- /.modal-content -->
-                                <form id="dummyforData" class="hide">
-                                    <input id='callStartTime' type='text' value='<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${callAudit.startTime}" />'>
-                                </form>
-                            </div>
+						<form id="dummyforData" class="hide">
+							<input id='callStartTime' type='text'
+								value='<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${callAudit.startTime}" />'>
+						</form>
+					</div>

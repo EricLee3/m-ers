@@ -35,6 +35,11 @@
             <script src="/resources/plugins/ionslider/ion.rangeSlider.min.js"></script>
             <script src="/resources/plugins/raphael/raphael-min.js"></script>
             <script src="/resources/plugins/morris/morris.min.js"></script>
+            
+            <script type="text/javascript" src="/resources/highcharts/highcharts.js"></script>
+			<script type="text/javascript" src="/resources/highcharts/exporting.js"></script>
+            
+            
             <script>
                 $(document).ready(function() {
                     if ("${searchBoardIndex}" != null && "${searchBoardIndex}" != '') $("select[name=searchBoardIndex1]").val("${searchBoardIndex}").attr("selected", "selected");

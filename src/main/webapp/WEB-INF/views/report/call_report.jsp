@@ -36,6 +36,11 @@
 	<script src="/resources/plugins/ionslider/ion.rangeSlider.min.js"></script>
 	<script src="/resources/plugins/raphael/raphael-min.js"></script>
 	<script src="/resources/plugins/morris/morris.min.js"></script>
+	
+	<!-- moved from call_view.jsp because of error highchart/16 [IOS 21-Nov-17] -->
+	<script type="text/javascript" src="/resources/highcharts/stock/highstock.js"></script>
+	<script type="text/javascript" src="/resources/highcharts/stock/exporting.js"></script>
+	
 </head>
 <script>
 		$(document).ready(function(){
