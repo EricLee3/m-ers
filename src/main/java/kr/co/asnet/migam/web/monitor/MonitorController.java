@@ -551,12 +551,18 @@ public class MonitorController {
 
 			// interim code for Service indicator
 			// actually it is recommended that the operator should create unique service indicator name for profiling IOS[25-Jul-2017]
-			if (indicator_name == "Energetic")  {
-				if (StateList.get(i).getCall_party() == "0")
+			if (indicator_name.equals("Energetic"))  {
+				if (StateList.get(i).getCall_party() == "0")  {
 					indicator_name = "EnergeticCallee";
-			} else if (indicator_name == "Stress")  {
-				if (StateList.get(i).getCall_party() == "0")
+				} else  {
+					indicator_name = "EnergeticCaller";
+				}
+			} else if (indicator_name.equals("Stress"))  {
+				if (StateList.get(i).getCall_party() == "0")  {
 					indicator_name = "StressCallee";
+				} else  { 
+					indicator_name = "StressCaller";
+				}
 			}
             String indicator_level = StateList.get(i).getIndicator_level();
             indicator_data[i] = indicator_name+","+indicator_level;

@@ -28,13 +28,13 @@
                                         angry = 0,
 //                                         boredom = 0,
 //                                         uncomfortable = 0,
-                                        stressCallee = 0,
-                                        energeticCallee = 0,
-                                        uncertain = 0,
-                                        concentration = 0,
-                                        dissatisfaction = 0,
-                                        stressCaller = 0,
-                                        energeticCaller = 0;
+                                        stressCallee = 0;
+//                                         energeticCallee = 0,
+//                                         uncertain = 0,
+//                                         concentration = 0,
+//                                         dissatisfaction = 0,
+//                                         stressCaller = 0,
+//                                         energeticCaller = 0;
                                     refreshInterval = setInterval(function() {
                                         $.ajax({
                                             url: '/monitor/call_linegraph?agentId=' + '${agentId}',
@@ -52,12 +52,12 @@
                                                     //if (name == "Boredom") boredom = val;
                                                     //if (name == "Uncomfortable") uncomfortable = val;
                                                     if (name == "StressCallee") stressCallee = val;
-                                                    if (name == "EnergeticCallee") energeticCallee = val;
-                                                    if (name == "Uncertain") uncertain = val;
-                                                    if (name == "Concentration") concentration = val;
-                                                    if (name == "Dissatisfaction") dissatisfaction = val;
-                                                    if (name == "StressCaller") stressCaller = val;
-                                                    if (name == "EnergeticCaller") energeticCaller = val;
+//                                                     if (name == "EnergeticCallee") energeticCallee = val;
+//                                                     if (name == "Uncertain") uncertain = val;
+//                                                     if (name == "Concentration") concentration = val;
+//                                                     if (name == "Dissatisfaction") dissatisfaction = val;
+//                                                     if (name == "StressCaller") stressCaller = val;
+//                                                     if (name == "EnergeticCaller") energeticCaller = val;
 													
                                                 }
                                             }
@@ -95,13 +95,13 @@
 
                                         // static code for STM version only, requested by Cho E IOS[170711] 
                                         series[0].addPoint([x, parseInt(angry)			], false, true);
-                                        series[1].addPoint([x, parseInt(stressCallee)	], false, true);
-                                        series[2].addPoint([x, parseInt(energeticCallee)], false, true);
-                                        series[3].addPoint([x, parseInt(uncertain)		], false, true);
-                                        series[4].addPoint([x, parseInt(concentration)	], false, true);
-                                        series[5].addPoint([x, parseInt(dissatisfaction)], false, true);
-                                        series[6].addPoint([x, parseInt(stressCaller)	], false, true);
-                                        series[7].addPoint([x, parseInt(energeticCaller)], true,  true);
+                                        series[1].addPoint([x, parseInt(stressCallee)	], true, true);
+//                                         series[2].addPoint([x, parseInt(energeticCallee)], false, true);
+//                                         series[3].addPoint([x, parseInt(uncertain)		], false, true);
+//                                         series[4].addPoint([x, parseInt(concentration)	], false, true);
+//                                         series[5].addPoint([x, parseInt(dissatisfaction)], false, true);
+//                                         series[6].addPoint([x, parseInt(stressCaller)	], false, true);
+//                                         series[7].addPoint([x, parseInt(energeticCaller)], true,  true);
                                         
 //                                         series[0].addPoint([x, parseInt(attention)], false, true);
 //                                         series[1].addPoint([x, parseInt(interest)], false, true);
@@ -110,13 +110,13 @@
 //                                         series[5].addPoint([x, parseInt(uncomfortable)], false, true);
 
                                         angry = 0,
-                                        stressCallee = 0,
-                                        energeticCallee = 0,
-                                        uncertain = 0,
-                                        concentration = 0,
-                                        dissatisfaction = 0,
-                                        stressCaller = 0,
-                                        energeticCaller = 0;
+                                        stressCallee = 0;
+//                                         energeticCallee = 0,
+//                                         uncertain = 0,
+//                                         concentration = 0,
+//                                         dissatisfaction = 0,
+//                                         stressCaller = 0,
+//                                         energeticCaller = 0;
                                     }, 1000);
                                 }
                             }
@@ -163,51 +163,6 @@
                                 return data;
                             })()
                         }, {
-                            name: '스트레스(고객)',
-                            data: (function() {
-                                var data = [], time = (new Date()).getTime(), i;
-                                for (i = -15; i <= 0; i++) {
-                                    data.push({x: time + i * 1000, y: 0});
-                                }
-                                return data;
-                            })()
-                        }, {
-                            name: '활력(고객)',
-                            data: (function() {
-                                var data = [], time = (new Date()).getTime(), i;
-                                for (i = -15; i <= 0; i++) {
-                                    data.push({x: time + i * 1000, y: 0});
-                                }
-                                return data;
-                            })()
-                        }, {
-                            name: '불확실',
-                            data: (function() {
-                                var data = [], time = (new Date()).getTime(), i;
-                                for (i = -15; i <= 0; i++) {
-                                    data.push({x: time + i * 1000, y: 0});
-                                }
-                                return data;
-                            })()
-                        }, {
-                            name: '집중',
-                            data: (function() {
-                                var data = [], time = (new Date()).getTime(), i;
-                                for (i = -15; i <= 0; i++) {
-                                    data.push({x: time + i * 1000, y: 0});
-                                }
-                                return data;
-                            })()
-                        }, {
-                            name: '불만족',
-                            data: (function() {
-                                var data = [], time = (new Date()).getTime(), i;
-                                for (i = -15; i <= 0; i++) {
-                                    data.push({x: time + i * 1000, y: 0});
-                                }
-                                return data;
-                            })()
-                        }, {
                             name: '스트레스(상담사)',
                             data: (function() {
                                 var data = [], time = (new Date()).getTime(), i;
@@ -216,16 +171,62 @@
                                 }
                                 return data;
                             })()
-                        }, {
-                            name: '활력(상담사)',
-                            data: (function() {
-                                var data = [], time = (new Date()).getTime(), i;
-                                for (i = -15; i <= 0; i++) {
-                                    data.push({x: time + i * 1000, y: 0});
-                                }
-                                return data;
-                            })()
                         }
+//                         , {
+//                             name: '활력(고객)',
+//                             data: (function() {
+//                                 var data = [], time = (new Date()).getTime(), i;
+//                                 for (i = -15; i <= 0; i++) {
+//                                     data.push({x: time + i * 1000, y: 0});
+//                                 }
+//                                 return data;
+//                             })()
+//                         }, {
+//                             name: '불확실',
+//                             data: (function() {
+//                                 var data = [], time = (new Date()).getTime(), i;
+//                                 for (i = -15; i <= 0; i++) {
+//                                     data.push({x: time + i * 1000, y: 0});
+//                                 }
+//                                 return data;
+//                             })()
+//                         }, {
+//                             name: '집중',
+//                             data: (function() {
+//                                 var data = [], time = (new Date()).getTime(), i;
+//                                 for (i = -15; i <= 0; i++) {
+//                                     data.push({x: time + i * 1000, y: 0});
+//                                 }
+//                                 return data;
+//                             })()
+//                         }, {
+//                             name: '불만족',
+//                             data: (function() {
+//                                 var data = [], time = (new Date()).getTime(), i;
+//                                 for (i = -15; i <= 0; i++) {
+//                                     data.push({x: time + i * 1000, y: 0});
+//                                 }
+//                                 return data;
+//                             })()
+//                         }, {
+//                             name: '스트레스(고객)',
+//                             data: (function() {
+//                                 var data = [], time = (new Date()).getTime(), i;
+//                                 for (i = -15; i <= 0; i++) {
+//                                     data.push({x: time + i * 1000, y: 0});
+//                                 }
+//                                 return data;
+//                             })()
+//                         }, {
+//                             name: '활력(상담사)',
+//                             data: (function() {
+//                                 var data = [], time = (new Date()).getTime(), i;
+//                                 for (i = -15; i <= 0; i++) {
+//                                     data.push({x: time + i * 1000, y: 0});
+//                                 }
+//                                 return data;
+//                             })()
+//                         }
 //                         , {
 //                             name: '불확실',
 //                             data: (function() {

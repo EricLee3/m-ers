@@ -244,16 +244,17 @@ public class ReportController {
 		DecimalFormat format = new DecimalFormat("#");
 	          
 		for(int i=0;i< CompletionCallAnalysisList.size();i++){
-			indicator_name = CompletionCallAnalysisList.get(i).getIndicator_kor_name();
+			indicator_name = CompletionCallAnalysisList.get(i).getIndicator_name();
+															//.getIndicator_kor_name();
 			// interim code for Service indicator
 			// actually it is recommended that the operator should create unique service indicator name for profiling IOS[25-Jul-2017]
-			if (indicator_name == "Energetic")  {
+			if (indicator_name.equals("Energetic"))  {
 				if (CompletionCallAnalysisList.get(i).getCall_party() == "0")  {
 					indicator_name = "Energetic(상담원)";
 				} else  {
 					indicator_name = "Energetic(고객)";
 				}
-			} else if (indicator_name == "Stress")  {
+			} else if (indicator_name.equals("Stress"))  {
 				if (CompletionCallAnalysisList.get(i).getCall_party() == "0")  {
 					indicator_name = "Stress(상담원)";
 				} else  {
