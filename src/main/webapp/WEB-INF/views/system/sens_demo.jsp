@@ -618,7 +618,8 @@ function fun_failcode(){
 					<form role="form" id="form_pro_create" action="" method="post">
 						<input type="hidden" id="checkedGroupId" name="checkedGroupId" value="false">
 						<div class="modal-body">
-							<div class="form-group" style="height: 360px">
+<!-- 							<div class="form-group" style="height: 360px"> -->
+							<div class="form-group" style="height: 50px">
 							<table cellpadding="0" border="0" align="left" width="100%">
 								<tr style="border-bottom:1px solid #D3D3D3;">
 									<td width="10%" align="center">전체<input type="checkbox" id="checkall" /></td>

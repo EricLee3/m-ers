@@ -1801,7 +1801,13 @@ public class SystemController {
 	   @RequestMapping(value = "/sens_demo", method = {RequestMethod.GET, RequestMethod.POST})
 		public String sens_demo( @RequestParam(value = "page", required = false, defaultValue = "1") int page, Model model, SearchDTO searchDTO, PageDTO2 pageDTO) {
 			List<ProMeta> IndiList = proMetaService.getIndiList(pageDTO, searchDTO, "order by name desc");
-			model.addAttribute("IndiList", IndiList);
+			
+			// to get rid of service ind for demo except Angry, Stress [24 Nov 17 IOS]
+			List<ProMeta> IndListTemp = IndiList.subList(2,  4);
+			model.addAttribute("IndiList", IndListTemp);
+			
+			
+			//model.addAttribute("IndiList", IndiList);
 			model.addAttribute("menu", "prometa");
 			model.addAttribute("menuCategory", "system");
 			return "/system/sens_demo"; //메인페이지가 완성되지 않아 임시 주석처리합니다.
