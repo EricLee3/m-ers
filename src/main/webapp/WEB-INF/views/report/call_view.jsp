@@ -80,7 +80,8 @@ function linegraph(mdata){
 
 	$(document).ready(function(){
 
- 		$.getJSON("https://"+location.host+"/report/linegraph?idx="+"${index}", function(data) {
+//  		$.getJSON("https://"+location.host+"/report/linegraph?idx="+"${index}", function(data) {
+  		$.getJSON(document.location.origin+"/report/linegraph?idx="+"${index}", function(data) {
  			linegraph(data);
 		});
 

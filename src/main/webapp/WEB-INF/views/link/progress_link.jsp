@@ -64,7 +64,8 @@
         
         $(function() {
             $(document).ready(function() {
-            	setInterval(req_progress,3000);
+            	// changed 3000ms to 2000ms [27-Nov-17 IOS] 
+            	setInterval(req_progress,2000);
            	});
         });
         

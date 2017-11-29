@@ -37,7 +37,8 @@
 //                                         energeticCaller = 0;
                                     refreshInterval = setInterval(function() {
                                         $.ajax({
-                                            url: '/monitor/call_linegraph?agentId=' + '${agentId}',
+//                                             url: '/monitor/call_linegraph?agentId=' + '${agentId}',
+                                            url: document.location.origin + '/monitor/call_linegraph?agentId=' + '${agentId}',
                                             success: function(data) {
                                                 //var x = (new Date()).getTime(); // current time
                                                 for (var i = 0; i < data.length; i++) {
