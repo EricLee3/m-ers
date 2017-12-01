@@ -1816,7 +1816,10 @@ public class SystemController {
 	   @RequestMapping(value = "/voiceCream_demo", method = {RequestMethod.GET, RequestMethod.POST})
 		public String voiceCream_demo( @RequestParam(value = "page", required = false, defaultValue = "1") int page, Model model, SearchDTO searchDTO, PageDTO2 pageDTO) {
 			List<ProMeta> IndiList = proMetaService.getIndiList(pageDTO, searchDTO, "order by name desc");
-			model.addAttribute("IndiList", IndiList);
+			
+			// to get rid of service ind for demo except Angry, Stress [1 Dec 17 IOS]
+			model.addAttribute("IndiList", IndiList.subList(2, 4));
+			//model.addAttribute("IndiList", IndiList);			
 			return "/demo/voiceCream_demo"; //메인페이지가 완성되지 않아 임시 주석처리합니다.
 		}
 	   

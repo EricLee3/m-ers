@@ -110,7 +110,7 @@ function fun_lastresult(){
 }
 function linegraph(mdata){
 	Highcharts.setOptions({
-	    colors: ['#b6728e', '#6dc066', '#ff6666', '#66cdaa', '#f08080', 
+	    colors: ['#FF0000', '#FF5E00', '#1DDB16', '#FFE400', '#f08080',  
 	             '#ffc82e', '#ffb6c1','#11a51b', '#738b9a', '#7ac5cd',
 	             '#4f90c1', '#222d4a','#9c3b30', '#db8e4e', '#dbbc5d',
 	             '#ff8fcf', '#d11141','#6663bf', '#16f14b', '#d0a92b']
@@ -183,6 +183,10 @@ function circlegraph(adata){
 	                background: '#ffffff',
 	                shadow:false
 	            },
+	            seriesColors:['#FF0000', '#FF5E00', '#1DDB16', '#FFE400','#17BDB8', 
+	            	'#ffc82e', '#ffb6c1','#11a51b', '#738b9a', '#7ac5cd',
+		             '#4f90c1', '#222d4a','#9c3b30', '#db8e4e', '#dbbc5d',
+		             '#ff8fcf', '#d11141','#6663bf', '#16f14b', '#d0a92b'],
 	            seriesDefaults: {
 	                shadow: false, 
 	                renderer: jQuery.jqplot.PieRenderer, 
