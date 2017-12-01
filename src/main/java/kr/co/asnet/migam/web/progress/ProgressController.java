@@ -59,9 +59,6 @@ public class ProgressController {
 		model.addAttribute("custom_num", progressLink.getCustom_num());
 		model.addAttribute("ProgressList", progresslinkList);
 
-//		System.out.println("IOS-----------------------------");
-//		System.out.println(progressLink.toString());
-		
 		return "/link/progress_link"; 
 	}
 
