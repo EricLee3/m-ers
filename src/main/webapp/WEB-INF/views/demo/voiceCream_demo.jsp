@@ -110,12 +110,25 @@ function fun_lastresult(){
 
 
 function linegraph(mdata){
-	Highcharts.setOptions({
-	    colors: ['#FF0000', '#FF5E00', '#1DDB16', '#FFE400', '#f08080', 
-	             '#ffc82e', '#ffb6c1','#11a51b', '#738b9a', '#7ac5cd',
-	             '#4f90c1', '#222d4a','#9c3b30', '#db8e4e', '#dbbc5d',
-	             '#ff8fcf', '#d11141','#6663bf', '#16f14b', '#d0a92b']
-	});
+// 	Highcharts.setOptions({
+// 	    colors: ['#FF0000', '#FF5E00', '#1DDB16', '#FFE400', '#f08080', 
+// 	             '#ffc82e', '#ffb6c1','#11a51b', '#738b9a', '#7ac5cd',
+// 	             '#4f90c1', '#222d4a','#9c3b30', '#db8e4e', '#dbbc5d',
+// 	             '#ff8fcf', '#d11141','#6663bf', '#16f14b', '#d0a92b']
+// 	});
+	
+	for (var i=0; i < mdata.length; i++)  {
+		if (mdata[i].name == 'Angry')  {
+			mdata[i].color = "#FF0000";
+		} else if (mdata[i].name == 'Dissatisfaction')  {
+			mdata[i].color = "#FF5E00";
+		} else if (mdata[i].name == 'Energetic')  {
+			mdata[i].color = "#1DDB16";
+		} else if (mdata[i].name == 'Stress')  {
+			mdata[i].color = "#FFE400";
+		}
+	}
+	
     Highcharts.chart('linegraph_display', {
 	    title: {
 	        //text: 'Solar Employment Growth by Sector, 2010-2016'
@@ -173,7 +186,21 @@ function linegraph(mdata){
 function circlegraph(adata){
 	  //data1 = [[['화난', 210],['Oranges', 111], ['Bananas', 74], ['Grapes', 72],['Pears', 49]]];
 	  //  toolTip1 = ['Red Delicious Apples', 'Parson Brown Oranges', 'Cavendish Bananas', 'Albaranzeuli Nero Grapes', 'Green Anjou Pears'];
+	  
+	  	var colorSeries = new Array();
+	    for (var i=0; i < adata[0].length; i++)  {
+			if (adata[0][i][0] == 'Angry')  {
+				colorSeries[i] = "#FF0000";
+			} else if (adata[0][i][0] == 'Dissatisfaction')  {
+				colorSeries[i] = "#FF5E00";
+			} else if (adata[0][i][0] == 'Energetic')  {
+				colorSeries[i] = "#1DDB16";
+			} else if (adata[0][i][0] == 'Stress')  {
+				colorSeries[i] = "#FFE400";
+			}
+		}
 	    
+	    // seriesColors:mdata 형태로 넣으면 될 듯 ... IOS 
 	    var plot1 = jQuery.jqplot('circlegraph_display', 
 	    		adata,
 	        {
@@ -184,10 +211,7 @@ function circlegraph(adata){
 	                background: '#ffffff',
 	                shadow:false
 	            },
-	            seriesColors:['#FF0000', '#FF5E00', '#1DDB16', '#FFE400','#17BDB8', 
-	            	'#ffc82e', '#ffb6c1','#11a51b', '#738b9a', '#7ac5cd',
-		             '#4f90c1', '#222d4a','#9c3b30', '#db8e4e', '#dbbc5d',
-		             '#ff8fcf', '#d11141','#6663bf', '#16f14b', '#d0a92b'],
+	            seriesColors:colorSeries,
 	            seriesDefaults: {
 	                shadow: false, 
 	                renderer: jQuery.jqplot.PieRenderer, 
@@ -633,7 +657,8 @@ function fun_failcode(){
 					<form role="form" id="form_pro_create" action="" method="post">
 						<input type="hidden" id="checkedGroupId" name="checkedGroupId" value="false">
 						<div class="modal-body">
-							<div class="form-group" style="height: 50px">
+							<!-- 감성지표 선택 다이얼로그 창크기 IOS 06-Dec-17 -->
+							<div class="form-group" style="height: 90px">
 							<table cellpadding="0" border="0" align="left" width="100%">
 								<tr style="border-bottom:1px solid #D3D3D3;">
 									<td width="10%" align="center">전체<input type="checkbox" id="checkall" /></td>
