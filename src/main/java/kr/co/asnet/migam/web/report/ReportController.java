@@ -240,7 +240,7 @@ public class ReportController {
         List<Map> hashlist = new ArrayList<Map>();
 		String indicator_name = "";
 		String indicator_end_pos = "";
-		String indicator_result ="";
+		String indicator_result ="0";
 		DecimalFormat format = new DecimalFormat("#");
 	          
 		for(int i=0;i< CompletionCallAnalysisList.size();i++){
@@ -272,20 +272,21 @@ public class ReportController {
 	        int[] end_postime_sub2 = new int[end_posbtime.length];
 	        
 	        Object[] postime = new Object[end_posbtime.length];
-	            
-            for(int j = 0; j<indicator_result_sub.length; j++){
-                String str = format.format(Double.parseDouble(end_posbtime[j]));
-                end_postime_sub2[j] =  Integer.parseInt(str) ;
-              
-                indicator_result_sub2[j] = Integer.parseInt(indicator_result_sub[j]);
-
-                Object[] postime2 ={end_postime_sub2[j],indicator_result_sub2[j]}; 
-                postime[j] = postime2;
-            }
+	        if (!indicator_result.isEmpty())  {    
+	            for(int j = 0; j<indicator_result_sub.length; j++){
+	                String str = format.format(Double.parseDouble(end_posbtime[j]));
+	                end_postime_sub2[j] =  Integer.parseInt(str) ;
+	              
+	                indicator_result_sub2[j] = Integer.parseInt(indicator_result_sub[j]);
+	
+	                Object[] postime2 ={end_postime_sub2[j],indicator_result_sub2[j]}; 
+	                postime[j] = postime2;
+	            }
+	        }
 	        	
 	        HashMap hashmap = new HashMap();
 //            hashmap = new HashMap();
-            hashmap.put("name", indicator_name);
+            hashmap.put("name", indicator_name.isEmpty()?"Default":indicator_name);
             hashmap.put("data", postime);
             hashlist.add(hashmap);
 		}

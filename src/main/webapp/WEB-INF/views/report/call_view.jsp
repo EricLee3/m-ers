@@ -81,6 +81,7 @@ function linegraph(mdata){
 	$(document).ready(function(){
 
 //  		$.getJSON("https://"+location.host+"/report/linegraph?idx="+"${index}", function(data) {
+		console.log("http?? is " + document.location.origin);
   		$.getJSON(document.location.origin+"/report/linegraph?idx="+"${index}", function(data) {
  			linegraph(data);
 		});
