@@ -179,7 +179,8 @@ public class ProcessGroupREST {
 			fault.setS_userid(array[2]);
 			fault.setCode(array[0]);
 			
-			result = ProcessGroupService.insertFaultHis(fault);
+			//insert??? update FaultHis!!! column??
+			//result = ProcessGroupService.insertFaultHis(fault);
 			isDeleted = ProcessGroupService.deleteFaultAlarm(array[0]); 
 			
 			response.setHeader("Cache-Control", "no-store");
