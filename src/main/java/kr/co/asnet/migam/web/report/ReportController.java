@@ -464,6 +464,30 @@ public class ReportController {
 			List<DailyCall> dailyCallList = dailyCallService.getDailyCallListForChart(pageDTO2, searchDTO, "order by stat_time desc");
 			model.addAttribute("call_list_Count", dailyCallService.selectDayMonitorStatCount(searchDTO));
 			model.addAttribute("dailyCallList", dailyCallList);
+			
+			int totalCount = 0;
+			int successCount = 0;
+			int failCount = 0;
+			int angerCount = 0;
+			int stressCount = 0;
+			int incrementCount = 0;
+			int decrementCount = 0;
+			for (DailyCall agentCall : dailyCallList ) {
+				totalCount += agentCall.getTotalCount();
+				successCount += agentCall.getSuccessCount();
+				failCount += agentCall.getFailCount();
+				angerCount += agentCall.getAngryCount();
+				stressCount += agentCall.getStressCount();
+				incrementCount += agentCall.getIncrementCount();
+				decrementCount += agentCall.getDecrementCount();
+			}
+			model.addAttribute("totalCall", totalCount);
+			model.addAttribute("successCount", successCount);
+			model.addAttribute("failCount", failCount);
+			model.addAttribute("angerCall", angerCount);
+			model.addAttribute("stressCall", stressCount);
+			model.addAttribute("incrementCount", incrementCount);
+			model.addAttribute("decrementCount", decrementCount);
 		}
 		/*
 		int totalCount = 0;
@@ -555,6 +579,32 @@ public class ReportController {
 			List<MonthlyCall> monthlyCallList = monthlyCallService.getMonthlyCallListForChart(pageDTO2,searchDTO, "order by stat_time desc");
 			model.addAttribute("call_list_Count", monthlyCallService.selectMonthMonitorStatCount(searchDTO));
 			model.addAttribute("monthlyCallList", monthlyCallList);
+			
+			int totalCount = 0;
+			int successCount = 0;
+			int failCount = 0;
+			int angerCount = 0;
+			int stressCount = 0;
+			int incrementCount = 0;
+			int decrementCount = 0;
+			for (MonthlyCall agentCall : monthlyCallList ) {
+				totalCount += agentCall.getTotalCount();
+				successCount += agentCall.getSuccessCount();
+				failCount += agentCall.getFailCount();
+				angerCount += agentCall.getAngryCount();
+				stressCount += agentCall.getStressCount();
+				incrementCount += agentCall.getIncrementCount();
+				decrementCount += agentCall.getDecrementCount();
+			}
+			model.addAttribute("totalCall", totalCount);
+			model.addAttribute("successCount", successCount);
+			model.addAttribute("failCount", failCount);
+			model.addAttribute("angerCall", angerCount);
+			model.addAttribute("stressCall", stressCount);
+			model.addAttribute("incrementCount", incrementCount);
+			model.addAttribute("decrementCount", decrementCount);
+			
+
 		}
 		/*
 		int totalCount = 0;
@@ -675,6 +725,30 @@ public class ReportController {
 		if(allagent ==true) {
 			List<HourlyCall> hourlyCallListByOrder = hourlyCallService.getHourlyCallListByOrder(pageDTO2, searchDTO, "order by stat_time desc");
 			model.addAttribute("hourlyCallListByOrder", hourlyCallListByOrder);
+			
+			int totalCount = 0;
+			int successCount = 0;
+			int failCount = 0;
+			int angerCount = 0;
+			int stressCount = 0;
+			int incrementCount = 0;
+			int decrementCount = 0;
+			for (HourlyCall agentCall : hourlyCallListByOrder ) {
+				totalCount += agentCall.getTotalCount();
+				successCount += agentCall.getSuccessCount();
+				failCount += agentCall.getFailCount();
+				angerCount += agentCall.getAngryCount();
+				stressCount += agentCall.getStressCount();
+				incrementCount += agentCall.getIncrementCount();
+				decrementCount += agentCall.getDecrementCount();
+			}
+			model.addAttribute("totalCall", totalCount);
+			model.addAttribute("successCount", successCount);
+			model.addAttribute("failCount", failCount);
+			model.addAttribute("angerCall", angerCount);
+			model.addAttribute("stressCall", stressCount);
+			model.addAttribute("incrementCount", incrementCount);
+			model.addAttribute("decrementCount", decrementCount);
 		}
 		
 		/*
