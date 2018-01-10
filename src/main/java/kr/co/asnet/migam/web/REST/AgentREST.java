@@ -82,7 +82,7 @@ public class AgentREST {
         agent.setProfile_name_cus("6");
         agent.setIsAudit(1);
         
-        logger.debug(agent.toString());
+        //logger.debug(agent.toString());
         InetAddress ip = InetAddress.getLocalHost();
         int agentIndex = 0;
         int agentchanged = 0;

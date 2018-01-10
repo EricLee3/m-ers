@@ -254,13 +254,15 @@ public class ReportController {
 				} else  {
 					indicator_name = "Energetic(고객)";
 				}
-			} else if (indicator_name.equals("Stress"))  {
-				if (CompletionCallAnalysisList.get(i).getCall_party() == "0")  {
-					indicator_name = "Stress(상담원)";
-				} else  {
-					indicator_name = "Stress(고객)";
-				}
-			}			
+			} 
+			// requested by 조돈재 on Jul-17 but proved not proper logic IOS [08-Dec-17]
+//			else if (indicator_name.equals("Stress"))  {
+//				if (CompletionCallAnalysisList.get(i).getCall_party() == "0")  {
+//					indicator_name = "Stress(상담원)";
+//				} else  {
+//					indicator_name = "Stress(고객)";
+//				}
+//			}			
 			
 			indicator_end_pos = CompletionCallAnalysisList.get(i).getIndicator_end_pos();
 			indicator_result = CompletionCallAnalysisList.get(i).getIndicator_result();

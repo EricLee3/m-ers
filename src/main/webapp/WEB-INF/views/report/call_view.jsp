@@ -7,14 +7,12 @@
 
 function linegraph(mdata){
 	Highcharts.setOptions({
-//	    colors: ['#b6728e', '#6dc066', '#ff6666', '#66cdaa', '#f08080', 
 	    colors: ['#000000', '#dc3737', '#ff6666', '#66cdaa', '#f08080', 
 	             '#ffc82e', '#ffb6c1','#11a51b', '#738b9a', '#7ac5cd',
 	             '#4f90c1', '#222d4a','#9c3b30', '#db8e4e', '#dbbc5d',
 	             '#ff8fcf', '#d11141','#6663bf', '#16f14b', '#d0a92b']
 	});
-   // Highcharts.chart('linegraph_display', {
-    	Highcharts.stockChart('linegraph_display', {
+	Highcharts.stockChart('linegraph_display', {
     	chart: {
             type: 'spline'
     	},
@@ -75,13 +73,10 @@ function linegraph(mdata){
 /* series: [{ data: [["0", 29.9],["1", 71.5],  ["7", 106.4]]}] */
 	   series:mdata   
 	}); 
-	
 }
 
 	$(document).ready(function(){
 
-//  		$.getJSON("https://"+location.host+"/report/linegraph?idx="+"${index}", function(data) {
-		console.log("http?? is " + document.location.origin);
   		$.getJSON(document.location.origin+"/report/linegraph?idx="+"${index}", function(data) {
  			linegraph(data);
 		});
